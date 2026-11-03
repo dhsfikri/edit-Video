@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "historyId": "7e0ade89-507e-4147-b815-0a2fdbabf06e",
+  "currentRevision": "ff59de52-08a6-45bc-bf4f-7751df7bee97",
+  "pendingChanges": false,
+  "files": {
+    "assets/gsap.min.js": {
+      "hash": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+      "content": "/root/.cache/hyperframes/history/7e0ade89-507e-4147-b815-0a2fdbabf06e/blobs/92/92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb"
+    },
+    "assets/montserrat-latin-600-normal.woff2": {
+      "hash": "d857325c360f7128b347ca924c1974967aaa886ba47dad22e4042d6c38b26a83",
+      "content": "/root/.cache/hyperframes/history/7e0ade89-507e-4147-b815-0a2fdbabf06e/blobs/d8/d857325c360f7128b347ca924c1974967aaa886ba47dad22e4042d6c38b26a83"
+    },
+    "assets/montserrat-latin-800-normal.woff2": {
+      "hash": "ba826fb84c2e961578adf3a08b5778b87905d4443445d1d56d84f9f157d5ea4b",
+      "content": "/root/.cache/hyperframes/history/7e0ade89-507e-4147-b815-0a2fdbabf06e/blobs/ba/ba826fb84c2e961578adf3a08b5778b87905d4443445d1d56d84f9f157d5ea4b"
+    },
+    "hyperframes.json": {
+      "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+      "content": "/root/.cache/hyperframes/history/7e0ade89-507e-4147-b815-0a2fdbabf06e/blobs/53/53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
+    },
+    "index.html": {
+      "hash": "338308ed63413aac87b065632b4e44dcb3adde9f6ee1547480715c4aaa11b8e8",
+      "content": "/root/.cache/hyperframes/history/7e0ade89-507e-4147-b815-0a2fdbabf06e/blobs/33/338308ed63413aac87b065632b4e44dcb3adde9f6ee1547480715c4aaa11b8e8"
+    },
+    "meta.json": {
+      "hash": "f2a776feba989c1f54fcdff5a7ae89908a7404ee2b74869a40b7bf4043d15a2b",
+      "content": "/root/.cache/hyperframes/history/7e0ade89-507e-4147-b815-0a2fdbabf06e/blobs/f2/f2a776feba989c1f54fcdff5a7ae89908a7404ee2b74869a40b7bf4043d15a2b"
+    },
+    "package.json": {
+      "hash": "0a4f99848ea5bac806d87212647a3eba450b1a631d171584c412d453aab9a0e8",
+      "content": "/root/.cache/hyperframes/history/7e0ade89-507e-4147-b815-0a2fdbabf06e/blobs/0a/0a4f99848ea5bac806d87212647a3eba450b1a631d171584c412d453aab9a0e8"
+    }
+  },
+  "revisions": {
+    "ff59de52-08a6-45bc-bf4f-7751df7bee97": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793713999206,
+      "endedAt": 1793713999208,
+      "files": {
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/7e0ade89-507e-4147-b815-0a2fdbabf06e/blobs/f0/f0c39eb6ab735bcd7225f7bed2d4ec605783cb5ebdae971107cca55bd6b737f8",
+          "after": "/root/.cache/hyperframes/history/7e0ade89-507e-4147-b815-0a2fdbabf06e/blobs/33/338308ed63413aac87b065632b4e44dcb3adde9f6ee1547480715c4aaa11b8e8"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "c3556125-6bbb-41b6-9d9e-6fbc51df54fd",
+      "completedAt": 1793714012272,
+      "output": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/broll/selesai.mp4",
+      "status": "completed",
+      "revision": "ff59de52-08a6-45bc-bf4f-7751df7bee97"
+    },
+    "retainedRevisions": [
+      "ff59de52-08a6-45bc-bf4f-7751df7bee97"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

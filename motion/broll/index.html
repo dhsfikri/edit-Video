@@ -1,0 +1,204 @@
+<!doctype html>
+<!--
+  B-roll animasi (penuh skrin, 1080x1920). Pilih babak dengan variable "scene":
+    kupon   — phone scroll kedai online penuh tag diskon, kupon terbang masuk
+    troli   — troli/checkout: harga dicoret, butang CHECKOUT ditekan
+    kosong  — tag diskon hilang, item keluar dari troli, troli kosong
+    selesai — MASALAH → PRODUK → SELESAI
+    konten  — phone sedang rakam video produk, ❤️ 💬 naik
+  Render:  npx hyperframes render --variables '{"scene":"kupon","dur":2.5}' -f 50 -o out.mp4
+  Kandungan penting di y 560–1180 (atas = kad grafik, bawah = subtitle).
+  Paparan kedai GENERIK — sengaja tidak meniru app/jenama sebenar.
+-->
+<html lang="ms" data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"scene","type":"string","label":"Babak","default":"kupon"},
+    {"id":"dur","type":"number","label":"Durasi (s)","default":2.5}
+  ]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      :root { --green: #25d366; --yellow: #ffd60a; --ink: #0b0b0b; --red: #ff4d4f; --white: #fff; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0b0b0b; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Montserrat", "Noto Color Emoji", sans-serif; overflow: hidden;
+        background: radial-gradient(80% 55% at 50% 45%, #163a2a 0%, #0d1a14 55%, #070b09 100%); }
+      .grid-bg { position: absolute; inset: -200px; opacity: 0.18;
+        background-image: linear-gradient(rgba(37,211,102,.5) 2px, transparent 2px), linear-gradient(90deg, rgba(37,211,102,.5) 2px, transparent 2px);
+        background-size: 90px 90px; }
+
+      /* Phone mockup */
+      .phone { position: absolute; left: 50%; top: 520px; width: 560px; height: 1120px; margin-left: -280px; border-radius: 70px;
+        background: #111; padding: 22px; box-shadow: 0 40px 120px rgba(0,0,0,.7), 0 0 0 4px #2b2b2b inset; }
+      .screen { position: relative; width: 100%; height: 100%; border-radius: 52px; overflow: hidden; background: #f4f5f7; }
+      .notch { position: absolute; left: 50%; top: 14px; width: 150px; height: 34px; margin-left: -75px; border-radius: 20px; background: #111; z-index: 5; }
+      .appbar { position: absolute; left: 0; right: 0; top: 0; height: 130px; background: var(--ink); color: #fff; z-index: 4;
+        display: flex; align-items: flex-end; padding: 0 28px 20px; font-weight: 800; font-size: 32px; gap: 12px; }
+      .appbar .g { color: var(--green); }
+      .feed { position: absolute; left: 0; right: 0; top: 140px; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+      .item { position: relative; background: #fff; border-radius: 22px; padding: 14px; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+      .item .pic { height: 170px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 90px; }
+      .item .nm { margin-top: 10px; height: 14px; width: 80%; border-radius: 7px; background: #dfe3e8; }
+      .item .pr { margin-top: 10px; font-weight: 800; font-size: 30px; color: var(--ink); }
+      .item .old { font-weight: 600; font-size: 22px; color: #9aa1a9; text-decoration: line-through; margin-left: 8px; }
+      .tag { position: absolute; top: 10px; right: 10px; background: var(--red); color: #fff; font-weight: 800; font-size: 26px; padding: 6px 12px; border-radius: 12px; }
+      .coupon { position: absolute; width: 330px; height: 130px; border-radius: 20px; background: var(--yellow); color: var(--ink);
+        display: flex; align-items: center; justify-content: center; flex-direction: column; font-weight: 800; box-shadow: 0 16px 40px rgba(0,0,0,.45);
+        border: 4px dashed rgba(0,0,0,.35); }
+      .coupon .a { font-size: 26px; letter-spacing: .1em; } .coupon .b { font-size: 50px; }
+
+      /* Troli / checkout */
+      .row { display: flex; align-items: center; gap: 18px; background: #fff; margin: 0 20px 16px; border-radius: 20px; padding: 16px; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+      .row .pic { width: 120px; height: 120px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 66px; }
+      .row .t { flex: 1; } .row .nm { height: 14px; width: 70%; border-radius: 7px; background: #dfe3e8; margin-bottom: 14px; }
+      .row .pr { font-weight: 800; font-size: 32px; } .row .old { font-weight: 600; font-size: 24px; color: #9aa1a9; text-decoration: line-through; margin-left: 8px; }
+      .total { position: absolute; left: 20px; right: 20px; bottom: 30px; }
+      .btn { height: 110px; border-radius: 26px; background: var(--green); color: var(--ink); font-weight: 800; font-size: 44px;
+        display: flex; align-items: center; justify-content: center; }
+      .tap { position: absolute; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,.75); border: 6px solid #fff; }
+      .bigcart { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 230px; }
+      .empty { position: absolute; left: 0; right: 0; top: 640px; text-align: center; font-weight: 800; font-size: 40px; color: #6b7280; }
+
+      /* Selesai */
+      .chip { position: absolute; left: 50%; width: 820px; margin-left: -410px; height: 150px; border-radius: 34px; display: flex; align-items: center;
+        justify-content: center; gap: 22px; font-weight: 800; font-size: 54px; white-space: nowrap; box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+      .arrow { position: absolute; left: 50%; margin-left: -40px; width: 80px; text-align: center; font-size: 80px; color: var(--green); font-weight: 800; }
+
+      /* Konten */
+      .rec { position: absolute; top: 160px; left: 30px; display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,.55); color: #fff;
+        font-weight: 800; font-size: 30px; padding: 10px 20px; border-radius: 999px; z-index: 6; }
+      .rec i { width: 22px; height: 22px; border-radius: 50%; background: var(--red); }
+      .float { position: absolute; font-size: 80px; }
+      .prod { position: absolute; left: 50%; top: 330px; margin-left: -150px; width: 300px; height: 300px; border-radius: 40px; background: #fff;
+        display: flex; align-items: center; justify-content: center; font-size: 180px; box-shadow: 0 20px 50px rgba(0,0,0,.25); }
+      .say { position: absolute; left: 30px; right: 30px; bottom: 120px; background: rgba(0,0,0,.65); color: #fff; font-weight: 800; font-size: 36px;
+        padding: 18px 22px; border-radius: 22px; text-align: center; }
+      .say b { color: var(--yellow); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="2.5" data-width="1080" data-height="1920">
+      <div id="stage" class="clip" data-start="0" data-duration="2.5" data-track-index="0"></div>
+    </div>
+    <script>
+      const V = window.__hyperframes.getVariables();
+      const D = Number(V.dur) || 2.5;
+      document.getElementById("root").dataset.duration = D;
+      document.getElementById("stage").dataset.duration = D;
+      const stage = document.getElementById("stage");
+      const tl = gsap.timeline({ paused: true });
+      const H = (html) => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; };
+      const add = (html, parent = stage) => parent.appendChild(H(html));
+      const bgs = ["#ffe4e6", "#e0f2fe", "#fef9c3", "#dcfce7", "#ede9fe", "#ffedd5"];
+      const emo = ["👟", "👜", "🧴", "🎧", "⌚", "🧢", "👕", "🍯"];
+
+      add(`<div class="grid-bg"></div>`);
+      tl.fromTo(".grid-bg", { y: 0 }, { y: 90, duration: D, ease: "none" }, 0);
+
+      const phone = () => {
+        const p = add(`<div class="phone"><div class="screen"><div class="notch"></div>
+          <div class="appbar"><span>🛍️</span><span>KEDAI <span class="g">ONLINE</span></span></div></div></div>`);
+        tl.fromTo(p, { y: 140, scale: 0.92, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 0);
+        return p.querySelector(".screen");
+      };
+
+      const S = V.scene;
+      if (S === "kupon") {
+        const sc = phone();
+        const feed = add(`<div class="feed"></div>`, sc);
+        for (let i = 0; i < 12; i++) {
+          add(`<div class="item"><div class="pic" style="background:${bgs[i % 6]}">${emo[i % 8]}</div><div class="nm"></div>
+            <div class="pr">RM${[19, 29, 9, 49, 15, 35][i % 6]}<span class="old">RM${[39, 59, 19, 99, 30, 70][i % 6]}</span></div>
+            <div class="tag">-${[50, 50, 55, 50, 50, 60][i % 6]}%</div></div>`, feed);
+        }
+        tl.fromTo(feed, { y: 0 }, { y: -560, duration: D - 0.2, ease: "power1.inOut" }, 0.15);
+        tl.fromTo(".tag", { scale: 0 }, { scale: 1, duration: 0.25, stagger: 0.06, ease: "back.out(3)" }, 0.25);
+        const cps = [["KUPON", "RM10"], ["DISKON", "50%"], ["KUPON", "FREE POS"]];
+        cps.forEach((c, i) => {
+          const el = add(`<div class="coupon"><span class="a">${c[0]}</span><span class="b">${c[1]}</span></div>`);
+          const x = [80, 670, 120][i], y = [700, 860, 1040][i];
+          el.style.left = x + "px"; el.style.top = y + "px";
+          tl.fromTo(el, { x: i % 2 ? 500 : -500, rotation: i % 2 ? 25 : -25, opacity: 0 },
+            { x: 0, rotation: i % 2 ? 8 : -8, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 0.45 + i * 0.3);
+          tl.to(el, { y: -16, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 0.85 + i * 0.3);
+        });
+      }
+
+      if (S === "troli") {
+        const sc = phone();
+        sc.querySelector(".appbar").innerHTML = `<span>🛒</span><span>TROLI <span class="g">(3)</span></span>`;
+        const list = add(`<div style="position:absolute;left:0;right:0;top:150px"></div>`, sc);
+        [["👟", "#ffe4e6", 59, 119], ["🎧", "#e0f2fe", 45, 90], ["⌚", "#fef9c3", 79, 159]].forEach((r) =>
+          add(`<div class="row"><div class="pic" style="background:${r[1]}">${r[0]}</div><div class="t"><div class="nm"></div>
+            <div class="pr">RM${r[2]}<span class="old">RM${r[3]}</span></div></div><div class="tag" style="position:static">-50%</div></div>`, list));
+        const tot = add(`<div class="total"><div style="display:flex;justify-content:space-between;font-weight:800;font-size:36px;margin-bottom:18px">
+          <span>JUMLAH</span><span><span class="old" style="font-size:28px;color:#9aa1a9;text-decoration:line-through">RM368</span> <span id="amt" style="color:#16a34a">RM183</span></span></div>
+          <div class="btn">CHECKOUT ✓</div></div>`, sc);
+        tl.fromTo(list.children, { x: 400, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, stagger: 0.15, ease: "power3.out" }, 0.2);
+        tl.fromTo(tot, { y: 200, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 0.6);
+        const tap = add(`<div class="tap"></div>`);
+        tap.style.left = "480px"; tap.style.top = "1490px";
+        tl.fromTo(tap, { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2 }, D * 0.62);
+        tl.to(tap, { scale: 0.7, opacity: 0, duration: 0.25 }, D * 0.62 + 0.25);
+        tl.to(tot.querySelector(".btn"), { scale: 0.94, duration: 0.1, yoyo: true, repeat: 1 }, D * 0.62 + 0.15);
+      }
+
+      if (S === "kosong") {
+        const sc = phone();
+        sc.querySelector(".appbar").innerHTML = `<span>🛒</span><span>TROLI</span>`;
+        const list = add(`<div style="position:absolute;left:0;right:0;top:150px"></div>`, sc);
+        [["👟", "#ffe4e6", 119], ["🎧", "#e0f2fe", 90], ["⌚", "#fef9c3", 159]].forEach((r) =>
+          add(`<div class="row"><div class="pic" style="background:${r[1]}">${r[0]}</div><div class="t"><div class="nm"></div>
+            <div class="pr">RM${r[2]}</div></div><div class="tag" style="position:static;background:#9aa1a9">TIADA DISKON</div></div>`, list));
+        const cart = add(`<div class="bigcart">🛒</div>`, sc);
+        const em = add(`<div class="empty">Troli kosong</div>`, sc);
+        tl.set([cart, em], { opacity: 0 }, 0);
+        tl.to(list.children, { x: -520, opacity: 0, duration: 0.22, stagger: 0.12, ease: "power2.in" }, 0.3);
+        tl.fromTo(cart, { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 0.75);
+        tl.fromTo(em, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25 }, 0.85);
+      }
+
+      if (S === "selesai") {
+        const c1 = add(`<div class="chip" style="top:560px;background:#2a0f12;color:#fff;border:4px solid var(--red)">😩 MASALAH PELANGGAN</div>`);
+        const a1 = add(`<div class="arrow" style="top:725px">↓</div>`);
+        const c2 = add(`<div class="chip" style="top:830px;background:#fff;color:var(--ink)">📦 PRODUK AWAK</div>`);
+        const a2 = add(`<div class="arrow" style="top:995px">↓</div>`);
+        const c3 = add(`<div class="chip" style="top:1100px;background:var(--green);color:var(--ink)">✅ MASALAH SELESAI</div>`);
+        const step = D / 3.2;
+        tl.fromTo(c1, { x: -900 }, { x: 0, duration: 0.35, ease: "back.out(1.4)" }, 0.05);
+        tl.fromTo(a1, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.2 }, step);
+        tl.fromTo(c2, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, step + 0.1);
+        tl.fromTo(a2, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.2 }, step * 2);
+        tl.fromTo(c3, { x: 900 }, { x: 0, duration: 0.35, ease: "back.out(1.4)" }, step * 2 + 0.1);
+        tl.to(c3, { scale: 1.05, duration: 0.15, yoyo: true, repeat: 1 }, step * 2 + 0.5);
+      }
+
+      if (S === "konten") {
+        const sc = phone();
+        sc.querySelector(".appbar").remove();
+        sc.style.background = "linear-gradient(#fef3c7, #fde68a)";
+        add(`<div class="rec"><i></i>REC 00:15</div>`, sc);
+        const pr = add(`<div class="prod">🧴</div>`, sc);
+        const say = add(`<div class="say">"Kulit kering? Produk ni <b>lembapkan 24 jam</b>"</div>`, sc);
+        tl.to(sc.querySelector(".rec i"), { opacity: 0.2, duration: 0.25, yoyo: true, repeat: 7 }, 0);
+        tl.fromTo(pr, { scale: 0.8, rotation: -6 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2)" }, 0.15);
+        tl.fromTo(say, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, 0.45);
+        ["❤️", "💬", "❤️", "🛒", "❤️", "💬"].forEach((e, i) => {
+          const f = add(`<div class="float">${e}</div>`);
+          f.style.left = [760, 820, 720, 800, 860, 740][i] + "px"; f.style.top = "1300px";
+          tl.fromTo(f, { y: 0, opacity: 0, scale: 0.6 }, { y: -560, opacity: 1, scale: 1.1, duration: 1.2, ease: "power1.out" }, 0.5 + i * 0.2);
+          tl.to(f, { opacity: 0, duration: 0.3 }, 1.4 + i * 0.2);
+        });
+      }
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
