@@ -1,0 +1,19 @@
+{
+  "source": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/raw/C0029.MP4",
+  "transcript": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/raw_transcript.json",
+  "workdir": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029",
+  "rotate": "cw",
+  "fps": 50,
+  "color": "eq=brightness=0.03:contrast=1.06:saturation=1.08:gamma=1.08",
+  "corrections": {"say": "sale"},
+  "segments": [
+    {"note": "A hook: susah nak sale, kupon kurang", "start": 7.82, "end": 11.18, "zoom": 1.0},
+    {"note": "B kupon tarik orang tak setia",          "start": 13.88, "end": 18.52, "zoom": 1.10},
+    {"note": "C beli sebab diskon",                     "start": 18.80, "end": 23.50, "zoom": 1.0},
+    {"note": "D diskon bonus (zoom out)",               "start": 26.30, "end": 28.26, "zoom": 1.12, "zoom_to": 1.0},
+    {"note": "E1 Tapi... (punch-in)",                   "start": 28.28, "end": 30.10, "zoom": 1.15},
+    {"note": "E2 produk selesaikan masalah",            "start": 30.80, "end": 35.20, "zoom": 1.0},
+    {"note": "F banyakkan konten benefit",              "start": 36.72, "end": 41.36, "zoom": 1.10},
+    {"note": "G CTA komen share like",                  "start": 46.74, "end": 48.95, "zoom": 1.0}
+  ]
+}

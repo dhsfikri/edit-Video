@@ -1,0 +1,164 @@
+<!doctype html>
+<!--
+  Overlay grafik penuh untuk satu video (render telus, kemudian ditindih atas A-roll guna FFmpeg).
+  Semua kandungan datang dari data.js (window.EDIT) — jana/isi per projek.
+  Zon (1080x1920):
+    - Badge siri   : atas kiri, y=200 (kekal sepanjang video)
+    - Zon grafik   : y≈290–600 (hook title, kad info, CTA) — atas kepala, tak tutup muka
+    - Subtitle     : y≈1180 (paras dada) — atas safe zone bawah (UI TikTok)
+-->
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <script src="data.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      :root { --green: #25d366; --yellow: #ffd60a; --ink: #0b0b0b; --white: #ffffff; --red: #ff4d4f; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
+      #preview-bg { position: absolute; inset: 0; background: #2a3440; }
+
+      /* Badge siri */
+      #badge { position: absolute; left: 60px; top: 200px; display: flex; align-items: center; gap: 16px;
+        padding: 14px 28px 14px 22px; border-radius: 999px; background: rgba(11,11,11,0.86);
+        border: 3px solid var(--green); box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+      #badge .dot { width: 20px; height: 20px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 6px rgba(37,211,102,0.25); }
+      #badge .series, #badge .ep { font-weight: 800; font-size: 32px; letter-spacing: 0.04em; }
+      #badge .series { color: var(--white); }
+      #badge .ep { color: var(--green); }
+
+      /* Kotak umum (hook / kad) */
+      .card { position: absolute; left: 60px; top: 300px; width: 960px; background: var(--ink); border-radius: 30px;
+        padding: 34px 44px 38px; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,0.45); }
+      .card .bar { position: absolute; left: 0; top: 0; height: 12px; width: 100%; background: var(--green); border-radius: 30px 30px 0 0; transform-origin: left center; }
+      .card .line { display: block; color: var(--white); font-weight: 800; font-size: 76px; line-height: 1.14; white-space: nowrap; }
+      .card .small { display: block; margin-top: 14px; color: var(--green); font-weight: 600; font-size: 32px; }
+      .word { display: inline-block; }
+      .kw { display: inline-block; margin: 0 6px; color: var(--ink); background: var(--yellow); padding: 0 16px; border-radius: 14px; }
+      .row { display: flex; align-items: center; justify-content: center; gap: 22px; font-weight: 800; font-size: 60px; color: var(--white); line-height: 1.5; white-space: nowrap; }
+      .row .tag { padding: 2px 20px; border-radius: 14px; font-size: 54px; }
+      .row .ok { background: var(--green); color: var(--ink); }
+      .row .no { background: var(--red); color: var(--white); }
+      .cta { background: var(--green); }
+      .cta .line { color: var(--ink); }
+      .cta .small { color: var(--ink); opacity: 0.85; }
+      .sticker { position: absolute; padding: 18px 36px; border-radius: 24px; background: var(--yellow); color: var(--ink);
+        font-weight: 800; font-size: 72px; box-shadow: 0 14px 40px rgba(0,0,0,0.4); }
+
+      /* Subtitle */
+      #subs { position: absolute; left: 40px; right: 40px; top: 1180px; height: 260px; }
+      .grp { position: absolute; left: 0; right: 0; top: 0; text-align: center; }
+      .sw { display: inline-block; margin: 0 9px; font-weight: 800; font-size: 74px; line-height: 1.15; color: var(--white);
+        -webkit-text-stroke: 11px var(--ink); paint-order: stroke fill; text-shadow: 0 6px 18px rgba(0,0,0,0.55); }
+      .sw.hl { color: var(--yellow); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1080" data-height="1920">
+      <div id="preview-bg" class="clip" data-start="0" data-duration="30" data-track-index="0"></div>
+      <div id="layer" class="clip" data-start="0" data-duration="30" data-track-index="1"></div>
+      <div id="subs" class="clip" data-start="0" data-duration="30" data-track-index="2"></div>
+    </div>
+
+    <script>
+      const E = window.EDIT;
+      const root = document.getElementById("root");
+      const layer = document.getElementById("layer");
+      const subs = document.getElementById("subs");
+      const D = E.duration;
+      root.dataset.duration = D;
+      ["preview-bg", "layer", "subs"].forEach((id) => (document.getElementById(id).dataset.duration = D));
+      if (!E.previewBg) document.getElementById("preview-bg").style.display = "none";
+
+      const tl = gsap.timeline({ paused: true });
+      const el = (html) => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; };
+      const words = (s) => s.split(" ").filter(Boolean).map((w) => `<span class="word">${w}</span>`).join(" ");
+      // [teks biasa] -> keyword kuning
+      const rich = (s) => s.split(/(\[[^\]]+\])/).filter(Boolean)
+        .map((p) => p.startsWith("[") ? `<span class="word kw">${p.slice(1, -1)}</span>` : words(p)).join(" ");
+      const fit = (node, max = 870, start = 76, min = 48) => {
+        node.querySelectorAll(".line").forEach((l) => {
+          let s = start; l.style.fontSize = s + "px";
+          while (l.scrollWidth > max && s > min) { s -= 2; l.style.fontSize = s + "px"; }
+        });
+      };
+      const popIn = (node, t) => {
+        tl.fromTo(node, { scale: 0.6, opacity: 0, rotation: -2 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.38, ease: "back.out(1.8)" }, t);
+        const bar = node.querySelector(".bar");
+        if (bar) tl.fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power3.out" }, t + 0.12);
+        const ws = node.querySelectorAll(".word:not(.kw)");
+        if (ws.length) tl.fromTo(ws, { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, stagger: 0.05, ease: "power3.out" }, t + 0.08);
+        const kws = node.querySelectorAll(".kw");
+        if (kws.length) tl.fromTo(kws, { scale: 0, rotation: -8 }, { scale: 1, rotation: -2, duration: 0.38, ease: "back.out(3)" }, t + 0.45);
+      };
+      const popOut = (node, t) => tl.to(node, { scale: 0.85, opacity: 0, y: -50, duration: 0.25, ease: "power2.in" }, t);
+
+      // 1) Badge siri
+      const badge = el(`<div id="badge"><span class="dot"></span><span class="series">${E.series}</span><span class="ep">#${E.episode}</span></div>`);
+      layer.appendChild(badge);
+      tl.fromTo(badge, { x: -520, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.6)" }, 0);
+      tl.fromTo(badge.querySelector(".dot"), { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 0.3);
+
+      // 2) Kad-kad (hook, info, CTA)
+      E.cards.forEach((c) => {
+        let node;
+        if (c.type === "rows") {
+          node = el(`<div class="card"><div class="bar"></div>${c.rows.map((r) => `<div class="row">${r}</div>`).join("")}</div>`);
+        } else if (c.type === "sticker") {
+          node = el(`<div class="sticker">${c.text}</div>`);
+          node.style.left = (c.x ?? 640) + "px"; node.style.top = (c.y ?? 330) + "px";
+        } else {
+          node = el(`<div class="card ${c.type === "cta" ? "cta" : ""}"><div class="bar"></div>${c.lines.map((l) => `<span class="line">${rich(l)}</span>`).join("")}${c.small ? `<span class="small">${c.small}</span>` : ""}</div>`);
+        }
+        layer.appendChild(node);
+        if (c.type !== "sticker") fit(node);
+        tl.set(node, { opacity: 0 }, 0);
+        popIn(node, c.start);
+        if (c.type === "rows") {
+          const rows = node.querySelectorAll(".row");
+          tl.set(rows, { opacity: 0 }, 0);
+          (c.rowTimes || []).forEach((rt, i) => tl.fromTo(rows[i], { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "back.out(2)" }, rt));
+        }
+        if (c.pulse) tl.to(node.querySelectorAll(".kw"), { scale: 1.08, duration: 0.18, ease: "power1.inOut", yoyo: true, repeat: 3 }, c.start + 1.0);
+        if (c.type === "sticker") tl.to(node, { rotation: 4, duration: 0.15, yoyo: true, repeat: 3, ease: "sine.inOut" }, c.start + 0.4);
+        if (c.end < D) popOut(node, c.end - 0.25);
+      });
+
+      // 3) Subtitle: kumpulan 1–3 perkataan, perkataan aktif pop masuk
+      const hl = new Set((E.highlight || []).map((w) => w.toLowerCase()));
+      const groups = [];
+      let cur = [];
+      E.words.forEach((w, i) => {
+        const prev = E.words[i - 1];
+        const brk = cur.length >= (E.maxWords || 3) || (prev && (w.s - prev.e > 0.3 || /[.,?!]$/.test(prev.w)));
+        if (cur.length && brk) { groups.push(cur); cur = []; }
+        cur.push(w);
+      });
+      if (cur.length) groups.push(cur);
+      groups.forEach((g, gi) => {
+        const node = el(`<div class="grp"></div>`);
+        g.forEach((w) => {
+          const clean = w.w.replace(/[.,?!]/g, "").toLowerCase();
+          const s = el(`<span class="sw ${hl.has(clean) ? "hl" : ""}">${w.w}</span>`);
+          node.appendChild(s);
+          tl.fromTo(s, { scale: 0.55, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.13, ease: "back.out(2.5)" }, Math.max(w.s - 0.03, 0));
+        });
+        subs.appendChild(node);
+        tl.set(node, { opacity: 0 }, 0);
+        tl.set(node, { opacity: 1 }, Math.max(g[0].s - 0.03, 0));
+        const next = groups[gi + 1];
+        const end = next ? next[0].s - 0.04 : Math.min(g[g.length - 1].e + 0.6, D);
+        tl.set(node, { opacity: 0 }, end);
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
