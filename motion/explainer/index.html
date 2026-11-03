@@ -1,0 +1,135 @@
+<!doctype html>
+<!--
+  Babak EXPLAINER — Gaya v2 (1080x1920, penuh skrin).
+  Latar hijau gelap · muka Sir dalam bulatan kiri-atas (klip video, ikut muka) · tajuk (tulisan tangan + kotak putih)
+  · mockup chat GENERIK di tengah (bukan rupa/logo app sebenar).
+  Variables:
+    scene  : "salah" | "betul"  (atau tambah babak baru dalam SCENES di bawah)
+    dur    : durasi (s)
+    face   : fail klip muka dalam assets/ (dari pipeline/facecrop.py)
+  Render: npx hyperframes render --variables '{"scene":"salah","dur":2.65,"face":"assets/face_salah.mp4"}' -f 30 -o out.mp4
+  Zon: kandungan utama y 230–1250. Subtitle video utama (bawah) boleh ditindih kemudian.
+-->
+<html lang="ms" data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"scene","type":"string","label":"Babak","default":"salah"},
+    {"id":"dur","type":"number","label":"Durasi (s)","default":3},
+    {"id":"face","type":"string","label":"Klip muka","default":"assets/face_salah.mp4"}
+  ]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/caveat-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      :root { --bg1: #0b2e1f; --bg2: #06180f; --green: #25d366; --deep: #0b3d2e; --white: #fff; --red: #ff4d4f; --ink: #0b0b0b; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg2); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", "Noto Color Emoji", sans-serif;
+        background: radial-gradient(90% 60% at 50% 40%, var(--bg1) 0%, var(--bg2) 100%); }
+      #grain { position: absolute; inset: 0; opacity: .07;
+        background-image: radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px); background-size: 6px 6px; }
+
+      #faceWrap { position: absolute; left: 60px; top: 230px; width: 250px; height: 250px; border-radius: 50%; overflow: hidden;
+        border: 7px solid var(--white); box-shadow: 0 16px 40px rgba(0,0,0,.45); }
+      #face { width: 100%; height: 100%; object-fit: cover; }
+
+      #title { position: absolute; left: 345px; top: 268px; }
+      #title .script { display: block; font-family: "Caveat", cursive; font-weight: 700; font-size: 58px; color: rgba(255,255,255,.9); line-height: 1; }
+      #title .box { display: inline-block; margin-top: 10px; background: var(--white); color: var(--deep); font-weight: 800; font-size: 76px;
+        padding: 2px 22px; border-radius: 10px; white-space: nowrap; overflow: hidden; vertical-align: top; }
+
+      /* Mockup chat generik */
+      #phone { position: absolute; left: 50%; top: 540px; width: 660px; height: 860px; margin-left: -320px; border-radius: 56px; background: #f3f5f4;
+        border: 14px solid #101512; box-shadow: 0 30px 80px rgba(0,0,0,.55); overflow: hidden; }
+      #bar { height: 120px; background: var(--deep); display: flex; align-items: center; gap: 18px; padding: 26px 28px 0; color: #fff; }
+      #bar .av { width: 64px; height: 64px; border-radius: 50%; background: #cfe9dc; display: flex; align-items: center; justify-content: center; font-size: 38px; }
+      #bar b { display: block; font-size: 30px; } #bar small { font-weight: 600; font-size: 22px; opacity: .8; }
+      #msgs { position: absolute; left: 0; right: 0; top: 120px; bottom: 90px; overflow: hidden; padding-top: 20px !important; padding: 0 22px; display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; }
+      .m { max-width: 82%; padding: 16px 22px 14px; border-radius: 26px; font-weight: 600; font-size: 30px; line-height: 1.3; box-shadow: 0 3px 8px rgba(0,0,0,.08); }
+      .m.c { align-self: flex-start; background: #fff; color: #1d2421; border-bottom-left-radius: 8px; }
+      .m.s { align-self: flex-end; background: #d7f8e3; color: #0b2e1f; border-bottom-right-radius: 8px; }
+      .m .t { display: block; text-align: right; font-size: 18px; opacity: .55; margin-top: 4px; }
+      .sys { align-self: center; background: rgba(0,0,0,.08); color: #4b5550; font-weight: 600; font-size: 24px; padding: 8px 18px; border-radius: 14px; }
+      .typing { align-self: flex-start; background: #fff; border-radius: 26px; padding: 18px 24px; display: flex; gap: 8px; }
+      .typing i { width: 12px; height: 12px; border-radius: 50%; background: #9aa5a0; }
+      #input { position: absolute; left: 18px; right: 18px; bottom: 16px; height: 62px; border-radius: 31px; background: #fff; color: #9aa5a0;
+        font-weight: 600; font-size: 24px; display: flex; align-items: center; padding: 0 26px; }
+
+      #stamp { position: absolute; left: 50%; top: 1350px; transform: translateX(-50%); white-space: nowrap; font-weight: 800; font-size: 56px;
+        padding: 14px 34px; border-radius: 18px; box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+      #stamp.no { background: var(--white); color: var(--red); border: 5px solid var(--red); } #stamp.ok { background: var(--green); color: var(--ink); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1080" data-height="1920">
+      <div id="stage" class="clip" data-start="0" data-duration="6" data-track-index="0">
+        <div id="grain"></div>
+        <div id="title"><span class="script"></span><span class="box"></span></div>
+        <div id="phone"><div id="bar"><div class="av">👤</div><div><b>Customer</b><small>online</small></div></div>
+          <div id="msgs"></div><div id="input">Tulis mesej…</div></div>
+        <div id="stamp"></div>
+      </div>
+      <div id="faceWrap"><video id="face" src="assets/face_salah.mp4" class="clip" data-start="0" data-duration="6" data-track-index="1" muted playsinline></video></div>
+    </div>
+    <script>
+      const V = window.__hyperframes.getVariables();
+      const D = Number(V.dur) || 3;
+      const $ = (s) => document.querySelector(s);
+      $("#face").setAttribute("src", V.face);
+
+      // Babak: [masa, jenis, teks]  jenis: c=customer, s=seller, sys=sistem, typing
+      const SCENES = {
+        salah: {
+          script: "selalu jadi…", box: "SALAH ❌", stamp: ["no", "❌ TAK SURUH BELI"],
+          msgs: [[0.25, "c", "Harga ok… nanti saya fikir dulu ya 🙏"], [0.9, "typing"], [1.25, "s", "Ok takpe, nanti roger saya ya 😊"], [1.75, "sys", "3 hari kemudian… 😶"]],
+          stampAt: 2.0,
+        },
+        betul: {
+          script: "cuba macam ni", box: "BETUL ✅", stamp: ["ok", "✅ BUAT KEPUTUSAN"],
+          msgs: [[0.2, "c", "Nanti saya fikir dulu ya 🙏"], [0.65, "s", "Saya cadangkan Pakej A — paling sesuai untuk akak 👍"],
+                 [1.25, "s", "Saya hantar link bayaran sekarang ya?"], [1.8, "typing"], [2.1, "c", "Ok boleh ✅"]],
+          stampAt: 2.35,
+        },
+      };
+      const sc = SCENES[V.scene] || SCENES.salah;
+      $("#title .script").textContent = sc.script;
+      $("#title .box").textContent = sc.box;
+      $("#stamp").className = sc.stamp[0]; $("#stamp").textContent = sc.stamp[1];
+
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#grain", { x: 0 }, { x: 6, duration: D, ease: "steps(" + Math.round(D * 12) + ")" }, 0);
+      tl.fromTo("#faceWrap", { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.35, ease: "back.out(1.8)" }, 0);
+      tl.fromTo("#title .script", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.1);
+      // kotak putih "ditaip": lebar dari 0 ke penuh
+      const box = $("#title .box"); const w = box.getBoundingClientRect().width;
+      tl.fromTo(box, { width: 0, paddingLeft: 0, paddingRight: 0 }, { width: w, paddingLeft: 22, paddingRight: 22, duration: 0.35, ease: "steps(8)" }, 0.25);
+      tl.fromTo("#phone", { y: 260, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 0.05);
+
+      const msgs = $("#msgs");
+      sc.msgs.forEach(([t, k, txt], i) => {
+        let el;
+        if (k === "typing") { el = document.createElement("div"); el.className = "typing"; el.innerHTML = "<i></i><i></i><i></i>"; }
+        else if (k === "sys") { el = document.createElement("div"); el.className = "sys"; el.textContent = txt; }
+        else { el = document.createElement("div"); el.className = "m " + k; el.innerHTML = txt + `<span class="t">${k === "s" ? "10:4" + i + " ✓✓" : "10:4" + i}</span>`; }
+        msgs.appendChild(el);
+        tl.set(el, { display: "none" }, 0);
+        tl.set(el, { display: k === "typing" ? "flex" : "block" }, t);
+        tl.fromTo(el, { scale: 0.6, opacity: 0, transformOrigin: k === "s" ? "right bottom" : "left bottom" }, { scale: 1, opacity: 1, duration: 0.22, ease: "back.out(2)" }, t);
+        if (k === "typing") {
+          tl.to(el.querySelectorAll("i"), { y: -8, duration: 0.12, stagger: 0.06, yoyo: true, repeat: 1 }, t + 0.05);
+          const next = sc.msgs[i + 1]; tl.set(el, { display: "none" }, next ? next[0] - 0.01 : t + 0.35);
+        }
+      });
+      tl.fromTo("#stamp", { scale: 2.2, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: -3, duration: 0.25, ease: "power4.in" }, sc.stampAt);
+      tl.to("#phone", { x: 10, duration: 0.05, yoyo: true, repeat: 3 }, sc.stampAt + 0.25);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
