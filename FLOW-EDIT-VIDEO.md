@@ -39,6 +39,10 @@
 
 ## 2. PRA-PRODUKSI (sebelum rakam)
 
+### 2.0 Plan & brief dulu (WAJIB)
+Sebelum mula edit, isi **`templates/brief-edit.md`** dan brief Sir Dharma dulu.
+**Edit hanya bermula selepas brief di-approve.** Kalau plan berubah masa edit, brief semula.
+
 ### 2.1 Tulis skrip (guna `templates/skrip-30s.md`)
 - 30 saat ≈ **70–85 patah perkataan** (cakap laju sikit dari biasa).
 - Hook mesti salah satu jenis ni:
@@ -216,6 +220,8 @@ TikTok akan **compress** setiap video yang diupload. Kalau fail asal dah lemah, 
 ## 6. Ringkasan Flow (1 muka)
 
 ```
+PLAN & BRIEF → tunggu approval Sir Dharma
+   ↓
 SKRIP (hook + 3 point + CTA, ≤85 patah)
    ↓
 RAKAM (A-roll talking head + B-roll ikut shot list)
