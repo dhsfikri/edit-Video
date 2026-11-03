@@ -1,0 +1,33 @@
+<!doctype html>
+<!-- Template thumbnail TikTok (1080x1920). Teks penting dalam zon tengah 3:4 (y 240–1680) sebab grid profil potong atas/bawah.
+     Guna: node render.mjs <frame.png> <out.png> '<json opsyen>' -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Montserrat"; font-weight: 800; src: url("montserrat-latin-800-normal.woff2"); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #070d2b; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
+  #photo { position: absolute; left: 0; top: 330px; width: 1080px; height: 1920px; object-fit: cover;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 260px); }
+  #vig { position: absolute; inset: 0; background:
+    radial-gradient(90% 60% at 50% 55%, transparent 55%, rgba(0,0,0,0.55) 100%),
+    linear-gradient(to bottom, rgba(7,13,43,0.9) 0, rgba(7,13,43,0) 520px); }
+  #badge { position: absolute; left: 60px; top: 280px; display: flex; align-items: center; gap: 16px; padding: 14px 28px 14px 22px;
+    border-radius: 999px; background: rgba(11,11,11,0.9); border: 3px solid #25d366; }
+  #badge i { width: 22px; height: 22px; border-radius: 50%; background: #25d366; }
+  #badge b { color: #fff; font-size: 36px; letter-spacing: .04em; } #badge b span { color: #25d366; }
+  #box { position: absolute; left: 50px; right: 50px; top: 380px; background: #0b0b0b; border-radius: 34px; padding: 40px 30px 46px;
+    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.6); transform: rotate(-1.5deg); }
+  #box::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 14px; background: #25d366; border-radius: 34px 34px 0 0; }
+  .l1 { color: #fff; font-size: 96px; line-height: 1.05; white-space: nowrap; }
+  .l2 { color: #fff; font-size: 92px; line-height: 1.2; white-space: nowrap; margin-top: 10px; }
+  .kw { background: #ffd60a; color: #0b0b0b; padding: 0 20px; border-radius: 16px; }
+  #sticker { position: absolute; right: 60px; top: 1470px; background: #25d366; color: #0b0b0b; font-size: 62px; padding: 18px 34px;
+    border-radius: 24px; transform: rotate(3deg); box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+</style></head>
+<body>
+  <img id="photo" src="frame.png">
+  <div id="vig"></div>
+  <div id="badge"><i></i><b>TIPS JUALAN <span>#01</span></b></div>
+  <div id="box"><div class="l1">SALES JATUH? 📉</div><div class="l2">TAK ADA <span class="kw">KUPON</span></div></div>
+  <div id="sticker">CERITA BENEFIT ✅</div>
+</body></html>
