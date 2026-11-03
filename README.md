@@ -1,6 +1,6 @@
 # Edit Video — Flow TikTok 30 Saat
 
-Repo ni simpan SOP / flow untuk edit video TikTok jenis **talking head + B-roll + hook title motion graphic + subtitle**, durasi **30 saat**.
+Repo ni simpan SOP / flow (editor: **Claude**, guna FFmpeg — bukan CapCut) untuk edit video TikTok jenis **talking head + B-roll + hook title motion graphic + subtitle**, durasi **30 saat**.
 
 | Fail | Guna untuk apa |
 |---|---|

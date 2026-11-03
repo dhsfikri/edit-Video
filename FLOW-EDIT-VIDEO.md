@@ -75,9 +75,39 @@ Senaraikan B-roll ikut point dalam skrip. Contoh untuk niche sales WhatsApp:
 
 ---
 
+## 4A. CARA KERJA DENGAN CLAUDE (Claude yang edit)
+
+```
+1. Sir bagi topik / skrip  →  2. Claude buat BRIEF  →  3. Sir APPROVE
+        ↓
+4. Sir rakam & hantar fail  →  5. Claude edit & render DRAF  →  6. Sir semak
+        ↓
+7. Revisi (kalau ada)  →  8. Claude hantar MP4 FINAL  →  9. Sir upload TikTok
+```
+
+### Apa Sir perlu hantar
+| Fail | Nota |
+|---|---|
+| Rakaman talking head (A-roll) | Fail **asal** dari phone (bukan hantar melalui WhatsApp). Boleh hantar semua take — Claude pilih yang terbaik |
+| B-roll | Video pendek, screen record, gambar, screenshot (Claude akan blur info sensitif, tapi tolong tandakan apa yang perlu blur) |
+| Skrip akhir | Ayat yang Sir cakap — Claude guna untuk subtitle yang tepat |
+| Logo (optional) | PNG latar telus |
+| Muzik (optional) | Fail lagu yang selamat untuk komersial. Kalau tiada, tambah lagu dari library TikTok masa upload |
+
+**Cara hantar:** upload terus dalam chat ni, ATAU letak dalam satu folder **Google Drive** dan bagi nama folder — Claude ambil dari situ.
+
+### Apa Claude hantar balik
+- **Draf** (MP4) untuk Sir semak, bersama nota ringkas apa yang dibuat.
+- Lepas Sir approve → **Final MP4** 1080x1920 · 30fps · ~15–20 Mbps, sedia upload.
+
+### Had yang Sir perlu tahu
+- Claude tak "nampak" video macam manusia tengok — Claude semak guna frame (gambar) dan data audio. Jadi **semakan Sir pada draf tetap penting**, terutama timing B-roll dan ekspresi muka.
+- Subtitle bergantung pada **skrip** yang Sir bagi. Kalau ayat dalam rakaman lain dari skrip, sebut masa hantar fail.
+- Motion graphic dibuat dengan teks beranimasi (pop-in, slide, highlight keyword, kotak warna). Effect 3D / animasi kompleks macam After Effects tak termasuk.
+
 ## 4. FLOW EDIT (step-by-step)
 
-> Tools cadangan: **CapCut** (paling mudah untuk semua step ni). Premiere Pro / DaVinci pun boleh — flow sama.
+> **Editor: Claude.** Sir hantar rakaman, Claude edit guna kod (FFmpeg untuk potong/zoom/audio/export, subtitle & hook title beranimasi dirender terus ke video), lepas tu hantar MP4 siap. Lihat **Bahagian 4A** untuk cara kerja dan apa yang Sir perlu hantar.
 
 ### STEP 1 — Setup projek & import
 1. New project → ratio **9:16**.
@@ -87,7 +117,7 @@ Senaraikan B-roll ikut point dalam skrip. Contoh untuk niche sales WhatsApp:
 ### STEP 2 — Rough cut talking head (A-roll)
 1. Letak semua take talking head kat main track.
 2. Pilih take terbaik untuk setiap ayat.
-3. **Buang semua senyap, "emm", "aaa", tarik nafas, ulang ayat.** (CapCut: *Auto cut / Remove silences* boleh tolong)
+3. **Buang semua senyap, "emm", "aaa", tarik nafas, ulang ayat.** (Claude kesan senyap secara automatik, kemudian semak dengan skrip)
 4. Jump cut tak apa — memang style TikTok.
 5. Semak durasi: **mesti ≤ 30s**. Lebih? Potong ayat, bukan laju-kan suara.
 
@@ -118,8 +148,8 @@ Contoh:
 ```
 
 ### STEP 6 — Subtitle
-1. CapCut: **Text → Auto captions** (pilih Bahasa Melayu).
-2. **Semak & betulkan setiap perkataan** (auto caption selalu salah eja slang / nama produk).
+1. Teks subtitle diambil dari **skrip yang Sir approve** dalam brief, kemudian dipadankan dengan masa suara dalam rakaman.
+2. **Semak setiap perkataan** — kalau Sir tukar ayat masa rakam (ad-lib), Claude betulkan ikut apa yang betul-betul dicakap.
 3. Format:
    - **1–4 patah perkataan** sebaris (bukan ayat panjang)
    - Font bold, putih + stroke hitam
@@ -131,7 +161,7 @@ Contoh:
 | Layer | Level |
 |---|---|
 | Suara (A-roll) | Utama — sekitar **-6 dB hingga -3 dB** peak. Guna *Enhance voice / Noise reduction* |
-| Background music | **-25 hingga -20 dB** (perlahan, jangan lawan suara). Pilih dari library TikTok/CapCut yang commercial-safe kalau akaun bisnes |
+| Background music | **-25 hingga -20 dB** (perlahan, jangan lawan suara). Sir bekalkan fail muzik yang selamat untuk komersial, ATAU biarkan kosong dan tambah lagu dari library TikTok masa upload (lihat 5.5) |
 | SFX | Whoosh kat transition, pop kat teks masuk, "ding" kat point penting. Jangan lebih |
 
 ### STEP 8 — Color & polish
@@ -193,13 +223,13 @@ TikTok akan **compress** setiap video yang diupload. Kalau fail asal dah lemah, 
 | Filter / effect | Jangan tambah grain, noise, atau sharpen berlebihan. Effect "glitch/blur" banyak buat compress jadi pecah |
 | Export berulang | Jangan export → import → export lagi. Setiap kali export, kualiti turun. Edit semua dalam satu projek |
 
-### 5.4 Setting export (CapCut)
+### 5.4 Setting export (Claude render guna FFmpeg)
 | Setting | Nilai |
 |---|---|
 | Resolution | **1080p** |
 | Frame rate | **30fps** (ikut rakaman) |
-| Bitrate / Code rate | **Higher** atau Custom **~15–20 Mbps** |
-| Format | MP4 (H.264) |
+| Bitrate | **~15–20 Mbps** (H.264 High profile, CRF rendah) |
+| Format | MP4 (H.264 + AAC 320kbps, `+faststart`) |
 | Saiz fail | Video 30s biasanya ~40–70 MB. Kalau bawah 15 MB, bitrate terlalu rendah |
 
 > Nota: Export 2K/4K tak semestinya lebih sharp sebab TikTok akan turunkan ke 1080p juga. **1080p + bitrate tinggi** biasanya hasil paling konsisten.
@@ -209,7 +239,7 @@ TikTok akan **compress** setiap video yang diupload. Kalau fail asal dah lemah, 
 2. Masa post: **More options → "Allow high-quality uploads" / "Upload HD" → ON** (nama menu boleh berubah ikut versi app).
 3. Upload guna **WiFi yang laju**, bukan data lemah.
 4. Upload dari **app TikTok terus** (atau TikTok Studio desktop). Jangan upload melalui app pihak ketiga yang compress semula.
-5. Jangan guna editor dalam TikTok untuk tambah teks/effect lagi, sebab TikTok akan render semula. Semua teks siapkan dalam CapCut.
+5. Jangan guna editor dalam TikTok untuk tambah teks/effect lagi, sebab TikTok akan render semula. Semua teks dah siap dalam video yang Claude render. (Tambah lagu dari library TikTok tak apa.)
 
 ### 5.6 Semak lepas upload
 - Tunggu 5–10 minit (TikTok process versi HD dulu, mula-mula memang nampak kabur sikit).
