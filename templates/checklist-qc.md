@@ -27,6 +27,14 @@
 - [ ] SFX tak berlebihan
 - [ ] Muzik selamat untuk akaun bisnes (commercial library)
 
+## Kualiti (sharp & tak pecah)
+- [ ] Rakam 4K/1080p, HDR OFF, lensa bersih, cahaya cukup
+- [ ] Fail dipindah tanpa WhatsApp biasa (kabel / Drive / AirDrop / hantar sebagai Document)
+- [ ] Punch-in zoom tak lebih 120% (rakaman 1080p)
+- [ ] Tak ada gambar/screenshot yang dibesarkan sampai kabur
+- [ ] Export 1080p · 30fps · bitrate Higher (~15–20 Mbps) — fail 30s sekitar 40–70 MB
+- [ ] TikTok: Data Saver OFF, "Upload HD / high-quality uploads" ON, guna WiFi
+
 ## Final
 - [ ] Tonton penuh kat phone (dengan bunyi & mute)
 - [ ] Export 1080p · 30fps · MP4

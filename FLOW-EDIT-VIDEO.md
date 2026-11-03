@@ -11,7 +11,7 @@
 | Aspect ratio | 9:16 (1080 x 1920) |
 | Frame rate | 30 fps (ikut rakaman asal, jangan campur 25 & 30) |
 | Durasi | 25–30 saat (sasaran 28s, bagi ruang loop) |
-| Export | 1080p, 30fps, bitrate tinggi / "Recommended", H.264 MP4 |
+| Export | 1080p, 30fps, bitrate **Higher** (~15–20 Mbps), H.264 MP4 — lihat Bahagian 6 |
 | Safe zone | Elak letak teks kat **bawah 20%** (caption & button TikTok) dan **kanan 15%** (icon like/comment/share). Atas ~10% pun elak (nama akaun / Following-For You) |
 | Font subtitle | Bold sans-serif (cth: Montserrat ExtraBold / Poppins Bold), saiz besar, stroke/shadow hitam |
 
@@ -148,7 +148,7 @@ Contoh:
 
 ### STEP 11 — QC & export
 1. Tengok full video **kat phone**, dengan & tanpa bunyi (`templates/checklist-qc.md`).
-2. Export: **1080p · 30fps · MP4**.
+2. Export: **1080p · 30fps · bitrate Higher (~15–20 Mbps) · MP4**. Detail kualiti: lihat Bahagian 6.
 3. Nama fail: `YYYYMMDD_topik_hookA.mp4`.
 
 ### STEP 12 — Upload TikTok
@@ -159,7 +159,61 @@ Contoh:
 
 ---
 
-## 5. Ringkasan Flow (1 muka)
+## 6. KUALITI VIDEO — Pastikan Sharp & Tak Pecah Bila Upload
+
+TikTok akan **compress** setiap video yang diupload. Kalau fail asal dah lemah, lepas compress jadi lagi pecah. Jadi kualiti kena jaga dari rakaman sampai upload.
+
+### 6.1 Masa rakam
+| Setting | Buat macam ni |
+|---|---|
+| Resolusi | **4K 30fps** (paling baik) atau minimum 1080p 30fps |
+| HDR | **OFF** (iPhone: Settings → Camera → Record Video → HDR Video OFF). HDR selalu jadi pudar/pelik lepas upload |
+| Kamera | Kamera **belakang**, lensa utama (1x). Jangan guna digital zoom |
+| Lensa | **Lap lensa** sebelum rakam (cap jari = video kabur) |
+| Fokus & exposure | Tekan lama kat muka untuk **lock AE/AF** supaya tak berubah-ubah |
+| Cahaya | Mesti terang. Bilik gelap = noise/grain = paling cepat pecah lepas compress |
+| Stabil | Guna tripod. Video bergoyang = lebih banyak blok pecah |
+
+### 6.2 Pindah fail
+- ❌ **JANGAN hantar video melalui WhatsApp/Telegram biasa.** WhatsApp compress teruk.
+- ✅ Guna kabel, AirDrop, Google Drive, atau WhatsApp **"Document"** (hantar sebagai fail, bukan video).
+- B-roll / screen record pun sama: guna fail asal.
+
+### 6.3 Masa edit
+| Perkara | Buat macam ni |
+|---|---|
+| Project | 9:16, **1080x1920**, frame rate sama dengan rakaman (30fps) |
+| Punch-in zoom | Rakaman 1080p → zoom maksimum **~120%**. Rakaman 4K → boleh zoom sampai 200% tanpa kabur |
+| Gambar / screenshot | Guna resolusi asal. Jangan besarkan gambar kecil (contoh: screenshot yang di-crop sikit lepas tu besarkan) |
+| Screen record chat | Rakam terus kat phone (resolusi penuh), jangan rakam skrin guna phone lain |
+| Filter / effect | Jangan tambah grain, noise, atau sharpen berlebihan. Effect "glitch/blur" banyak buat compress jadi pecah |
+| Export berulang | Jangan export → import → export lagi. Setiap kali export, kualiti turun. Edit semua dalam satu projek |
+
+### 6.4 Setting export (CapCut)
+| Setting | Nilai |
+|---|---|
+| Resolution | **1080p** |
+| Frame rate | **30fps** (ikut rakaman) |
+| Bitrate / Code rate | **Higher** atau Custom **~15–20 Mbps** |
+| Format | MP4 (H.264) |
+| Saiz fail | Video 30s biasanya ~40–70 MB. Kalau bawah 15 MB, bitrate terlalu rendah |
+
+> Nota: Export 2K/4K tak semestinya lebih sharp sebab TikTok akan turunkan ke 1080p juga. **1080p + bitrate tinggi** biasanya hasil paling konsisten.
+
+### 6.5 Masa upload TikTok
+1. **Matikan Data Saver**: Profile → ☰ → Settings → Data Saver → OFF.
+2. Masa post: **More options → "Allow high-quality uploads" / "Upload HD" → ON** (nama menu boleh berubah ikut versi app).
+3. Upload guna **WiFi yang laju**, bukan data lemah.
+4. Upload dari **app TikTok terus** (atau TikTok Studio desktop). Jangan upload melalui app pihak ketiga yang compress semula.
+5. Jangan guna editor dalam TikTok untuk tambah teks/effect lagi, sebab TikTok akan render semula. Semua teks siapkan dalam CapCut.
+
+### 6.6 Semak lepas upload
+- Tunggu 5–10 minit (TikTok process versi HD dulu, mula-mula memang nampak kabur sikit).
+- Tengok kat phone lain / akaun lain. Kalau masih pecah, semak balik: cahaya rakaman, bitrate export, dan cara pindah fail.
+
+---
+
+## 7. Ringkasan Flow (1 muka)
 
 ```
 SKRIP (hook + 3 point + CTA, ≤85 patah)
@@ -180,5 +234,7 @@ AUDIO (suara jelas, muzik perlahan, SFX)
    ↓
 COLOR + CTA + LOOP ENDING
    ↓
-QC KAT PHONE → EXPORT 1080p 30fps → UPLOAD
+QC KAT PHONE → EXPORT 1080p 30fps bitrate tinggi
+   ↓
+UPLOAD (WiFi, Data Saver OFF, HD upload ON)
 ```
