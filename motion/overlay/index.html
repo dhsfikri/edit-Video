@@ -41,7 +41,7 @@
       .word { display: inline-block; }
       .kw { display: inline-block; margin: 0 6px; color: var(--ink); background: var(--yellow); padding: 0 16px; border-radius: 14px; }
       .row { display: flex; align-items: center; justify-content: center; gap: 22px; font-weight: 800; font-size: 60px; color: var(--white); line-height: 1.5; white-space: nowrap; }
-      .row .tag { padding: 2px 20px; border-radius: 14px; font-size: 54px; }
+      .row .tag { padding: 2px 20px; border-radius: 14px; font-size: 0.9em; }
       .row .ok { background: var(--green); color: var(--ink); }
       .row .no { background: var(--red); color: var(--white); }
       .cta { background: var(--green); }
@@ -80,7 +80,8 @@
       const words = (s) => s.split(" ").filter(Boolean).map((w) => `<span class="word">${w}</span>`).join(" ");
       // [teks biasa] -> keyword kuning
       const rich = (s) => s.split(/(\[[^\]]+\])/).filter(Boolean)
-        .map((p) => p.startsWith("[") ? `<span class="word kw">${p.slice(1, -1)}</span>` : words(p)).join(" ");
+        .map((p) => p.startsWith("[") ? `<span class="word kw">${p.slice(1, -1)}</span>` : words(p))
+        .reduce((acc, h, i, arr) => acc + (i && !/^<span class="word">[?!.,]/.test(h) ? " " : "") + h, "");
       const fit = (node, max = 870, start = 76, min = 48) => {
         node.querySelectorAll(".line").forEach((l) => {
           let s = start; l.style.fontSize = s + "px";
@@ -117,6 +118,13 @@
         }
         layer.appendChild(node);
         if (c.type !== "sticker") fit(node);
+        // Semua baris dalam satu kad guna saiz yang sama (ikut baris paling panjang)
+        const rowsEl = [...node.querySelectorAll(".row")];
+        if (rowsEl.length) {
+          let z = 60; const setZ = () => rowsEl.forEach((r) => (r.style.fontSize = z + "px"));
+          setZ();
+          while (rowsEl.some((r) => r.scrollWidth > 880) && z > 36) { z -= 2; setZ(); }
+        }
         tl.set(node, { opacity: 0 }, 0);
         popIn(node, c.start);
         if (c.type === "rows") {
