@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "historyId": "dedeb383-2eb6-42f1-93df-d1e61c04abd1",
+  "currentRevision": "3bd59d62-e099-47a2-9ec8-2ee05dc43d90",
+  "pendingChanges": false,
+  "files": {
+    "AGENTS.md": {
+      "hash": "1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5",
+      "content": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/1d/1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5"
+    },
+    "CLAUDE.md": {
+      "hash": "1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5",
+      "content": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/1d/1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5"
+    },
+    "assets/gsap.min.js": {
+      "hash": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+      "content": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/92/92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb"
+    },
+    "assets/montserrat-latin-600-normal.woff2": {
+      "hash": "d857325c360f7128b347ca924c1974967aaa886ba47dad22e4042d6c38b26a83",
+      "content": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/d8/d857325c360f7128b347ca924c1974967aaa886ba47dad22e4042d6c38b26a83"
+    },
+    "assets/montserrat-latin-800-normal.woff2": {
+      "hash": "ba826fb84c2e961578adf3a08b5778b87905d4443445d1d56d84f9f157d5ea4b",
+      "content": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/ba/ba826fb84c2e961578adf3a08b5778b87905d4443445d1d56d84f9f157d5ea4b"
+    },
+    "assets/signature.wav": {
+      "hash": "633aadf68e8c8255ce1fbe6182e0711540f1bb7eeb198f9733a163abc7c3eb66",
+      "content": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/63/633aadf68e8c8255ce1fbe6182e0711540f1bb7eeb198f9733a163abc7c3eb66"
+    },
+    "hyperframes.json": {
+      "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+      "content": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/53/53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
+    },
+    "index.html": {
+      "hash": "d93f4ea10e11cae8fd1a8509f9f4aa709229b0e8d4cd6232cc4759e412df4138",
+      "content": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/d9/d93f4ea10e11cae8fd1a8509f9f4aa709229b0e8d4cd6232cc4759e412df4138"
+    },
+    "meta.json": {
+      "hash": "c768e2478dc87cab8be9bc030fc809b1a7c07d5b6dcf18032ec7fc4e28a7c015",
+      "content": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/c7/c768e2478dc87cab8be9bc030fc809b1a7c07d5b6dcf18032ec7fc4e28a7c015"
+    },
+    "package.json": {
+      "hash": "428d04ebb3647a556fa99bbf3b55cd7fe4371aedb9e7d854c82f21bc3607e323",
+      "content": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/42/428d04ebb3647a556fa99bbf3b55cd7fe4371aedb9e7d854c82f21bc3607e323"
+    }
+  },
+  "revisions": {
+    "3bd59d62-e099-47a2-9ec8-2ee05dc43d90": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793711220872,
+      "endedAt": 1793711220873,
+      "files": {
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/91/91a5c25bd9789fd4aa16d5fd9d692f0e30d392ff06560819a4fdc4b581f3a8a3",
+          "after": "/root/.cache/hyperframes/history/dedeb383-2eb6-42f1-93df-d1e61c04abd1/blobs/d9/d93f4ea10e11cae8fd1a8509f9f4aa709229b0e8d4cd6232cc4759e412df4138"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "67795140-2d48-4aee-96b7-2e1fed4bc815",
+      "completedAt": 1793711234960,
+      "output": "/home/user/edit-Video/motion/intro/renders/intro-preview.mp4",
+      "status": "completed",
+      "revision": "3bd59d62-e099-47a2-9ec8-2ee05dc43d90"
+    },
+    "retainedRevisions": [
+      "3bd59d62-e099-47a2-9ec8-2ee05dc43d90"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ms" data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"series","type":"string","label":"Nama siri","default":"AYAT CLOSING"},
+    {"id":"episode","type":"string","label":"Nombor episod","default":"07"},
+    {"id":"hook1","type":"string","label":"Hook baris 1","default":"CUSTOMER \"SEEN\" JE?"},
+    {"id":"hookPre","type":"string","label":"Hook baris 2 (sebelum keyword)","default":"BALAS"},
+    {"id":"keyword","type":"string","label":"Keyword (kuning)","default":"AYAT INI"},
+    {"id":"hookPost","type":"string","label":"Hook baris 2 (selepas keyword)","default":"🔥"},
+    {"id":"handle","type":"string","label":"Username TikTok","default":"@sirdharma_"},
+    {"id":"preview","type":"string","label":"Latar contoh (1) atau telus (0)","default":"1"}
+  ]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      :root {
+        --green: #25d366;
+        --yellow: #ffd60a;
+        --ink: #0b0b0b;
+        --white: #ffffff;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
+      #root {
+        position: relative; width: 100%; height: 100%;
+        font-family: "Montserrat", "Noto Color Emoji", sans-serif;
+      }
+
+      /* ---------- Latar contoh (ganti dengan rakaman Sir) ---------- */
+      #bg { position: absolute; inset: 0; background: radial-gradient(120% 80% at 50% 45%, #3a4652 0%, #1b2128 60%, #0e1216 100%); }
+      #bg .person { position: absolute; left: 50%; top: 760px; width: 560px; height: 1160px; transform: translateX(-50%);
+        background: radial-gradient(closest-side at 50% 22%, #6b7884 0 46%, transparent 47%),
+                    radial-gradient(70% 55% at 50% 100%, #56626d 0 70%, transparent 71%); opacity: 0.85; }
+      #bg .label { position: absolute; bottom: 470px; width: 100%; text-align: center; color: rgba(255,255,255,0.28);
+        font: 600 30px "Montserrat", sans-serif; letter-spacing: 0.2em; }
+
+      /* ---------- Badge siri (kekal sepanjang video) ---------- */
+      #badge {
+        position: absolute; left: 64px; top: 236px;
+        display: flex; align-items: center; gap: 18px;
+        padding: 18px 30px 18px 24px; border-radius: 999px;
+        background: rgba(11, 11, 11, 0.86);
+        border: 3px solid var(--green);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        transform-origin: left center;
+      }
+      #badge .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 6px rgba(37,211,102,0.25); }
+      #badge .series { color: var(--white); font-weight: 800; font-size: 36px; letter-spacing: 0.04em; }
+      #badge .ep { color: var(--green); font-weight: 800; font-size: 36px; }
+
+      /* ---------- Hook title ---------- */
+      #hook {
+        position: absolute; left: 0; right: 0; top: 470px;
+        display: flex; flex-direction: column; align-items: center; gap: 22px;
+      }
+      #hook .box {
+        position: relative; width: 960px;
+        background: var(--ink); border-radius: 30px;
+        padding: 40px 50px 46px; text-align: center;
+        box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+        transform-origin: center center;
+      }
+      #hook .bar { position: absolute; left: 0; top: 0; height: 12px; width: 100%; background: var(--green); border-radius: 30px 30px 0 0; transform-origin: left center; }
+      #hook .line { display: block; color: var(--white); font-weight: 800; font-size: 84px; line-height: 1.12; letter-spacing: -0.01em; white-space: nowrap; }
+      #hook .word { display: inline-block; }
+      #hook .kw { display: inline-block; margin: 0 6px; color: var(--ink); background: var(--yellow); padding: 0 18px; border-radius: 14px; transform-origin: center; }
+      #hook .handle {
+        color: var(--white); font-weight: 600; font-size: 34px; letter-spacing: 0.02em;
+        background: rgba(11,11,11,0.6); padding: 10px 24px; border-radius: 999px;
+      }
+      #hook .handle b { color: var(--green); font-weight: 800; }
+
+      /* ---------- Contoh subtitle (sistem sebenar: dari auto subtitle) ---------- */
+      #sub { position: absolute; left: 0; right: 0; top: 1290px; text-align: center; }
+      #sub .w {
+        display: inline-block; margin: 0 10px; font-weight: 800; font-size: 76px; color: var(--white);
+        -webkit-text-stroke: 10px var(--ink); paint-order: stroke fill;
+        text-shadow: 0 6px 18px rgba(0,0,0,0.5);
+      }
+      #sub .w.hl { color: var(--yellow); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1080" data-height="1920">
+      <div id="bg" class="clip" data-start="0" data-duration="5" data-track-index="0">
+        <div class="person"></div>
+        <div class="label">RAKAMAN SIR DI SINI</div>
+      </div>
+
+      <div id="badge" class="clip" data-start="0" data-duration="5" data-track-index="1">
+        <span class="dot"></span><span class="series"></span><span class="ep"></span>
+      </div>
+
+      <div id="hook" class="clip" data-start="0" data-duration="3.4" data-track-index="2">
+        <div class="box">
+          <div class="bar"></div>
+          <span class="line l1"></span>
+          <span class="line l2"></span>
+        </div>
+        <div class="handle"></div>
+      </div>
+
+      <div id="sub" class="clip" data-start="0" data-duration="5" data-track-index="3"></div>
+
+      <audio id="sig" class="clip" src="assets/signature.wav" data-start="0.05" data-duration="0.9" data-volume="0.9" data-track-index="4"></audio>
+    </div>
+
+    <script>
+      const v = window.__hyperframes.getVariables();
+      const $ = (s) => document.querySelector(s);
+      if (v.preview !== "1") $("#bg").style.display = "none";
+
+      $("#badge .series").textContent = v.series;
+      $("#badge .ep").textContent = "#" + v.episode;
+
+      const words = (s, cls) => s.split(" ").filter(Boolean)
+        .map((w) => `<span class="word ${cls || ""}">${w}</span>`).join(" ");
+      $("#hook .l1").innerHTML = words(v.hook1);
+      $("#hook .l2").innerHTML =
+        words(v.hookPre) + ' <span class="word kw">' + v.keyword + "</span> " + words(v.hookPost);
+      // Auto-fit: kecilkan font hook kalau ayat panjang, supaya tak terkeluar kotak (ruang teks 860px)
+      document.querySelectorAll("#hook .line").forEach((el) => {
+        let size = 84;
+        el.style.fontSize = size + "px";
+        while (el.scrollWidth > 860 && size > 52) { size -= 2; el.style.fontSize = size + "px"; }
+      });
+      $("#hook .handle").innerHTML = "<b>●</b> " + v.handle;
+
+      // Contoh subtitle word-by-word (dalam video sebenar, timing datang dari auto subtitle)
+      const subWords = [
+        ["Customer", 0.45], ["tanya", 0.75], ["harga,", 1.0],
+        ["lepas", 1.55], ["tu", 1.75], ["terus", 1.95], ["senyap?", 2.25, "hl"],
+        ["Ni", 3.0], ["sebabnya.", 3.25, "hl"]
+      ];
+      const groups = [[0, 3], [3, 7], [7, 9]];
+      const sub = $("#sub");
+
+      const tl = gsap.timeline({ paused: true });
+
+      // 1) Badge siri: slide-in dari kiri dengan lantunan kecil
+      tl.fromTo("#badge", { x: -520, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.6)" }, 0.0);
+      tl.fromTo("#badge .dot", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 0.3);
+
+      // 2) Hook title: kotak pop-in, bar hijau wipe, perkataan masuk satu-satu, keyword "punch"
+      tl.fromTo("#hook .box", { scale: 0.55, opacity: 0, rotation: -3 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.42, ease: "back.out(1.8)" }, 0.12);
+      tl.fromTo("#hook .bar", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.3);
+      tl.fromTo("#hook .word:not(.kw)", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.28, stagger: 0.06, ease: "power3.out" }, 0.22);
+      tl.fromTo("#hook .kw", { scale: 0, rotation: -8 }, { scale: 1, rotation: -2, duration: 0.4, ease: "back.out(3)" }, 0.7);
+      tl.to("#hook .kw", { scale: 1.08, duration: 0.18, ease: "power1.inOut", yoyo: true, repeat: 3 }, 1.3);
+      tl.fromTo("#hook .handle", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 0.75);
+
+      // 3) Hook keluar sekitar 3s (badge kekal)
+      tl.to("#hook", { scale: 0.85, opacity: 0, y: -60, duration: 0.3, ease: "power2.in" }, 3.0);
+
+      // 4) Contoh subtitle
+      groups.forEach(([a, b], gi) => {
+        const g = document.createElement("div");
+        g.className = "grp"; g.style.position = "absolute"; g.style.left = "0"; g.style.right = "0";
+        subWords.slice(a, b).forEach(([w, t, hl]) => {
+          const s = document.createElement("span");
+          s.className = "w" + (hl ? " hl" : ""); s.textContent = w; g.appendChild(s);
+          tl.fromTo(s, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.14, ease: "back.out(2.5)" }, t);
+        });
+        sub.appendChild(g);
+        const end = gi + 1 < groups.length ? subWords[groups[gi + 1][0]][1] - 0.02 : 5;
+        tl.set(g, { opacity: 0 }, end);
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
