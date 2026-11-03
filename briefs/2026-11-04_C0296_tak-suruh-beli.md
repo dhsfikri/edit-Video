@@ -1,7 +1,7 @@
 # Brief Edit — C0296 "Kenapa orang tak dengar cakap awak?" (DEMO GAYA v2)
 
 **Fail asal:** `Folder Video/Raw/C0296.MP4` · **Versi brief:** v1
-**Status:** ☐ Menunggu approval  ☐ Approved  ☐ Perlu ubah
+**Status:** ☐ Menunggu approval  ☑ Approved  ☐ Perlu ubah
 
 ## 0. Spec fail asal (dah semak)
 | Item | Nilai | Tindakan |
@@ -44,3 +44,10 @@ Dibuang: "Faham? Dan satu lagi…" (pembukaan), "Tapi sekarang ni", "Kenapa geng
 1. Peserta dalam kelas nampak di depan kamera (kebanyakan belakang kepala). Mereka dah setuju untuk muncul dalam video?
 2. Whisper dengar "Bukan **kesian**" dan "Kenapa geng-geng **dof**" — Sir sebenarnya cakap apa? (Saya cadang buang kedua-dua ayat ni.)
 3. Durasi ±15s tanpa iklan. Nak sisip iklan 4s juga? (Cadangan: tak, sebab video pendek — iklan akan ambil 25% video.)
+
+---
+## Revisi
+- B-roll: babak chat SALAH/BETUL diletak **semasa Sir bercakap** (bukan senyap) — muka dalam bulatan ikut muka (pipeline/facecrop.py).
+- **Draf v1 (11.5s):** hook → kenapa → sebab tak cakap (callout) → chat SALAH → chat BETUL → percayai cakap saya + CTA follow.
+- **Draf v2 (14.7s):** Sir minta ±15s & kekalkan hook di depan → tambah "Saya nak cerita, orang boleh dengar cakap kita" + "Tapi sekarang ni…" SELEPAS hook.
+- Subtitle: "bayar bayaran" → "buat payment" (perlu Sir sahkan).

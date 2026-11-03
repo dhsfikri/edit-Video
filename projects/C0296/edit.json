@@ -6,15 +6,79 @@
   "fps": 30,
   "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
   "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
-  "corrections": {"dedisyen": "decision"},
+  "corrections": {
+    "dedisyen": "decision"
+  },
   "segments": [
-    {"note": "A hook: kenapa orang tu tak dengar cakap awak?", "start": 9.93, "end": 11.20, "zoom": 1.2, "cy": 0.38},
-    {"note": "B Kenapa?",                                      "start": 13.18, "end": 13.64, "zoom": 1.2, "cy": 0.38},
-    {"note": "C Sebab awak tak cakap.",                        "start": 16.50, "end": 17.42, "zoom": 1.2, "cy": 0.38},
-    {"note": "C2 Sebab tak cakap.",                            "start": 18.66, "end": 19.42, "zoom": 1.2, "cy": 0.38},
-    {"note": "D [B-roll SALAH] tak suruh beli / bayar",        "start": 20.20, "end": 22.84, "zoom": 1.2, "cy": 0.38},
-    {"note": "E [B-roll BETUL] tak buat decision",             "start": 23.40, "end": 24.92, "zoom": 1.2, "cy": 0.38},
-    {"note": "F [B-roll BETUL] orang boleh dengar cakap awak", "start": 5.93,  "end": 7.60, "zoom": 1.2, "cy": 0.38},
-    {"note": "G percayai cakap saya",                          "start": 8.07,  "end": 8.80, "zoom": 1.2, "cy": 0.38}
+    {
+      "note": "A hook: kenapa orang tu tak dengar cakap awak?",
+      "start": 9.93,
+      "end": 11.2,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "P saya nak cerita, orang boleh dengar cakap kita",
+      "start": 2.09,
+      "end": 4.55,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "T tapi sekarang ni,",
+      "start": 9.09,
+      "end": 9.9,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "B Kenapa?",
+      "start": 13.18,
+      "end": 13.64,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "C Sebab awak tak cakap.",
+      "start": 16.5,
+      "end": 17.42,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "C2 Sebab tak cakap.",
+      "start": 18.66,
+      "end": 19.42,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "D [B-roll SALAH] tak suruh beli / bayar",
+      "start": 20.2,
+      "end": 22.84,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "E [B-roll BETUL] tak buat decision",
+      "start": 23.4,
+      "end": 24.92,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "F [B-roll BETUL] orang boleh dengar cakap awak",
+      "start": 5.93,
+      "end": 7.6,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "G percayai cakap saya",
+      "start": 8.07,
+      "end": 8.8,
+      "zoom": 1.2,
+      "cy": 0.38
+    }
   ]
 }
