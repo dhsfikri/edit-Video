@@ -50,4 +50,5 @@ Dibuang: "Faham? Dan satu lagi…" (pembukaan), "Tapi sekarang ni", "Kenapa geng
 - B-roll: babak chat SALAH/BETUL diletak **semasa Sir bercakap** (bukan senyap) — muka dalam bulatan ikut muka (pipeline/facecrop.py).
 - **Draf v1 (11.5s):** hook → kenapa → sebab tak cakap (callout) → chat SALAH → chat BETUL → percayai cakap saya + CTA follow.
 - **Draf v2 (14.7s):** Sir minta ±15s & kekalkan hook di depan → tambah "Saya nak cerita, orang boleh dengar cakap kita" + "Tapi sekarang ni…" SELEPAS hook.
+- **Draf v3:** tajuk jadi headline — muncul sekali gus (0.5s), kekal lama, tak ikut suara. 3 tajuk sahaja: hook (0–4.9s), TAK CAKAP (4.9–6.7s), ORANG BOLEH DENGAR (12.8s–akhir).
 - Subtitle: "bayar bayaran" → "buat payment" (perlu Sir sahkan).

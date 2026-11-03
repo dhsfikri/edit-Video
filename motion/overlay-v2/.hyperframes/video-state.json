@@ -1,7 +1,7 @@
 {
   "version": 1,
   "historyId": "069813b9-4423-4969-90ae-596549d35dd3",
-  "currentRevision": "ceba00ac-c585-4cc7-985e-5763d6492d3e",
+  "currentRevision": "a1e5b46e-c5a6-45bd-a910-db22983bb002",
   "pendingChanges": false,
   "files": {
     "assets/caveat-latin-700-normal.woff2": {
@@ -21,8 +21,8 @@
       "content": "/root/.cache/hyperframes/history/069813b9-4423-4969-90ae-596549d35dd3/blobs/ba/ba826fb84c2e961578adf3a08b5778b87905d4443445d1d56d84f9f157d5ea4b"
     },
     "data.js": {
-      "hash": "569938b8a9fdbea61d8af2a96390e7f884d5db9c42296168f8daa6986d8e0916",
-      "content": "/root/.cache/hyperframes/history/069813b9-4423-4969-90ae-596549d35dd3/blobs/56/569938b8a9fdbea61d8af2a96390e7f884d5db9c42296168f8daa6986d8e0916"
+      "hash": "825924bcbb4c2b0e9f48f2260a631e4b3530df31489d5b2a90b5add306ebcd90",
+      "content": "/root/.cache/hyperframes/history/069813b9-4423-4969-90ae-596549d35dd3/blobs/82/825924bcbb4c2b0e9f48f2260a631e4b3530df31489d5b2a90b5add306ebcd90"
     },
     "hyperframes.json": {
       "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
@@ -71,6 +71,21 @@
           "after": "/root/.cache/hyperframes/history/069813b9-4423-4969-90ae-596549d35dd3/blobs/56/569938b8a9fdbea61d8af2a96390e7f884d5db9c42296168f8daa6986d8e0916"
         }
       }
+    },
+    "a1e5b46e-c5a6-45bd-a910-db22983bb002": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793748747658,
+      "endedAt": 1793748747659,
+      "files": {
+        "data.js": {
+          "before": "/root/.cache/hyperframes/history/069813b9-4423-4969-90ae-596549d35dd3/blobs/56/569938b8a9fdbea61d8af2a96390e7f884d5db9c42296168f8daa6986d8e0916",
+          "after": "/root/.cache/hyperframes/history/069813b9-4423-4969-90ae-596549d35dd3/blobs/82/825924bcbb4c2b0e9f48f2260a631e4b3530df31489d5b2a90b5add306ebcd90"
+        }
+      }
     }
   },
   "checks": {
@@ -85,15 +100,15 @@
   },
   "renders": {
     "latest": {
-      "id": "e3c8fe7e-1ec2-4fb6-8c97-b0ed0257c4f6",
-      "completedAt": 1793748609180,
+      "id": "3d9a414f-330f-455c-9893-1b034d2bbd26",
+      "completedAt": 1793748799462,
       "output": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0296/overlay.mov",
       "status": "completed",
-      "revision": "ceba00ac-c585-4cc7-985e-5763d6492d3e"
+      "revision": "a1e5b46e-c5a6-45bd-a910-db22983bb002"
     },
     "retainedRevisions": [
-      "ceba00ac-c585-4cc7-985e-5763d6492d3e",
-      "0ede21de-a4e4-43cd-90da-2f27a4a4a253"
+      "a1e5b46e-c5a6-45bd-a910-db22983bb002",
+      "ceba00ac-c585-4cc7-985e-5763d6492d3e"
     ]
   },
   "pendingArtifactCleanup": []

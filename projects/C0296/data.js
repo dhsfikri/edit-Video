@@ -1,4 +1,4 @@
-// Data overlay Gaya v2 untuk C0296 v2 (15s, hook di depan, 1s hold di hujung)
+// Data overlay Gaya v2 untuk C0296 v3 (tajuk = headline, kekal lama, tak ikut suara)
 window.EDIT = {
  "duration": 14.605,
  "series": "AYAT CLOSING",
@@ -13,78 +13,31 @@ window.EDIT = {
  "titles": [
   {
    "start": 0.0,
-   "end": 1.225,
+   "end": 4.865,
    "lines": [
     [
      {
-      "t": 0.02,
+      "t": 0.05,
       "text": "kenapa orang",
       "k": "script"
      }
     ],
     [
      {
-      "t": 0.62,
+      "t": 0.19,
       "text": "TAK DENGAR",
       "k": "bold"
      }
     ],
     [
      {
-      "t": 0.94,
+      "t": 0.33,
       "text": "CAKAP",
       "k": "bold"
      },
      {
-      "t": 1.0,
+      "t": 0.47,
       "text": "AWAK?",
-      "k": "box"
-     }
-    ]
-   ]
-  },
-  {
-   "start": 1.225,
-   "end": 3.61,
-   "lines": [
-    [
-     {
-      "t": 1.25,
-      "text": "saya nak cerita…",
-      "k": "script"
-     }
-    ],
-    [
-     {
-      "t": 2.27,
-      "text": "ORANG BOLEH",
-      "k": "bold"
-     }
-    ],
-    [
-     {
-      "t": 2.57,
-      "text": "DENGAR ✓",
-      "k": "box"
-     }
-    ]
-   ]
-  },
-  {
-   "start": 3.61,
-   "end": 4.865,
-   "lines": [
-    [
-     {
-      "t": 3.63,
-      "text": "tapi sekarang ni…",
-      "k": "script"
-     }
-    ],
-    [
-     {
-      "t": 4.39,
-      "text": "KENAPA?",
       "k": "box"
      }
     ]
@@ -96,14 +49,14 @@ window.EDIT = {
    "lines": [
     [
      {
-      "t": 4.885,
+      "t": 4.915,
       "text": "sebab awak",
       "k": "script"
      }
     ],
     [
      {
-      "t": 5.165,
+      "t": 5.055,
       "text": "TAK CAKAP",
       "k": "box"
      }
@@ -116,20 +69,22 @@ window.EDIT = {
    "lines": [
     [
      {
-      "t": 12.855,
-      "text": "percayai",
+      "t": 12.885,
+      "text": "ingat,",
       "k": "script"
      }
     ],
     [
      {
-      "t": 12.975,
-      "text": "CAKAP",
+      "t": 13.025,
+      "text": "ORANG BOLEH",
       "k": "bold"
-     },
+     }
+    ],
+    [
      {
-      "t": 13.115,
-      "text": "SAYA",
+      "t": 13.165,
+      "text": "DENGAR",
       "k": "box"
      }
     ]
