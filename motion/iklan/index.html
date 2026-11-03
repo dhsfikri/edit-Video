@@ -1,0 +1,74 @@
+<!doctype html>
+<!--
+  Iklan 2 saat (penuh skrin, 1080x1920) — disisip di tengah konten.
+  Tukar mesej guna variables (label, line1, keyword, sub, cta).
+  Render: npx hyperframes render -f 50 -q high -o iklan.mp4
+  Bunyi "ding" (assets/ding.wav) dicampur dalam FFmpeg semasa gabung, bukan dalam render ini.
+-->
+<html lang="ms" data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"label","type":"string","label":"Label kecil","default":"SERVIS SIR DHARMA"},
+    {"id":"line1","type":"string","label":"Teks besar","default":"SETUP TEAM SALES"},
+    {"id":"keyword","type":"string","label":"Keyword kuning","default":"A–Z ✅"},
+    {"id":"sub","type":"string","label":"Teks kecil","default":"Monitoring 1 bulan"},
+    {"id":"cta","type":"string","label":"CTA","default":"💬 WhatsApp link di bio"}
+  ]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
+      #panel { position: absolute; inset: 0; background: #25d366; }
+      #stripes { position: absolute; inset: -400px; opacity: 0.12;
+        background: repeating-linear-gradient(45deg, #0b0b0b 0 40px, transparent 40px 110px); }
+      #card { position: absolute; left: 70px; right: 70px; top: 560px; background: #0b0b0b; border-radius: 40px; padding: 60px 40px 64px;
+        text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+      #label { display: inline-block; color: #0b0b0b; background: #25d366; font-weight: 800; font-size: 34px; letter-spacing: .12em;
+        padding: 10px 26px; border-radius: 999px; }
+      #l1 { margin-top: 34px; color: #fff; font-weight: 800; font-size: 100px; line-height: 1.05; white-space: nowrap; }
+      #kw { display: inline-block; margin-top: 22px; background: #ffd60a; color: #0b0b0b; font-weight: 800; font-size: 120px; padding: 4px 36px; border-radius: 22px; }
+      #sub { margin-top: 30px; color: #fff; font-weight: 600; font-size: 46px; }
+      #cta { position: absolute; left: 0; right: 0; top: 1330px; text-align: center; }
+      #cta span { display: inline-block; background: #0b0b0b; color: #fff; font-weight: 800; font-size: 50px; padding: 22px 40px; border-radius: 999px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="2" data-width="1080" data-height="1920">
+      <div id="stage" class="clip" data-start="0" data-duration="2" data-track-index="0">
+        <div id="panel"><div id="stripes"></div></div>
+        <div id="card"><span id="label"></span><div id="l1"></div><span id="kw"></span><div id="sub"></div></div>
+        <div id="cta"><span></span></div>
+      </div>
+    </div>
+    <script>
+      const V = window.__hyperframes.getVariables();
+      const $ = (s) => document.querySelector(s);
+      $("#label").textContent = V.label; $("#l1").textContent = V.line1; $("#kw").textContent = V.keyword;
+      $("#sub").textContent = V.sub; $("#cta span").textContent = V.cta;
+      let z = 100; while ($("#l1").scrollWidth > 880 && z > 60) { z -= 2; $("#l1").style.fontSize = z + "px"; }
+
+      const tl = gsap.timeline({ paused: true });
+      // Masuk: panel hijau sapu dari bawah, kad pop, keyword punch, CTA naik. Keluar: sapu ke atas.
+      tl.fromTo("#panel", { yPercent: 100 }, { yPercent: 0, duration: 0.22, ease: "power3.out" }, 0);
+      tl.fromTo("#stripes", { x: 0 }, { x: 110, duration: 2, ease: "none" }, 0);
+      tl.fromTo("#card", { scale: 0.7, opacity: 0, rotation: -3 }, { scale: 1, opacity: 1, rotation: -1.5, duration: 0.3, ease: "back.out(1.8)" }, 0.12);
+      tl.fromTo("#label", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.2 }, 0.25);
+      tl.fromTo("#l1", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: "power3.out" }, 0.28);
+      tl.fromTo("#kw", { scale: 0, rotation: -10 }, { scale: 1, rotation: -3, duration: 0.3, ease: "back.out(3)" }, 0.42);
+      tl.fromTo("#sub", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.55);
+      tl.fromTo("#cta span", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "back.out(2)" }, 0.6);
+      tl.to("#kw", { scale: 1.08, duration: 0.14, yoyo: true, repeat: 3, ease: "sine.inOut" }, 0.9);
+      tl.to(["#card", "#cta"], { yPercent: -120, opacity: 0, duration: 0.2, ease: "power2.in" }, 1.75);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

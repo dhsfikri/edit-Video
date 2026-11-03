@@ -1,0 +1,15 @@
+{
+  "base": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/base.mov",
+  "out": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/C0029_draf_v2.mp4",
+  "fps": 50,
+  "insert": {"at": 14.42, "dur": 2.0, "overlay": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/iklan.mov", "sfx": "/home/user/edit-Video/motion/iklan/assets/ding.wav", "sfx_vol": 0.6},
+  "broll": [
+    {"src": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/broll/kupon.mp4",   "start": 3.45,  "dur": 2.5},
+    {"src": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/broll/troli.mp4",   "start": 8.0,   "dur": 2.4},
+    {"src": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/broll/kosong.mp4",  "start": 11.3,  "dur": 1.32},
+    {"src": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/broll/selesai.mp4", "start": 18.0,  "dur": 2.28},
+    {"src": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/broll/konten.mp4",  "start": 24.5,  "dur": 2.16}
+  ],
+  "overlay": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/overlay_v2.mov",
+  "sfx": [{"src": "/home/user/edit-Video/motion/intro/assets/signature.wav", "at": 0.04, "vol": 0.55}]
+}

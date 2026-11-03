@@ -1,22 +1,22 @@
-// Data overlay untuk C0029 "Kupon TikTok Shop" — masa (saat) ikut base.mov selepas potong
+// v2 (iklan 2s disisip pada 14.42) — Data overlay untuk C0029 "Kupon TikTok Shop" — masa (saat) ikut base.mov selepas potong
 window.EDIT = {
-  duration: 27.48,
+  duration: 29.48,
   previewBg: false,
   series: "TIPS JUALAN",
   episode: "01",
   maxWords: 3,
   highlight: ["sale", "kupon", "setia", "bonus", "tapi", "masalah", "benefit"],
   cards: [
-    { type: "text", start: 0.05, end: 3.3, lines: ["SALES JATUH BILA", "TAK ADA [KUPON]? 📉"], small: "● @sirdharma_", pulse: true },
-    { type: "rows", start: 3.4, end: 7.95, rowTimes: [3.5, 7.2],
+    { type: "text", start:0.05, end:3.3, lines: ["SALES JATUH BILA", "TAK ADA [KUPON]? 📉"], small: "● @sirdharma_", pulse: true },
+    { type: "rows", start:3.4, end:7.95, rowTimes: [3.5, 7.2],
       rows: ["🏷️ KUPON + DISKON", "= PELANGGAN <span class='kw'>TAK SETIA</span>"] },
-    { type: "rows", start: 8.0, end: 12.62, rowTimes: [8.1, 11.25],
+    { type: "rows", start:8.0, end:12.62, rowTimes: [8.1, 11.25],
       rows: ["ADA DISKON <span class='tag ok'>✅ BELI</span>", "TAK ADA DISKON <span class='tag no'>❌ TAK BELI</span>"] },
-    { type: "sticker", start: 13.75, end: 14.42, text: "BONUS ✨", x: 600, y: 330 },
-    { type: "text", start: 14.45, end: 20.6, lines: ["CERITA [BENEFIT]", "> DISKON 💪"] },
-    { type: "rows", start: 20.65, end: 25.2, rowTimes: [20.75, 21.9],
+    { type: "sticker", start:13.75, end:16.42, text: "BONUS ✨", x: 600, y: 330 },
+    { type: "text", start:16.45, end:22.6, lines: ["CERITA [BENEFIT]", "> DISKON 💪"] },
+    { type: "rows", start:22.65, end:27.2, rowTimes: [22.75, 23.9],
       rows: ["✅ MASALAH APA DISELESAIKAN?", "✅ KENAPA PILIH PRODUK AWAK?"] },
-    { type: "cta", start: 25.22, end: 27.48, lines: ["KOMEN [BENEFIT] 👇"], small: "kalau setuju · follow @sirdharma_" }
+    { type: "cta", start:27.22, end:29.48, lines: ["KOMEN [BENEFIT] 👇"], small: "kalau setuju · follow @sirdharma_" }
   ],
   words: [
     {w:"Susah",s:0.22,e:1.0},{w:"lah",s:1.0,e:1.2},{w:"nak",s:1.2,e:1.32},{w:"sale",s:1.32,e:1.54},{w:"kat",s:1.54,e:1.66},
@@ -31,14 +31,14 @@ window.EDIT = {
     {w:"diskon,",s:11.64,e:11.94},{w:"dia",s:12.0,e:12.06},{w:"orang",s:12.06,e:12.12},{w:"tak",s:12.12,e:12.3},{w:"beli.",s:12.3,e:12.62},
     {w:"Kalau",s:12.68,e:12.78},{w:"ada",s:12.78,e:12.88},{w:"diskon",s:12.88,e:13.16},{w:"tu",s:13.16,e:13.26},{w:"bagus,",s:13.26,e:13.5},
     {w:"alhamdulillah",s:13.62,e:13.9},{w:"bonus.",s:13.9,e:14.4},
-    {w:"Tapi",s:14.46,e:14.74},{w:"banyakkan",s:14.74,e:15.32},{w:"cerita",s:15.32,e:15.62},{w:"tentang",s:15.62,e:16.02},
-    {w:"apa",s:16.02,e:16.34},{w:"produk",s:16.34,e:16.72},{w:"awak",s:16.72,e:17.04},{w:"boleh",s:17.04,e:17.3},
-    {w:"selesaikan",s:17.3,e:17.78},{w:"masalah",s:17.78,e:18.06},{w:"orang.",s:18.06,e:18.28},
-    {w:"Kenapa",s:18.3,e:18.78},{w:"orang",s:18.78,e:18.92},{w:"kena",s:18.92,e:19.18},{w:"pilih",s:19.18,e:19.4},
-    {w:"produk",s:19.4,e:19.66},{w:"awak",s:19.66,e:19.88},{w:"berbanding",s:19.88,e:20.1},{w:"orang",s:20.1,e:20.3},{w:"lain?",s:20.3,e:20.6},
-    {w:"Ingat,",s:20.66,e:21.38},{w:"kali",s:21.62,e:21.68},{w:"ini",s:21.68,e:21.88},{w:"banyakkan",s:21.88,e:22.38},{w:"lagi",s:22.38,e:22.54},
-    {w:"konten",s:22.54,e:22.78},{w:"untuk",s:23.16,e:23.4},{w:"bercerita",s:23.4,e:23.84},{w:"tentang",s:23.84,e:24.12},
-    {w:"benefit",s:24.12,e:24.66},{w:"produk",s:24.66,e:24.94},{w:"kita.",s:24.94,e:25.22},
-    {w:"Jangan",s:25.26,e:25.4},{w:"lupa",s:25.4,e:25.56},{w:"komen,",s:25.56,e:25.94},{w:"share",s:26.38,e:26.74},{w:"dan",s:26.74,e:27.04},{w:"like.",s:27.04,e:27.4}
+    {w:"Tapi",s:16.46,e:16.74},{w:"banyakkan",s:16.74,e:17.32},{w:"cerita",s:17.32,e:17.62},{w:"tentang",s:17.62,e:18.02},
+    {w:"apa",s:18.02,e:18.34},{w:"produk",s:18.34,e:18.72},{w:"awak",s:18.72,e:19.04},{w:"boleh",s:19.04,e:19.3},
+    {w:"selesaikan",s:19.3,e:19.78},{w:"masalah",s:19.78,e:20.06},{w:"orang.",s:20.06,e:20.28},
+    {w:"Kenapa",s:20.3,e:20.78},{w:"orang",s:20.78,e:20.92},{w:"kena",s:20.92,e:21.18},{w:"pilih",s:21.18,e:21.4},
+    {w:"produk",s:21.4,e:21.66},{w:"awak",s:21.66,e:21.88},{w:"berbanding",s:21.88,e:22.1},{w:"orang",s:22.1,e:22.3},{w:"lain?",s:22.3,e:22.6},
+    {w:"Ingat,",s:22.66,e:23.38},{w:"kali",s:23.62,e:23.68},{w:"ini",s:23.68,e:23.88},{w:"banyakkan",s:23.88,e:24.38},{w:"lagi",s:24.38,e:24.54},
+    {w:"konten",s:24.54,e:24.78},{w:"untuk",s:25.16,e:25.4},{w:"bercerita",s:25.4,e:25.84},{w:"tentang",s:25.84,e:26.12},
+    {w:"benefit",s:26.12,e:26.66},{w:"produk",s:26.66,e:26.94},{w:"kita.",s:26.94,e:27.22},
+    {w:"Jangan",s:27.26,e:27.4},{w:"lupa",s:27.4,e:27.56},{w:"komen,",s:27.56,e:27.94},{w:"share",s:28.38,e:28.74},{w:"dan",s:28.74,e:29.04},{w:"like.",s:29.04,e:29.4}
   ]
 };
