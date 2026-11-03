@@ -1,7 +1,7 @@
 # Brief Edit — C0029 "Kupon TikTok Shop"
 
 **Tarikh:** 2026-11-03 · **Fail asal:** `Folder Video/Raw/C0029.MP4` · **Versi brief:** v1
-**Status:** ☐ Menunggu approval  ☑ Approved (draf v1 dihantar)  ☐ Perlu ubah
+**Status:** ☐ Menunggu approval  ☑ Approved — FINAL dihantar (20261103_kupon-tiktok-shop_hookA.mp4, = draf v1 tanpa ubahan)  ☐ Perlu ubah
 
 ## 0. Spec fail asal (dah semak)
 | Item | Nilai | Tindakan |
