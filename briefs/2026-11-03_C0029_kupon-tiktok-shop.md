@@ -59,3 +59,9 @@ Dibuang: 0–6.4 (pembukaan), "So kenapa? So kat sini kita belajar", "So kat sin
 1. Nama siri "TIPS JUALAN #01" okay?
 2. Hook title okay, atau nak versi lain?
 3. CTA: "Komen 'BENEFIT'" okay?
+
+---
+## Revisi
+- **v2:** tambah 5 B-roll animasi (HyperFrames: kupon, troli, kosong, selesai, konten) + iklan 2s "Setup Team Sales A–Z" (video dihentikan seketika pada 14.42s, tiada ayat hilang).
+- **v3 (FINAL, approved):** iklan dipanjangkan ke 4s dengan motion graphic (ikon team, checklist 3 item, bar 30 hari, CTA WhatsApp). Durasi 31.5s (Sir setuju lebih 30s). Fail: `20261103_kupon-tiktok-shop_hookA_v3.mp4`.
+- Outro: belum diputuskan.
