@@ -1,0 +1,34 @@
+<!doctype html>
+<!-- Thumbnail GAYA v2 (1080x1920). Teks penting dalam zon tengah 3:4 (y 240–1680).
+     Ganti frame.png (frame dari video), ubah teks di bawah, kemudian: node render.cjs out.png -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Montserrat"; font-weight: 800; src: url("montserrat-latin-800-normal.woff2"); }
+  @font-face { font-family: "Montserrat"; font-weight: 600; src: url("montserrat-latin-600-normal.woff2"); }
+  @font-face { font-family: "Caveat"; font-weight: 700; src: url("caveat-latin-700-normal.woff2"); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #06180f; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
+  #photo { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; filter: saturate(.9) contrast(1.05); }
+  #shade { position: absolute; inset: 0; background:
+     linear-gradient(to bottom, rgba(6,24,15,.85) 0, rgba(6,24,15,.55) 640px, rgba(6,24,15,0) 900px),
+     radial-gradient(100% 70% at 50% 50%, transparent 55%, rgba(0,0,0,.5) 100%); }
+  .sh { filter: drop-shadow(0 6px 18px rgba(0,0,0,.5)); }
+  #badge { position: absolute; left: 70px; top: 270px; display: flex; align-items: center; gap: 12px; padding: 10px 22px 10px 16px;
+    border-radius: 999px; background: rgba(11,11,11,.6); border: 3px solid rgba(37,211,102,.9); }
+  #badge i { width: 18px; height: 18px; border-radius: 50%; background: #25d366; }
+  #badge b { color: #fff; font-size: 30px; letter-spacing: .06em; } #badge b span { color: #25d366; }
+  #title { position: absolute; left: 70px; top: 350px; }
+  .script { display: block; font-family: "Caveat", cursive; font-weight: 700; font-size: 86px; color: #fff; line-height: 1; }
+  .bold { display: block; font-weight: 800; font-size: 106px; color: #fff; line-height: 1.04; white-space: nowrap; }
+  .box { display: inline-block; background: #fff; color: #0b3d2e; padding: 0 22px; border-radius: 14px; font-size: 112px; }
+  #co { position: absolute; left: 590px; top: 1040px; display: flex; align-items: center; gap: 14px; background: rgba(20,20,20,.82); color: #fff;
+    font-weight: 800; font-size: 44px; padding: 14px 30px 14px 18px; border-radius: 22px; }
+  #co i { width: 54px; height: 54px; border-radius: 50%; background: #ff6b6b; display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 34px; }
+</style></head>
+<body>
+  <img id="photo" src="frame.png">
+  <div id="shade"></div>
+  <div id="badge" class="sh"><i></i><b>AYAT CLOSING <span>#01</span></b></div>
+  <div id="title" class="sh"><span class="script">kenapa orang</span><span class="bold">TAK DENGAR</span><span class="bold">CAKAP <span class="box">AWAK?</span></span></div>
+  <div id="co" class="sh"><i>✕</i>tak minta order</div>
+</body></html>
