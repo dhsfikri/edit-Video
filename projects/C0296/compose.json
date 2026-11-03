@@ -1,0 +1,12 @@
+{
+  "base": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0296/base.mov",
+  "out": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0296/C0296_draf_v1.mp4",
+  "fps": 30,
+  "insert": {"at": 10.40, "dur": 1.0},
+  "broll": [
+    {"src": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0296/broll_salah.mp4", "start": 3.56, "dur": 2.73},
+    {"src": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0296/broll_betul.mp4", "start": 6.29, "dur": 3.385}
+  ],
+  "overlay": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0296/overlay.mov",
+  "sfx": [{"src": "/home/user/edit-Video/motion/intro/assets/signature.wav", "at": 0.03, "vol": 0.4}]
+}

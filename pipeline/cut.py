@@ -96,7 +96,8 @@ for i, s in enumerate(segs):
     labels.append(f"[v{i}][a{i}]")
 
 fc = ";".join(parts) + ";" + "".join(labels) + f"concat=n={len(segs)}:v=1:a=1[vc][ac];"
-fc += "[ac]highpass=f=70,loudnorm=I=-14:TP=-1.5:LRA=9,alimiter=limit=0.89,aresample=48000[ao]"
+extra = cfg.get("audio_extra", "")
+fc += f"[ac]highpass=f=70,{extra + ',' if extra else ''}loudnorm=I=-14:TP=-1.5:LRA=9,alimiter=limit=0.89,aresample=48000[ao]"
 
 run([
     "ffmpeg", "-v", "error", "-stats", "-y", "-i", cfg["source"],
