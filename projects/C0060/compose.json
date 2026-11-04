@@ -1,6 +1,6 @@
 {
  "base": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/C0060/base.mov",
- "out": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/C0060/C0060_draf_v1.mp4",
+ "out": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/C0060/C0060_draf_v2.mp4",
  "fps": 50,
  "insert": {
   "at": 32.66,
@@ -13,6 +13,11 @@
    "src": "/home/user/edit-Video/motion/intro/assets/signature.wav",
    "at": 0.03,
    "vol": 0.4
+  },
+  {
+   "src": "/home/user/edit-Video/motion/overlay-v2/assets/pop.wav",
+   "at": 0.3,
+   "vol": 0.5
   }
  ]
 }

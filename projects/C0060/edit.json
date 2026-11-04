@@ -9,11 +9,13 @@
  "corrections": {},
  "segments": [
   {
-   "note": "A hook: kita tak berubah-berubah sampai sekarang",
+   "note": "A hook: kita tak berubah-berubah sampai sekarang [ZOOM RAPAT muka]",
    "start": 41.36,
    "end": 43.51,
-   "zoom": 1.2,
-   "cy": 0.3
+   "zoom": 1.9,
+   "cy": 0.222,
+   "zoom_to": 2.1,
+   "cx": 0.365
   },
   {
    "note": "B rasa macam (TAHUN 2023 DIBUANG)",

@@ -10,6 +10,7 @@
     callouts  : pil kecil {t, end, x, y, text, kind:"ok"|"no"|"tag"}
     words     : subtitle kecil bawah, perkataan aktif dalam kotak hijau (karaoke)
     cta       : pil CTA kecil {start, text}
+    stickers  : (pilihan) emoji besar pop + goyang {t, end, x, y, text, size}
 -->
 <html lang="ms" data-resolution="portrait">
   <head>
@@ -56,6 +57,7 @@
         text-shadow: 0 3px 10px rgba(0,0,0,.6); }
       .sw.on { background: var(--green); color: var(--ink); text-shadow: none; }
 
+      .stk { position: absolute; line-height: 1; font-family: "Noto Color Emoji", sans-serif; transform-origin: 50% 80%; }
       #cta { position: absolute; left: 60px; right: 180px; top: 1190px; text-align: center; }
       #cta span { display: inline-block; background: #fff; color: var(--deep); font-weight: 800; font-size: 36px; padding: 14px 30px; border-radius: 999px; }
     </style>
@@ -148,6 +150,16 @@
         });
         const nxt = groups[gi + 1];
         tl.set(node, { opacity: 0 }, nxt ? nxt[0].s - 0.05 : Math.min(g[g.length - 1].e + 0.4, D));
+      });
+
+      // Sticker emoji (hook)
+      (E.stickers || []).forEach((st) => {
+        const n = put(`<div class="stk shadow">${st.text}</div>`);
+        n.style.left = st.x + "px"; n.style.top = st.y + "px"; n.style.fontSize = (st.size || 140) + "px";
+        tl.set(n, { opacity: 0 }, 0);
+        tl.fromTo(n, { opacity: 0, scale: 0, rotation: -25 }, { opacity: 1, scale: 1, rotation: 8, duration: 0.3, ease: "back.out(2.6)" }, st.t);
+        tl.to(n, { rotation: -6, duration: 0.25, yoyo: true, repeat: Math.max(1, Math.floor((st.end - st.t - 0.5) / 0.25)), ease: "sine.inOut" }, st.t + 0.3);
+        tl.to(n, { opacity: 0, scale: 0.6, duration: 0.12 }, st.end - 0.12);
       });
 
       // CTA
