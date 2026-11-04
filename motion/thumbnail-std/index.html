@@ -1,0 +1,67 @@
+<!doctype html>
+<!--
+  THUMBNAIL STANDARD — Sir Dharma (TikTok 1080x1920). Lihat BRANDKIT.md bahagian "Thumbnail".
+  Zon (grid profil potong 3:4 = y 240–1680; views "▷ 123" di bawah kiri):
+    Badge siri  : y 300          Headline : y 380–1000 (maks 2 baris + keyword)
+    Muka        : pusat ~y 1150  Callout  : kanan, y 1260–1400
+    LARANGAN    : tiada teks y < 290 atau y > 1450, tiada teks x > 1010
+  Guna: node render.cjs config.json out.png   (config: lihat contoh dalam projects/*/thumb.json)
+-->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Anton"; src: url("anton-latin-400-normal.woff2"); }
+  @font-face { font-family: "Montserrat"; font-weight: 800; src: url("montserrat-latin-800-normal.woff2"); }
+  @font-face { font-family: "Caveat"; font-weight: 700; src: url("caveat-latin-700-normal.woff2"); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #06180f; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
+  #photo { position: absolute; left: 0; top: 0; transform-origin: 0 0; filter: saturate(.95) contrast(1.06); }
+  #shade { position: absolute; inset: 0; background:
+     linear-gradient(to bottom, rgba(8,32,21,.96) 0, rgba(8,32,21,.9) 520px, rgba(8,32,21,.0) 1040px),
+     linear-gradient(to top, rgba(0,0,0,.45) 0, rgba(0,0,0,0) 420px); }
+  .sh { filter: drop-shadow(0 8px 22px rgba(0,0,0,.55)); }
+  #badge { position: absolute; left: 70px; top: 300px; display: flex; align-items: center; gap: 12px; padding: 10px 24px 10px 16px;
+    border-radius: 999px; background: #0b0b0b; border: 3px solid #25d366; }
+  #badge i { width: 18px; height: 18px; border-radius: 50%; background: #25d366; }
+  #badge b { color: #fff; font-size: 30px; letter-spacing: .08em; } #badge b span { color: #25d366; }
+  #head { position: absolute; left: 66px; right: 66px; top: 385px; }
+  #kicker { display: block; font-family: "Caveat", cursive; font-weight: 700; font-size: 74px; color: #fff; line-height: 1; margin-bottom: 4px; }
+  .ln { display: block; font-family: "Anton", sans-serif; color: #fff; font-size: 178px; line-height: 1.0; text-transform: uppercase; white-space: nowrap; letter-spacing: .5px; }
+  .kw { display: inline-block; background: #ffd60a; color: #0b0b0b; padding: 0 22px; border-radius: 14px; transform: rotate(-2deg); }
+  #co { position: absolute; right: 70px; top: 1290px; display: flex; align-items: center; gap: 14px; color: #fff;
+    font-weight: 800; font-size: 46px; padding: 14px 30px 14px 18px; border-radius: 22px; }
+  #co.no { background: rgba(15,15,15,.88); } #co.ok { background: #25d366; color: #0b0b0b; }
+  #co i { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 34px; color: #fff; }
+  #co.no i { background: #ff5a5a; } #co.ok i { background: #0b0b0b; }
+</style></head>
+<body>
+  <img id="photo">
+  <div id="shade"></div>
+  <div id="badge" class="sh"><i></i><b></b></div>
+  <div id="head" class="sh"><span id="kicker"></span><span class="ln" id="l1"></span><span class="ln" id="l2"></span></div>
+  <div id="co" class="sh"><i></i><span></span></div>
+<script>
+  window.render = (c) => new Promise((ok) => {
+    const $ = (s) => document.querySelector(s);
+    $("#badge b").innerHTML = `${c.series} <span>#${c.episode}</span>`;
+    $("#kicker").textContent = c.kicker || ""; if (!c.kicker) $("#kicker").style.display = "none";
+    const rich = (s) => s.replace(/\[([^\]]+)\]/g, '<span class="kw">$1</span>');
+    $("#l1").innerHTML = rich(c.line1); $("#l2").innerHTML = rich(c.line2 || ""); if (!c.line2) $("#l2").style.display = "none";
+    if (c.callout) { $("#co").className = "sh " + (c.callout.kind || "no"); $("#co i").textContent = c.callout.kind === "ok" ? "✓" : "✕"; $("#co span").textContent = c.callout.text; }
+    else $("#co").style.display = "none";
+    // Muat headline dalam lebar 948px (kecilkan seragam kedua-dua baris)
+    let z = 178; const lines = [$("#l1"), $("#l2")];
+    const fit = () => lines.forEach((l) => (l.style.fontSize = z + "px"));
+    fit(); while (lines.some((l) => l.scrollWidth > 948) && z > 90) { z -= 4; fit(); }
+    // Gambar: letak titik muka (fx,fy dalam frame asal) di (540, faceY) dengan skala s
+    const img = $("#photo"); img.onload = () => {
+      const s = c.scale || 1, fy = c.faceY || 1160;
+      img.style.width = img.naturalWidth + "px";
+      let x = 540 - c.fx * s, y = fy - c.fy * s;
+      x = Math.min(0, Math.max(1080 - img.naturalWidth * s, x)); y = Math.min(0, Math.max(1920 - img.naturalHeight * s, y));
+      img.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+      document.fonts.ready.then(() => setTimeout(ok, 100));
+    };
+    img.src = c.photo;
+  });
+</script>
+</body></html>

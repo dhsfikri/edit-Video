@@ -1,4 +1,4 @@
-// Data overlay Gaya v2 untuk C0296 v3 (tajuk = headline, kekal lama, tak ikut suara)
+// Data overlay Gaya v2 untuk C0296 - safe zone v1 (callout bawah muka)
 window.EDIT = {
  "duration": 14.605,
  "series": "AYAT CLOSING",
@@ -118,7 +118,7 @@ window.EDIT = {
    "t": 5.015,
    "end": 6.72,
    "x": 650,
-   "y": 760,
+   "y": 960,
    "text": "produk bagus",
    "kind": "ok"
   },
@@ -126,7 +126,7 @@ window.EDIT = {
    "t": 5.315,
    "end": 6.72,
    "x": 650,
-   "y": 840,
+   "y": 1040,
    "text": "harga ok",
    "kind": "ok"
   },
@@ -134,14 +134,14 @@ window.EDIT = {
    "t": 6.065,
    "end": 6.72,
    "x": 650,
-   "y": 920,
+   "y": 1120,
    "text": "tak minta order",
    "kind": "no"
   }
  ],
  "cta": {
   "start": 12.92,
-  "text": "🔔 follow @sirdharma_ untuk tips closing"
+  "text": "🔔 follow @sirdharma_"
  },
  "words": [
   {
