@@ -1,5 +1,10 @@
 # Peraturan Projek (untuk Claude / editor)
 
+## Skill (ikut langkah dalam skill)
+- **`tiktok-edit`** (`.claude/skills/tiktok-edit/SKILL.md`) — edit video dari rakaman Raw sampai final.
+- **`tiktok-thumbnail`** (`.claude/skills/tiktok-thumbnail/SKILL.md`) — thumbnail cover + caption.
+- Skill boleh dikemas kini: naikkan nombor versi + changelog. Perubahan besar (gaya/urutan/peraturan) → brief Sir dulu; pembetulan teknikal kecil → terus kemas kini & maklumkan.
+
 ## WAJIB: Plan & brief dulu sebelum edit
 Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 1. **Buat plan** guna `templates/brief-edit.md` (objektif, konsep, gaya editing, hook, timeline, style, aset, kualiti).
@@ -14,7 +19,7 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 - Thumbnail: teks hanya dalam y 290–1450 (grid profil potong 3:4; "▷ views" di bawah kiri).
 
 ## Editor & tools
-- **Claude yang edit** (bukan CapCut). Guna FFmpeg + subtitle ASS beranimasi untuk hook title & subtitle.
+- **Claude yang edit** (bukan CapCut). FFmpeg (`pipeline/`) + HyperFrames (`motion/`) untuk tajuk, subtitle, B-roll, iklan; faster-whisper untuk transcribe.
 - Rakaman diterima melalui upload chat atau folder Google Drive Sir.
 - Hantar **draf** dulu untuk semakan, final hanya selepas approval.
 - Export: 1080x1920, fps ikut rakaman (30/50), H.264 ~15–20 Mbps, AAC, `+faststart` (`pipeline/compose.py`).
@@ -23,8 +28,9 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 - Siri: "AYAT CLOSING #NN" (konsep lain: "BEDAH CHAT #NN", "OBJECTION KILLER #NN")
 - TikTok: @sirdharma_
 - Warna: hijau #25D366, hitam #0B0B0B, putih, keyword kuning #FFD60A
-- Font: Montserrat ExtraBold (800) / SemiBold (600)
-- Intro: badge siri + hook frame berjenama + bunyi signature, TANPA intro berasingan (Sir bercakap dari saat 0)
+- Font: Montserrat ExtraBold/SemiBold (video), Anton (headline thumbnail), Caveat (tulisan tangan)
+- Intro: badge siri + tajuk hook + bunyi signature, TANPA intro berasingan (Sir bercakap dari saat 0)
+- Siri juga: "TIPS JUALAN #NN" (jualan umum / TikTok Shop)
 
 ## Google Drive (pustaka aset)
 - `Folder Video` (id 1K3AzhqGOV5IhaRmOGf5TpdDUz4xZzx1g) → `Raw` (rakaman mentah, id 1U4zM7ykx7C97n6ZbkILKLw8fK_x_N3KB)
