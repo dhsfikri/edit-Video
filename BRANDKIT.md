@@ -74,21 +74,21 @@ Grid profil potong thumbnail jadi **3:4 (y 240–1680)** dan letak **"▷ views"
 ```
 y=240  ┌───────────────────────┐ ← mula nampak dalam grid
 y=300  │ ● SIRI #NN            │  badge
-y=385  │ kicker (tulisan tangan)│
-       │ HEADLINE BARIS 1      │  Anton, putih, BESAR
-       │ BARIS 2 [KEYWORD]     │  1 keyword kotak KUNING
-       │      ╭─────╮          │
-y~1160 │      │MUKA │          │  muka besar, ekspresi kuat
-       │      ╰─────╯ [✕ pil] │  1 callout kanan (y 1260–1400)
+y=390  │ kicker (tulisan tangan)│
+       │ HEADLINE BARIS 1██████│  GAYA COVER: setiap baris Anton
+       │ BARIS 2 [KEYWORD]█████│  dibesarkan sampai PENUH lebar
+       │      ╭─────╮          │  1 keyword kotak KUNING
+y~1290 │      │MUKA │          │  muka besar, ekspresi kuat
+       │      ╰─────╯ [✕ pil] │  1 callout kanan (y 1320–1440)
 y=1450 │░░░░ ▷ views ░░░░░░░░░│  ✗ tiada teks
 y=1680 └───────────────────────┘ ← habis nampak dalam grid
 ```
 
 **Peraturan:**
-1. Headline **maks 2 baris, 3–6 patah perkataan**, huruf besar, font Anton.
+1. **Gaya cover:** headline **maks 2 baris, 2–3 perkataan sebaris**, Anton huruf besar — setiap baris dibesarkan automatik sampai penuh lebar (macam tajuk majalah). Tajuk boleh bertindih sedikit dengan rambut/kepala, tapi **mata mesti nampak**.
 2. **Satu** keyword dalam kotak kuning — perkataan yang paling "sakit"/menarik.
 3. Band hijau gelap di atas (sama untuk semua video) → grid nampak seragam.
-4. Muka Sir: close-up, ekspresi kuat (frust/terkejut/serius), pusat ~y 1160.
+4. Muka Sir: close-up, ekspresi kuat (frust/terkejut/serius), pusat ~y 1290.
 5. Satu pil callout (✓ hijau atau ✕ hitam) di kanan — tambah rasa ingin tahu.
 6. Tiada teks di y < 290, y > 1450, atau x > 1010.
 
