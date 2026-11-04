@@ -61,7 +61,7 @@
       const s = c.scale || 1, fy = c.faceY || 1160;
       img.style.width = img.naturalWidth + "px";
       let x = 540 - c.fx * s, y = fy - c.fy * s;
-      x = Math.min(0, Math.max(1080 - img.naturalWidth * s, x)); y = Math.min(0, Math.max(1920 - img.naturalHeight * s, y));
+      x = Math.min(0, Math.max(1080 - img.naturalWidth * s, x)); y = Math.min(c.maxTop || 0, Math.max(1920 - img.naturalHeight * s, y)); // maxTop: benarkan gambar turun (ruang atas ditutup shade hijau) — untuk rakaman lebar, muka tinggi
       img.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
       document.fonts.ready.then(() => setTimeout(ok, 100));
     };
