@@ -14,7 +14,7 @@
   data-composition-variables='[
     {"id":"scene","type":"string","label":"Babak","default":"salah"},
     {"id":"dur","type":"number","label":"Durasi (s)","default":3},
-    {"id":"face","type":"string","label":"Klip muka","default":"assets/face_salah.mp4"}
+    {"id":"face","type":"string","label":"Klip muka","default":"assets/face.mp4"}
   ]'>
   <head>
     <meta charset="UTF-8" />
@@ -65,15 +65,15 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1080" data-height="1920">
-      <div id="stage" class="clip" data-start="0" data-duration="6" data-track-index="0">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1080" data-height="1920">
+      <div id="stage" class="clip" data-start="0" data-duration="10" data-track-index="0">
         <div id="grain"></div>
         <div id="title"><span class="script"></span><span class="box"></span></div>
         <div id="phone"><div id="bar"><div class="av">👤</div><div><b>Customer</b><small>online</small></div></div>
           <div id="msgs"></div><div id="input">Tulis mesej…</div></div>
         <div id="stamp"></div>
       </div>
-      <div id="faceWrap"><video id="face" src="assets/face_salah.mp4" class="clip" data-start="0" data-duration="6" data-track-index="1" muted playsinline></video></div>
+      <div id="faceWrap"><video id="face" src="assets/face.mp4" class="clip" data-start="0" data-duration="10" data-track-index="1" muted playsinline></video></div>
     </div>
     <script>
       const V = window.__hyperframes.getVariables();
@@ -93,6 +93,20 @@
           msgs: [[0.2, "c", "Nanti saya fikir dulu ya 🙏"], [0.65, "s", "Saya cadangkan Pakej A — paling sesuai untuk akak 👍"],
                  [1.25, "s", "Saya hantar link bayaran sekarang ya?"], [1.8, "typing"], [2.1, "c", "Ok boleh ✅"]],
           stampAt: 2.35,
+        },
+        // C0059 — blue tick (AYAT CLOSING #02)
+        bluetick: {
+          script: "selalu jadi…", box: "BLUE TICK ✓✓", stamp: ["no", "❌ TAK RASA RUGI"],
+          msgs: [[0.3, "s", "Akak, ni harga pakej yang akak tanya tadi ya 😊"], [1.3, "sys", "✓✓ Dibaca"],
+                 [2.6, "sys", "1 jam kemudian… 😶"], [3.6, "s", "Akak? 🙏"], [4.4, "sys", "✓✓ Dibaca"]],
+          stampAt: 4.9,
+        },
+        cta: {
+          script: "cuba macam ni", box: "BAGI CTA ✅", stamp: ["ok", "✅ ARAHAN JELAS"],
+          msgs: [[0.2, "s", "1️⃣ Pakej Asas<br>2️⃣ Pakej Premium"], [0.8, "sys", "✓✓ Dibaca · 10 minit kemudian"],
+                 [1.7, "s", "Boleh kan kalau akak tolong reply antara pilihan di atas, yang mana akak perlukan segera? 🙏"],
+                 [4.3, "typing"], [4.9, "c", "2️⃣ ya 👍"]],
+          stampAt: 5.3,
         },
       };
       const sc = SCENES[V.scene] || SCENES.salah;

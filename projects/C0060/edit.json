@@ -1,0 +1,89 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/raw-C0060/C0060.MP4",
+ "transcript": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/raw-C0060/transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/C0060",
+ "rotate": "cw",
+ "fps": 50,
+ "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+ "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+ "corrections": {},
+ "segments": [
+  {
+   "note": "A hook: kita tak berubah-berubah sampai sekarang",
+   "start": 41.36,
+   "end": 43.51,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "B rasa macam (TAHUN 2023 DIBUANG)",
+   "start": 1.53,
+   "end": 2.15,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "C nak buat satu yang berbeza, nak berubah",
+   "start": 3.33,
+   "end": 6.29,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "D perubahan itu menyakitkan",
+   "start": 8.89,
+   "end": 12.79,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "E nak mula berubah ni,",
+   "start": 14.49,
+   "end": 15.51,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "F step pertama: hijrah",
+   "start": 15.85,
+   "end": 18.17,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "G dua benda: 1 ubah environment",
+   "start": 18.49,
+   "end": 22.41,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "H contoh sudut kerja",
+   "start": 22.73,
+   "end": 27.51,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "I kedua: ubah kawan",
+   "start": 28.19,
+   "end": 29.97,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "J kawan pengaruh paling besar",
+   "start": 29.97,
+   "end": 36.29,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "K kawan tetap dengan cara mereka",
+   "start": 36.75,
+   "end": 39.95,
+   "zoom": 1.2,
+   "cy": 0.3
+  }
+ ]
+}

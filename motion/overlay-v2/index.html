@@ -3,6 +3,7 @@
   Overlay GAYA v2 (telus, 1080x1920) — ditindih atas A-roll + B-roll dengan FFmpeg.
   Elemen (semua dari data.js → window.EDIT):
     badge     : badge siri kecil kiri-atas (disembunyi dalam julat `hideBadge`)
+    titleY    : (pilihan) kedudukan y tajuk, default 300. Guna ~880 bila muka di atas (rakaman lebar).
     titles    : tajuk kinetik kiri-atas. Setiap kumpulan = baris; setiap baris = token {t, text, k}
                 k: "script" (tulisan tangan) | "bold" | "box" (kotak putih, ditaip huruf demi huruf)
     brackets  : bracket fokus 4 sudut {start, end, box:[x,y,w,h]}
@@ -60,8 +61,8 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
-      <div id="layer" class="clip" data-start="0" data-duration="20" data-track-index="0"></div>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="40" data-width="1080" data-height="1920">
+      <div id="layer" class="clip" data-start="0" data-duration="40" data-track-index="0"></div>
     </div>
     <script>
       const E = window.EDIT, D = E.duration;
@@ -78,16 +79,18 @@
       // Tajuk kinetik
       (E.titles || []).forEach((g) => {
         const box = put(`<div class="title shadow"></div>`);
+        if (E.titleY) box.style.top = E.titleY + "px";
         if (g.start > 0) { tl.set(box, { opacity: 0 }, 0); tl.set(box, { opacity: 1 }, g.start); }
         g.lines.forEach((line) => {
           const ln = el(`<span class="tl"></span>`); box.appendChild(ln);
           line.forEach((tok) => {
             const s = el(`<span class="tk ${tok.k}">${tok.text}</span>`); ln.appendChild(s);
             if (tok.k === "box") {
-              const w = s.getBoundingClientRect().width, n = tok.text.length;
+              // "ditaip" guna clip-path (tak ukur lebar — elak saiz salah sebelum font dimuat)
+              const n = tok.text.length;
               tl.set(s, { opacity: 0 }, 0);
-              tl.fromTo(s, { opacity: 1, width: 0, paddingLeft: 0, paddingRight: 0 },
-                { width: w, paddingLeft: 18, paddingRight: 18, duration: Math.min(0.06 * n, 0.4), ease: `steps(${n})` }, tok.t);
+              tl.fromTo(s, { opacity: 1, clipPath: "inset(0% 100% 0% 0%)" },
+                { clipPath: "inset(0% 0% 0% 0%)", duration: Math.min(0.06 * n, 0.4), ease: `steps(${n})` }, tok.t);
             } else {
               tl.fromTo(s, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, tok.t);
             }

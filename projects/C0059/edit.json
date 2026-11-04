@@ -1,0 +1,72 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/raw-C0059/C0059.MP4",
+ "transcript": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/raw-C0059/transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/C0059",
+ "rotate": "cw",
+ "fps": 50,
+ "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+ "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+ "corrections": {
+  "rejeksion": "rejection",
+  "CTE": "CTA",
+  "Paham": "Faham"
+ },
+ "segments": [
+  {
+   "note": "A hook: siapa yang rasa kena blue tick?",
+   "start": 22.69,
+   "end": 26.25,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "B lagi-lagi akhir bulan ni (TAHUN 2022 DIBUANG)",
+   "start": 3.47,
+   "end": 5.13,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "C ramai masih tak tahu nak uruskan",
+   "start": 6.97,
+   "end": 9.5,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "D rejection paling ramai hadap = blue tick",
+   "start": 10.66,
+   "end": 15.35,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "E kenapa orang bagi blue tick",
+   "start": 16.33,
+   "end": 22.45,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "F cuba amalkan: bagi CTA",
+   "start": 26.33,
+   "end": 29.69,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "G maksudnya: 10 minit, bagi arahan seterusnya",
+   "start": 30.47,
+   "end": 36.29,
+   "zoom": 1.2,
+   "cy": 0.3
+  },
+  {
+   "note": "H contoh ayat [B-roll chat]",
+   "start": 36.61,
+   "end": 43.81,
+   "zoom": 1.2,
+   "cy": 0.3
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "base": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/C0059/base.mov",
+ "out": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/C0059/C0059_draf_v1.mp4",
+ "fps": 50,
+ "insert": {
+  "at": 34.68,
+  "dur": 1.0
+ },
+ "broll": [
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/C0059/r/broll_bt.mp4",
+   "start": 12.22,
+   "dur": 6.18
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/C0059/r/broll_cta.mp4",
+   "start": 27.66,
+   "dur": 6.24
+  }
+ ],
+ "overlay": "/tmp/claude-0/-home-user-edit-Video/a8510b18-1f40-5b56-880a-7885a26198f0/scratchpad/C0059/overlay.mov",
+ "sfx": [
+  {
+   "src": "/home/user/edit-Video/motion/intro/assets/signature.wav",
+   "at": 0.03,
+   "vol": 0.4
+  }
+ ]
+}
