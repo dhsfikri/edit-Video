@@ -1,7 +1,7 @@
 # Brand Kit — Dharma | Sales Guru (@sirdharma_)
 
 > Rujukan WAJIB setiap kali edit video TikTok, buat thumbnail, atau reka grafik.
-> Status: **v1 — menunggu approval Sir** (2026-11-04)
+> Status: **v1 — DILULUSKAN Sir (2026-11-04)**. Thumbnail gaya cover + safe zone wajib bermula video seterusnya. Video sedia ada (TIPS JUALAN #01, AYAT CLOSING #01) kekal seperti diupload.
 
 ---
 
