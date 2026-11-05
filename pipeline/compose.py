@@ -14,7 +14,8 @@ compose.json:
   "overlay": ".../overlay.mov",            # grafik + subtitle (telus), timeline AKHIR
   "blur": [{"x":60,"y":880,"w":840,"h":380,"start":0.05,"end":5,"radius":30}],
         # optional: kawasan kabur (kesan kad kaca) bawah overlay, sudut bulat, fade 0.2s
-  "sfx": [{"src": ".../signature.wav", "at": 0.04, "vol": 0.55}]
+  "sfx": [{"src": ".../signature.wav", "at": 0.04, "vol": 0.55}],
+  "fade_out": 0.35                         # optional: fade hitam + bunyi di hujung
 }
 """
 import json, subprocess, sys
@@ -82,7 +83,9 @@ if ins and ins.get("overlay"):
     fc.append(f"[{cur}][adv]overlay=0:0:format=auto:eof_action=pass:enable='between(t,{ins['at']},{ins['at']+ins['dur']-0.001})'[vad]")
     cur = "vad"
     idx += 1
-fc.append(f"[{cur}]format=yuv420p[vout]")
+fo = c.get("fade_out")  # optional: fade ke hitam + bunyi di hujung (saat)
+total0 = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", c["base"]])) + (ins["dur"] if ins else 0)
+fc.append(f"[{cur}]{f'fade=t=out:st={total0 - fo:.3f}:d={fo},' if fo else ''}format=yuv420p[vout]")
 
 # 5) Bunyi tambahan
 amix = ["[abase]"]
@@ -95,7 +98,7 @@ for i, s in enumerate(sfx):
     fc.append(f"[{idx}:a]volume={s.get('vol', 0.55)},adelay={ms}|{ms}[s{i}]")
     amix.append(f"[s{i}]")
     idx += 1
-fc.append(f"{''.join(amix)}amix=inputs={len(amix)}:duration=first:normalize=0,alimiter=limit=0.79:level=false[aout]")
+fc.append(f"{''.join(amix)}amix=inputs={len(amix)}:duration=first:normalize=0,alimiter=limit=0.79:level=false{f',afade=t=out:st={total0 - fo:.3f}:d={fo}' if fo else ''}[aout]")
 
 total = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", c["base"]]))
 total += ins["dur"] if ins else 0

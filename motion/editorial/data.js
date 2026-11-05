@@ -1,13 +1,12 @@
 // Data overlay EDITORIAL untuk C0104 (TIPS JUALAN raya) — magazine + kad kaca + B-roll magazine
 window.EDIT = {
- "duration": 16.4,
+ "duration": 17.735,
  "series": "TIPS JUALAN",
  "episode": "02",
  "chapter": "TIPS RAYA",
  "titleY": 880,
  "magMax": 150,
  "maxWords": 4,
- "hold_end": 0.8,
  "titles": [
   {
    "start": 0.0,
@@ -94,7 +93,7 @@ window.EDIT = {
  "brackets": [],
  "callouts": [],
  "cta": {
-  "start": 15.98,
+  "start": 16.5,
   "text": "🔔 follow @sirdharma_"
  },
  "words": [
@@ -344,9 +343,19 @@ window.EDIT = {
    "e": 15.915
   },
   {
-   "w": "ni",
+   "w": "ni.",
    "s": 15.915,
-   "e": 16.4
+   "e": 16.05
+  },
+  {
+   "w": "Nampak",
+   "s": 16.545,
+   "e": 17.0
+  },
+  {
+   "w": "tak?",
+   "s": 17.1,
+   "e": 17.4
   }
  ],
  "broll": [
@@ -381,5 +390,6 @@ window.EDIT = {
    "t": 15.95
   }
  ],
- "titleStyle": "glass"
+ "titleStyle": "glass",
+ "fade_out": 0.35
 };

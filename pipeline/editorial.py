@@ -75,6 +75,8 @@ comp = {"base": str(out / "base.mov"), "out": str(out / f"{vid}_{a.style}.mp4"),
 glass = json.loads(subprocess.check_output(["node", str(ROOT / "pipeline" / "probe_glass.js"), str(MOTION), a.style]).decode() or "[]")
 if glass:
     comp["blur"] = glass
+if E.get("fade_out"):
+    comp["fade_out"] = E["fade_out"]
 if E.get("broll"):
     comp["broll"] = E["broll"]  # [{src, start, dur}] masa timeline akhir
 if E.get("hold_end"):
