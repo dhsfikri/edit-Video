@@ -4,7 +4,7 @@
   Latar gelap warm + grain · muka Sir dalam tetingkap segi empat bulat (kiri-atas) · kad kaca tajuk (kinetic, keyword kuning)
   · kandungan di tengah (y 700–1270). Mockup GENERIK sahaja (tiada logo/rupa app sebenar).
   Variables:
-    scene : "produk" | "database"   (tambah babak baru dalam SCENES)
+    scene : "produk" | "database" | "musim" | "survey" | "langkah"   (tambah babak baru dalam SCENES)
     dur   : durasi (s)
     face  : klip muka dalam assets/ (pipeline/facecrop.py)
   Render: npx hyperframes render --variables '{"scene":"produk","dur":3.53,"face":"assets/face_produk.mp4"}' -f 50 -q high -o out.mp4
@@ -88,6 +88,36 @@
       .m.s { align-self: flex-end; background: #ffe98a; color: #1d1a16; border-bottom-right-radius: 8px; }
       .typing { align-self: flex-start; background: #fff; border-radius: 24px; padding: 18px 22px; display: flex; gap: 8px; }
       .typing i { width: 12px; height: 12px; border-radius: 50%; background: #a9a39a; }
+
+      /* --- musim: produk vs Ramadhan --- */
+      .big { position: absolute; top: 20px; width: 380px; height: 440px; border-radius: 30px; padding: 26px; text-align: center; }
+      .big .em { font-size: 150px; line-height: 1.1; margin-top: 20px; }
+      .big .nm { font-weight: 800; font-size: 40px; color: #fff; margin-top: 18px; }
+      .big .pr { font-weight: 600; font-size: 26px; color: rgba(255,255,255,.65); margin-top: 6px; }
+      .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 18px; }
+      .cal i { height: 30px; border-radius: 6px; background: rgba(255,255,255,.14); }
+      .cal i.on { background: var(--yellow); }
+      #q { position: absolute; left: 50%; top: 120px; margin-left: -70px; width: 140px; height: 140px; border-radius: 50%; background: var(--yellow); color: var(--ink);
+        font-weight: 800; font-size: 100px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 60px rgba(255,214,10,.55); }
+      #qt { position: absolute; left: 0; right: 0; top: 490px; text-align: center; }
+      #qt span { display: inline-block; font-weight: 800; font-size: 40px; color: #fff; padding: 12px 28px; border-radius: 999px; }
+      /* --- survey: pilihan + undian --- */
+      .poll { align-self: flex-end; width: 88%; background: #fff; border-radius: 24px; padding: 16px 18px; box-shadow: 0 3px 8px rgba(0,0,0,.08); }
+      .poll b { display: block; font-size: 24px; color: #1d1a16; margin-bottom: 10px; }
+      .opt { position: relative; height: 50px; border-radius: 14px; background: #efece6; margin-bottom: 8px; overflow: hidden; }
+      .opt .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: #ffe98a; }
+      .opt.win .fill { background: var(--yellow); }
+      .opt span { position: absolute; left: 16px; top: 0; line-height: 50px; font-weight: 800; font-size: 24px; color: #1d1a16; }
+      .opt em { position: absolute; right: 14px; top: 0; line-height: 50px; font-style: normal; font-weight: 800; font-size: 24px; color: #1d1a16; }
+      #win { position: absolute; right: 40px; top: 40px; transform: rotate(8deg); font-weight: 800; font-size: 30px; color: var(--ink); background: var(--yellow);
+        padding: 10px 18px; border-radius: 12px; border: 4px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,.4); opacity: 0; }
+      .contoh { position: absolute; left: 0; bottom: -34px; font-weight: 600; font-size: 18px; color: rgba(255,255,255,.5); letter-spacing: .1em; }
+      /* --- langkah: kad boleh-share --- */
+      .step { display: flex; align-items: center; gap: 24px; height: 150px; border-radius: 26px; padding: 0 28px; margin-bottom: 18px; }
+      .step .no { width: 84px; height: 84px; flex: none; border-radius: 50%; background: var(--yellow); color: var(--ink); font-weight: 800; font-size: 44px; display: flex; align-items: center; justify-content: center; }
+      .step .tx { font-weight: 800; font-size: 40px; color: #fff; line-height: 1.15; }
+      .step .tx small { display: block; font-weight: 600; font-size: 24px; color: rgba(255,255,255,.65); margin-top: 4px; }
+      #save { position: absolute; right: 0; bottom: -10px; font-weight: 800; font-size: 22px; letter-spacing: .14em; color: var(--yellow); }
 
       /* wipe masuk/keluar (sama dengan editorial magazine) */
       .wipe { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; }
@@ -179,6 +209,63 @@
               tl.fromTo(n, { opacity: 0, y: 20, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "back.out(2)", immediateRender: false }, at);
               if (k === "typing") { const nx = M[i + 1]; tl.set(n, { display: "none" }, tChat + nx[0] * f - 0.01); }
             });
+          },
+        },
+        // C0105 — produk ikut musim
+        musim: {
+          label: "PART 2 · SOALAN", kick: "bulan puasa ni,", words: [["PRODUK", 0], ["IKUT", 0], ["MUSIM?", 1]],
+          build(stage) {
+            const a = put(`<div class="big glass" style="left:0"><div class="em">💊</div><div class="nm">Suplimen</div><div class="pr">produk sedia ada</div></div>`, stage);
+            const days = Array.from({ length: 28 }, (_, i) => `<i class="${i > 6 ? "on" : ""}"></i>`).join("");
+            const b = put(`<div class="big glass" style="left:460px"><div class="em" style="font-size:110px">🌙</div><div class="nm">RAMADHAN</div><div class="pr">30 hari puasa</div><div class="cal">${days}</div></div>`, stage);
+            const q = put(`<div id="q">?</div>`, stage);
+            const qt = put(`<div id="qt"><span class="glass">orang perlukan ke?</span></div>`, stage);
+            tl.fromTo(a, { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 0.3);
+            tl.fromTo(b, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 0.45);
+            tl.fromTo(b.querySelectorAll(".cal i"), { scale: 0 }, { scale: 1, duration: 0.12, stagger: 0.012, ease: "back.out(2)" }, 0.6);
+            const tq = Math.min(1.3, DUR * 0.45);
+            tl.fromTo(q, { opacity: 0, scale: 3, rotation: -30 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "back.out(2.2)" }, tq);
+            tl.to(q, { scale: 1.12, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut" }, tq + 0.35);
+            tl.fromTo(qt, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, tq + 0.25);
+            tl.to(a, { opacity: 0.55, duration: 0.3 }, tq + 0.4);
+          },
+        },
+        // C0105 — survey database (pilihan + undian contoh)
+        survey: {
+          label: "PART 2 · SURVEY", kick: "follow up database lama,", words: [["TANYA", 0], ["MEREKA", 0], ["NAK", 1], ["MANA?", 1]],
+          build(stage) {
+            const chat = put(`<div id="chat" style="opacity:1"><div class="bar"><div class="av">AI</div><div><b>Kak Aina</b><small>customer lama · database</small></div></div><div id="msgs"></div></div>`, stage);
+            put(`<div class="contoh">* CONTOH SAHAJA</div>`, stage);
+            const msgs = $("#msgs");
+            const m1 = put(`<div class="m s">Salam kak 😊 Ramadhan ni saya nak bawa produk baru. Akak lebih suka yang mana?</div>`, msgs);
+            const O = [["A · Kurma premium", 62, 1], ["B · Kuih raya", 28, 0], ["C · Suplimen", 10, 0]];
+            const poll = put(`<div class="poll"><b>🗳️ Pilih satu:</b>${O.map(([t, p, w]) => `<div class="opt ${w ? "win" : ""}"><div class="fill"></div><span>${t}</span><em>${p}%</em></div>`).join("")}</div>`, msgs);
+            const win = put(`<div id="win">✓ PALING RAMAI NAK</div>`, stage);
+            tl.fromTo(chat, { opacity: 0, y: 60, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 0.2);
+            tl.fromTo(m1, { opacity: 0, y: 20, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "back.out(2)" }, 0.45);
+            tl.fromTo(poll, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.28, ease: "back.out(1.8)" }, 0.85);
+            const tv = Math.min(1.3, DUR * 0.35);
+            poll.querySelectorAll(".opt").forEach((o, i) => {
+              tl.fromTo(o.querySelector(".fill"), { width: "0%" }, { width: O[i][1] + "%", duration: 0.9, ease: "power2.out" }, tv + i * 0.08);
+              tl.fromTo(o.querySelector("em"), { opacity: 0 }, { opacity: 1, duration: 0.2 }, tv + 0.5 + i * 0.08);
+            });
+            const tw = Math.min(tv + 1.2, DUR - 0.9);
+            tl.fromTo(win, { opacity: 0, scale: 2.2 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.in", immediateRender: false }, tw);
+            tl.to(poll.querySelector(".opt.win"), { scale: 1.04, duration: 0.18, yoyo: true, repeat: 1 }, tw + 0.15);
+          },
+        },
+        // C0105 — kad boleh-share 3 langkah
+        langkah: {
+          label: "SIMPAN & SHARE", kick: "3 langkah survey:", words: [["DECIDE", 0], ["&", 0], ["VALIDATE", 1]],
+          build(stage) {
+            const S3 = [["1", "Follow up database lama", "customer yang dah pernah beli"], ["2", "Bagi 2–3 pilihan produk", "tanya: \"akak nak yang mana?\""], ["3", "Pilih yang paling ramai nak", "baru stok & promote"]];
+            const rows = S3.map(([n, t, sm]) => put(`<div class="step glass"><div class="no">${n}</div><div class="tx">${t}<small>${sm}</small></div></div>`, stage));
+            put(`<div id="save">📌 SCREENSHOT & SHARE</div>`, stage);
+            rows.forEach((r, i) => {
+              tl.fromTo(r, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 0.3 + i * 0.22);
+              tl.fromTo(r.querySelector(".no"), { scale: 0 }, { scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 0.4 + i * 0.22);
+            });
+            tl.fromTo("#save", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.2);
           },
         },
       };

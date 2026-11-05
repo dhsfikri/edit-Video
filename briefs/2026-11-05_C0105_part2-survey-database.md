@@ -1,7 +1,7 @@
 # Brief Edit — C0105 "PART 2: Ramadhan ni nak jual apa? Survey database dulu" (TIPS JUALAN #03)
 
 **Fail asal:** `Folder Video/Raw/C0105.MP4` · **Versi brief:** v1 · **Tarikh:** 2026-11-05
-**Status:** ☑ Menunggu approval  ☐ Approved  ☐ Perlu ubah
+**Status:** ☐ Menunggu approval  ☑ Approved · **FINAL** (`20261105_part2-survey-database-ramadhan.mp4`, 29.9s)
 
 ## 0. Spec
 | Item | Nilai | Tindakan |
@@ -59,3 +59,10 @@ Subtitle magazine (garis bawah kuning) · callout pil kaca · SFX pop lembut + w
 1. **CTA komen:** Sir sebut "komen, share, like" sahaja. Di skrin saya cadang **Komen "SURVEY" → saya share contoh soalan survey**. Sir sanggup balas/beri contoh tu? Atau kata kunci lain?
 2. **Janji "cara simpan database" dari C0104:** saya cadang caption jawab ringkas. **Sir simpan database guna apa?** (Label WhatsApp Business / Google Sheet / CRM / lain). Saya tak nak teka.
 3. "Perjudilah" = **"Peduli lah"**? (Bahagian ni dibuang, cuma untuk rekod.)
+
+## Revisi (keputusan Sir)
+- **Hook ditukar** ke ayat suplimen (*"Kalau kita jual suplimen, adakah bulan puasa orang memerlukan suplimen kita?"*), supaya tak ikut pattern C0104. Soalan "Ramadhan ni jual apa?" jadi beat kedua + seed komen.
+- CTA: **Komen "SURVEY"** → Sir share contoh soalan survey (**Sir perlu balas komen**).
+- Cara simpan database (janji C0104) dijawab dalam caption: **Google Sheet** (Nama · No. telefon · Produk dibeli · Tarikh beli · Catatan).
+- B-roll: `musim` (2.8s), `survey` (4.3s, undian CONTOH), `langkah` (3.6s, kad boleh-share).
+- QC: safe zone ✓ · -14.3 LUFS, peak -2.7 dB ✓ · 1080x1920 50fps.

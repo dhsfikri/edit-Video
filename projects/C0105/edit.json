@@ -1,0 +1,68 @@
+{
+  "source": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/raw-C0105/C0105.MP4",
+  "transcript": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/raw-C0105/transcript.json",
+  "workdir": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/C0105",
+  "rotate": "cw",
+  "fps": 50,
+  "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+  "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "corrections": {},
+  "segments": [
+    {
+      "note": "H HOOK: kalau kita jual suplimen, adakah bulan puasa orang memerlukan suplimen kita? [B-roll musim]",
+      "start": 13.3,
+      "end": 18.9,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "Q bulan Ramadhan ni apa plan awak? kita nak jual apa? [seed komen]",
+      "start": 9.84,
+      "end": 12.58,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "D kat sinilah kepentingan database",
+      "start": 19.56,
+      "end": 21.0,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "S ketika Ramadhan nanti, produk baru / ganti produk, buat survey",
+      "start": 22.12,
+      "end": 28.08,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "F follow up balik database lama, berikan pilihan produk, tanya mereka [B-roll survey]",
+      "start": 29.62,
+      "end": 35.05,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "M mereka nak yang mana",
+      "start": 35.3,
+      "end": 36.15,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "V kat situ awak boleh decide dan validate idea [B-roll langkah]",
+      "start": 36.36,
+      "end": 39.95,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "C kalau awak dapat sesuatu, jangan lupa komen, share dan like",
+      "start": 41.3,
+      "end": 45.05,
+      "zoom": 1.2,
+      "cy": 0.38
+    }
+  ]
+}

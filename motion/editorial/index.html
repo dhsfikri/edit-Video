@@ -247,7 +247,7 @@
         // KAD KACA + kinetic typography: label → (kicker) → perkataan masuk satu-satu (blur→tajam), keyword huruf demi huruf kuning
         glass(g, box) {
           const t0 = g.lines[0][0].t;
-          const label = `${(g.chapter || E.chapter || E.series).toUpperCase()} · ${String(g.no || 1).padStart(2, "0")}`;
+          const label = g.label || `${(g.chapter || E.chapter || E.series).toUpperCase()} · ${String(g.no || 1).padStart(2, "0")}`;
           const card = put(`<div class="glass"><div class="gl">${label}</div></div>`, box);
           const kick = g.lines.filter((l) => l.every((t) => t.k === "script")).map((l) => l.map((t) => t.text).join(" ")).join(" ");
           let kEl = null;
