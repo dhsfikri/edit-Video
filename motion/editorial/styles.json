@@ -1,0 +1,31 @@
+{
+  "_nota": "Pakej gaya editorial (EDITORIAL.md). grade = penapis FFmpeg untuk A-roll; zoom = corak zoom setiap segmen (berulang); sfx = bunyi pada tajuk/peralihan (fail dalam assets/).",
+  "clean": {
+    "nama": "CLEAN COACH",
+    "grade": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+    "zoom": [1.2],
+    "transition": "soft",
+    "sfx": {"title": null, "transition": null, "vol": 0.35}
+  },
+  "bold": {
+    "nama": "BOLD & LAJU",
+    "grade": "eq=brightness=0.0:contrast=1.12:saturation=1.08:gamma=1.0,unsharp=5:5:0.5",
+    "zoom": [1.2, 1.42],
+    "transition": "flash",
+    "sfx": {"title": "sfx_pop.wav", "transition": "sfx_whoosh.wav", "vol": 0.45}
+  },
+  "chat": {
+    "nama": "CHAT STORY",
+    "grade": "eq=brightness=0.01:contrast=1.04:saturation=0.9:gamma=1.02,colorbalance=bs=0.03:bm=0.02",
+    "zoom": [1.2],
+    "transition": "swipe",
+    "sfx": {"title": "sfx_tick.wav", "transition": "sfx_whoosh.wav", "vol": 0.4}
+  },
+  "magazine": {
+    "nama": "EDITORIAL MAGAZINE",
+    "grade": "eq=contrast=1.08:saturation=0.78:gamma=0.98,colorbalance=rs=0.04:bs=-0.04:rm=0.02:bm=-0.03",
+    "zoom": [1.26],
+    "transition": "wipe",
+    "sfx": {"title": "sfx_boom.wav", "transition": "sfx_whoosh.wav", "vol": 0.4}
+  }
+}

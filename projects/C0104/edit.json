@@ -1,0 +1,17 @@
+{
+  "source": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/raw-C0104/C0104.MP4",
+  "transcript": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/raw-C0104/transcript.json",
+  "workdir": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/C0104",
+  "rotate": "cw",
+  "fps": 50,
+  "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+  "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "corrections": {},
+  "segments": [
+    {"note": "A hook: Raya kan dah nak dekat betul tak?", "start": 0.70, "end": 2.55, "zoom": 1.2, "cy": 0.38},
+    {"note": "B apa plan awak untuk naikkan sale ketika raya nanti?", "start": 3.10, "end": 6.18, "zoom": 1.2, "cy": 0.38},
+    {"note": "C kita tahu bila buat raya ni, tak semua produk laku tau", "start": 6.48, "end": 9.92, "zoom": 1.2, "cy": 0.38},
+    {"note": "D kat sini saya nak share satu tips", "start": 14.79, "end": 16.06, "zoom": 1.2, "cy": 0.38},
+    {"note": "E korang, tolong follow up balik database, tanya apa mereka perlukan untuk raya", "start": 17.35, "end": 24.06, "zoom": 1.2, "cy": 0.38}
+  ]
+}

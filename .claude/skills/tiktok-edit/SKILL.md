@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.0 (2026-11-04)
+**Versi:** 1.1 (2026-11-05)
 **Changelog:**
+- 1.1 — Tambah pakej gaya editorial (`EDITORIAL.md`, `motion/editorial/`, `pipeline/editorial.py`), 4 gaya. Medan `titleY` untuk muka tinggi dalam frame.
 - 1.0 — Versi pertama, dari pengalaman C0029 (TIPS JUALAN #01) & C0296 (AYAT CLOSING #01).
 
 > Sebelum mula: baca `CLAUDE.md` dan `BRANDKIT.md`. Komunikasi dengan Sir dalam Bahasa Melayu santai tapi teliti.
@@ -84,6 +85,9 @@ Simpan JSON `{"segments":[{start,end,text,words:[{w,s,e}]}]}`. Cetak word timest
 **Higgsfield (AI)** — hanya B-roll suasana, semak kredit & anggaran dalam brief dulu.
 
 ## 7. Overlay Gaya v2 — `motion/overlay-v2/`
+> **Baru (1.1):** kalau brief pilih gaya editorial, guna `motion/editorial/` (skema data sama + `titleY`, `chapter`, `transitions`) dan render terus dengan
+> `python3 -I pipeline/editorial.py projects/<ID>/edit.json projects/<ID>/data.js <gaya> <outdir>` (cut → overlay → compose → QC). B-roll/iklan: tambah dalam `<outdir>/<gaya>/compose.json` dan jalankan `compose.py` semula.
+
 `projects/<ID>/data.js` → salin ke `motion/overlay-v2/data.js`. Skema `window.EDIT`:
 ```
 duration, series, episode, maxWords(4), hideBadge[[a,b]] (sembunyi semasa B-roll),

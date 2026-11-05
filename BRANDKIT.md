@@ -93,6 +93,7 @@ y=1680 └───────────────────────�
 6. Tiada teks di y < 290, y > 1450, atau x > 1010.
 
 ## 7. Gaya video (rujukan)
+- **Pakej editorial** (pilih satu setiap video): CLEAN COACH · BOLD & LAJU · CHAT STORY · EDITORIAL MAGAZINE. Butiran dalam `EDITORIAL.md`, template `motion/editorial/`.
 - **Gaya v2** (standard semasa): tajuk headline kiri-atas, subtitle kecil karaoke hijau, bracket fokus, callout, babak explainer (muka dalam bulatan + mockup chat generik), grade lembut.
 - Template: `motion/overlay-v2/`, `motion/explainer/`, `motion/iklan/`, `motion/broll/`.
 - Tiada rupa/logo app sebenar (WhatsApp/TikTok Shop) — mockup generik sahaja.

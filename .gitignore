@@ -2,3 +2,5 @@ node_modules/
 motion/intro/renders/
 .thumbnails/
 motion/thumbnail/frame.png
+preview-editorial/
+motion/*/.hyperframes/

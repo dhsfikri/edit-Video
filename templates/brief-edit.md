@@ -11,7 +11,8 @@
 
 ## 2. Konsep & gaya
 - Konsep isi (cth: Bedah Chat / 1 Ayat Closing / Objection Killer / Kesilapan Seller / POV / Case Study): ____
-- Gaya editing (A. Clean / B. Bold & Laju / C. Split Screen / D. Green Screen / E. Chat Simulation / F. Cinematic / G. Meme): ____
+- **Gaya editorial** (`EDITORIAL.md`): ☐ 1. CLEAN COACH ☐ 2. BOLD & LAJU ☐ 3. CHAT STORY ☐ 4. EDITORIAL MAGAZINE
+- Gaya tambahan (optional: Split Screen / Green Screen / Meme): ____
 - Kenapa pilih gabungan ni: ____
 
 ## 3. Hook

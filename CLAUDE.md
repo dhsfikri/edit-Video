@@ -13,6 +13,7 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 4. Kalau ada perubahan pada plan masa edit (contoh: tukar hook, tukar gaya, B-roll tak cukup), **brief semula** sebelum teruskan.
 
 ## WAJIB: Brand kit & safe zone
+- Pilih **gaya editorial** dalam brief (`EDITORIAL.md`: Clean Coach / Bold & Laju / Chat Story / Editorial Magazine).
 - Ikut **`BRANDKIT.md`** untuk warna, font, siri, gaya video dan **thumbnail standard** (`motion/thumbnail-std/`, config `projects/<ID>/thumb.json`).
 - **Semua teks & overlay dalam safe zone TikTok:** x 60–900, y 220–1440 (BRANDKIT §5).
 - Setiap draf: jalankan `python3 pipeline/safezone_qc.py <video>` dan semak gambar sebelum hantar kepada Sir. Tiada teks dalam zon merah.
