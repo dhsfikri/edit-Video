@@ -65,7 +65,7 @@ subprocess.run(["npx", "hyperframes", "render", "--format", "mov", "-f", str(fps
 sfx = [{"src": str(ROOT / "motion/intro/assets/signature.wav"), "at": 0.03, "vol": 0.4}]
 vol = S["sfx"].get("vol", 0.4)
 if S["sfx"].get("transition"):
-    sfx += [{"src": str(MOTION / "assets" / S["sfx"]["transition"]), "at": max(tr["t"] - 0.2, 0), "vol": vol} for tr in E["transitions"]]
+    sfx += [{"src": str(MOTION / "assets" / S["sfx"]["transition"]), "at": max(tr["t"] - 0.2, 0), "vol": vol} for tr in E["transitions"] if tr.get("kind") in (None, S["transition"])]
 if S["sfx"].get("title"):
     for g in E.get("titles", [])[1:] if a.style != "chat" else E.get("titles", []):
         for line in g["lines"] if a.style == "chat" else g["lines"][:1]:

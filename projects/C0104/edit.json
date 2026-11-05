@@ -23,23 +23,44 @@
       "cy": 0.38
     },
     {
-      "note": "C kita tahu bila buat raya ni, tak semua produk laku tau",
+      "note": "C [B-roll produk] kita tahu bila buat raya ni, tak semua produk laku tau",
       "start": 6.48,
       "end": 9.92,
       "zoom": 1.2,
       "cy": 0.38
     },
     {
-      "note": "D kat sini saya nak share satu tips",
+      "note": "D macam mana nak tukar produk dengan baik?",
+      "start": 12.88,
+      "end": 14.36,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "E kat sini saya nak share satu tips",
       "start": 14.79,
       "end": 16.06,
       "zoom": 1.2,
       "cy": 0.38
     },
     {
-      "note": "E korang, tolong follow up balik database, tanya apa mereka perlukan untuk raya. Nampak tak? (penutup)",
+      "note": "F korang, tolong follow up balik database, tanya apa mereka perlukan [B-roll database]. Nampak tak?",
       "start": 17.35,
-      "end": 25.4,
+      "end": 25.25,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "G kadang-kadang kan database tu sangat penting",
+      "start": 25.42,
+      "end": 27.56,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "H kalau nak tahu cara simpan database, komen part 2, okey?",
+      "start": 27.72,
+      "end": 31.32,
       "zoom": 1.2,
       "cy": 0.38
     }
