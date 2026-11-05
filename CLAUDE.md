@@ -46,6 +46,7 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 - Flow penuh: `FLOW-EDIT-VIDEO.md`
 - Template skrip: `templates/skrip-30s.md`
 - Checklist QC: `templates/checklist-qc.md`
+- Prestasi & insight data: `docs/prestasi-tiktok.md` (data mentah `data/tiktok/`). Guna dalam setiap brief.
 
 ## Gaya komunikasi
 - Guna Bahasa Melayu Malaysia yang santai tapi teliti.

@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.2 (2026-11-05)
+**Versi:** 1.3 (2026-11-05)
 **Changelog:**
+- 1.3 — Peraturan berasaskan data prestasi (`docs/prestasi-tiktok.md`, `EDITORIAL.md`): CTA komen kata kunci + ganjaran, seed komen, momen boleh-share, 1 hipotesis setiap brief.
 - 1.2 — Gaya utama Sir: MAGAZINE + tajuk kad kaca (kinetic, keyword kuning). B-roll gaya magazine `motion/broll-mag/` (babak produk, database). `compose.py` sokong `blur` (kad kaca), `editorial.py` sokong `broll`.
 - 1.1 — Tambah pakej gaya editorial (`EDITORIAL.md`, `motion/editorial/`, `pipeline/editorial.py`), 4 gaya. Medan `titleY` untuk muka tinggi dalam frame.
 - 1.0 — Versi pertama, dari pengalaman C0029 (TIPS JUALAN #01) & C0296 (AYAT CLOSING #01).
@@ -67,7 +68,7 @@ Simpan JSON `{"segments":[{start,end,text,words:[{w,s,e}]}]}`. Cetak word timest
 
 ## 4. Brief → tunggu approval
 `briefs/<YYYY-MM-DD>_<ID>_<slug>.md`: spec, objektif, siri (`AYAT CLOSING` = closing/WhatsApp, `TIPS JUALAN` = jualan umum/TikTok Shop), struktur timeline (sumber → ayat → grafik), ayat dibuang, B-roll, soalan untuk Sir (privasi peserta, ayat tak jelas, iklan ya/tidak).
-**Hook mesti di depan** (soalan/masalah). Buang pembukaan lambat ("Alhamdulillah…", "Faham? Dan satu lagi…", "So…").
+**Hook mesti di depan** (soalan/masalah). Baca `docs/prestasi-tiktok.md` dan isi §8 brief (insight + 1 hipotesis + CTA komen kata kunci). Buang pembukaan lambat ("Alhamdulillah…", "Faham? Dan satu lagi…", "So…").
 
 ## 5. Potong A-roll — `pipeline/cut.py`
 `projects/<ID>/edit.json`: `source, transcript, workdir, rotate, fps, color, audio_extra, corrections, segments[{note,start,end,zoom,zoom_to,cy}]`.

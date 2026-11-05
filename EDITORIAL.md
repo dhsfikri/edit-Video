@@ -43,6 +43,16 @@ cd motion/broll-mag && npx hyperframes render --variables '{"scene":"produk","du
 Masukkan dalam `data.js` → `"broll": [{"src", "start", "dur"}]` dan letak `transitions` pada sempadan B-roll (wipe).
 Tambah babak baru: entri baru dalam `SCENES` (label, kick, words [[teks, keyword?]], build()).
 
+## Peraturan berasaskan data (`docs/prestasi-tiktok.md`)
+> Dikemas kini setiap kali ada data baru. Data 1 (28 Okt–3 Nov): like ×8.7 selepas gaya baru, **komen 0 selama 7 hari**, share rendah.
+
+1. **CTA komen wajib ada "kata kunci + ganjaran"**, keluar di skrin (kad kaca) DAN disebut Sir. Contoh: *Komen "PART 2" → saya buat video seterusnya*. Jangan guna CTA kabur ("komen di bawah").
+2. **Seed komen:** satu soalan mudah di tengah video yang boleh dijawab satu perkataan (cth "Raya ni awak jual apa? Komen 👇"). Letak sebagai callout kecil semasa babak santai.
+3. **Momen "boleh share":** setiap video ada satu kad ringkas yang orang nak hantar kepada team/kawan seller (senarai 3 langkah, ayat closing yang boleh disalin). Tahan ≥ 2s supaya sempat screenshot.
+4. **Kekal yang menjadi:** hook soalan pada 0–1s, B-roll explainer, subtitle karaoke. Gaya baru naikkan like rate 0.44% → 3.81%.
+5. **Tolak ke profil:** CTA akhir sebut *sebab* untuk follow/klik profil (cth "Part 2 keluar esok, follow supaya tak terlepas").
+6. **Setiap brief tulis 1 hipotesis** yang nak diuji, dan metrik untuk ukur (lihat jadual hipotesis dalam `docs/prestasi-tiktok.md`).
+
 ## Peraturan semua gaya
 1. **Hook di depan** (0–3s), tajuk hook muncul dari saat 0.
 2. **2–3 tajuk** sahaja sevideo: hook → poin utama → penutup (jawapan kepada hook untuk loop).

@@ -45,7 +45,13 @@
 - Resolusi rakaman asal: ____
 - Export: 1080p · 30fps · bitrate Higher (~15–20 Mbps) · MP4
 
-## 8. Soalan / perkara untuk Sir putuskan
+## 8. Data & hipotesis (`docs/prestasi-tiktok.md`)
+- Insight data terkini yang dipakai: ____
+- Hipotesis video ni (1 sahaja): ____
+- Metrik untuk ukur (komen / like rate / % tonton habis / share): ____
+- CTA komen: kata kunci "____" + ganjaran ____
+
+## 9. Soalan / perkara untuk Sir putuskan
 - ____
 
 ---
