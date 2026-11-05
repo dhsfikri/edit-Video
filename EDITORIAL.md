@@ -2,7 +2,7 @@
 
 > Pakej gaya untuk setiap video. Pilih **satu gaya** dalam brief (`templates/brief-edit.md` §2).
 > Semua gaya ikut `BRANDKIT.md` (warna, font, siri) dan **safe zone** (teks x 60–900, y 220–1440).
-> Status: **v1 DRAF (2026-11-05)**. Preview 4 gaya guna C0104, menunggu Sir pilih/semak.
+> Status: **v1 (2026-11-05)**. Sir pilih **MAGAZINE** (warna C: grade warm + keyword kuning) sebagai gaya utama. 3 gaya lain kekal sebagai pilihan.
 
 Template: `motion/editorial/` (satu template, 4 gaya) · Definisi gaya: `motion/editorial/styles.json`
 Render satu arahan:
@@ -19,8 +19,8 @@ python3 -I pipeline/editorial.py projects/<ID>/edit.json projects/<ID>/data.js <
 | **Mood** | Tenang, berwibawa | Bertenaga, scroll-stopper | "Intai" chat sebenar | Premium, serius |
 | **Grade** | Lembut, kurang saturasi | Kontras tinggi + tajam | Lembut, sedikit sejuk | Sinematik warm + vignette |
 | **Zoom A-roll** | Tetap 1.2 | Bertukar 1.2 ↔ 1.42 setiap potong (punch-in) | Tetap 1.2 | Tetap 1.26 |
-| **Tajuk** | Caveat + Montserrat, keyword kotak putih ditaip | Huruf besar tengah, slam satu-satu + gegar, keyword kotak kuning | Bubble chat + "typing…", keyword bubble hijau ✓✓ | Anton penuh lebar, mask reveal, garisan + "01 / 03" |
-| **Subtitle** | Kecil, kotak karaoke hijau | Besar huruf besar, outline hitam, perkataan aktif kuning | Dalam pil hijau gelap, perkataan aktif hijau | Nipis, garis bawah hijau |
+| **Tajuk** | Caveat + Montserrat, keyword kotak putih ditaip | Huruf besar tengah, slam satu-satu + gegar, keyword kotak kuning | Bubble chat + "typing…", keyword bubble hijau ✓✓ | Anton penuh lebar, mask reveal, garisan + "01 / 03", keyword & kicker **kuning** |
+| **Subtitle** | Kecil, kotak karaoke hijau | Besar huruf besar, outline hitam, perkataan aktif kuning | Dalam pil hijau gelap, perkataan aktif hijau | Nipis, garis bawah kuning |
 | **Callout** | Pil putih ✓/✕ | Kotak kuning outline hitam | Cop serong ✓ BETUL / ✕ | Label garis tepi hijau |
 | **Peralihan** | Soft (kilat putih lembut) | Flash putih + whoosh | Swipe panel hijau gelap ke atas | Wipe blok hijau → hitam |
 | **SFX** | Signature sahaja | Pop (tajuk) + whoosh | Tick (bubble) + whoosh | Boom rendah (tajuk) + whoosh |
