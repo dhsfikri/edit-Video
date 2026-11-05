@@ -6,6 +6,7 @@
     transitions : [{t, kind?}]  — peralihan pada titik potong (kind ikut gaya jika kosong)
     chapter     : teks label kecil gaya magazine, cth "RAYA" (optional)
     titleY      : kedudukan y tajuk (default 300; bold 420). Guna bila muka tinggi dalam frame. Per tajuk: g.y
+    titleStyle  : gaya tajuk magazine: "glass" (default, kad kaca + kinetic) | "cover" (Anton penuh lebar)
     magMax      : saiz font maksimum baris Anton gaya magazine (default 200)
     hold_end    : tahan frame akhir N saat (untuk CTA)
   Elemen: badge, titles, brackets, callouts, words (subtitle), cta, transitions.
@@ -85,6 +86,16 @@
       .s-magazine .rule { height: 4px; background: #fff; transform-origin: 0 50%; margin-bottom: 18px; width: 840px; }
       .s-magazine .chap { font-weight: 600; font-size: 22px; letter-spacing: .32em; color: #fff; margin-bottom: 10px; display: flex; justify-content: space-between; width: 840px; }
       .s-magazine .chap span { color: var(--green); }
+      /* magazine — tajuk KAD KACA (pilihan Sir 2026-11-05). Blur sebenar dibuat oleh compose.py (window.__glass) */
+      .glass { position: relative; width: 840px; padding: 32px 40px 34px; border-radius: 30px; background: linear-gradient(135deg, rgba(255,255,255,.14), rgba(20,20,20,.34) 45%, rgba(10,10,10,.42));
+        border: 2px solid rgba(255,255,255,.28); box-shadow: 0 20px 50px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.35); }
+      .glass .gl { font-weight: 600; font-size: 26px; letter-spacing: .28em; color: var(--yellow); white-space: nowrap; }
+      .glass .gk { font-family: "Caveat", cursive; font-weight: 700; font-size: 50px; color: rgba(255,255,255,.9); margin-top: 6px; }
+      .glass .gt { font-weight: 800; font-size: 82px; line-height: 1.04; color: #fff; margin-top: 8px; }
+      .glass .gw { display: inline-block; white-space: nowrap; margin-right: .24em; }
+      .glass .gw.key { color: var(--yellow); }
+      .glass .gw .ch { display: inline-block; }
+      .glass .gb { height: 8px; width: 180px; background: var(--yellow); border-radius: 4px; margin-top: 22px; transform-origin: 0 50%; }
 
       /* ---------- BRACKET ---------- */
       .br { position: absolute; width: 58px; height: 58px; border-color: #fff; border-style: solid; border-width: 0; --bw: 7px; }
@@ -106,7 +117,7 @@
       .s-chat .co.no { border-color: var(--red); color: var(--red); background: rgba(20,8,8,.78); }
       .s-chat .co .ic { background: transparent !important; color: inherit; font-size: 34px; }
       .s-chat .co, .s-chat .co span { text-shadow: 0 2px 8px rgba(0,0,0,.5); }
-      .s-magazine .co { background: rgba(11,11,11,.6); color: #fff; border-radius: 0; border-left: 4px solid var(--green); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: 30px; padding: 6px 18px; }
+      .s-magazine .co { background: rgba(20,20,20,.55); color: #fff; border-radius: 18px; border: 2px solid rgba(255,255,255,.28); border-left: 8px solid var(--yellow); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: 30px; padding: 6px 18px; }
       .s-magazine .co.no { border-left-color: var(--red); }
       .s-magazine .co .ic { display: none; }
 
@@ -128,7 +139,7 @@
       #cta span { display: inline-block; font-weight: 800; font-size: 36px; padding: 14px 30px; border-radius: 999px; background: #fff; color: var(--deep); }
       .s-bold #cta span { background: var(--green); color: var(--ink); border: 4px solid var(--ink); border-radius: 8px; font-size: 42px; text-transform: uppercase; }
       .s-chat #cta span { background: var(--green); color: var(--ink); border-radius: 34px 34px 8px 34px; }
-      .s-magazine #cta span { background: rgba(11,11,11,.72); color: #fff; border: 3px solid #fff; border-radius: 0; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: 30px; }
+      .s-magazine #cta span { background: rgba(20,20,20,.6); color: #fff; border: 2px solid rgba(255,255,255,.35); border-radius: 22px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: 30px; }
 
       /* ---------- FX (peralihan & suasana) ---------- */
       .fx-flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
@@ -230,6 +241,51 @@
           if (g.end < D) tl.to(box, { opacity: 0, y: -30, duration: 0.15 }, g.end - 0.15);
         },
         magazine(g, box) {
+          if ((E.titleStyle || "glass") === "glass") return titleBuilders.glass(g, box);
+          return titleBuilders.cover(g, box);
+        },
+        // KAD KACA + kinetic typography: label → (kicker) → perkataan masuk satu-satu (blur→tajam), keyword huruf demi huruf kuning
+        glass(g, box) {
+          const t0 = g.lines[0][0].t;
+          const label = `${(g.chapter || E.chapter || E.series).toUpperCase()} · ${String(g.no || 1).padStart(2, "0")}`;
+          const card = put(`<div class="glass"><div class="gl">${label}</div></div>`, box);
+          const kick = g.lines.filter((l) => l.every((t) => t.k === "script")).map((l) => l.map((t) => t.text).join(" ")).join(" ");
+          let kEl = null;
+          if (kick) kEl = put(`<div class="gk">${kick}</div>`, card);
+          const gt = put(`<div class="gt"></div>`, card);
+          const words = [];
+          g.lines.filter((l) => !l.every((t) => t.k === "script")).forEach((line) => line.forEach((tok) => {
+            tok.text.split(/\s+/).filter(Boolean).forEach((wd) => {
+              const key = tok.k === "box";
+              const w = put(`<span class="gw ${key ? "key" : ""}"></span>`, gt);
+              if (key) [...wd].forEach((c) => put(`<span class="ch">${c}</span>`, w)); else w.textContent = wd;
+              words.push({ w, key });
+            });
+          }));
+          const bar = put(`<div class="gb"></div>`, card);
+          // kad
+          tl.fromTo(card, { opacity: 0, y: 24, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.25, ease: "power3.out" }, t0);
+          tl.fromTo(card.querySelector(".gl"), { opacity: 0, x: -16, letterSpacing: "0.6em" }, { opacity: 1, x: 0, letterSpacing: "0.28em", duration: 0.4, ease: "power3.out" }, t0 + 0.08);
+          if (kEl) tl.fromTo(kEl, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.25 }, t0 + 0.14);
+          // perkataan
+          let at = t0 + (kEl ? 0.24 : 0.16);
+          words.forEach(({ w, key }) => {
+            if (key) {
+              const chs = w.querySelectorAll(".ch");
+              tl.fromTo(chs, { opacity: 0, y: 36, scale: 1.4, filter: "blur(6px)" },
+                { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.28, ease: "back.out(2.2)", stagger: 0.035 }, at);
+              at += 0.035 * chs.length + 0.08;
+            } else {
+              tl.fromTo(w, { opacity: 0, y: 30, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out" }, at);
+              at += 0.09;
+            }
+          });
+          tl.fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power4.inOut" }, at);
+          if (g.end < D) tl.to(card, { opacity: 0, y: -16, duration: 0.2, ease: "power2.in" }, g.end - 0.2);
+          // geometri kad untuk blur sebenar (compose.py)
+          box.__glass = { card, start: t0, end: Math.min(g.end, D) };
+        },
+        cover(g, box) {
           const chap = put(`<div class="chap"><div>${(g.chapter || E.chapter || E.series).toUpperCase()}</div><span>${String(g.no || 1).padStart(2, "0")} / ${String(E.titles.length).padStart(2, "0")}</span></div>`, box);
           const rule = put(`<div class="rule"></div>`, box);
           const t0 = g.lines[0][0].t;
@@ -267,6 +323,12 @@
         // pengawal safe zone: bawah tajuk mesti atas subtitle (y 1290)
         const top = parseFloat(getComputedStyle(box).top), h = box.offsetHeight;
         if (top + h > 1290) box.style.top = Math.max(300, 1290 - h) + "px";
+        if (box.__glass) {
+          // dikira bila dipanggil (selepas font siap dimuat) — offset* tak terkesan oleh transform animasi
+          const G = box.__glass, c = G.card;
+          (window.__glassRefs = window.__glassRefs || []).push(() => ({ x: box.offsetLeft + c.offsetLeft, y: box.offsetTop + c.offsetTop,
+            w: c.offsetWidth, h: c.offsetHeight, start: +G.start.toFixed(3), end: +G.end.toFixed(3), radius: 30 }));
+        }
       });
 
       // ---------- Bracket fokus ----------

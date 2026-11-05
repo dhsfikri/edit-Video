@@ -12,6 +12,8 @@ compose.json:
         # optional: hentikan video pada 'at' (frame beku), tindih iklan, kemudian sambung
   "broll": [{"src": ".../kupon.mp4", "start": 3.45, "dur": 2.5}],   # masa dalam timeline AKHIR
   "overlay": ".../overlay.mov",            # grafik + subtitle (telus), timeline AKHIR
+  "blur": [{"x":60,"y":880,"w":840,"h":380,"start":0.05,"end":5,"radius":30}],
+        # optional: kawasan kabur (kesan kad kaca) bawah overlay, sudut bulat, fade 0.2s
   "sfx": [{"src": ".../signature.wav", "at": 0.04, "vol": 0.55}]
 }
 """
@@ -48,6 +50,22 @@ for i, b in enumerate(c.get("broll", [])):
     fc.append(f"[{cur}][b{i}]overlay=0:0:eof_action=pass:enable='between(t,{b['start']},{b['start']+b['dur']-0.001})'[vb{i}]")
     cur = f"vb{i}"
     idx += 1
+
+# 2b) Blur kad kaca (sebelum overlay). Masa dalam timeline AKHIR.
+for i, g in enumerate(c.get("blur", [])):
+    x, y, w, h, r = g["x"], g["y"], g["w"], g["h"], g.get("radius", 30)
+    st, en = g["start"], g["end"]
+    fd = min(0.2, (en - st) / 3)
+    rr = f"if(gte(X,{r})*lt(X,W-{r})+gte(Y,{r})*lt(Y,H-{r})+lte(hypot(min(X,W-1-X)-{r},min(Y,H-1-Y)-{r}),{r}),255,0)"
+    fc += [
+        f"[{cur}]split[gb{i}a][gb{i}b]",
+        f"[gb{i}b]crop={w}:{h}:{x}:{y},boxblur=22:3,eq=brightness=-0.04,format=yuva420p[gb{i}c]",
+        # topeng sudut bulat: kira SEKALI (1 frame) kemudian ulang — geq setiap frame terlalu perlahan
+        f"color=c=black:s={w}x{h}:r={fps}:d={1/fps:.4f},format=gray,geq=lum='{rr}',loop=loop=-1:size=1,setpts=N/{fps}/TB[gb{i}m]",
+        f"[gb{i}c][gb{i}m]alphamerge,fade=t=in:st={st}:d={fd}:alpha=1,fade=t=out:st={en - fd}:d={fd}:alpha=1[gb{i}d]",
+        f"[gb{i}a][gb{i}d]overlay={x}:{y}:shortest=1:enable='between(t,{st},{en})'[gb{i}o]",
+    ]
+    cur = f"gb{i}o"
 
 # 3) Overlay grafik + subtitle
 if c.get("overlay"):

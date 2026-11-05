@@ -8,6 +8,7 @@ Langkah: cut.py (grade + zoom ikut gaya) -> overlay motion/editorial (style) -> 
 - data.js: skema overlay-v2 (titles, brackets, callouts, words, cta). Jika tiada `transitions`,
   peralihan diletak automatik pada setiap titik potong (dari cuts.json).
 - `words`: kalau data.js letak "words": "auto", guna words.json dari cut.py.
+- `broll`: [{src, start, dur}] (cth dari motion/broll-mag) diteruskan ke compose.py.
 Output dalam <outdir>/<gaya>/: base.mov, overlay.mov, <ID>_<gaya>.mp4, <ID>_<gaya>_safezone.png
 """
 import argparse, json, subprocess, sys
@@ -70,6 +71,12 @@ if S["sfx"].get("title"):
         for line in g["lines"] if a.style == "chat" else g["lines"][:1]:
             sfx.append({"src": str(MOTION / "assets" / S["sfx"]["title"]), "at": line[0]["t"], "vol": vol})
 comp = {"base": str(out / "base.mov"), "out": str(out / f"{vid}_{a.style}.mp4"), "fps": fps, "overlay": str(ov), "sfx": sfx}
+# Kad kaca (magazine): baca geometri kad dari template untuk blur sebenar
+glass = json.loads(subprocess.check_output(["node", str(ROOT / "pipeline" / "probe_glass.js"), str(MOTION), a.style]).decode() or "[]")
+if glass:
+    comp["blur"] = glass
+if E.get("broll"):
+    comp["broll"] = E["broll"]  # [{src, start, dur}] masa timeline akhir
 if E.get("hold_end"):
     comp["insert"] = {"at": round(cuts["duration"] - 0.05, 3), "dur": E["hold_end"]}
 cj = out / "compose.json"

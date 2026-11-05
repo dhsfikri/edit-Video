@@ -1,0 +1,219 @@
+<!doctype html>
+<!--
+  B-ROLL MAGAZINE (1080x1920, penuh skrin) — padanan gaya editorial MAGAZINE + tajuk KAD KACA.
+  Latar gelap warm + grain · muka Sir dalam tetingkap segi empat bulat (kiri-atas) · kad kaca tajuk (kinetic, keyword kuning)
+  · kandungan di tengah (y 700–1270). Mockup GENERIK sahaja (tiada logo/rupa app sebenar).
+  Variables:
+    scene : "produk" | "database"   (tambah babak baru dalam SCENES)
+    dur   : durasi (s)
+    face  : klip muka dalam assets/ (pipeline/facecrop.py)
+  Render: npx hyperframes render --variables '{"scene":"produk","dur":3.53,"face":"assets/face_produk.mp4"}' -f 50 -q high -o out.mp4
+  Subtitle & badge video utama ditindih kemudian (y 1320 / y 240) — jangan letak kandungan di situ.
+-->
+<html lang="ms" data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"scene","type":"string","label":"Babak","default":"produk"},
+    {"id":"dur","type":"number","label":"Durasi (s)","default":3.5},
+    {"id":"face","type":"string","label":"Klip muka","default":"assets/face_produk.mp4"}
+  ]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/caveat-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      :root { --yellow: #ffd60a; --green: #25d366; --red: #ff5a5a; --ink: #0b0b0b; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0d0a08; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", "Noto Color Emoji", sans-serif;
+        background: radial-gradient(80% 55% at 70% 35%, #3a2a17 0%, #16100b 55%, #0a0806 100%); }
+      /* cahaya warm kabur di belakang kaca */
+      .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; }
+      #grain { position: absolute; inset: 0; opacity: .06; background-image: radial-gradient(rgba(255,255,255,.7) 1px, transparent 1px); background-size: 5px 5px; }
+      .vig { position: absolute; inset: 0; background: radial-gradient(ellipse 75% 60% at 50% 45%, rgba(0,0,0,0) 50%, rgba(0,0,0,.55) 100%); }
+
+      .glass { background: linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.05) 50%, rgba(255,255,255,.08));
+        border: 2px solid rgba(255,255,255,.24); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+        box-shadow: 0 20px 50px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.3); }
+
+      #faceWrap { position: absolute; left: 60px; top: 320px; width: 270px; height: 340px; border-radius: 28px; overflow: hidden;
+        border: 3px solid rgba(255,255,255,.5); box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+      #face { width: 100%; height: 100%; object-fit: cover; }
+      #faceTag { position: absolute; left: 76px; top: 612px; font-weight: 800; font-size: 20px; letter-spacing: .2em; color: #fff;
+        background: rgba(0,0,0,.55); padding: 6px 12px; border-radius: 10px; }
+
+      #head { position: absolute; left: 360px; top: 320px; width: 540px; padding: 26px 30px 28px; border-radius: 28px; }
+      #head .gl { font-weight: 600; font-size: 22px; letter-spacing: .26em; color: var(--yellow); white-space: nowrap; }
+      #head .gk { font-family: "Caveat", cursive; font-weight: 700; font-size: 44px; color: rgba(255,255,255,.9); margin-top: 4px; }
+      #head .gt { font-weight: 800; font-size: 62px; line-height: 1.04; color: #fff; margin-top: 6px; }
+      #head .gw { display: inline-block; white-space: nowrap; margin-right: .24em; }
+      #head .gw.key { color: var(--yellow); } #head .ch { display: inline-block; }
+      #head .gb { height: 7px; width: 140px; background: var(--yellow); border-radius: 4px; margin-top: 18px; transform-origin: 0 50%; }
+
+      #stage { position: absolute; left: 60px; top: 720px; width: 840px; height: 560px; }
+
+      /* --- produk: grid kad --- */
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+      .pc { position: relative; height: 265px; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
+      .pc .em { font-size: 92px; line-height: 1; text-align: center; margin-top: 6px; }
+      .pc .nm { font-weight: 800; font-size: 26px; color: #fff; text-align: center; }
+      .pc .pr { font-weight: 600; font-size: 20px; color: rgba(255,255,255,.65); text-align: center; }
+      .pc .dim { position: absolute; inset: 0; border-radius: 24px; background: rgba(0,0,0,.55); opacity: 0; }
+      .cop { position: absolute; left: 50%; top: 46%; transform: translate(-50%,-50%) rotate(-10deg); white-space: nowrap; font-weight: 800; font-size: 30px;
+        padding: 8px 16px; border-radius: 10px; letter-spacing: .04em; }
+      .cop.no { color: var(--red); border: 4px solid var(--red); background: rgba(20,8,8,.75); }
+      .cop.ok { color: var(--ink); background: var(--yellow); border: 4px solid var(--yellow); }
+
+      /* --- database: senarai kontak + chat --- */
+      #list { position: absolute; left: 0; top: 0; width: 840px; height: 540px; border-radius: 28px; padding: 22px 26px; overflow: hidden; }
+      #list .lh { display: flex; justify-content: space-between; font-weight: 600; font-size: 22px; letter-spacing: .2em; color: var(--yellow); margin-bottom: 14px; }
+      #list .lh span { color: rgba(255,255,255,.7); letter-spacing: .05em; }
+      #rows { position: relative; }
+      .row { display: flex; align-items: center; gap: 18px; height: 88px; padding: 0 14px; border-radius: 18px; }
+      .row .av { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 24px; color: var(--ink); }
+      .row b { display: block; font-size: 30px; color: #fff; } .row small { font-weight: 600; font-size: 20px; color: rgba(255,255,255,.6); }
+      .row .go { margin-left: auto; font-weight: 800; font-size: 22px; color: var(--ink); background: var(--yellow); padding: 8px 16px; border-radius: 999px; opacity: 0; }
+      #sel { position: absolute; left: 0; right: 0; height: 88px; border-radius: 18px; background: rgba(255,214,10,.16); border: 2px solid var(--yellow); }
+      #chat { position: absolute; left: 70px; top: 0; width: 700px; height: 540px; border-radius: 34px; overflow: hidden; opacity: 0;
+        background: rgba(245,243,238,.96); box-shadow: 0 30px 70px rgba(0,0,0,.55); }
+      #chat .bar { height: 96px; background: #1b1712; display: flex; align-items: center; gap: 16px; padding: 0 24px; color: #fff; }
+      #chat .bar .av { width: 56px; height: 56px; border-radius: 50%; background: var(--yellow); color: var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 22px; }
+      #chat .bar b { display: block; font-size: 28px; } #chat .bar small { font-weight: 600; font-size: 20px; opacity: .7; }
+      #msgs { position: absolute; left: 0; right: 0; top: 96px; bottom: 0; padding: 18px 22px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; }
+      .m { max-width: 84%; padding: 14px 20px 12px; border-radius: 24px; font-weight: 600; font-size: 28px; line-height: 1.3; box-shadow: 0 3px 8px rgba(0,0,0,.08); }
+      .m.c { align-self: flex-start; background: #fff; color: #1d1a16; border-bottom-left-radius: 8px; }
+      .m.s { align-self: flex-end; background: #ffe98a; color: #1d1a16; border-bottom-right-radius: 8px; }
+      .typing { align-self: flex-start; background: #fff; border-radius: 24px; padding: 18px 22px; display: flex; gap: 8px; }
+      .typing i { width: 12px; height: 12px; border-radius: 50%; background: #a9a39a; }
+
+      /* wipe masuk/keluar (sama dengan editorial magazine) */
+      .wipe { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1080" data-height="1920">
+      <div id="stage0" class="clip" data-start="0" data-duration="6" data-track-index="0">
+        <div class="orb" style="left:520px;top:180px;width:520px;height:520px;background:#c98a2c"></div>
+        <div class="orb" style="left:-120px;top:980px;width:560px;height:560px;background:#6b3f16"></div>
+        <div class="orb" style="left:700px;top:1150px;width:300px;height:300px;background:#ffd60a;opacity:.18"></div>
+        <div id="grain"></div><div class="vig"></div>
+        <div id="head" class="glass"></div>
+        <div id="stage"></div>
+        <div id="faceTag">SIR DHARMA</div>
+      </div>
+      <div id="faceWrap"><video id="face" src="assets/face_produk.mp4" class="clip" data-start="0" data-duration="6" data-track-index="1" muted playsinline></video></div>
+    </div>
+    <script>
+      const V = (window.__hyperframes && window.__hyperframes.getVariables ? window.__hyperframes.getVariables() : {}) || {};
+      const DUR = +V.dur || 3.5;
+      if (V.face) document.getElementById("face").setAttribute("src", V.face);
+      const $ = (s) => document.querySelector(s);
+      const el = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstChild; };
+      const put = (h, p) => p.appendChild(el(h));
+      const tl = gsap.timeline({ paused: true });
+
+      const SCENES = {
+        produk: {
+          label: "TIPS RAYA · FAKTA", kick: "hati-hati,", words: [["TAK", 0], ["SEMUA", 0], ["LAKU", 1]],
+          build(stage) {
+            const P = [["👗", "Baju raya", "RM89", 1], ["🧴", "Skincare", "RM45", 0], ["🍪", "Kuih raya", "RM35", 1],
+                       ["👟", "Kasut sukan", "RM120", 0], ["🎁", "Hamper", "RM159", 1], ["📱", "Casing phone", "RM25", 0]];
+            const g = put(`<div class="grid"></div>`, stage);
+            const cards = P.map(([e, n, p, ok]) => {
+              const c = put(`<div class="pc glass"><div class="em">${e}</div><div><div class="nm">${n}</div><div class="pr">${p}</div></div><div class="dim"></div>
+                <div class="cop ${ok ? "ok" : "no"}">${ok ? "✓ LAKU" : "✕ TAK LAKU"}</div></div>`, g);
+              return { c, ok };
+            });
+            cards.forEach(({ c }, i) => tl.fromTo(c, { opacity: 0, y: 40, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "back.out(1.8)" }, 0.35 + i * 0.07));
+            // cop: TAK LAKU dulu (gelap), kemudian LAKU
+            const no = cards.filter((x) => !x.ok), ok = cards.filter((x) => x.ok);
+            const tNo = Math.min(1.35, DUR * 0.4), tOk = Math.min(tNo + 0.7, DUR - 0.8);
+            no.forEach(({ c }, i) => {
+              const cop = c.querySelector(".cop");
+              tl.fromTo(cop, { opacity: 0, scale: 2.2 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power4.in", immediateRender: false }, tNo + i * 0.14);
+              tl.set(cop, { opacity: 0 }, 0);
+              tl.to(c.querySelector(".dim"), { opacity: 1, duration: 0.2 }, tNo + i * 0.14 + 0.1);
+              tl.to(c, { x: 8, duration: 0.04, yoyo: true, repeat: 3 }, tNo + i * 0.14 + 0.18);
+            });
+            ok.forEach(({ c }, i) => {
+              const cop = c.querySelector(".cop");
+              tl.set(cop, { opacity: 0 }, 0);
+              tl.fromTo(cop, { opacity: 0, scale: 2.2 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power4.in", immediateRender: false }, tOk + i * 0.14);
+              tl.to(c, { scale: 1.05, duration: 0.2, yoyo: true, repeat: 1, borderColor: "rgba(255,214,10,.9)" }, tOk + i * 0.14 + 0.15);
+            });
+          },
+        },
+        database: {
+          label: "TIPS RAYA · CARA", kick: "follow up database:", words: [["TANYA", 0], ["DULU,", 0], ["BARU", 1], ["JUAL", 1]],
+          build(stage) {
+            const list = put(`<div id="list" class="glass"><div class="lh">DATABASE CUSTOMER <span>1,248 kontak</span></div><div id="rows"><div id="sel"></div></div></div>`, stage);
+            const R = [["AI", "Kak Aina", "beli: baju raya 2025", "#ffd60a"], ["FZ", "Encik Faiz", "beli: hamper 2025", "#f4a261"],
+                       ["RS", "Puan Ros", "beli: kuih raya 2025", "#e9c46a"], ["MR", "Kak Mira", "beli: tudung 2025", "#ffb4a2"], ["ZL", "Abang Zul", "beli: kurta 2025", "#cdb4db"]];
+            const rows = $("#rows");
+            const rs = R.map(([i, n, s, col]) => put(`<div class="row"><div class="av" style="background:${col}">${i}</div><div><b>${n}</b><small>${s}</small></div><div class="go">FOLLOW UP</div></div>`, rows));
+            const sel = $("#sel");
+            const k = Math.min(1, (DUR * 0.45) / 1.6); // skala masa ikut durasi
+            tl.fromTo(list, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.25);
+            rs.forEach((r, i) => tl.fromTo(r, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.22, ease: "power3.out" }, 0.35 + i * 0.06));
+            // highlight bergerak ke bawah kemudian kembali ke Kak Aina
+            tl.fromTo(sel, { y: 0, opacity: 0 }, { opacity: 1, duration: 0.15 }, 0.7 * k);
+            tl.to(sel, { y: 88 * 2, duration: 0.3 * k, ease: "power2.inOut" }, 0.85 * k);
+            tl.to(sel, { y: 0, duration: 0.25 * k, ease: "power2.inOut" }, 1.15 * k);
+            tl.to(rs[0].querySelector(".go"), { opacity: 1, duration: 0.12 }, 1.35 * k);
+            tl.to(rs[0].querySelector(".go"), { scale: 0.9, duration: 0.08, yoyo: true, repeat: 1 }, 1.45 * k);
+            // chat generik
+            const chat = put(`<div id="chat"><div class="bar"><div class="av">AI</div><div><b>Kak Aina</b><small>customer lama</small></div></div><div id="msgs"></div></div>`, stage);
+            const tChat = 1.6 * k, f = Math.min(1, (DUR - 0.4 - tChat) / 1.5);
+            tl.to(list, { opacity: 0, scale: 0.94, duration: 0.2 }, tChat);
+            tl.fromTo(chat, { opacity: 0, y: 60, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.28, ease: "back.out(1.6)", immediateRender: false }, tChat + 0.05);
+            const msgs = $("#msgs");
+            const M = [[0.25, "s", "Salam Kak Aina 😊 Raya ni akak tengah cari apa ya?"], [0.75, "typing"], [1.1, "c", "Baju raya anak-anak dengan kuih 🥰"], [1.5, "s", "Ada kak! Saya share pilihan ya 👍"]];
+            M.forEach(([t, k, txt], i) => {
+              const at = tChat + t * f;
+              const n = k === "typing" ? put(`<div class="typing"><i></i><i></i><i></i></div>`, msgs) : put(`<div class="m ${k}">${txt}</div>`, msgs);
+              tl.set(n, { display: "none" }, 0);
+              tl.set(n, { display: "" }, at);
+              tl.fromTo(n, { opacity: 0, y: 20, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "back.out(2)", immediateRender: false }, at);
+              if (k === "typing") { const nx = M[i + 1]; tl.set(n, { display: "none" }, tChat + nx[0] * f - 0.01); }
+            });
+          },
+        },
+      };
+      const sc = SCENES[V.scene] || SCENES.produk;
+
+      // Tajuk kad kaca (kinetic) — sama dengan tajuk magazine
+      const head = $("#head");
+      put(`<div class="gl">${sc.label}</div>`, head);
+      const gk = put(`<div class="gk">${sc.kick}</div>`, head);
+      const gt = put(`<div class="gt"></div>`, head);
+      const ws = sc.words.map(([w, key]) => {
+        const s = put(`<span class="gw ${key ? "key" : ""}"></span>`, gt);
+        if (key) [...w].forEach((c) => put(`<span class="ch">${c}</span>`, s)); else s.textContent = w;
+        return { s, key };
+      });
+      const gb = put(`<div class="gb"></div>`, head);
+      tl.fromTo(head, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" }, 0.12);
+      tl.fromTo(gk, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.2 }, 0.2);
+      let at = 0.28;
+      ws.forEach(({ s, key }) => {
+        if (key) { const ch = s.querySelectorAll(".ch");
+          tl.fromTo(ch, { opacity: 0, y: 30, scale: 1.4, filter: "blur(6px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.26, ease: "back.out(2.2)", stagger: 0.03 }, at);
+          at += 0.03 * ch.length + 0.06;
+        } else { tl.fromTo(s, { opacity: 0, y: 26, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.28, ease: "power3.out" }, at); at += 0.08; }
+      });
+      tl.fromTo(gb, { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power4.inOut" }, at);
+      tl.fromTo("#faceWrap", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 0.05);
+      tl.fromTo("#faceTag", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.3);
+      tl.to(".orb", { x: 30, y: -20, duration: DUR, ease: "sine.inOut" }, 0);
+      sc.build($("#stage"));
+
+      // Peralihan masuk/keluar dibuat oleh overlay editorial (transitions pada sempadan B-roll)
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

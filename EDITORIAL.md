@@ -2,7 +2,7 @@
 
 > Pakej gaya untuk setiap video. Pilih **satu gaya** dalam brief (`templates/brief-edit.md` §2).
 > Semua gaya ikut `BRANDKIT.md` (warna, font, siri) dan **safe zone** (teks x 60–900, y 220–1440).
-> Status: **v1 (2026-11-05)**. Sir pilih **MAGAZINE** (warna C: grade warm + keyword kuning) sebagai gaya utama. 3 gaya lain kekal sebagai pilihan.
+> Status: **v1.1 (2026-11-05)**. Sir pilih **MAGAZINE** sebagai gaya utama: grade warm, keyword kuning, tajuk **kad kaca + kinetic typography** (konsep no. 6). 3 gaya lain kekal sebagai pilihan.
 
 Template: `motion/editorial/` (satu template, 4 gaya) · Definisi gaya: `motion/editorial/styles.json`
 Render satu arahan:
@@ -19,16 +19,29 @@ python3 -I pipeline/editorial.py projects/<ID>/edit.json projects/<ID>/data.js <
 | **Mood** | Tenang, berwibawa | Bertenaga, scroll-stopper | "Intai" chat sebenar | Premium, serius |
 | **Grade** | Lembut, kurang saturasi | Kontras tinggi + tajam | Lembut, sedikit sejuk | Sinematik warm + vignette |
 | **Zoom A-roll** | Tetap 1.2 | Bertukar 1.2 ↔ 1.42 setiap potong (punch-in) | Tetap 1.2 | Tetap 1.26 |
-| **Tajuk** | Caveat + Montserrat, keyword kotak putih ditaip | Huruf besar tengah, slam satu-satu + gegar, keyword kotak kuning | Bubble chat + "typing…", keyword bubble hijau ✓✓ | Anton penuh lebar, mask reveal, garisan + "01 / 03", keyword & kicker **kuning** |
+| **Tajuk** | Caveat + Montserrat, keyword kotak putih ditaip | Huruf besar tengah, slam satu-satu + gegar, keyword kotak kuning | Bubble chat + "typing…", keyword bubble hijau ✓✓ | **Kad kaca** (blur sebenar) + kinetic typography: label → kicker → perkataan masuk satu-satu (blur→tajam), keyword **kuning** huruf demi huruf, bar kuning. Pilihan lama: `titleStyle: "cover"` (Anton penuh lebar) |
 | **Subtitle** | Kecil, kotak karaoke hijau | Besar huruf besar, outline hitam, perkataan aktif kuning | Dalam pil hijau gelap, perkataan aktif hijau | Nipis, garis bawah kuning |
-| **Callout** | Pil putih ✓/✕ | Kotak kuning outline hitam | Cop serong ✓ BETUL / ✕ | Label garis tepi hijau |
+| **Callout** | Pil putih ✓/✕ | Kotak kuning outline hitam | Cop serong ✓ BETUL / ✕ | Pil kaca, garis tepi kuning |
 | **Peralihan** | Soft (kilat putih lembut) | Flash putih + whoosh | Swipe panel hijau gelap ke atas | Wipe blok hijau → hitam |
-| **SFX** | Signature sahaja | Pop (tajuk) + whoosh | Tick (bubble) + whoosh | Boom rendah (tajuk) + whoosh |
+| **SFX** | Signature sahaja | Pop (tajuk) + whoosh | Tick (bubble) + whoosh | Pop lembut (tajuk) + whoosh |
 | **Sesuai siri** | AYAT CLOSING, tips panjang | OBJECTION KILLER, hook kontroversi | BEDAH CHAT | TIPS JUALAN, case study |
 
 > Padanan siri hanya **cadangan**. Sir boleh pilih gaya lain untuk mana-mana video.
 
 ---
+
+## B-roll gaya MAGAZINE — `motion/broll-mag/`
+Latar gelap warm + cahaya kabur + grain, muka Sir dalam tetingkap segi empat bulat (kiri atas), kad kaca tajuk (sama dengan tajuk video), kandungan y 720–1280.
+| Babak | Isi |
+|---|---|
+| `produk` | Grid 6 kad produk generik → cop ✕ TAK LAKU (kad digelapkan) → cop ✓ LAKU kuning |
+| `database` | Senarai kontak "DATABASE CUSTOMER" → highlight pilih customer → chat generik follow up |
+```bash
+python3 -I pipeline/facecrop.py <SRC> motion/broll-mag/assets/face_<babak>.mp4 --rotate cw --seg <mula>:<tamat> --fps 50
+cd motion/broll-mag && npx hyperframes render --variables '{"scene":"produk","dur":3.5,"face":"assets/face_produk.mp4"}' -f 50 -q high -o br.mp4   # kemudian trim -t dur
+```
+Masukkan dalam `data.js` → `"broll": [{"src", "start", "dur"}]` dan letak `transitions` pada sempadan B-roll (wipe).
+Tambah babak baru: entri baru dalam `SCENES` (label, kick, words [[teks, keyword?]], build()).
 
 ## Peraturan semua gaya
 1. **Hook di depan** (0–3s), tajuk hook muncul dari saat 0.
@@ -45,7 +58,9 @@ python3 -I pipeline/editorial.py projects/<ID>/edit.json projects/<ID>/data.js <
 | `transitions` | `[{t, kind?}]`. Kosongkan untuk peralihan automatik di setiap potongan |
 | `chapter` | Label kecil gaya magazine (cth "TIPS RAYA") |
 | `titleY` / `titles[].y` | Kedudukan y tajuk |
-| `magMax` | Saiz maksimum font Anton gaya magazine (default 200) |
+| `titleStyle` | Magazine: `glass` (default, kad kaca) atau `cover` |
+| `magMax` | Saiz maksimum font Anton gaya `cover` (default 200) |
+| `broll` | `[{src, start, dur}]` B-roll penuh skrin (diteruskan ke compose.py) |
 | `hold_end` | Tahan frame akhir N saat untuk CTA |
 | `words: "auto"` | Guna words.json terus dari cut.py |
 

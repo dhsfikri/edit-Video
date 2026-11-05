@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.1 (2026-11-05)
+**Versi:** 1.2 (2026-11-05)
 **Changelog:**
+- 1.2 — Gaya utama Sir: MAGAZINE + tajuk kad kaca (kinetic, keyword kuning). B-roll gaya magazine `motion/broll-mag/` (babak produk, database). `compose.py` sokong `blur` (kad kaca), `editorial.py` sokong `broll`.
 - 1.1 — Tambah pakej gaya editorial (`EDITORIAL.md`, `motion/editorial/`, `pipeline/editorial.py`), 4 gaya. Medan `titleY` untuk muka tinggi dalam frame.
 - 1.0 — Versi pertama, dari pengalaman C0029 (TIPS JUALAN #01) & C0296 (AYAT CLOSING #01).
 
@@ -82,6 +83,7 @@ Simpan JSON `{"segments":[{start,end,text,words:[{w,s,e}]}]}`. Cetak word timest
 3. Render: `npx hyperframes render --variables '{"scene":"x","dur":D,"face":"assets/face_x.mp4"}' -f <fps> -q high -w 4 -o ex.mp4` → **trim** `ffmpeg -t D` (composition `data-duration` tetap; render lebih panjang).
 - Letak B-roll **semasa Sir bercakap** (bukan senyap).
 **Animasi kedai/troli** — `motion/broll/` (`scene`: kupon/troli/kosong/selesai/konten).
+**B-roll MAGAZINE (gaya utama)** — `motion/broll-mag/` (lihat `EDITORIAL.md`): muka segi empat + kad kaca + kandungan generik. Masuk `data.js` → `broll`.
 **Higgsfield (AI)** — hanya B-roll suasana, semak kredit & anggaran dalam brief dulu.
 
 ## 7. Overlay Gaya v2 — `motion/overlay-v2/`

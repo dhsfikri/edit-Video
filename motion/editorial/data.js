@@ -1,4 +1,4 @@
-// Dijana oleh pipeline/editorial.py (C0104, gaya bold)
+// Data overlay EDITORIAL untuk C0104 (TIPS JUALAN raya) — magazine + kad kaca + B-roll magazine
 window.EDIT = {
  "duration": 16.4,
  "series": "TIPS JUALAN",
@@ -11,7 +11,7 @@ window.EDIT = {
  "titles": [
   {
    "start": 0.0,
-   "end": 5.0,
+   "end": 4.9,
    "lines": [
     [
      {
@@ -37,58 +37,53 @@ window.EDIT = {
    ]
   },
   {
-   "start": 7.2,
-   "end": 9.79,
+   "start": 8.6,
+   "end": 9.72,
    "lines": [
     [
      {
-      "t": 7.25,
-      "text": "hati-hati,",
+      "t": 8.62,
+      "text": "kat sini,",
       "k": "script"
      }
     ],
     [
      {
-      "t": 7.39,
-      "text": "TAK SEMUA",
+      "t": 8.7,
+      "text": "SATU",
       "k": "bold"
      }
     ],
     [
      {
-      "t": 7.53,
-      "text": "PRODUK",
-      "k": "bold"
-     },
-     {
-      "t": 7.67,
-      "text": "LAKU",
+      "t": 8.8,
+      "text": "TIPS RAYA",
       "k": "box"
      }
     ]
    ]
   },
   {
-   "start": 11.35,
-   "end": 15.3,
+   "start": 10.3,
+   "end": 12.85,
    "lines": [
     [
      {
-      "t": 11.4,
+      "t": 10.35,
       "text": "tips raya:",
       "k": "script"
      }
     ],
     [
      {
-      "t": 11.54,
+      "t": 10.45,
       "text": "FOLLOW UP",
       "k": "bold"
      }
     ],
     [
      {
-      "t": 11.68,
+      "t": 10.6,
       "text": "DATABASE",
       "k": "box"
      }
@@ -96,38 +91,10 @@ window.EDIT = {
    ]
   }
  ],
- "brackets": [
-  {
-   "start": 5.1,
-   "end": 7.1,
-   "box": [
-    380,
-    420,
-    340,
-    340
-   ]
-  }
- ],
- "callouts": [
-  {
-   "t": 9.85,
-   "end": 11.3,
-   "x": 120,
-   "y": 1000,
-   "text": "1 tips raya",
-   "kind": "ok"
-  },
-  {
-   "t": 5.6,
-   "end": 7.1,
-   "x": 120,
-   "y": 1000,
-   "text": "bukan semua laku",
-   "kind": "no"
-  }
- ],
+ "brackets": [],
+ "callouts": [],
  "cta": {
-  "start": 15.35,
+  "start": 15.98,
   "text": "🔔 follow @sirdharma_"
  },
  "words": [
@@ -382,7 +349,18 @@ window.EDIT = {
    "e": 16.4
   }
  ],
- "style": "bold",
+ "broll": [
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/C0104-ed/br_produk.mp4",
+   "start": 5.045,
+   "dur": 3.525
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/C0104-ed/br_database.mp4",
+   "start": 12.95,
+   "dur": 3.0
+  }
+ ],
  "transitions": [
   {
    "t": 1.915
@@ -395,6 +373,13 @@ window.EDIT = {
   },
   {
    "t": 9.79
+  },
+  {
+   "t": 12.95
+  },
+  {
+   "t": 15.95
   }
- ]
+ ],
+ "titleStyle": "glass"
 };
