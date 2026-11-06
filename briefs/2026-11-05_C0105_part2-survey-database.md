@@ -66,3 +66,6 @@ Subtitle magazine (garis bawah kuning) · callout pil kaca · SFX pop lembut + w
 - Cara simpan database (janji C0104) dijawab dalam caption: **Google Sheet** (Nama · No. telefon · Produk dibeli · Tarikh beli · Catatan).
 - B-roll: `musim` (2.8s), `survey` (4.3s, undian CONTOH), `langkah` (3.6s, kad boleh-share).
 - QC: safe zone ✓ · -14.3 LUFS, peak -2.7 dB ✓ · 1080x1920 50fps.
+
+## Nama fail final
+`TIPS-JUALAN-03_Part-2-Ramadhan-Ni-Jual-Apa_video.mp4` · `TIPS-JUALAN-03_Part-2-Ramadhan-Ni-Jual-Apa_thumbnail.png` · `TIPS-JUALAN-03_Part-2-Ramadhan-Ni-Jual-Apa_caption.txt` · Drive: `Folder Video/Final/TIPS-JUALAN-03_Part-2-Ramadhan-Ni-Jual-Apa/`

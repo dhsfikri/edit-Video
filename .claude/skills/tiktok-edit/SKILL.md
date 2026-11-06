@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.3 (2026-11-05)
+**Versi:** 1.4 (2026-11-06)
 **Changelog:**
+- 1.4 — Nama fail final ikut tajuk video: `<SIRI>-<NN>_<Tajuk-Video>_video.mp4` (lihat `CLAUDE.md`).
 - 1.3 — Peraturan berasaskan data prestasi (`docs/prestasi-tiktok.md`, `EDITORIAL.md`): CTA komen kata kunci + ganjaran, seed komen, momen boleh-share, 1 hipotesis setiap brief.
 - 1.2 — Gaya utama Sir: MAGAZINE + tajuk kad kaca (kinetic, keyword kuning). B-roll gaya magazine `motion/broll-mag/` (babak produk, database). `compose.py` sokong `blur` (kad kaca), `editorial.py` sokong `broll`.
 - 1.1 — Tambah pakej gaya editorial (`EDITORIAL.md`, `motion/editorial/`, `pipeline/editorial.py`), 4 gaya. Medan `titleY` untuk muka tinggi dalam frame.
@@ -125,7 +126,7 @@ Lihat frame: tajuk muncul? kotak terkeluar? subtitle bertindih? B-roll peralihan
 ## 11. Hantar & iterasi
 - `SendUserFile` draf (`<ID>_draf_vN.mp4`) + jadual ringkas apa berlaku setiap saat + **apa Sir perlu semak** (rentak, ekspresi, timing, ayat tak pasti).
 - Revisi: kemas kini `edit.json`/`data.js`/`compose.json`, render semula, catat dalam bahagian **Revisi** brief.
-- Approve → final: `<YYYYMMDD>_<slug>.mp4` (salin draf yang diluluskan, sahkan decode) → hantar → tanda brief **FINAL**.
+- Approve → final: `<SIRI>-<NN>_<Tajuk-Video>_video.mp4` (tajuk = headline thumbnail; lihat `CLAUDE.md` → Nama fail final) (salin draf yang diluluskan, sahkan decode) → hantar → tanda brief **FINAL**.
 - Seterusnya: skill `tiktok-thumbnail` (thumbnail cover + caption).
 
 ## 12. Fail & simpanan

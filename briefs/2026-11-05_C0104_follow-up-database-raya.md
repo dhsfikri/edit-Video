@@ -43,3 +43,6 @@ Mockup produk & chat **generik/rekaan** (nama customer contoh sahaja).
 - Video: `20261105_tips-raya-follow-up-database.mp4`
 - Thumbnail: `projects/C0104/thumbnail.png` (frame 1.0s, ruang atas dilanjutkan supaya muka turun bawah tajuk)
 - Caption: `projects/C0104/caption.md`
+
+## Nama fail final
+`TIPS-JUALAN-02_Sale-Raya-Follow-Up-Database_video.mp4` · `TIPS-JUALAN-02_Sale-Raya-Follow-Up-Database_thumbnail.png` · `TIPS-JUALAN-02_Sale-Raya-Follow-Up-Database_caption.txt` · Drive: `Folder Video/Final/TIPS-JUALAN-02_Sale-Raya-Follow-Up-Database/`

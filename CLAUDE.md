@@ -19,6 +19,19 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 - Setiap draf: jalankan `python3 pipeline/safezone_qc.py <video>` dan semak gambar sebelum hantar kepada Sir. Tiada teks dalam zon merah.
 - Thumbnail: teks hanya dalam y 290–1450 (grid profil potong 3:4; "▷ views" di bawah kiri).
 
+## WAJIB: Nama fail final (ikut tajuk video)
+Semua fail yang dihantar kepada Sir / Drive guna format:
+```
+<SIRI>-<NN>_<Tajuk-Video>_video.mp4
+<SIRI>-<NN>_<Tajuk-Video>_thumbnail.png
+<SIRI>-<NN>_<Tajuk-Video>_caption.txt
+```
+- `<SIRI>-<NN>`: siri + nombor episod, huruf besar, sengkang (cth `TIPS-JUALAN-02`, `AYAT-CLOSING-03`, `OBJECTION-KILLER-01`).
+- `<Tajuk-Video>`: **headline thumbnail** (yang Sir nampak di profil), Title-Case, perkataan disambung sengkang, tiada simbol (`?`, `#`, `"`). Part → `Part-2-…`.
+- Folder Drive & zip pakai nama yang sama tanpa akhiran: `Folder Video/Final/<SIRI>-<NN>_<Tajuk-Video>/` dan `<SIRI>-<NN>_<Tajuk-Video>.zip`.
+- Fail kerja dalam repo (`projects/<ID>/`) kekal ikut ID klip (C0104 dll.); catat nama final dalam brief.
+- Contoh: `TIPS-JUALAN-02_Sale-Raya-Follow-Up-Database_video.mp4`
+
 ## Editor & tools
 - **Claude yang edit** (bukan CapCut). FFmpeg (`pipeline/`) + HyperFrames (`motion/`) untuk tajuk, subtitle, B-roll, iklan; faster-whisper untuk transcribe.
 - Rakaman diterima melalui upload chat atau folder Google Drive Sir.

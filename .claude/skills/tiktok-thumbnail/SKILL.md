@@ -5,8 +5,9 @@ description: Buat thumbnail TikTok gaya COVER (standard brand kit Sir Dharma) da
 
 # Skill: Thumbnail Cover + Caption — Sir Dharma
 
-**Versi:** 1.0 (2026-11-04)
+**Versi:** 1.1 (2026-11-06)
 **Changelog:**
+- 1.1 — Fail hantar: `<SIRI>-<NN>_<Tajuk-Video>_thumbnail.png` & `_caption.txt`. Muka tinggi dalam frame → lanjutkan ruang atas (blur) supaya tajuk tak tutup mata.
 - 1.0 — Gaya cover diluluskan Sir (band hijau gelap, headline Anton penuh lebar, 1 keyword kuning, muka besar, 1 callout).
 
 > Rujukan: `BRANDKIT.md` §6. Brief konsep ringkas kepada Sir dulu (teks headline, frame, callout) — tunggu approval.
@@ -47,7 +48,7 @@ Semak: teks dalam y 290–1450 & x ≤ 1010 · mata tak tertutup tajuk · keywor
 Perangkap: font mesti dimuat sebelum ukur (`document.fonts.load` — dah dalam template). Jangan `import` ESM dengan NODE_PATH — guna `render.cjs`.
 
 ### 4. Hantar
-Simpan `projects/<ID>/thumbnail.png`, hantar kepada Sir (`SendUserFile`, render) + pratonton grid.
+Simpan `projects/<ID>/thumbnail.png`; fail hantar dinamakan `<SIRI>-<NN>_<Tajuk-Video>_thumbnail.png` (caption: `_caption.txt`). Hantar kepada Sir (`SendUserFile`, render) + pratonton grid.
 Cara guna: TikTok → **Edit cover → Upload from gallery**.
 
 ## B. Caption panjang
