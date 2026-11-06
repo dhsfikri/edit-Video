@@ -2,3 +2,5 @@ node_modules/
 motion/intro/renders/
 .thumbnails/
 motion/thumbnail/frame.png
+motion/collage/assets/aroll.mp4
+motion/*/.hyperframes/

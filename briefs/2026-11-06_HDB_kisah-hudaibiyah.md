@@ -98,4 +98,25 @@
 5. Cold open Part 2 guna ayat "jadi peperangan" yang **diulang** semula di 15–21s. Okay atau nak elak ulang?
 
 ---
-**Status:** ☒ Menunggu approval  ☐ Approved  ☐ Perlu ubah (nota: ____)
+**Status:** ☐ Menunggu approval  ☒ Approved (2 part, untuk klien umrah)  ☐ Perlu ubah
+
+## Keputusan Sir (2026-11-06)
+- **2 part.** Video untuk **klien umrah**, bukan akaun @sirdharma_.
+- Gaya mesti **berbeza** daripada video Sir: TIADA badge siri, TIADA hijau #25D366, TIADA Montserrat/karaoke hijau.
+- Soalan 2–5 (kebenaran, fail asal, nama mutawwif, ulang ayat) belum dijawab. Draf guna fail WhatsApp dan tanpa nama mutawwif.
+
+## Identiti visual klien (draf v1, boleh tukar ikut brand klien)
+| Item | Nilai |
+|---|---|
+| Latar | Kertas krim lama + kertas grid (tekstur dijana) |
+| Warna | Dakwat #1D1B18 · karat #B8472A (aksen/cop) · emas #E0AD3E (keyword subtitle) · teal #1F4F5B |
+| Font | DM Serif Display (tajuk) · Courier Prime Bold (label, cop, subtitle gaya mesin taip) |
+| Subtitle | Pita label hitam, teks krim, keyword emas, y 1372 |
+| A-roll | Kad foto bucu putih + pita pelekat, condong -1° |
+| Bunyi | SFX sintetik (kertas, cop, kapak, tumbang), tiada muzik |
+| Template | `motion/collage/` (HyperFrames) |
+
+## Revisi
+- **Draf v1 Part 1** (`HDB01_draf_v1.mp4`, 42.1s): A-roll `projects/HDB/edit_p1.json`, subtitle `projects/HDB/subs_p1.py`, SFX `projects/HDB/mix_p1.json`.
+  - Pembetulan subtitle: "baik ah rituan" → Baiatur Ridwan, "Allah alam mubisawab" → Allahu a'lam bissawab, "ibu nak katap" → al-Khattab, "ambil bermujaan" → **amalan pemujaan** (⚠️ perlu Sir/klien sahkan), "tepang" → tebang.
+  - Kad A-roll muncul pada 14.55s (rakaman sebelum itu = kamera pan ke jemaah).

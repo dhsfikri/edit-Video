@@ -1,0 +1,17 @@
+{
+  "source": "/tmp/claude-0/-home-user-edit-Video/3866b2e4-78e7-539a-aec9-3a94bcf1ec85/scratchpad/hdb_raw.mp4",
+  "transcript": "/tmp/claude-0/-home-user-edit-Video/3866b2e4-78e7-539a-aec9-3a94bcf1ec85/scratchpad/v2/words.json",
+  "workdir": "/tmp/claude-0/-home-user-edit-Video/3866b2e4-78e7-539a-aec9-3a94bcf1ec85/scratchpad/hdb01",
+  "rotate": "none",
+  "fps": 30,
+  "color": "eq=contrast=1.05:saturation=1.04:gamma=0.98,colorbalance=rm=0.03:bm=-0.03",
+  "audio_extra": "afftdn=nf=-25,highpass=f=110,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "segments": [
+    {"note": "cold open: Umar tebang pokok", "start": 70.80, "end": 73.40},
+    {"note": "Adakah peristiwa", "start": 11.70, "end": 12.95},
+    {"note": "Baiatur Ridwan ... tak tahu dekat mana", "start": 17.45, "end": 26.05},
+    {"note": "zaman Umar pohon masih ada", "start": 29.35, "end": 34.95},
+    {"note": "kesyirikan / pemujaan", "start": 54.60, "end": 66.55},
+    {"note": "Umar tebang, insan tegas", "start": 67.20, "end": 77.85}
+  ]
+}

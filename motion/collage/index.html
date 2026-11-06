@@ -1,0 +1,300 @@
+<!doctype html>
+<!--
+  COLLAGE (gaya kertas lama / "Vox-style") — template KLIEN UMRAH (bukan brand Sir Dharma).
+  Satu composition penuh 1080x1920: latar kertas + babak collage (atas) + kad A-roll (bawah) + subtitle.
+  Data: subs.js (window.SUBS) · A-roll: assets/aroll.mp4 (proxy dari base.mov, dengan frame akhir ditahan).
+  Tiada gambar Nabi SAW / sahabat — simbol & teks sahaja.
+  Projek pertama: HDB01 "Kenapa Saidina Umar tebang pokok ni?"
+-->
+<html lang="ms" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<script src="subs.js"></script>
+<style>
+  @font-face { font-family: "DMSerif"; src: url("assets/dm-serif-display-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Courier Prime"; font-weight: 700; src: url("assets/courier-prime-latin-700-normal.woff2") format("woff2"); }
+  @property --t { syntax: "<number>"; inherits: true; initial-value: 0; }
+  :root { --paper:#ece3cf; --ink:#1d1b18; --rust:#b8472a; --gold:#e0ad3e; --teal:#1f4f5b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1080px; height:1920px; overflow:hidden; background:var(--paper); }
+  #root { position:relative; width:1080px; height:1920px; overflow:hidden; font-family:"Courier Prime", monospace; }
+  #stage { position:absolute; inset:0; --f: round(down, calc(var(--t) * 12), 1); }
+  .abs { position:absolute; }
+  /* stop-motion "boil": gegar kecil 12fps, deterministik ikut masa */
+  .boil { translate: calc(sin(var(--f) * 7.13 + var(--s, 1)) * 2.2px) calc(cos(var(--f) * 5.31 + var(--s, 1)) * 2.2px);
+          rotate: calc(sin(var(--f) * 3.77 + var(--s, 1)) * 0.7deg); }
+  .cut { filter: drop-shadow(0 0 0 #fff) drop-shadow(5px 7px 0 rgba(0,0,0,.18)) drop-shadow(0 10px 18px rgba(0,0,0,.22)); }
+  .tape { position:absolute; width:150px; height:44px; background:rgba(235,226,196,.78); box-shadow:0 2px 6px rgba(0,0,0,.15);
+          clip-path: polygon(3% 0,97% 4%,100% 50%,96% 100%,2% 96%,0 50%); }
+
+  #bg { position:absolute; inset:0; background:url(assets/paper.jpg) center/cover; }
+  #grid { left:-30px; top:150px; width:1140px; height:900px; background:url(assets/grid.png); rotate:-2deg; opacity:.9;
+          clip-path: polygon(0 3%,8% 0,22% 2%,40% 0,61% 3%,80% 0,100% 2%,100% 97%,85% 100%,63% 97%,41% 100%,20% 97%,0 100%); }
+
+  /* hook title */
+  #hook { left:60px; top:250px; width:840px; }
+  #hook .l1 { font-family:DMSerif; font-size:78px; line-height:1; color:var(--ink); }
+  #hook .l2 { display:inline-block; margin:10px 0 6px -6px; font-family:DMSerif; font-size:150px; line-height:1; color:#fff8e8;
+              background:var(--rust); padding:4px 26px 10px; rotate:-2deg; box-shadow:6px 8px 0 rgba(0,0,0,.18); }
+  #hook .l3 { font-family:DMSerif; font-size:78px; line-height:1; color:var(--ink); }
+
+  .label { display:inline-block; background:var(--ink); color:#f3ead6; font-weight:700; font-size:40px; letter-spacing:.04em;
+           padding:8px 18px; white-space:nowrap; box-shadow:4px 5px 0 rgba(0,0,0,.18); }
+  .label.paper { background:#f7f0de; color:var(--ink); border:2px solid var(--ink); }
+  .label.rust { background:var(--rust); color:#fff8e8; }
+  .stamp { font-family:"Courier Prime"; font-weight:700; color:var(--rust); border:7px solid var(--rust); border-radius:10px;
+           padding:6px 22px; font-size:62px; letter-spacing:.06em; white-space:nowrap; mix-blend-mode:multiply; opacity:.92; }
+  .stamp.teal { color:var(--teal); border-color:var(--teal); }
+
+  /* peta */
+  #map { left:90px; top:300px; width:900px; height:620px; }
+  #ruinWrap { left:150px; top:960px; width:640px; padding:14px 14px 56px; background:#f7f2e6; rotate:2.5deg; }
+  #ruinWrap img { display:block; width:100%; height:300px; object-fit:cover; }
+  #ruinWrap .cap { position:absolute; left:20px; bottom:12px; font-size:30px; color:var(--ink); }
+  #q { left:770px; top:880px; font-family:DMSerif; font-size:300px; color:var(--rust); line-height:1; }
+  #alam { left:560px; top:1210px; }
+
+  /* pokok & kapak */
+  #tree { left:250px; top:420px; width:580px; height:560px; }
+  #crowd { left:0; top:0; width:1080px; height:1100px; }
+  #ring { left:200px; top:380px; width:680px; height:640px; }
+  #axe { left:640px; top:380px; width:330px; height:420px; transform-origin: 85% 92%; }
+
+  /* kad A-roll */
+  #card { left:70px; top:1010px; width:940px; height:800px; background:#fbf7ee; padding:14px; rotate:-1deg;
+          box-shadow:0 18px 40px rgba(0,0,0,.28); }
+  #card .vwrap { width:100%; height:100%; overflow:hidden; }
+  #aroll { width:100%; height:100%; object-fit:cover; object-position:50% 39%; display:block; }
+
+  /* subtitle: pita label typewriter */
+  #subs { left:60px; width:840px; top:1372px; height:80px; }
+  .sg { position:absolute; left:0; right:0; top:0; text-align:center; }
+  .sg span { display:inline-block; background:var(--ink); color:#f3ead6; font-weight:700; font-size:44px; padding:4px 10px; margin:0 -1px;
+             box-decoration-break:clone; }
+  .sg span.k { color:var(--gold); }
+
+  #end { left:90px; top:330px; width:820px; padding:40px 44px 46px; background:#f7f0de; rotate:-1.5deg; box-shadow:0 14px 30px rgba(0,0,0,.25); }
+  #end .k1 { font-size:34px; color:var(--rust); letter-spacing:.12em; }
+  #end .k2 { font-family:DMSerif; font-size:76px; line-height:1.05; color:var(--ink); margin-top:14px; }
+  #end .k2 b { font-weight:400; background:var(--rust); color:#fff8e8; padding:0 12px; }
+  #chips { left:0; top:0; width:1080px; height:1920px; pointer-events:none; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="42.1" data-width="1080" data-height="1920">
+ <div id="stage" class="clip" data-start="0" data-duration="42.1" data-track-index="0">
+  <div id="bg"></div>
+  <div id="grid" class="abs"></div>
+
+  <!-- PETA (torn paper) -->
+  <svg id="map" class="abs cut boil" style="--s:2" viewBox="0 0 900 620">
+    <defs>
+      <pattern id="ht" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><circle cx="4.5" cy="4.5" r="2.1" fill="#1f4f5b" opacity=".55"/></pattern>
+    </defs>
+    <path d="M14 30 L120 12 L260 26 L410 8 L560 24 L700 10 L886 28 L872 180 L890 330 L874 470 L888 604 L700 590 L540 610 L380 594 L220 612 L60 596 L10 610 L24 450 L8 300 L22 160 Z" fill="#e9dcbc" stroke="#cdbb93" stroke-width="2"/>
+    <!-- laut (kiri) -->
+    <path d="M24 160 Q120 210 150 300 T190 470 Q170 540 60 596 L10 610 L24 450 L8 300 Z" fill="url(#ht)"/>
+    <text x="40" y="330" font-family="Courier Prime" font-weight="700" font-size="22" fill="#1f4f5b" transform="rotate(-70 40 330)" letter-spacing="6">LAUT MERAH</text>
+    <!-- garis kontur -->
+    <g fill="none" stroke="#a8946a" stroke-width="2" opacity=".7">
+      <path d="M330 90 q60 -30 120 10 t130 0 t140 30"/><path d="M300 520 q80 -40 160 0 t170 -10"/><path d="M640 200 q50 40 0 90 t30 100"/>
+    </g>
+    <!-- laluan -->
+    <path id="route" d="M380 210 C 470 260, 520 330, 610 420" fill="none" stroke="#b8472a" stroke-width="7" stroke-dasharray="16 14" stroke-linecap="round"/>
+    <circle cx="380" cy="210" r="16" fill="#1d1b18"/><circle cx="610" cy="420" r="16" fill="#1d1b18"/>
+    <text x="250" y="170" font-family="Courier Prime" font-weight="700" font-size="40" fill="#1d1b18">HUDAIBIYAH</text>
+    <text x="560" y="485" font-family="Courier Prime" font-weight="700" font-size="40" fill="#1d1b18">MAKKAH</text>
+  </svg>
+  <div id="stampBR" class="abs stamp" style="left:300px;top:660px;rotate:-7deg">BAIATUR RIDWAN</div>
+  <div id="tagPokok" class="abs label paper boil" style="left:390px;top:236px;font-size:34px;--s:4">di bawah sepohon pokok</div>
+
+  <!-- FOTO tapak hari ini -->
+  <div id="ruinWrap" class="abs boil" style="--s:5"><img src="assets/ruin.jpg"/><div class="cap">Hudaibiyah · hari ini</div>
+    <div class="tape" style="left:-30px;top:-14px;rotate:-28deg"></div><div class="tape" style="right:-30px;top:-14px;rotate:24deg"></div></div>
+  <div id="q" class="abs cut boil" style="--s:6">?</div>
+  <div id="alam" class="abs label rust" style="rotate:-3deg">Allahu a'lam</div>
+
+  <!-- ORANG RAMAI = titik (bukan manusia) -->
+  <svg id="crowd" class="abs" viewBox="0 0 1080 1100"></svg>
+
+  <!-- POKOK (samurah/akasia) -->
+  <svg id="tree" class="abs cut" viewBox="0 0 580 560">
+    <defs>
+      <pattern id="ht2" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(20)"><rect width="8" height="8" fill="#2f4a2c"/><circle cx="4" cy="4" r="2.2" fill="#5f7a43"/></pattern>
+      <pattern id="bark" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#4a3424"/><path d="M0 0 L3 10 M6 0 L8 10" stroke="#2c1e14" stroke-width="2"/></pattern>
+    </defs>
+    <g id="stump"><path d="M262 470 L250 556 L330 556 L318 470 Z" fill="url(#bark)"/><ellipse cx="290" cy="470" rx="28" ry="8" fill="#d9c08f"/></g>
+    <g id="treeTop" style="transform-origin:290px 470px">
+      <path d="M268 470 C 270 400, 262 330, 228 270 L 200 220 L 222 214 L 252 262 C 266 240, 272 210, 270 180 L 292 180 C 294 220, 286 250, 278 280 C 290 300, 300 300, 330 250 L 360 205 L 380 214 L 344 272 C 320 320, 312 390, 314 470 Z" fill="url(#bark)" stroke="#1d1b18" stroke-width="3"/>
+      <g stroke="#1d1b18" stroke-width="3">
+        <path d="M60 210 C 30 160, 90 120, 150 130 C 170 80, 250 70, 300 100 C 350 60, 450 70, 470 120 C 540 110, 580 170, 540 210 C 500 240, 420 230, 380 222 C 330 240, 260 240, 220 226 C 170 240, 90 250, 60 210 Z" fill="url(#ht2)"/>
+        <path d="M120 150 C 180 110, 260 112, 300 132 C 360 100, 430 110, 470 140" fill="none" stroke="#b9c48a" stroke-width="4" opacity=".6"/>
+      </g>
+    </g>
+  </svg>
+  <svg id="ring" class="abs" viewBox="0 0 680 640"><path id="ringPath" d="M340 40 C 560 30, 660 200, 640 340 C 620 520, 430 610, 300 600 C 120 590, 30 470, 40 320 C 50 160, 180 60, 360 52" fill="none" stroke="#b8472a" stroke-width="12" stroke-linecap="round"/></svg>
+
+  <!-- KAPAK -->
+  <svg id="axe" class="abs cut" viewBox="0 0 330 420">
+    <defs><pattern id="ht3" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#6d6d6a"/><circle cx="3.5" cy="3.5" r="1.8" fill="#3a3a38"/></pattern></defs>
+    <rect x="140" y="60" width="34" height="360" rx="14" fill="#8a5a33" stroke="#1d1b18" stroke-width="4" transform="rotate(-18 157 240)"/>
+    <path d="M60 30 C 120 50, 170 60, 210 40 L 230 120 C 180 110, 130 130, 90 170 C 40 140, 30 80, 60 30 Z" fill="url(#ht3)" stroke="#1d1b18" stroke-width="5" transform="rotate(-18 157 240)"/>
+  </svg>
+  <svg id="chips" class="abs" viewBox="0 0 1080 1920"></svg>
+
+  <!-- label babak split -->
+  <div id="lbZaman" class="abs label" style="left:60px;top:250px">ZAMAN KHALIFAH KE-2</div>
+  <div id="lbUmar" class="abs label paper" style="left:60px;top:320px">Saidina Umar al-Khattab</div>
+  <div id="stMasih" class="abs stamp teal" style="left:560px;top:820px;rotate:-6deg">MASIH ADA ✓</div>
+  <div id="stSyirik" class="abs stamp" style="left:420px;top:280px;rotate:5deg">KESYIRIKAN</div>
+  <div id="lbPuja" class="abs label rust" style="left:80px;top:860px;font-size:52px;rotate:-3deg">PEMUJAAN ✕</div>
+  <div id="lbUmar2" class="abs label paper" style="left:60px;top:250px">Bila Saidina Umar tahu…</div>
+  <div id="stTegas" class="abs stamp" style="left:480px;top:600px;font-size:110px;border-width:10px;rotate:-8deg">TEGAS</div>
+
+  <!-- KAD A-ROLL -->
+  <div id="card" class="abs">
+    <div class="vwrap"><video id="aroll" class="clip" data-start="0" data-duration="42.1" data-track-index="1" src="assets/aroll.mp4" muted playsinline></video></div>
+    <div class="tape" style="left:-36px;top:-18px;rotate:-30deg"></div><div class="tape" style="right:-36px;top:-18px;rotate:28deg"></div>
+  </div>
+
+  <!-- HOOK -->
+  <div id="hook" class="abs">
+    <div class="l1">Kenapa Saidina Umar</div>
+    <div class="l2">TEBANG</div>
+    <div class="l3">pokok ni?</div>
+  </div>
+
+  <div id="subs" class="abs"></div>
+
+  <div id="end" class="abs">
+    <div class="k1">BERSAMBUNG · PART 2 →</div>
+    <div class="k2">Kenapa Nabi SAW <b>TAK</b> hantar Saidina Umar ke Makkah?</div>
+    <div class="tape" style="left:330px;top:-22px;rotate:-3deg"></div>
+  </div>
+ </div>
+</div>
+<script>
+const D = 42.1, $ = (q) => document.querySelector(q);
+const tl = gsap.timeline({ paused: true });
+const stage = $("#stage");
+tl.fromTo(stage, { "--t": 0 }, { "--t": D, duration: D, ease: "none" }, 0);
+
+// rawak deterministik
+let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+// ---------- keadaan awal ----------
+const hideAll = ["#map","#stampBR","#tagPokok","#ruinWrap","#q","#alam","#ring","#axe","#lbZaman","#lbUmar","#stMasih","#stSyirik","#lbPuja","#lbUmar2","#stTegas","#end","#card"];
+gsap.set(hideAll, { opacity: 0 });
+gsap.set("#ringPath", { strokeDasharray: 2200, strokeDashoffset: 2200 });
+
+const pop = (sel, at, from = { scale: 0.6, y: 40 }, d = 0.28) => tl.fromTo(sel, { opacity: 0, ...from }, { opacity: 1, scale: 1, x: 0, y: 0, duration: d, ease: "back.out(2.2)" }, at);
+const out = (sel, at, to = { y: -60 }, d = 0.22) => tl.to(sel, { opacity: 0, ...to, duration: d, ease: "power2.in" }, at);
+const slam = (sel, at) => { tl.fromTo(sel, { opacity: 0, scale: 2.4 }, { opacity: .92, scale: 1, duration: 0.16, ease: "power4.in" }, at); shake(at + 0.16, 10); };
+function shake(at, amt) { [1,-1,.6,-.4,0].forEach((k,i) => tl.to("#stage", { x: k*amt*(i%2?1:-.7), y: k*amt*.6, duration: .04, ease: "none" }, at + i*.04)); }
+
+// serpihan kayu
+const chips = $("#chips");
+function burst(at, cx, cy, n = 14) {
+  for (let i = 0; i < n; i++) {
+    const r = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    const w = 8 + rnd()*14; r.setAttribute("width", w); r.setAttribute("height", w*0.45); r.setAttribute("fill", i%3 ? "#8a5a33" : "#d9c08f");
+    r.setAttribute("x", cx); r.setAttribute("y", cy); chips.appendChild(r); gsap.set(r, { opacity: 0 });
+    const a = -Math.PI*(0.15 + rnd()*0.7), v = 120 + rnd()*220;
+    tl.fromTo(r, { opacity: 1, x: 0, y: 0, rotation: 0 }, { x: Math.cos(a)*v - 60, y: Math.sin(a)*v + 260, rotation: rnd()*540, duration: .7, ease: "power1.out", immediateRender: false }, at);
+    tl.to(r, { opacity: 0, duration: .15 }, at + .6);
+  }
+}
+
+// orang ramai = titik
+const crowd = $("#crowd"), dots = [];
+for (let i = 0; i < 46; i++) {
+  const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  c.setAttribute("r", 12 + rnd()*6); c.setAttribute("fill", i%7 ? "#1d1b18" : "#1f4f5b");
+  const a = rnd()*Math.PI*2, d0 = 560 + rnd()*200, d1 = 250 + rnd()*90;
+  c.setAttribute("cx", 540 + Math.cos(a)*d0); c.setAttribute("cy", 720 + Math.sin(a)*d0*.5);
+  crowd.appendChild(c); dots.push({ c, x: Math.cos(a)*(d1-d0), y: Math.sin(a)*(d1-d0)*.5 });
+}
+gsap.set(crowd, { opacity: 0 });
+
+// ---------- A: cold open 0–2.5 (penuh) ----------
+gsap.set("#tree", { x: 0, y: 380, scale: 1.15 });
+gsap.set("#axe", { x: 40, y: 520, rotation: 40 });
+pop("#hook .l1", 0.05, { y: 30 }); pop("#hook .l2", 0.2, { scale: 1.6 }); pop("#hook .l3", 0.38, { y: 30 });
+tl.fromTo("#tree", { opacity: 0, y: 520 }, { opacity: 1, y: 380, duration: .35, ease: "back.out(1.6)" }, 0.1);
+tl.fromTo("#axe", { opacity: 0, x: 420, rotation: 40 }, { opacity: 1, x: 40, rotation: 72, duration: .45, ease: "power2.out" }, 0.7);   // angkat
+tl.to("#axe", { rotation: -24, duration: .14, ease: "power4.in" }, 1.58);                        // hayun → kena 1.72
+burst(1.72, 545, 1270); shake(1.72, 14);
+tl.to("#axe", { rotation: -18, duration: .3, ease: "power1.out" }, 1.8);
+out("#hook", 2.45, { y: -80 }); out("#axe", 2.4, { x: 400 });
+tl.to("#tree", { x: -170, y: 230, scale: .5, duration: .45, ease: "power3.inOut" }, 2.45);
+
+// ---------- B: Baiatur Ridwan 2.5–12.2 (penuh, tutup jemaah) ----------
+pop("#map", 2.55, { y: 120, rotation: -6 }, .4);
+tl.fromTo("#route", { strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1.2, ease: "none" }, 2.9);
+slam("#stampBR", 3.7);
+pop("#tagPokok", 5.6, { x: 60 });
+tl.fromTo("#tree", { scale: .5 }, { scale: .6, duration: .25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 5.6);
+out("#tagPokok", 7.2, { x: 80 });
+tl.to(["#map","#stampBR","#tree"], { y: "-=170", duration: .45, ease: "power2.inOut" }, 7.25);
+pop("#ruinWrap", 7.3, { y: 300, rotation: 12 }, .4);
+pop("#q", 7.75, { scale: 2.5, rotation: -30 }, .3);
+pop("#alam", 8.95, { x: -40 });
+tl.to("#q", { rotation: 14, duration: .12, yoyo: true, repeat: 3, ease: "sine.inOut" }, 10.45);
+// keluar ke split
+out(["#map","#stampBR","#ruinWrap","#q","#alam"], 12.05, { y: -120 });
+tl.to("#tree", { x: 0, y: -10, scale: .95, duration: .5, ease: "power3.inOut" }, 12.1);
+
+// ---------- C: zaman Khalifah 12.3–17.9 ----------
+pop("#lbZaman", 12.75, { x: -60 });
+pop("#lbUmar", 14.2, { x: -60 });
+// kad A-roll naik (rakaman 12.3–14.5 = kamera pan ke jemaah → kad muncul selepas itu)
+tl.fromTo("#card", { opacity: 0, y: 900, rotation: 6 }, { opacity: 1, y: 0, rotation: 0, duration: .5, ease: "back.out(1.2)" }, 14.55);
+slam("#stMasih", 16.0);
+out(["#lbZaman","#lbUmar","#stMasih"], 17.85, { x: -80 });
+
+// ---------- D: kesyirikan 18.0–29.9 ----------
+tl.to(crowd, { opacity: 1, duration: .2 }, 18.0);
+dots.forEach((d, i) => tl.to(d.c, { x: d.x, y: d.y, duration: 2.6, ease: "power2.inOut" }, 18.1 + i*0.04));
+tl.to("#ring", { opacity: 1, duration: .05 }, 21.6);
+tl.to("#ringPath", { strokeDashoffset: 0, duration: .7, ease: "power2.inOut" }, 21.6);
+slam("#stSyirik", 22.35);
+dots.forEach((d, i) => tl.to(d.c, { scale: 1.25, transformOrigin: "50% 50%", duration: .25, yoyo: true, repeat: 1 }, 26.3 + (i%8)*.05));
+slam("#lbPuja", 27.9);
+out(["#ring","#stSyirik","#lbPuja"], 29.85, { y: -40 });
+dots.forEach((d) => tl.to(d.c, { x: d.x*-1.5, y: d.y*-1.5 + 300, opacity: 0, duration: .5, ease: "power2.in" }, 29.9));
+
+// ---------- E: Umar tebang 29.9–36.3 ----------
+pop("#lbUmar2", 31.4, { x: -60 });
+tl.fromTo("#axe", { opacity: 0, x: 420, y: 80, rotation: 40 }, { opacity: 1, x: 40, y: 140, rotation: 70, duration: .5, ease: "power2.out", immediateRender: false }, 33.0);
+tl.to("#axe", { rotation: 82, duration: .5, ease: "sine.inOut" }, 34.4);
+tl.to("#axe", { rotation: -24, duration: .14, ease: "power4.in" }, 35.02);   // kena 35.16
+burst(35.16, 545, 870, 18); shake(35.16, 16);
+tl.to("#treeTop", { rotation: -82, duration: .7, ease: "power3.in" }, 35.45);
+shake(36.15, 18); burst(36.15, 300, 900, 10);
+tl.to("#treeTop", { opacity: 0, duration: .3 }, 36.3);
+out(["#axe","#lbUmar2"], 36.4, { x: 300 });
+
+// ---------- F: insan yang tegas 36.3–40.6 ----------
+slam("#stTegas", 40.06);
+
+// ---------- G: penutup 40.6–42.1 ----------
+out(["#stTegas","#tree"], 40.62, { y: -60 });
+pop("#end", 40.7, { y: 120, rotation: 6 }, .45);
+
+// ---------- subtitle ----------
+const subs = $("#subs");
+(window.SUBS || []).forEach((g) => {
+  const el = document.createElement("div"); el.className = "sg";
+  el.innerHTML = g.w.map(([w,,k]) => `<span class="${k ? "k" : ""}">${w}</span>`).join(" ");
+  subs.appendChild(el); gsap.set(el, { opacity: 0 });
+  tl.fromTo(el, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .1 }, g.s);
+  tl.set(el, { opacity: 0 }, Math.min(g.e + 0.12, D));
+});
+
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
