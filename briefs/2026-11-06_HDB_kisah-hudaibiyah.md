@@ -127,3 +127,4 @@
   - Sir sahkan: "amalan pemujaan" ✓, guna fail WhatsApp dulu ✓, pace okay ✓, tulis "SAW" ✓.
   - **Prinsip untuk Part 2:** ustaz sentiasa nampak (penuh skrin di awal, kemudian kad). Animasi hanya di bahagian atas.
 - **Draf v3 Part 1** (`HDB01_draf_v3.mp4`): komen Sir, "subtitle tutup muka ustaz". Subtitle dialih ke y 966 (sempadan antara animasi dan kad), jadi tak bertindih dengan muka. Masih dalam safe zone.
+- **Draf v4 Part 1** (`HDB01_draf_v4.mp4`): komen Sir, "subtitle terlalu tinggi, guna ruang atas kepala ustaz". Subtitle dialih ke y 1040 (dalam kad, ruang langit atas kepala). Label "Hudaibiyah · hari ini" dialih ke bawah kad.
