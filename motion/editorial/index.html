@@ -67,6 +67,11 @@
       /* chat story */
       .s-chat .title { top: 300px; }
       .s-chat .tl { margin-bottom: 14px; }
+      /* chat: headline besar di luar bubble (k:"head", [kata] = keyword hijau) */
+      .s-chat .hd { display: block; font-weight: 800; font-size: 74px; line-height: 1.04; color: #fff; text-transform: uppercase; margin: 6px 0 10px;
+        text-shadow: 0 6px 24px rgba(0,0,0,.6); white-space: normal; }
+      .s-chat .hd .w { display: inline-block; margin-right: .22em; white-space: nowrap; }
+      .s-chat .hd .w.key { color: var(--ink); background: var(--green); padding: 0 14px; border-radius: 12px; text-shadow: none; }
       .bub { display: inline-block; position: relative; padding: 16px 26px; border-radius: 34px 34px 34px 8px; background: #fff; color: var(--night);
         font-weight: 800; font-size: 54px; box-shadow: 0 6px 18px rgba(0,0,0,.35); transform-origin: 0% 100%; white-space: nowrap; }
       .bub.small { font-weight: 600; font-size: 38px; padding: 12px 22px; }
@@ -218,6 +223,21 @@
         },
         chat(g, box) {
           g.lines.forEach((line) => {
+            if (line.every((t) => t.k === "head")) {
+              // [kata kunci] dalam kurungan → kotak hijau
+              const txt = line.map((t) => t.text).join(" ");
+              const hd = put(`<div class="hd"></div>`, box);
+              const parts = txt.match(/\[[^\]]+\]|\S+/g) || [];
+              const ws = parts.map((p) => {
+                const key = p.startsWith("[");
+                return put(`<span class="w ${key ? "key" : ""}">${key ? p.slice(1, -1) : p}</span>`, hd);
+              });
+              // muat dalam safe zone: kecilkan kalau ada perkataan/keyword lebih 840px
+              const widest = Math.max(...ws.map((x) => x.offsetWidth));
+              if (widest > 840) hd.style.fontSize = Math.floor(74 * 820 / widest) + "px";
+              tl.fromTo(ws, { opacity: 0, y: 30, scale: 1.3 }, { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: "back.out(2.6)", stagger: 0.07 }, line[0].t);
+              return;
+            }
             const isOut = line.some((t) => t.k === "box");
             const isSmall = line.every((t) => t.k === "script");
             const text = line.map((t) => t.text).join(" ");

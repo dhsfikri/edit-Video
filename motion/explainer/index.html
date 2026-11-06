@@ -4,7 +4,7 @@
   Latar hijau gelap · muka Sir dalam bulatan kiri-atas (klip video, ikut muka) · tajuk (tulisan tangan + kotak putih)
   · mockup chat GENERIK di tengah (bukan rupa/logo app sebenar).
   Variables:
-    scene  : "salah" | "betul"  (atau tambah babak baru dalam SCENES di bawah)
+    scene  : "salah" | "betul" | "harga_salah" | "harga_betul"  (atau tambah babak baru dalam SCENES di bawah)
     dur    : durasi (s)
     face   : fail klip muka dalam assets/ (dari pipeline/facecrop.py)
   Render: npx hyperframes render --variables '{"scene":"salah","dur":2.65,"face":"assets/face_salah.mp4"}' -f 30 -o out.mp4
@@ -73,7 +73,7 @@
           <div id="msgs"></div><div id="input">Tulis mesej…</div></div>
         <div id="stamp"></div>
       </div>
-      <div id="faceWrap"><video id="face" src="assets/face_salah.mp4" class="clip" data-start="0" data-duration="6" data-track-index="1" muted playsinline></video></div>
+      <div id="faceWrap"><video id="face" src="assets/face.mp4" class="clip" data-start="0" data-duration="6" data-track-index="1" muted playsinline></video></div>
     </div>
     <script>
       const V = window.__hyperframes.getVariables();
@@ -93,6 +93,18 @@
           msgs: [[0.2, "c", "Nanti saya fikir dulu ya 🙏"], [0.65, "s", "Saya cadangkan Pakej A — paling sesuai untuk akak 👍"],
                  [1.25, "s", "Saya hantar link bayaran sekarang ya?"], [1.8, "typing"], [2.1, "c", "Ok boleh ✅"]],
           stampAt: 2.35,
+        },
+        // C0106 OBJECTION KILLER #01 — customer tanya harga awal-awal
+        harga_salah: {
+          script: "selalu jadi…", box: "SALAH ❌", stamp: ["no", "❌ TERUS BAGI HARGA"],
+          msgs: [[0.15, "c", "Sis, harga berapa? 👀"], [0.55, "s", "RM299 sis 😊"], [0.95, "typing"], [1.25, "c", "Ok… nanti saya fikir dulu ya 🙏"]],
+          stampAt: 1.7,
+        },
+        harga_betul: {
+          script: "cuba macam ni", box: "BETUL ✅", stamp: ["ok", "✅ DIA PILIH SENDIRI"],
+          msgs: [[0.15, "c", "Sis, harga berapa? 👀"], [0.6, "s", "Sebelum saya bagi harga spesial hari ni, puan dah confirm ke nak pakej mana? 😊"],
+                 [1.75, "typing"], [2.1, "c", "Pakej B sis, untuk 2 orang 🙌"], [2.7, "sys", "📌 salin ayat ni"]],
+          stampAt: 3.0,
         },
       };
       const sc = SCENES[V.scene] || SCENES.salah;

@@ -43,6 +43,10 @@ cd motion/broll-mag && npx hyperframes render --variables '{"scene":"produk","du
 Masukkan dalam `data.js` → `"broll": [{"src", "start", "dur"}]` dan letak `transitions` pada sempadan B-roll (wipe).
 Tambah babak baru: entri baru dalam `SCENES` (label, kick, words [[teks, keyword?]], build()).
 
+## Nota teknikal B-roll (muka)
+Template `motion/explainer/` & `motion/broll-mag/` rujuk **`assets/face.mp4`** secara tetap (HyperFrames baca src dari HTML). Sebelum render: `cp assets/face_<babak>.mp4 assets/face.mp4` (fail ni di-gitignore).
+Gaya CHAT: token tajuk `k:"head"` = headline besar luar bubble, `[kata]` = keyword kotak hijau (auto-kecil supaya ≤ 840px). Bunyi tambahan: `sfx_extra: [{file, at, vol}]` (cth `sfx_ding.wav`).
+
 ## Peraturan berasaskan data (`docs/prestasi-tiktok.md`)
 > Dikemas kini setiap kali ada data baru. Data 1 (28 Okt–3 Nov): like ×8.7 selepas gaya baru, **komen 0 selama 7 hari**, share rendah.
 

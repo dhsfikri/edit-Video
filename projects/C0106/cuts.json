@@ -1,0 +1,53 @@
+{
+ "segments": [
+  {
+   "note": "H HOOK: awal-awal orang dah tanya pasal harga. nak buat apa? nak bagi harga ke? nak bagi produk?",
+   "start": 0.77,
+   "end": 5.81,
+   "zoom": 1.2,
+   "cy": 0.38,
+   "zoom_to": 1.2
+  },
+  {
+   "note": "I TWIST: mereka ni bukannya terus nak harga, mereka dah survey produk kita dah lama",
+   "start": 13.455,
+   "end": 16.93,
+   "zoom": 1.2,
+   "cy": 0.38,
+   "zoom_to": 1.2
+  },
+  {
+   "note": "L so just layan je lah",
+   "start": 17.64,
+   "end": 18.99,
+   "zoom": 1.2,
+   "cy": 0.38,
+   "zoom_to": 1.2
+  },
+  {
+   "note": "S apa nak kena buat? step pertama [B-roll salah] ... tanya soalan kepastian dulu",
+   "start": 18.99,
+   "end": 26.67,
+   "zoom": 1.2,
+   "cy": 0.38,
+   "zoom_to": 1.2
+  },
+  {
+   "note": "Q soalan dia macam ni [B-roll betul]: sebelum saya bagi harga spesial hari ni, puan dah confirm ke nak pakej mana?",
+   "start": 27.59,
+   "end": 32.54,
+   "zoom": 1.2,
+   "cy": 0.38,
+   "zoom_to": 1.2
+  },
+  {
+   "note": "C kalau nak next step, komen part 2. saya share lepas tanya soalan nak kena buat apa",
+   "start": 34.62,
+   "end": 39.865,
+   "zoom": 1.2,
+   "cy": 0.38,
+   "zoom_to": 1.2
+  }
+ ],
+ "duration": 27.74
+}

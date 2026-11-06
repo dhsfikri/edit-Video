@@ -70,6 +70,8 @@ if S["sfx"].get("title"):
     for g in E.get("titles", [])[1:] if a.style != "chat" else E.get("titles", []):
         for line in g["lines"] if a.style == "chat" else g["lines"][:1]:
             sfx.append({"src": str(MOTION / "assets" / S["sfx"]["title"]), "at": line[0]["t"], "vol": vol})
+for x in E.get("sfx_extra", []):  # [{file, at, vol}] bunyi tambahan (cth ding notifikasi), fail dalam motion/editorial/assets
+    sfx.append({"src": str(MOTION / "assets" / x["file"]), "at": x["at"], "vol": x.get("vol", 0.5)})
 comp = {"base": str(out / "base.mov"), "out": str(out / f"{vid}_{a.style}.mp4"), "fps": fps, "overlay": str(ov), "sfx": sfx}
 # Kad kaca (magazine): baca geometri kad dari template untuk blur sebenar
 glass = json.loads(subprocess.check_output(["node", str(ROOT / "pipeline" / "probe_glass.js"), str(MOTION), a.style]).decode() or "[]")

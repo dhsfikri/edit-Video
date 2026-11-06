@@ -1,0 +1,56 @@
+{
+  "source": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/raw-C0106/C0106.MP4",
+  "transcript": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/raw-C0106/transcript.json",
+  "workdir": "/tmp/claude-0/-home-user-edit-Video/aedd4e3a-5fe8-5ff2-ac60-d7c345fdc40d/scratchpad/C0106",
+  "rotate": "cw",
+  "fps": 50,
+  "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+  "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "corrections": {
+    "application": "pakej"
+  },
+  "segments": [
+    {
+      "note": "H HOOK: awal-awal orang dah tanya pasal harga. nak buat apa? nak bagi harga ke? nak bagi produk?",
+      "start": 0.75,
+      "end": 5.85,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "I TWIST: mereka ni bukannya terus nak harga, mereka dah survey produk kita dah lama",
+      "start": 13.43,
+      "end": 17.0,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "L so just layan je lah",
+      "start": 17.62,
+      "end": 18.95,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "S apa nak kena buat? step pertama [B-roll salah] ... tanya soalan kepastian dulu",
+      "start": 18.98,
+      "end": 26.55,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "Q soalan dia macam ni [B-roll betul]: sebelum saya bagi harga spesial hari ni, puan dah confirm ke nak pakej mana?",
+      "start": 27.55,
+      "end": 32.55,
+      "zoom": 1.2,
+      "cy": 0.38
+    },
+    {
+      "note": "C kalau nak next step, komen part 2. saya share lepas tanya soalan nak kena buat apa",
+      "start": 34.62,
+      "end": 39.75,
+      "zoom": 1.2,
+      "cy": 0.38
+    }
+  ]
+}
