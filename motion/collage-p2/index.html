@@ -1,0 +1,256 @@
+<!doctype html>
+<!--
+  COLLAGE (gaya kertas lama / "Vox-style") — template KLIEN UMRAH (bukan brand Sir Dharma).
+  Satu composition penuh 1080x1920: latar kertas + babak collage (atas) + kad A-roll (bawah) + subtitle.
+  Data: subs.js (window.SUBS) · A-roll: assets/aroll.mp4 (proxy dari base.mov, dengan frame akhir ditahan).
+  Tiada gambar Nabi SAW / sahabat — simbol & teks sahaja.
+  Projek: HDB02 "Kenapa Nabi SAW TAK hantar Saidina Umar?" (salinan template motion/collage)
+-->
+<html lang="ms" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<script src="subs.js"></script>
+<style>
+  @font-face { font-family: "DMSerif"; src: url("assets/dm-serif-display-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Courier Prime"; font-weight: 700; src: url("assets/courier-prime-latin-700-normal.woff2") format("woff2"); }
+  @property --t { syntax: "<number>"; inherits: true; initial-value: 0; }
+  :root { --paper:#ece3cf; --ink:#1d1b18; --rust:#b8472a; --gold:#e0ad3e; --teal:#1f4f5b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1080px; height:1920px; overflow:hidden; background:var(--paper); }
+  #root { position:relative; width:1080px; height:1920px; overflow:hidden; font-family:"Courier Prime", monospace; }
+  #stage { position:absolute; inset:0; --f: round(down, calc(var(--t) * 12), 1); }
+  .abs { position:absolute; }
+  /* stop-motion "boil": gegar kecil 12fps, deterministik ikut masa */
+  .boil { translate: calc(sin(var(--f) * 7.13 + var(--s, 1)) * 2.2px) calc(cos(var(--f) * 5.31 + var(--s, 1)) * 2.2px);
+          rotate: calc(sin(var(--f) * 3.77 + var(--s, 1)) * 0.7deg); }
+  .cut { filter: drop-shadow(0 0 0 #fff) drop-shadow(5px 7px 0 rgba(0,0,0,.18)) drop-shadow(0 10px 18px rgba(0,0,0,.22)); }
+  .tape { position:absolute; width:150px; height:44px; background:rgba(235,226,196,.78); box-shadow:0 2px 6px rgba(0,0,0,.15);
+          clip-path: polygon(3% 0,97% 4%,100% 50%,96% 100%,2% 96%,0 50%); }
+
+  #bg { position:absolute; inset:0; background:url(assets/paper.jpg) center/cover; }
+  #grid { left:-30px; top:150px; width:1140px; height:900px; background:url(assets/grid.png); rotate:-2deg; opacity:.9;
+          clip-path: polygon(0 3%,8% 0,22% 2%,40% 0,61% 3%,80% 0,100% 2%,100% 97%,85% 100%,63% 97%,41% 100%,20% 97%,0 100%); }
+
+  /* hook title */
+  #hook { left:60px; top:250px; width:840px; }
+  #hook .l1, #hook .l3 { display:inline-block; background:#f3ead6; padding:6px 16px 10px; box-shadow:5px 6px 0 rgba(0,0,0,.18); }
+  #hook .l1 { font-family:DMSerif; font-size:72px; line-height:1; color:var(--ink); }
+  #hook .l2 { display:inline-block; margin:10px 0 6px -6px; font-family:DMSerif; font-size:150px; line-height:1; color:#fff8e8;
+              background:var(--rust); padding:4px 26px 10px; rotate:-2deg; box-shadow:6px 8px 0 rgba(0,0,0,.18); }
+  #hook .l3 { font-family:DMSerif; font-size:72px; line-height:1; color:var(--ink); }
+  #hook .l2 { display:block; width:max-content; }
+
+  .label { display:inline-block; background:var(--ink); color:#f3ead6; font-weight:700; font-size:40px; letter-spacing:.04em;
+           padding:8px 18px; white-space:nowrap; box-shadow:4px 5px 0 rgba(0,0,0,.18); }
+  .label.paper { background:#f7f0de; color:var(--ink); border:2px solid var(--ink); }
+  .label.rust { background:var(--rust); color:#fff8e8; }
+  .stamp { font-family:"Courier Prime"; font-weight:700; color:var(--rust); border:7px solid var(--rust); border-radius:10px;
+           padding:6px 22px; font-size:62px; letter-spacing:.06em; white-space:nowrap; mix-blend-mode:multiply; opacity:.92; }
+  .stamp.teal { color:var(--teal); border-color:var(--teal); }
+
+  /* peta */
+  #map { left:90px; top:300px; width:900px; height:620px; }
+  #ruinWrap { left:150px; top:960px; width:640px; padding:14px 14px 56px; background:#f7f2e6; rotate:2.5deg; }
+  #ruinWrap img { display:block; width:100%; height:300px; object-fit:cover; }
+  #ruinWrap .cap { position:absolute; left:20px; bottom:12px; font-size:30px; color:var(--ink); }
+  #q { left:770px; top:300px; font-family:DMSerif; font-size:300px; color:var(--rust); line-height:1; }
+  #alam { left:470px; top:880px; }
+
+  /* pokok & kapak */
+  #tree { left:250px; top:420px; width:580px; height:560px; }
+  #crowd { left:0; top:0; width:1080px; height:1100px; }
+  #ring { left:200px; top:380px; width:680px; height:640px; }
+  #axe { left:640px; top:380px; width:330px; height:420px; transform-origin: 85% 92%; }
+
+  /* kad A-roll */
+  #card { left:70px; top:1010px; width:940px; height:800px; background:#fbf7ee; padding:14px;
+          box-shadow:0 18px 40px rgba(0,0,0,.28); }
+  #card .vwrap { position:relative; width:100%; height:100%; overflow:hidden; }
+  #cardPhoto { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; }
+  #cardCap { position:absolute; left:24px; top:110px; opacity:0; }
+  #aroll { width:100%; height:100%; object-fit:cover; object-position:50% 39%; display:block; }
+
+  /* subtitle: pita label typewriter */
+  #subs { left:60px; width:840px; top:1040px; height:80px; }
+  .sg { position:absolute; left:0; right:0; top:0; text-align:center; white-space:nowrap; }
+  .sg span { display:inline-block; background:var(--ink); color:#f3ead6; font-weight:700; font-size:40px; padding:4px 9px; margin:0 -1px;
+             box-decoration-break:clone; }
+  .sg span.k { color:var(--gold); }
+
+  #end { left:90px; top:330px; width:820px; padding:40px 44px 46px; background:#f7f0de; rotate:-1.5deg; box-shadow:0 14px 30px rgba(0,0,0,.25); }
+  #end .k1 { font-size:34px; color:var(--rust); letter-spacing:.12em; }
+  #end .k2 { font-family:DMSerif; font-size:76px; line-height:1.05; color:var(--ink); margin-top:14px; }
+  #end .k2 b { font-weight:400; background:var(--rust); color:#fff8e8; padding:0 12px; }
+  #chips { left:0; top:0; width:1080px; height:1920px; pointer-events:none; }
+
+  /* Part 2: kad nama, petikan, skrol */
+  #env { left:250px; top:410px; width:150px; height:104px; }
+  .ncard { left:330px; top:380px; width:420px; padding:34px 36px 30px; background:#f7f0de; box-shadow:0 14px 28px rgba(0,0,0,.25); text-align:center; }
+  .ncard .nk { font-size:28px; letter-spacing:.3em; color:var(--rust); }
+  .ncard .nm { font-family:DMSerif; font-size:70px; line-height:1.05; color:var(--ink); margin-top:8px; }
+  .ncard .nt { font-size:30px; color:#5a5246; margin-top:4px; }
+  #cUmar { left:330px; top:380px; } #cUthman { left:510px; top:380px; }
+  .ncard .nm { font-size:60px; }
+  #stPilih { left:430px; top:660px; rotate:-6deg; }
+  #stTegas { left:150px; top:700px; rotate:-7deg; }
+  #stDiplo { left:520px; top:770px; rotate:-5deg; }
+  #lbNego { left:560px; top:680px; rotate:2deg; }
+  #arrow { left:600px; top:890px; }
+  #quote { left:70px; top:300px; width:830px; padding:36px 40px 40px; background:#f7f0de; box-shadow:0 14px 28px rgba(0,0,0,.25);
+           font-family:DMSerif; font-size:60px; line-height:1.1; color:var(--ink); }
+  #quote .qm { color:var(--rust); font-size:110px; line-height:0; vertical-align:-36px; margin-right:6px; }
+  #scroll { left:190px; top:560px; width:700px; height:260px; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="40.9" data-width="1080" data-height="1920">
+ <div id="stage" class="clip" data-start="0" data-duration="40.9" data-track-index="0">
+  <div id="bg"></div>
+  <div id="grid" class="abs"></div>
+
+  <!-- PETA Hudaibiyah → Makkah -->
+  <svg id="map" class="abs cut boil" style="--s:2" viewBox="0 0 900 620">
+    <defs><pattern id="ht" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><circle cx="4.5" cy="4.5" r="2.1" fill="#1f4f5b" opacity=".55"/></pattern></defs>
+    <path d="M14 30 L120 12 L260 26 L410 8 L560 24 L700 10 L886 28 L872 180 L890 330 L874 470 L888 604 L700 590 L540 610 L380 594 L220 612 L60 596 L10 610 L24 450 L8 300 L22 160 Z" fill="#e9dcbc" stroke="#cdbb93" stroke-width="2"/>
+    <path d="M24 160 Q120 210 150 300 T190 470 Q170 540 60 596 L10 610 L24 450 L8 300 Z" fill="url(#ht)"/>
+    <text x="40" y="330" font-family="Courier Prime" font-weight="700" font-size="22" fill="#1f4f5b" transform="rotate(-70 40 330)" letter-spacing="6">LAUT MERAH</text>
+    <g fill="none" stroke="#a8946a" stroke-width="2" opacity=".7"><path d="M330 90 q60 -30 120 10 t130 0 t140 30"/><path d="M300 520 q80 -40 160 0 t170 -10"/><path d="M640 200 q50 40 0 90 t30 100"/></g>
+    <path id="route" d="M300 200 C 420 260, 520 330, 650 430" fill="none" stroke="#b8472a" stroke-width="7" stroke-dasharray="16 14" stroke-linecap="round"/>
+    <circle cx="300" cy="200" r="16" fill="#1d1b18"/><circle cx="650" cy="430" r="16" fill="#1d1b18"/>
+    <text x="170" y="160" font-family="Courier Prime" font-weight="700" font-size="40" fill="#1d1b18">HUDAIBIYAH</text>
+    <text x="590" y="500" font-family="Courier Prime" font-weight="700" font-size="40" fill="#1d1b18">MAKKAH</text>
+  </svg>
+  <!-- sampul surat utusan -->
+  <svg id="env" class="abs cut" viewBox="0 0 160 110"><rect x="4" y="4" width="152" height="102" rx="6" fill="#f7f0de" stroke="#1d1b18" stroke-width="4"/><path d="M6 8 L80 62 L154 8" fill="none" stroke="#1d1b18" stroke-width="4"/><circle cx="80" cy="64" r="14" fill="#b8472a"/></svg>
+  <div id="lbUtusan" class="abs label paper boil" style="left:120px;top:236px;--s:3">UTUSAN untuk berunding</div>
+  <div id="stQuraisy" class="abs stamp" style="left:380px;top:820px;rotate:-5deg;font-size:52px">QURAISY · MAKKAH</div>
+
+  <!-- KAD NAMA (teks sahaja, tiada gambar) -->
+  <div id="cUmar" class="abs ncard boil" style="--s:4"><div class="nk">SAHABAT</div><div class="nm">Saidina Umar</div><div class="nt">al-Khattab</div><div class="tape" style="left:110px;top:-22px;rotate:-4deg"></div></div>
+  <div id="cUthman" class="abs ncard boil" style="--s:5"><div class="nk">SAHABAT</div><div class="nm">Saidina Uthman</div><div class="nt">bin Affan</div><div class="tape" style="left:110px;top:-22px;rotate:5deg"></div></div>
+  <div id="stPilih" class="abs stamp teal" style="font-size:44px">DIPILIH ✓</div>
+  <div id="stTegas" class="abs stamp" style="font-size:52px">TEGAS</div>
+  <div id="stDiplo" class="abs stamp teal" style="font-size:48px">DIPLOMATIK ✓</div>
+  <div id="lbNego" class="abs label rust" style="font-size:34px">pandai berunding</div>
+
+  <div id="q" class="abs cut boil" style="--s:6">?</div>
+
+  <!-- petikan -->
+  <div id="quote" class="abs boil" style="--s:7"><span class="qm">“</span>Ya Rasulullah, kalau hantar aku…<div class="tape" style="left:300px;top:-22px;rotate:-3deg"></div></div>
+
+  <!-- skrol RUNDINGAN (koyak dua) -->
+  <svg id="scroll" class="abs cut" viewBox="0 0 700 260">
+    <g id="scL"><path d="M20 30 L360 30 L340 70 L370 110 L335 150 L365 190 L345 230 L20 230 Z" fill="#efe2bf" stroke="#1d1b18" stroke-width="4"/><rect x="6" y="20" width="34" height="220" rx="16" fill="#c9b07a" stroke="#1d1b18" stroke-width="4"/>
+      <text x="70" y="148" font-family="DMSerif" font-size="66" fill="#1d1b18">RUNDI</text></g>
+    <g id="scR"><path d="M360 30 L680 30 L680 230 L345 230 L365 190 L335 150 L370 110 L340 70 Z" fill="#efe2bf" stroke="#1d1b18" stroke-width="4"/><rect x="660" y="20" width="34" height="220" rx="16" fill="#c9b07a" stroke="#1d1b18" stroke-width="4"/>
+      <text x="372" y="148" font-family="DMSerif" font-size="66" fill="#1d1b18">NGAN</text></g>
+  </svg>
+  <div id="stPerang" class="abs stamp" style="left:220px;top:850px;rotate:-6deg;font-size:70px;border-width:9px">PEPERANGAN ✕</div>
+
+  <div id="arrow" class="abs label" style="font-size:36px">→ ke MAKKAH</div>
+  <div id="loc" class="abs label paper" style="left:60px;top:250px">📍 Hudaibiyah</div>
+
+  <!-- KAD A-ROLL -->
+  <div id="card" class="abs">
+    <div class="vwrap"><video id="aroll" class="clip" data-start="0" data-duration="40.9" data-track-index="1" src="assets/aroll.mp4" muted playsinline></video></div>
+    <div class="tape" style="left:-36px;top:-18px;rotate:-30deg"></div><div class="tape" style="right:-36px;top:-18px;rotate:28deg"></div>
+  </div>
+
+  <div id="hook" class="abs">
+    <div class="l1">Kenapa Nabi SAW</div>
+    <div class="l2">TAK</div>
+    <div class="l3">hantar Saidina Umar?</div>
+  </div>
+
+  <div id="subs" class="abs"></div>
+
+  <div id="end" class="abs">
+    <div class="k1">NANTIKAN DALAM BAS…</div>
+    <div class="k2">Follow untuk <b>kisah ziarah</b> seterusnya</div>
+    <div class="tape" style="left:330px;top:-22px;rotate:-3deg"></div>
+  </div>
+ </div>
+</div>
+<script>
+const D = 40.9, $ = (q) => document.querySelector(q);
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#stage", { "--t": 0 }, { "--t": D, duration: D, ease: "none" }, 0);
+
+gsap.set(["#map","#env","#lbUtusan","#stQuraisy","#cUmar","#cUthman","#stPilih","#stTegas","#stDiplo","#lbNego","#q","#quote","#scroll","#stPerang","#arrow","#loc","#end"], { opacity: 0 });
+const pop = (sel, at, from = { scale: 0.6, y: 40 }, d = 0.28) => tl.fromTo(sel, { opacity: 0, ...from }, { opacity: 1, scale: 1, x: 0, y: 0, rotation: 0, duration: d, ease: "back.out(2.2)", immediateRender: false }, at);
+const out = (sel, at, to = { y: -60 }, d = 0.22) => tl.to(sel, { opacity: 0, ...to, duration: d, ease: "power2.in" }, at);
+const slam = (sel, at) => { tl.fromTo(sel, { opacity: 0, scale: 2.4 }, { opacity: .92, scale: 1, duration: 0.16, ease: "power4.in", immediateRender: false }, at); shake(at + 0.16, 10); };
+function shake(at, amt) { [1,-1,.6,-.4,0].forEach((k,i) => tl.to("#stage", { x: k*amt*(i%2?1:-.7), y: k*amt*.6, duration: .04, ease: "none" }, at + i*.04)); }
+
+// ---------- A: cold open 0–2.9 — USTAZ PENUH SKRIN + hook ----------
+gsap.set("#card", { opacity: 1, left: 0, top: 0, width: 1080, height: 1920, padding: 0, rotation: 0 });
+gsap.set("#aroll", { objectPosition: "50% 50%" });
+gsap.set("#card .tape", { opacity: 0 });
+pop("#hook .l1", 0.05, { y: 30 }); pop("#hook .l2", 0.2, { scale: 1.6 }); pop("#hook .l3", 0.38, { y: 30 });
+shake(2.34, 12);                                                   // "peperangan"
+out("#hook", 2.75, { y: -80 });
+tl.to("#card", { left: 70, top: 1010, width: 940, height: 800, padding: 14, rotation: -1, duration: .45, ease: "power3.inOut" }, 2.85);
+tl.to("#aroll", { objectPosition: "50% 39%", duration: .45, ease: "power3.inOut" }, 2.85);
+tl.to("#card .tape", { opacity: 1, duration: .2 }, 3.2);
+
+// ---------- B: utusan ke Quraisy 3.3–13.2 ----------
+pop("#map", 3.3, { y: 120, rotation: -6 }, .4);
+pop("#env", 5.65, { scale: 2 });                                   // "sahabat"
+pop("#lbUtusan", 6.4, { x: -60 });
+tl.fromTo("#route", { strokeDashoffset: 500 }, { strokeDashoffset: 0, duration: 1.6, ease: "none" }, 6.9);   // "berunding"
+tl.to("#env", { x: 330, y: 220, rotation: 12, duration: 1.6, ease: "power1.inOut" }, 6.9);
+slam("#stQuraisy", 9.3);                                           // "Quraisy"
+out(["#map","#env","#lbUtusan","#stQuraisy"], 11.25, { y: -120 });
+// "Nabi pilih Saidina Umar"
+pop("#cUmar", 11.5, { y: 200, rotation: -10 }, .4);
+slam("#stPilih", 12.6);
+
+// ---------- C: "Umar cakap apa?" + petikan 13.3–21.0 ----------
+out("#stPilih", 13.25, { x: 60 });
+out("#cUmar", 13.3, { x: -200 });
+pop("#q", 13.8, { scale: 2.5, rotation: -30 }, .3);
+out("#q", 14.6, { scale: .5 });
+tl.fromTo("#quote", { opacity: 0, y: 60, rotation: 4 }, { opacity: 1, y: 0, rotation: -1.5, duration: .35, ease: "back.out(1.8)", immediateRender: false }, 14.65);
+pop("#scroll", 18.4, { y: 80 }, .3);                               // "tak jadi rundingan"
+tl.to("#scL", { x: -70, y: 30, rotation: -12, transformOrigin: "50% 50%", duration: .35, ease: "power3.out" }, 20.12);   // koyak!
+tl.to("#scR", { x: 70, y: 40, rotation: 14, transformOrigin: "50% 50%", duration: .35, ease: "power3.out" }, 20.12);
+slam("#stPerang", 20.2);
+
+// ---------- D: Uthman diplomat 21.1–34.3 ----------
+out(["#quote","#scroll","#stPerang"], 21.1, { y: -80 });
+tl.fromTo("#cUmar", { opacity: 0, x: -400 }, { opacity: 1, x: -260, duration: .45, ease: "back.out(1.5)", immediateRender: false }, 21.2);
+slam("#stTegas", 21.7);
+pop("#cUthman", 24.7, { x: 300, rotation: 12 }, .4);               // "Saidina Uthman"
+pop("#lbNego", 27.75, { y: 30 });                                  // "pandai negotiate"
+slam("#stDiplo", 30.2);                                            // "Diplomatik"
+tl.to(["#cUmar","#stTegas"], { opacity: .45, duration: .3 }, 32.6);
+pop("#arrow", 33.5, { x: -60 });                                   // "hantarnya kat situ"
+
+// ---------- E: "nak tahu apa berlaku dekat sini?" 34.6–39.3 ----------
+out(["#cUmar","#cUthman","#stTegas","#stDiplo","#lbNego","#arrow"], 34.6, { y: -80 });
+pop("#loc", 35.3, { x: -60 });
+tl.set("#q", { left: 400, top: 380 }, 34.8);
+pop("#q", 37.0, { scale: 2.5, rotation: -30 }, .3);                // "sini?"
+tl.to("#q", { rotation: 14, duration: .12, yoyo: true, repeat: 3, ease: "sine.inOut" }, 38.0);
+
+// ---------- F: penutup 39.4–40.9 ----------
+out(["#q","#loc"], 39.35, { y: -60 });
+pop("#end", 39.45, { y: 120, rotation: 6 }, .45);
+
+// ---------- subtitle ----------
+const subs = $("#subs");
+(window.SUBS || []).forEach((g) => {
+  const el = document.createElement("div"); el.className = "sg";
+  el.innerHTML = g.w.map(([w,,k]) => `<span class="${k ? "k" : ""}">${w}</span>`).join(" ");
+  subs.appendChild(el); gsap.set(el, { opacity: 0 });
+  tl.fromTo(el, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .1, immediateRender: false }, g.s);
+  tl.set(el, { opacity: 0 }, Math.min(g.e + 0.12, D));
+});
+
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
