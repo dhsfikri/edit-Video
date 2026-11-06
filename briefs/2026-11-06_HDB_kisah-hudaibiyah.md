@@ -126,3 +126,4 @@
   - Bila rakaman pan ke jemaah (2.55–6.0s & 12.33–14.5s), kad tunjuk foto tapak halftone "Hudaibiyah · hari ini".
   - Sir sahkan: "amalan pemujaan" ✓, guna fail WhatsApp dulu ✓, pace okay ✓, tulis "SAW" ✓.
   - **Prinsip untuk Part 2:** ustaz sentiasa nampak (penuh skrin di awal, kemudian kad). Animasi hanya di bahagian atas.
+- **Draf v3 Part 1** (`HDB01_draf_v3.mp4`): komen Sir, "subtitle tutup muka ustaz". Subtitle dialih ke y 966 (sempadan antara animasi dan kad), jadi tak bertindih dengan muka. Masih dalam safe zone.
