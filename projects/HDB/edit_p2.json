@@ -1,0 +1,46 @@
+{
+  "source": "/tmp/claude-0/-home-user-edit-Video/3866b2e4-78e7-539a-aec9-3a94bcf1ec85/scratchpad/hdb_raw.mp4",
+  "transcript": "/tmp/claude-0/-home-user-edit-Video/3866b2e4-78e7-539a-aec9-3a94bcf1ec85/scratchpad/v2/words.json",
+  "workdir": "/tmp/claude-0/-home-user-edit-Video/3866b2e4-78e7-539a-aec9-3a94bcf1ec85/scratchpad/hdb02",
+  "rotate": "none",
+  "fps": 30,
+  "color": "eq=contrast=1.05:saturation=1.04:gamma=0.98,colorbalance=rm=0.03:bm=-0.03",
+  "audio_extra": "afftdn=nf=-25,highpass=f=110,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "segments": [
+    {
+      "note": "cold open: tak jadi rundingan, jadi peperangan",
+      "start": 99.65,
+      "end": 102.25
+    },
+    {
+      "note": "baginda nak hantar sahabat",
+      "start": 84.2,
+      "end": 87.3
+    },
+    {
+      "note": "berunding dengan Quraisy ... Umar cakap apa?",
+      "start": 87.8,
+      "end": 96.05
+    },
+    {
+      "note": "Umar: kalau hantar aku jadi peperangan",
+      "start": 96.45,
+      "end": 102.25
+    },
+    {
+      "note": "dipilih orang kedua iaitu Saidina Uthman",
+      "start": 108.7,
+      "end": 112.62
+    },
+    {
+      "note": "Uthman pandai negotiate, diplomatik",
+      "start": 113.1,
+      "end": 122.75
+    },
+    {
+      "note": "Nak tahu apa berlaku? Nantikan dalam bas",
+      "start": 123.15,
+      "end": 127.75
+    }
+  ]
+}
