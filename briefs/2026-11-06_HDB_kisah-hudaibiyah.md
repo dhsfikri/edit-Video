@@ -120,3 +120,9 @@
 - **Draf v1 Part 1** (`HDB01_draf_v1.mp4`, 42.1s): A-roll `projects/HDB/edit_p1.json`, subtitle `projects/HDB/subs_p1.py`, SFX `projects/HDB/mix_p1.json`.
   - Pembetulan subtitle: "baik ah rituan" → Baiatur Ridwan, "Allah alam mubisawab" → Allahu a'lam bissawab, "ibu nak katap" → al-Khattab, "ambil bermujaan" → **amalan pemujaan** (⚠️ perlu Sir/klien sahkan), "tepang" → tebang.
   - Kad A-roll muncul pada 14.55s (rakaman sebelum itu = kamera pan ke jemaah).
+- **Draf v2 Part 1** (`HDB01_draf_v2.mp4`): komen Sir, "kena mula dengan video ustaz, nanti jadi macam video animasi".
+  - 0–2.2s: ustaz **penuh skrin** + tajuk hook (jalur kertas supaya boleh dibaca). Kapak/pokok dibuang dari cold open.
+  - 2.2s: video ustaz mengecil jadi kad (split screen) dan **kekal sepanjang video**.
+  - Bila rakaman pan ke jemaah (2.55–6.0s & 12.33–14.5s), kad tunjuk foto tapak halftone "Hudaibiyah · hari ini".
+  - Sir sahkan: "amalan pemujaan" ✓, guna fail WhatsApp dulu ✓, pace okay ✓, tulis "SAW" ✓.
+  - **Prinsip untuk Part 2:** ustaz sentiasa nampak (penuh skrin di awal, kemudian kad). Animasi hanya di bahagian atas.

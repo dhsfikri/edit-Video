@@ -35,10 +35,12 @@
 
   /* hook title */
   #hook { left:60px; top:250px; width:840px; }
-  #hook .l1 { font-family:DMSerif; font-size:78px; line-height:1; color:var(--ink); }
+  #hook .l1, #hook .l3 { display:inline-block; background:#f3ead6; padding:6px 16px 10px; box-shadow:5px 6px 0 rgba(0,0,0,.18); }
+  #hook .l1 { font-family:DMSerif; font-size:72px; line-height:1; color:var(--ink); }
   #hook .l2 { display:inline-block; margin:10px 0 6px -6px; font-family:DMSerif; font-size:150px; line-height:1; color:#fff8e8;
               background:var(--rust); padding:4px 26px 10px; rotate:-2deg; box-shadow:6px 8px 0 rgba(0,0,0,.18); }
-  #hook .l3 { font-family:DMSerif; font-size:78px; line-height:1; color:var(--ink); }
+  #hook .l3 { font-family:DMSerif; font-size:72px; line-height:1; color:var(--ink); }
+  #hook .l2 { display:block; width:max-content; }
 
   .label { display:inline-block; background:var(--ink); color:#f3ead6; font-weight:700; font-size:40px; letter-spacing:.04em;
            padding:8px 18px; white-space:nowrap; box-shadow:4px 5px 0 rgba(0,0,0,.18); }
@@ -53,8 +55,8 @@
   #ruinWrap { left:150px; top:960px; width:640px; padding:14px 14px 56px; background:#f7f2e6; rotate:2.5deg; }
   #ruinWrap img { display:block; width:100%; height:300px; object-fit:cover; }
   #ruinWrap .cap { position:absolute; left:20px; bottom:12px; font-size:30px; color:var(--ink); }
-  #q { left:770px; top:880px; font-family:DMSerif; font-size:300px; color:var(--rust); line-height:1; }
-  #alam { left:560px; top:1210px; }
+  #q { left:770px; top:300px; font-family:DMSerif; font-size:300px; color:var(--rust); line-height:1; }
+  #alam { left:470px; top:880px; }
 
   /* pokok & kapak */
   #tree { left:250px; top:420px; width:580px; height:560px; }
@@ -63,9 +65,11 @@
   #axe { left:640px; top:380px; width:330px; height:420px; transform-origin: 85% 92%; }
 
   /* kad A-roll */
-  #card { left:70px; top:1010px; width:940px; height:800px; background:#fbf7ee; padding:14px; rotate:-1deg;
+  #card { left:70px; top:1010px; width:940px; height:800px; background:#fbf7ee; padding:14px;
           box-shadow:0 18px 40px rgba(0,0,0,.28); }
-  #card .vwrap { width:100%; height:100%; overflow:hidden; }
+  #card .vwrap { position:relative; width:100%; height:100%; overflow:hidden; }
+  #cardPhoto { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; }
+  #cardCap { position:absolute; left:24px; top:24px; opacity:0; }
   #aroll { width:100%; height:100%; object-fit:cover; object-position:50% 39%; display:block; }
 
   /* subtitle: pita label typewriter */
@@ -155,7 +159,7 @@
 
   <!-- KAD A-ROLL -->
   <div id="card" class="abs">
-    <div class="vwrap"><video id="aroll" class="clip" data-start="0" data-duration="42.1" data-track-index="1" src="assets/aroll.mp4" muted playsinline></video></div>
+    <div class="vwrap"><video id="aroll" class="clip" data-start="0" data-duration="42.1" data-track-index="1" src="assets/aroll.mp4" muted playsinline></video><img id="cardPhoto" src="assets/ruin.jpg"/><div id="cardCap" class="label paper">Hudaibiyah · hari ini</div></div>
     <div class="tape" style="left:-36px;top:-18px;rotate:-30deg"></div><div class="tape" style="right:-36px;top:-18px;rotate:28deg"></div>
   </div>
 
@@ -185,7 +189,7 @@ tl.fromTo(stage, { "--t": 0 }, { "--t": D, duration: D, ease: "none" }, 0);
 let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 
 // ---------- keadaan awal ----------
-const hideAll = ["#map","#stampBR","#tagPokok","#ruinWrap","#q","#alam","#ring","#axe","#lbZaman","#lbUmar","#stMasih","#stSyirik","#lbPuja","#lbUmar2","#stTegas","#end","#card"];
+const hideAll = ["#tree","#map","#stampBR","#tagPokok","#ruinWrap","#q","#alam","#ring","#axe","#lbZaman","#lbUmar","#stMasih","#stSyirik","#lbPuja","#lbUmar2","#stTegas","#end"];
 gsap.set(hideAll, { opacity: 0 });
 gsap.set("#ringPath", { strokeDasharray: 2200, strokeDashoffset: 2200 });
 
@@ -218,39 +222,43 @@ for (let i = 0; i < 46; i++) {
 }
 gsap.set(crowd, { opacity: 0 });
 
-// ---------- A: cold open 0–2.5 (penuh) ----------
-gsap.set("#tree", { x: 0, y: 380, scale: 1.15 });
-gsap.set("#axe", { x: 40, y: 520, rotation: 40 });
+// ---------- A: cold open 0–2.5 — USTAZ PENUH SKRIN + tajuk hook ----------
+// Video mesti buka dengan muka ustaz (tazkirah sebenar), animasi hanya sokongan.
+gsap.set("#tree", { x: -170, y: 230, scale: .5 });
+gsap.set("#card", { opacity: 1, left: 0, top: 0, width: 1080, height: 1920, padding: 0, rotation: 0 });
+gsap.set("#aroll", { objectPosition: "50% 50%" });
+gsap.set("#card .tape", { opacity: 0 });
 pop("#hook .l1", 0.05, { y: 30 }); pop("#hook .l2", 0.2, { scale: 1.6 }); pop("#hook .l3", 0.38, { y: 30 });
-tl.fromTo("#tree", { opacity: 0, y: 520 }, { opacity: 1, y: 380, duration: .35, ease: "back.out(1.6)" }, 0.1);
-tl.fromTo("#axe", { opacity: 0, x: 420, rotation: 40 }, { opacity: 1, x: 40, rotation: 72, duration: .45, ease: "power2.out" }, 0.7);   // angkat
-tl.to("#axe", { rotation: -24, duration: .14, ease: "power4.in" }, 1.58);                        // hayun → kena 1.72
-burst(1.72, 545, 1270); shake(1.72, 14);
-tl.to("#axe", { rotation: -18, duration: .3, ease: "power1.out" }, 1.8);
-out("#hook", 2.45, { y: -80 }); out("#axe", 2.4, { x: 400 });
-tl.to("#tree", { x: -170, y: 230, scale: .5, duration: .45, ease: "power3.inOut" }, 2.45);
+shake(1.72, 10);                                                   // "tebang"
+out("#hook", 2.15, { y: -80 });
+// ustaz mengecil jadi kad (split screen)
+tl.to("#card", { left: 70, top: 1010, width: 940, height: 800, padding: 14, rotation: -1, duration: .45, ease: "power3.inOut" }, 2.2);
+tl.to("#aroll", { objectPosition: "50% 39%", duration: .45, ease: "power3.inOut" }, 2.2);
+tl.to("#card .tape", { opacity: 1, duration: .2 }, 2.9);
+// rakaman 2.55–6.0 & 12.33–14.5 = kamera pan ke jemaah → kad tunjuk foto tapak (tutup jemaah)
+const photoOn = (a, b, z0, z1) => {
+  tl.set(["#cardPhoto","#cardCap"], { opacity: 1 }, a); tl.set(["#cardPhoto","#cardCap"], { opacity: 0 }, b);
+  tl.fromTo("#cardPhoto", { scale: z0 }, { scale: z1, duration: b - a, ease: "none", immediateRender: false }, a);
+};
+photoOn(2.55, 6.0, 1.0, 1.12); photoOn(12.33, 14.5, 1.15, 1.3);
 
-// ---------- B: Baiatur Ridwan 2.5–12.2 (penuh, tutup jemaah) ----------
-pop("#map", 2.55, { y: 120, rotation: -6 }, .4);
+// ---------- B: Baiatur Ridwan 2.5–12.2 (split) ----------
+pop("#map", 2.6, { y: 120, rotation: -6 }, .4);
+tl.fromTo("#tree", { opacity: 0, scale: .2 }, { opacity: 1, scale: .5, duration: .35, ease: "back.out(2)", immediateRender: false }, 3.0);
 tl.fromTo("#route", { strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1.2, ease: "none" }, 2.9);
 slam("#stampBR", 3.7);
 pop("#tagPokok", 5.6, { x: 60 });
 tl.fromTo("#tree", { scale: .5 }, { scale: .6, duration: .25, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 5.6);
 out("#tagPokok", 7.2, { x: 80 });
-tl.to(["#map","#stampBR","#tree"], { y: "-=170", duration: .45, ease: "power2.inOut" }, 7.25);
-pop("#ruinWrap", 7.3, { y: 300, rotation: 12 }, .4);
 pop("#q", 7.75, { scale: 2.5, rotation: -30 }, .3);
 pop("#alam", 8.95, { x: -40 });
 tl.to("#q", { rotation: 14, duration: .12, yoyo: true, repeat: 3, ease: "sine.inOut" }, 10.45);
-// keluar ke split
-out(["#map","#stampBR","#ruinWrap","#q","#alam"], 12.05, { y: -120 });
+out(["#map","#stampBR","#q","#alam"], 12.05, { y: -120 });
 tl.to("#tree", { x: 0, y: -10, scale: .95, duration: .5, ease: "power3.inOut" }, 12.1);
 
 // ---------- C: zaman Khalifah 12.3–17.9 ----------
 pop("#lbZaman", 12.75, { x: -60 });
 pop("#lbUmar", 14.2, { x: -60 });
-// kad A-roll naik (rakaman 12.3–14.5 = kamera pan ke jemaah → kad muncul selepas itu)
-tl.fromTo("#card", { opacity: 0, y: 900, rotation: 6 }, { opacity: 1, y: 0, rotation: 0, duration: .5, ease: "back.out(1.2)" }, 14.55);
 slam("#stMasih", 16.0);
 out(["#lbZaman","#lbUmar","#stMasih"], 17.85, { x: -80 });
 
