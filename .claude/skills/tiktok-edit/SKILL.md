@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.0 (2026-11-04)
+**Versi:** 1.1 (2026-11-10)
 **Changelog:**
+- 1.1 — Tambah bahagian **Jimat token** (diminta Sir) + nota teknikal dari C0175: B-roll gaya v2+ (`motion/pakej`, `motion/poin`), `build.py`, syot rapat, `hold` dalam compose.
 - 1.0 — Versi pertama, dari pengalaman C0029 (TIPS JUALAN #01) & C0296 (AYAT CLOSING #01).
 
 > Sebelum mula: baca `CLAUDE.md` dan `BRANDKIT.md`. Komunikasi dengan Sir dalam Bahasa Melayu santai tapi teliti.
@@ -21,6 +22,19 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 4. Hantar **draf** → Sir semak → **final** hanya selepas approve.
 5. Tiada janji hasil tanpa bukti. Mockup app **generik** (tiada logo/rupa WhatsApp/TikTok Shop sebenar). Tiada bukti bayaran/testimoni palsu.
 6. Commit & push setiap langkah penting ke branch kerja.
+
+---
+
+## Jimat token (WAJIB ikut — diminta Sir 2026-11-10)
+1. **Satu sesi = satu video.** Bila video siap (final + thumbnail + caption), cadangkan Sir mula sesi baru untuk video seterusnya. Semua kerja ada dalam repo.
+2. **Brief satu pusingan.** Semua soalan dalam SATU senarai bernombor, setiap satu dengan cadangan lalai. Minta Sir jawab sekali gus ("1: …, 2: …"). Kalau Sir kata "setuju/teruskan", guna semua cadangan lalai — jangan tanya semula.
+3. **Tiada contoh B-roll berasingan** bila gaya dah diluluskan (Gaya v2+ lulus pada C0175). Terus ke draf penuh. Contoh hanya untuk gaya BARU.
+4. **Guna semula template & skrip:** `motion/pakej`, `motion/poin`, `motion/explainer`, `projects/C0175/build.py` (salin & ubah cue). Jangan bina dari kosong.
+5. **Hadkan gambar semakan:** 1 contact sheet rakaman, 1 helaian semakan B-roll (semua babak digabung), 1–2 gambar QC safe zone sebelum hantar. Jangan `Read` gambar yang sama berulang; skala kecil (≤270px lebar setiap frame).
+6. **Kumpulkan pembetulan** sebelum render semula overlay/compose (render overlay ±3–4 min) — jangan render untuk setiap pembetulan kecil.
+7. **Transcribe sekali** setiap rakaman; semak potongan dengan satu transcribe `base.mov` selepas semua titik potong dilaras.
+8. **Final + thumbnail + caption dalam satu pusingan** selepas draf diluluskan. Revisi: minta Sir senaraikan SEMUA maklum balas dalam satu mesej.
+9. Output arahan panjang → `| tail -n` / `>/dev/null`. Balasan kepada Sir: ringkas, jadual untuk timeline, tiada ulang maklumat yang dah diberi.
 
 ---
 
@@ -80,6 +94,11 @@ Simpan JSON `{"segments":[{start,end,text,words:[{w,s,e}]}]}`. Cetak word timest
 2. Babak baru → tambah dalam `SCENES` (index.html): `script`, `box`, `stamp`, `msgs[[t,"c"|"s"|"sys"|"typing",teks]]`, `stampAt`.
 3. Render: `npx hyperframes render --variables '{"scene":"x","dur":D,"face":"assets/face_x.mp4"}' -f <fps> -q high -w 4 -o ex.mp4` → **trim** `ffmpeg -t D` (composition `data-duration` tetap; render lebih panjang).
 - Letak B-roll **semasa Sir bercakap** (bukan senyap).
+**Gaya v2+ (diluluskan C0175)** — ambil alih skrin penuh dengan sapuan hijau masuk/keluar, muka bulatan 330px, elemen masuk ±0.2s SEBELUM perkataan Sir, selang balik ke muka penuh untuk B-roll panjang (>8s), SFX whoosh/pop/tick (`motion/pakej/assets/`):
+- `motion/pakej/` — tangga 3 kad harga (cue: `cards`, `switches`, `note`).
+- `motion/poin/` — `scene: "offer"` (senarai semak ✓) · `"nama"` (carian + kad tempat). Babak baru → tambah di sini.
+- Klip `aroll_*`/`face_*` diambil dari **base.mov** (bukan rakaman asal) supaya sapuan sepadan; cue ditulis dalam masa sumber dan dipetakan melalui `cuts.json` — lihat `projects/C0175/build.py`.
+- B-roll mesti TAMAT sebelum titik sisipan iklan (frame beku diambil dari A-roll).
 **Animasi kedai/troli** — `motion/broll/` (`scene`: kupon/troli/kosong/selesai/konten).
 **Higgsfield (AI)** — hanya B-roll suasana, semak kredit & anggaran dalam brief dulu.
 
@@ -91,6 +110,7 @@ titles[{start,end,lines[[{t,text,k:"script"|"bold"|"box"}]]}],
 brackets[{start,end,box:[x,y,w,h]}], callouts[{t,end,x,y,text,kind:"ok"|"no"|"tag"}],
 cta{start,text}, words[{w,s,e}]
 ```
+- **Syot rapat** (kepala bermula y < 450 pada zoom 1.0): guna `zoom: 1.0` dan letak tajuk di BAWAH muka dengan `top` (cth 1000–1070) — tajuk kiri-atas akan tutup dahi/mata. `maxWords: 3` jika subtitle jadi 2 baris; `"b":1` pada perkataan untuk paksa kumpulan subtitle baru. Set `data-duration` overlay ≥ durasi video.
 - **Tajuk = headline:** muncul sekali gus (token selang 0.14s), **kekal lama**, TIDAK ikut suara. Hanya 2–3 tajuk sevideo: hook (0 → sebelum B-roll), poin utama, penutup (jawapan kepada hook → kesan loop).
 - **Bracket:** kotak muka dari OpenCV pada `base.mov` (median per segmen).
 - **Callout:** di bawah/tepi muka (y ±960–1120), template auto-clamp x ≤ 900.
@@ -104,7 +124,7 @@ Iklan 4s "Setup Team Sales A–Z" (telus). Disisip dengan **video dihentikan sek
 
 ## 9. Gabung — `pipeline/compose.py`
 `projects/<ID>/compose.json`: `base, out, fps, insert{at,dur,overlay?,sfx?}, broll[{src,start,dur}], overlay, sfx[{src,at,vol}]`.
-- **Tahan frame akhir 1s** untuk CTA: `insert: {"at": <durasi-0.05>, "dur": 1.0}`.
+- **Tahan frame akhir 1s** untuk CTA: `"hold": 1.0` (boleh digabung dengan `insert` iklan). Tanpa iklan: `insert: {"at": <durasi-0.05>, "dur": 1.0}` pun boleh.
 - Bunyi signature: `motion/intro/assets/signature.wav` @0.03, vol 0.4.
 - Audio akhir: -14 LUFS, peak ≤ -2 dB (alimiter 0.79).
 

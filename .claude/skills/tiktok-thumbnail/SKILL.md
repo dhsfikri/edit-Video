@@ -35,6 +35,7 @@ ffmpeg -v error -y $(for t in $T; do echo -i c_$t.png; done) -filter_complex hst
 - **Satu** `[keyword]` (kotak kuning).
 - `kicker`: tulisan tangan pendek (boleh kosong).
 - `callout.kind`: `ok` (✓ hijau) atau `no` (✕ hitam).
+- **Syot rapat** (muka dah tinggi dalam frame): tambah `"allowDown": true` supaya gambar boleh turun ke `faceY`; anjak muka ke kiri (besarkan `fx`) supaya callout (kanan, y 1320) tak tutup mata. Cari muka dengan OpenCV, jangan anggar.
 - `scale`/`faceY`: muka besar, pusat ~y 1290. Rakaman lebar (orang kecil) → `scale` 1.5–1.6 (akan sedikit lembut).
 
 ### 3. Render & semak
