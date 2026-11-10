@@ -40,7 +40,10 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
   - `05 SFX` (1AhUahjvZgEOKhm1Pf1BC6Faj5ylIasKv) · `06 Muzik` (1dTkEF8cMVYXLo9HkF3Jop94-k951nXwe)
 - `Folder Video/Material` (id 1ZqG_d_rPEAygS5_N_vtjalDfJdoFHdCX) — bahan khusus per video dari Sir:
   - `01 Screenshot Chat` (1CDqlCWNpp3c3G_t15nP2Fs4hBOXLF1zF) · `02 Bukti & Testimoni` (1qtLaKQaEuNl5Jp6mB8mG7cap6F6PEYxH)
-  - `03 Skrip & Bank Ayat` (125WjwLwMoxc0FEZ2MR_9yc65MnpNqDAK) · `04 Rujukan Video` (1WkXi5i1Pwe425k4kZp-gjJ7koWva0nhj)
+  - `03 Skrip & Bank Ayat` (125WjwLwMoxc0FEZ2MR_9yc65MnpNqDAK)
+- `Folder Video/Reference & Inspo` (id 1WkXi5i1Pwe425k4kZp-gjJ7koWva0nhj) — contoh luar yang Sir suka (rujukan gaya, BUKAN untuk disalin):
+  - `01 Hook` (1i3MygwWVGtld-yT7-SxjwKsxgwVL9li8) · `02 Gaya Editing` (1npfRDrhjC0qA6YWdWjNrSYebAzA-dORW)
+  - `03 Thumbnail & Cover` (1DIL10ULMnCBzf7EuFz3haH2ThZP4pzUf) · `04 Idea Konten` (1WxV2vGtDYMrccLCEUWIPy81zSXoa5dGc)
 - `Folder Video/Edited` (id 1XQvZGEOJpoDoe7yKeQRwAq5hvACET_QN) — DRAF untuk semakan Sir (subfolder `<SIRI-NN>_<Tajuk>`)
 - `Folder Video/Final` (id 1dQgYEcrcn6DawR362tiVy714YWMZKLtR) — video LULUS + thumbnail + caption (subfolder per episod)
 - Baca/senarai fail: Google Drive connector. **Download** fail besar: `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t` (folder perlu "Anyone with the link").
