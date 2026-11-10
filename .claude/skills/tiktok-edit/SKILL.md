@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.0 (2026-11-04)
+**Versi:** 1.1 (2026-11-10)
 **Changelog:**
+- 1.1 — Upload draf/final terus ke Google Drive (connector `create_file` + rujukan fail `sha256:<hash>:<path>`), bagi link kepada Sir. Ganti cara zip.
 - 1.0 — Versi pertama, dari pengalaman C0029 (TIPS JUALAN #01) & C0296 (AYAT CLOSING #01).
 
 > Sebelum mula: baca `CLAUDE.md` dan `BRANDKIT.md`. Komunikasi dengan Sir dalam Bahasa Melayu santai tapi teliti.
@@ -124,4 +125,7 @@ Lihat frame: tajuk muncul? kotak terkeluar? subtitle bertindih? B-roll peralihan
 ## 12. Fail & simpanan
 - Repo: `projects/<ID>/` (edit.json, data.js, compose.json, thumb.json, caption.md, thumbnail), `briefs/`.
 - Scratchpad: rakaman, base.mov, render, draf (besar — tidak dalam git).
-- Aset untuk Drive → zip & hantar kepada Sir (connector tak boleh upload video). Folder Aset ID dalam `CLAUDE.md`.
+- **Upload ke Drive (standard):** Drive connector `create_file` dengan `base64Content` = rujukan fail `sha256:<sha256sum>:<path mutlak>` (BUKAN taip base64), `contentMimeType` `video/mp4` (atau `image/png`), `disableConversionToGoogleType: true`.
+  - Draf → subfolder `<SIRI-NN>_<Tajuk>` dalam `Edited`; final + thumbnail + caption → subfolder episod dalam `Final` (ID dalam `CLAUDE.md`).
+  - Sahkan `fileSize` dalam respons = saiz fail tempatan. Bagi Sir **link `viewUrl`** fail/folder.
+  - Kalau upload gagal (fail terlalu besar), baru hantar fail terus kepada Sir.

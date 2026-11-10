@@ -47,7 +47,7 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 - `Folder Video/Edited` (id 1XQvZGEOJpoDoe7yKeQRwAq5hvACET_QN) — DRAF untuk semakan Sir (subfolder `<SIRI-NN>_<Tajuk>`)
 - `Folder Video/Final` (id 1dQgYEcrcn6DawR362tiVy714YWMZKLtR) — video LULUS + thumbnail + caption (subfolder per episod)
 - Baca/senarai fail: Google Drive connector. **Download** fail besar: `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t` (folder perlu "Anyone with the link").
-- **Upload** video ke Drive melalui connector TIDAK praktikal (kandungan mesti dihantar inline). Hantar fail kepada Sir (zip), Sir upload ke folder yang betul.
+- **Upload** video ke Drive: connector `create_file` dengan rujukan fail `sha256:<hash>:<path mutlak>` dalam `base64Content` (bukan base64 ditaip), `disableConversionToGoogleType: true`. Draf → `Edited`, lulus → `Final`. Sahkan `fileSize`, bagi Sir link. Sir post manual ke TikTok.
 - Sumber asal semua aset (template HyperFrames) ada dalam repo `motion/` — boleh render semula bila-bila.
 
 ## Rujukan
