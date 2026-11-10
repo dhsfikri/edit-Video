@@ -2,3 +2,4 @@ node_modules/
 motion/intro/renders/
 .thumbnails/
 motion/thumbnail/frame.png
+motion/**/.hyperframes/artifacts/
