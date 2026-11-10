@@ -63,6 +63,31 @@
       .place b { font-weight: 800; font-size: 46px; margin-top: 18px; line-height: 1.05; }
       .place .ask { margin-top: auto; font-family: "Caveat", cursive; font-weight: 700; font-size: 54px; color: var(--yellow); transform: rotate(-3deg); }
       .place .glow { position: absolute; inset: -4px; border-radius: 26px; border: 5px solid var(--green); box-shadow: 0 0 46px rgba(37,211,102,.55); opacity: 0; }
+      /* Bateri */
+      .batt { position: relative; border: 8px solid #fff; border-radius: 26px; padding: 10px; background: rgba(0,0,0,.35); }
+      .batt.sm { border-width: 5px; border-radius: 14px; padding: 6px; }
+      .batt .lv { height: 100%; width: 0; border-radius: 12px; }
+      .batt.sm .lv { border-radius: 6px; }
+      .batt .cap { position: absolute; right: -30px; top: 50%; width: 22px; height: 40%; transform: translateY(-50%); background: #fff; border-radius: 0 8px 8px 0; }
+      .batt.sm .cap { right: -16px; width: 11px; }
+      .batt .pc { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 120px; color: #fff; text-shadow: 0 4px 16px rgba(0,0,0,.6); }
+      .batt.sm .pc { font-size: 32px; }
+      .batt .bolt { position: absolute; right: 30px; top: 50%; margin-top: -60px; font-size: 110px; line-height: 1; }
+      #mini { position: absolute; left: 70px; top: 640px; display: flex; align-items: center; gap: 34px; }
+      #mini > span { font-family: "Caveat", cursive; font-weight: 700; font-size: 52px; color: #fff; }
+      #big { position: absolute; left: 90px; top: 720px; }
+      #say { position: absolute; left: 60px; width: 840px; top: 1110px; text-align: center; font-family: "Caveat", cursive; font-weight: 700; font-size: 72px; color: var(--yellow); }
+      #tags { position: absolute; left: 60px; width: 840px; top: 1110px; display: flex; justify-content: center; gap: 16px; }
+      #tags span { background: #fff; color: var(--deep); font-weight: 800; font-size: 34px; padding: 12px 20px; border-radius: 16px; white-space: nowrap; }
+      .row.bad { font-size: 46px; gap: 20px; } .row.bad > span { white-space: nowrap; } .row.bad .ico2 { font-size: 46px; } .row.bad small { font-size: 44px; color: var(--yellow); white-space: nowrap; }
+      .row.bad .xk { width: 56px; height: 56px; border-radius: 50%; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 34px; flex: none; }
+      #chart { position: absolute; left: 60px; top: 790px; width: 840px; height: 420px; border-radius: 26px; background: var(--ink); border: 4px solid rgba(255,255,255,.14); padding: 20px 30px; }
+      #chart .yl { font-weight: 600; font-size: 28px; color: rgba(255,255,255,.7); }
+      #chart svg { position: absolute; left: 30px; top: 40px; width: 760px; height: 360px; overflow: visible; }
+      #chart .ax { fill: none; stroke: rgba(255,255,255,.4); stroke-width: 4; }
+      #flat { fill: none; stroke: var(--yellow); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+      #fyp { position: absolute; right: 40px; top: 70px; background: var(--red); color: #fff; font-weight: 800; font-size: 48px; padding: 8px 22px; border-radius: 14px; }
+      #bub { position: absolute; left: 160px; top: 1225px; transform-origin: left top; background: #fff; color: var(--ink); font-family: "Caveat", cursive; font-weight: 700; font-size: 54px; padding: 4px 28px; border-radius: 40px; }
     </style>
   </head>
   <body>
@@ -81,7 +106,7 @@
       const V = window.__hyperframes.getVariables();
       const $ = (s) => document.querySelector(s);
       const DEF = { offer: { on: 0.4, off: 8.6, items: [0.6, 2.0, 5.2, 6.5] }, nama: { on: 0.4, off: 4.6, items: [0.6, 1.9, 3.3] } };
-      const scene = V.scene === "nama" ? "nama" : "offer";
+      const scene = ["offer", "nama", "tugas", "graf", "bateri", "cas"].includes(V.scene) ? V.scene : "offer";
       const C = V.cue ? JSON.parse(V.cue) : DEF[scene];
       $("#face").setAttribute("src", V.face); $("#aroll").setAttribute("src", V.aroll);
       const D = 12, body = $("#body");
@@ -97,12 +122,76 @@
       });
       tl.fromTo("#faceWrap", { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.4, ease: "back.out(1.8)" }, C.on + 0.08);
 
-      const T = { offer: ["offer yang ada", "VALUE"], nama: ["orang kenal tak", "NAMA BAIK"] }[scene];
-      if (scene === "nama") $("#title .box").style.fontSize = "64px"; // kekal dalam x ≤ 900
+      const T = { offer: ["offer yang ada", "VALUE"], nama: ["orang kenal tak", "NAMA BAIK"], tugas: ["tanda 1", "SERBA TAK KENA"],
+        graf: ["tanda 2", "TAK SEMANGAT"], bateri: ["tanda 3", "TAK BEREMOSI"], cas: ["jangan tunggu kosong", "CAS SEMULA"] }[scene];
       $("#title .script").textContent = T[0]; $("#title .box").textContent = T[1];
+      { const b = $("#title .box"); let z = 76; while (b.getBoundingClientRect().right > 900 && z > 58) { z -= 2; b.style.fontSize = z + "px"; }
+        if (b.getBoundingClientRect().right > 900) { b.style.whiteSpace = "normal"; b.style.width = "470px"; b.style.lineHeight = "1.05"; b.dataset.wrap = 1; } } // safe zone x ≤ 900
       tl.fromTo("#title .script", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, C.on + 0.2);
       const box = $("#title .box"); const bw = box.getBoundingClientRect().width;
-      tl.fromTo(box, { width: 0, paddingLeft: 0, paddingRight: 0 }, { width: bw, paddingLeft: 22, paddingRight: 22, duration: 0.35, ease: "steps(8)" }, C.on + 0.32);
+      if (box.dataset.wrap) tl.fromTo(box, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, C.on + 0.32);
+      else tl.fromTo(box, { width: 0, paddingLeft: 0, paddingRight: 0 }, { width: bw, paddingLeft: 22, paddingRight: 22, duration: 0.35, ease: "steps(8)" }, C.on + 0.32);
+
+      // ---- Bateri (motif burn out) ----
+      const batt = (cls, w, h) => `<div class="batt ${cls}" style="width:${w}px;height:${h}px"><div class="lv"></div><div class="cap"></div><span class="pc">0%</span></div>`;
+      const BCOL = (v) => (v > 50 ? "#25d366" : v > 20 ? "#ffd60a" : "#ff5a5a");
+      function drain(sel, from, to, t, d) {
+        const el = $(sel), lv = el.querySelector(".lv"), pc = el.querySelector(".pc"), o = { v: from };
+        const upd = () => { lv.style.width = o.v + "%"; lv.style.background = BCOL(o.v); pc.textContent = Math.round(o.v) + "%"; };
+        tl.set(o, { v: from, onUpdate: upd }, 0); upd();
+        tl.to(o, { v: to, duration: d, ease: "power1.inOut", onUpdate: upd }, t);
+      }
+
+      if (["tugas", "graf"].includes(scene)) {
+        body.insertAdjacentHTML("beforeend", `<div id="mini">${batt("sm", 190, 76)}<span>tenaga awak</span></div>`);
+        tl.fromTo("#mini", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.25 }, C.on + 0.2);
+      }
+      if (scene === "tugas") {
+        const ROWS = [["🎬", "Buat konten", "ulang… ulang…"], ["✂️", "Editing", "esok… esok…"], ["💼", "Kerja", "kena marah 😤"]];
+        ROWS.forEach(([ic, t, s], i) => {
+          const r = document.createElement("div"); r.className = "row bad"; r.style.top = 800 + i * 140 + "px"; r.style.height = "118px";
+          r.innerHTML = `<span class="ico2">${ic}</span><span>${t}</span><small>${s}</small><span class="xk">✕</span>`; body.appendChild(r);
+          const ti = C.items[i];
+          tl.fromTo(r, { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.26, ease: "back.out(1.6)" }, ti);
+          tl.fromTo(r.querySelector("small"), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.2 }, ti + 0.35);
+          tl.fromTo(r.querySelector(".xk"), { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power4.in" }, ti + 0.6);
+          tl.to(r, { x: 8, duration: 0.05, yoyo: true, repeat: 3 }, ti + 0.8);
+        });
+        drain("#mini .batt", 70, 45, C.items[0], C.off - C.items[0]);
+      }
+      if (scene === "graf") {
+        body.insertAdjacentHTML("beforeend", `<div id="chart"><small class="yl">views / sale</small>
+          <svg viewBox="0 0 760 360"><path class="ax" d="M40 20 V330 H740"/><path id="flat" d="M40 290 L140 286 L220 294 L300 284 L380 292 L460 287 L540 293 L620 288 L720 291"/></svg>
+          <span id="fyp">FYP? ✕</span></div><div id="bub">“tak payahlah buat…”</div>`);
+        tl.fromTo("#chart", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, C.items[0] - 0.2);
+        const p = $("#flat"), L = p.getTotalLength();
+        tl.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.6, ease: "none" }, C.items[0]);
+        tl.fromTo("#fyp", { scale: 2.2, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: -4, duration: 0.25, ease: "power4.in" }, C.items[1]);
+        tl.fromTo("#bub", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, C.items[2]);
+        drain("#mini .batt", 45, 25, C.items[0], C.off - C.items[0]);
+      }
+      if (scene === "bateri" || scene === "cas") {
+        body.insertAdjacentHTML("beforeend", `<div id="big">${batt("lg", 640, 300)}</div><div id="say"></div><div id="tags"></div>`);
+        tl.fromTo("#big", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.6)" }, C.on + 0.1);
+      }
+      if (scene === "bateri") {
+        $("#say").textContent = "“nak jadi, jadilah…”";
+        tl.fromTo("#say", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.25 }, C.items[0]);
+        drain("#big .batt", 25, 8, C.on, C.items[1] - C.on);
+        drain("#big .batt", 8, 1, C.items[1], 0.5);
+        tl.to("#big .batt", { opacity: 0.35, duration: 0.18, yoyo: true, repeat: 5, ease: "steps(1)" }, C.items[1] + 0.5);
+        tl.to("#big", { x: 10, duration: 0.05, yoyo: true, repeat: 5 }, C.items[1] + 0.5);
+      }
+      if (scene === "cas") {
+        $("#big .batt").insertAdjacentHTML("beforeend", `<span class="bolt">⚡</span>`);
+        const TAGS = ["🍜 pergi makan", "🌿 healing", "🤝 sama-sama"];
+        $("#tags").innerHTML = TAGS.map((t) => `<span>${t}</span>`).join("");
+        [...document.querySelectorAll("#tags span")].forEach((el, i) =>
+          tl.fromTo(el, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: "back.out(2.4)" }, C.items[i]));
+        tl.fromTo("#big .bolt", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, C.on + 0.3);
+        tl.to("#big .bolt", { scale: 1.15, duration: 0.3, yoyo: true, repeat: 9 }, C.on + 0.6);
+        drain("#big .batt", 1, 100, C.on + 0.3, C.off - C.on - 0.5);
+      }
 
       if (scene === "offer") {
         body.innerHTML = `<div id="hint"><span class="tag">RM<i></i></span><span class="txt">bukan sekadar harga…</span></div>`;
@@ -122,7 +211,7 @@
           if (i) tl.to(els[i - 1].querySelector(".glow"), { opacity: 0, duration: 0.2 }, t);
         });
         tl.to(els.map((r) => r.querySelector(".glow")), { opacity: 1, duration: 0.25 }, C.items[3] + 0.6);
-      } else {
+      } else if (scene === "nama") {
         body.innerHTML = `<div id="search"><span>🔍</span><span class="q">kedai awak</span><span class="cur"></span></div>
           <div class="place" style="left:60px"><div class="glow"></div><div class="ico">📱</div><b>media<br>sosial</b><span class="ask">orang perasan?</span></div>
           <div class="place" style="left:495px"><div class="glow"></div><div class="ico">🏘️</div><b>kawasan<br>sendiri</b><span class="ask">orang perasan?</span></div>`;

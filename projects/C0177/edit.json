@@ -1,0 +1,202 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/raw-260923/C0177.MP4",
+ "transcript": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/work-260923/C0177-transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0177",
+ "rotate": "cw",
+ "fps": 30,
+ "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+ "corrections": {
+  "seber": "serba"
+ },
+ "eyeline": {
+  "y": 620,
+  "x": 540
+ },
+ "segments": [
+  {
+   "note": "A hook (push + punch 'burn out')",
+   "start": 0.7,
+   "end": 8.05,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.12
+    ],
+    [
+     2.85,
+     1.2
+    ],
+    [
+     3.0,
+     1.35
+    ],
+    [
+     7.35,
+     1.42
+    ]
+   ]
+  },
+  {
+   "note": "B yang pertama ... serba tak kena",
+   "start": 8.05,
+   "end": 12.8,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.12
+    ]
+   ]
+  },
+  {
+   "note": "C [B-roll tugas] buat konten ... lain-lain",
+   "start": 12.83,
+   "end": 20.4,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.25
+    ]
+   ]
+  },
+  {
+   "note": "D dan yang kedua ... tak semangat",
+   "start": 25.91,
+   "end": 28.6,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.12
+    ]
+   ]
+  },
+  {
+   "note": "E maksudnya apa? fikir yang tak elok",
+   "start": 29.07,
+   "end": 31.5,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.25
+    ]
+   ]
+  },
+  {
+   "note": "F [B-roll graf] ... FYP ... sale ... tak payahlah buat",
+   "start": 31.67,
+   "end": 37.8,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.12
+    ]
+   ]
+  },
+  {
+   "note": "G dan yang terakhir ... tidak beremosi",
+   "start": 38.94,
+   "end": 42.6,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.25
+    ]
+   ]
+  },
+  {
+   "note": "H [B-roll bateri] nak jadi jadilah, lantak kau lah",
+   "start": 43.45,
+   "end": 46.6,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.12
+    ]
+   ]
+  },
+  {
+   "note": "I so hati-hati dengan tiga perkara ni",
+   "start": 46.77,
+   "end": 49.3,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.25
+    ]
+   ]
+  },
+  {
+   "note": "J1 [B-roll cas] kenal kawan ... ajak pergi makan",
+   "start": 49.43,
+   "end": 54.2,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.12
+    ]
+   ]
+  },
+  {
+   "note": "J2 [B-roll cas] pergi healing sama-sama",
+   "start": 55.2,
+   "end": 56.4,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.12
+    ]
+   ]
+  },
+  {
+   "note": "K1 sebab apa?",
+   "start": 56.55,
+   "end": 57.1,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.12
+    ]
+   ]
+  },
+  {
+   "note": "K2 burn out is real (punch)",
+   "start": 57.8,
+   "end": 58.95,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.35
+    ],
+    [
+     1.15,
+     1.4
+    ]
+   ]
+  }
+ ]
+}
