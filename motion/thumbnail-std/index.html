@@ -44,7 +44,7 @@
   window.render = (c) => new Promise(async (ok) => {
     const $ = (s) => document.querySelector(s);
     await Promise.all(['300px "Anton"', '700 96px "Caveat"', '800 40px "Montserrat"'].map((f) => document.fonts.load(f)));
-    $("#badge b").innerHTML = `${c.series} <span>#${c.episode}</span>`;
+    $("#badge b").innerHTML = `${c.series} <span>#${c.episode}</span>`; if (!c.series) $("#badge").style.display = "none"; // tanpa siri
     $("#kicker").textContent = c.kicker || ""; if (!c.kicker) $("#kicker").style.display = "none";
     const rich = (s) => s.replace(/\[([^\]]+)\]/g, '<span class="kw">$1</span>');
     $("#l1").innerHTML = rich(c.line1); $("#l2").innerHTML = rich(c.line2 || ""); if (!c.line2) $("#l2").style.display = "none";
