@@ -1,9 +1,13 @@
 {
   "version": 1,
   "historyId": "1c1c6264-22f0-47cd-9998-1a294cd08538",
-  "currentRevision": "6e846937-66f0-4af8-819a-832dab9d02fa",
+  "currentRevision": null,
   "pendingChanges": false,
   "files": {
+    "_lama/iklan_2s.html.bak": {
+      "hash": "bc5a696151cb6c664f21dae19d229a009173df2247432a70c15c61558fc77a61",
+      "content": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/bc/bc5a696151cb6c664f21dae19d229a009173df2247432a70c15c61558fc77a61"
+    },
     "assets/ding.wav": {
       "hash": "245cd55881d690597eafcb644c37ba0c28bbe4ef25a60ae849c3865cce356329",
       "content": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/24/245cd55881d690597eafcb644c37ba0c28bbe4ef25a60ae849c3865cce356329"
@@ -25,8 +29,8 @@
       "content": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/53/53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
     },
     "index.html": {
-      "hash": "ab28ce23e13c9d60623451896fc1e5a2b8a088d62243caa248e3bb6f202b8bbf",
-      "content": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/ab/ab28ce23e13c9d60623451896fc1e5a2b8a088d62243caa248e3bb6f202b8bbf"
+      "hash": "dc3158dcc1a1959f0047eda66073c1fb083e3cd2c3293eb2a0699fa50bd80de1",
+      "content": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/dc/dc3158dcc1a1959f0047eda66073c1fb083e3cd2c3293eb2a0699fa50bd80de1"
     },
     "meta.json": {
       "hash": "aab1d8f84e30e7f17988b440d517f58ddae9c3263fbb3a5527365a38ef77296d",
@@ -35,48 +39,9 @@
     "package.json": {
       "hash": "c035cfa0414f232a28b587a1d6b155e848974e07402b5e16961b3a49fe1851aa",
       "content": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/c0/c035cfa0414f232a28b587a1d6b155e848974e07402b5e16961b3a49fe1851aa"
-    },
-    "index_2s.html": {
-      "hash": "bc5a696151cb6c664f21dae19d229a009173df2247432a70c15c61558fc77a61",
-      "content": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/bc/bc5a696151cb6c664f21dae19d229a009173df2247432a70c15c61558fc77a61"
     }
   },
-  "revisions": {
-    "da5c5da8-aae4-4769-ade2-c2a0ddd092bd": {
-      "actor": {
-        "kind": "outside",
-        "name": "Outside"
-      },
-      "label": "Changed outside the app",
-      "startedAt": 1793715266501,
-      "endedAt": 1793715266502,
-      "files": {
-        "index.html": {
-          "before": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/8b/8b3de9cd06611e18b579f7811db07d33e2cd51dfc304d7bdea0ee942f826e8cf",
-          "after": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/bc/bc5a696151cb6c664f21dae19d229a009173df2247432a70c15c61558fc77a61"
-        }
-      }
-    },
-    "6e846937-66f0-4af8-819a-832dab9d02fa": {
-      "actor": {
-        "kind": "outside",
-        "name": "Outside"
-      },
-      "label": "Changed outside the app",
-      "startedAt": 1793715895029,
-      "endedAt": 1793715895038,
-      "files": {
-        "index_2s.html": {
-          "before": null,
-          "after": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/bc/bc5a696151cb6c664f21dae19d229a009173df2247432a70c15c61558fc77a61"
-        },
-        "index.html": {
-          "before": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/bc/bc5a696151cb6c664f21dae19d229a009173df2247432a70c15c61558fc77a61",
-          "after": "/root/.cache/hyperframes/history/1c1c6264-22f0-47cd-9998-1a294cd08538/blobs/ab/ab28ce23e13c9d60623451896fc1e5a2b8a088d62243caa248e3bb6f202b8bbf"
-        }
-      }
-    }
-  },
+  "revisions": {},
   "checks": {
     "latest": null,
     "revisions": {},
@@ -89,11 +54,11 @@
   },
   "renders": {
     "latest": {
-      "id": "e8427128-c159-4bed-b94f-da1dbfb16ac6",
-      "completedAt": 1793715918957,
-      "output": "/tmp/claude-0/-home-user-edit-Video/4c46b131-9446-56bd-9c05-6179486a250d/scratchpad/C0029/iklan4.mov",
+      "id": "dd64ba47-4ec2-44c0-9310-8661eb1a5145",
+      "completedAt": 1794297818045,
+      "output": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0175/iklan_raw.mov",
       "status": "completed",
-      "revision": "6e846937-66f0-4af8-819a-832dab9d02fa"
+      "revision": null
     },
     "retainedRevisions": [
       "6e846937-66f0-4af8-819a-832dab9d02fa",

@@ -12,7 +12,8 @@ compose.json:
         # optional: hentikan video pada 'at' (frame beku), tindih iklan, kemudian sambung
   "broll": [{"src": ".../kupon.mp4", "start": 3.45, "dur": 2.5}],   # masa dalam timeline AKHIR
   "overlay": ".../overlay.mov",            # grafik + subtitle (telus), timeline AKHIR
-  "sfx": [{"src": ".../signature.wav", "at": 0.04, "vol": 0.55}]
+  "sfx": [{"src": ".../signature.wav", "at": 0.04, "vol": 0.55}],
+  "hold": 1.0                              # optional: tahan frame akhir (saat) untuk CTA
 }
 """
 import json, subprocess, sys
@@ -39,7 +40,11 @@ if ins:
     ]
 else:
     fc += ["[0:v]null[vbase]", "[0:a]anull[abase]"]
-cur = "vbase"
+# 1b) Tahan frame akhir (optional): "hold": saat
+hold = c.get("hold", 0)
+if hold:
+    fc += [f"[vbase]tpad=stop_mode=clone:stop_duration={hold}[vbh]", f"[abase]apad=pad_dur={hold}[abh]"]
+cur = "vbh" if hold else "vbase"
 
 # 2) B-roll (penuh skrin, audio A-roll diteruskan)
 for i, b in enumerate(c.get("broll", [])):
@@ -67,7 +72,7 @@ if ins and ins.get("overlay"):
 fc.append(f"[{cur}]format=yuv420p[vout]")
 
 # 5) Bunyi tambahan
-amix = ["[abase]"]
+amix = ["[abh]" if hold else "[abase]"]
 sfx = list(c.get("sfx", []))
 if ins and ins.get("sfx"):
     sfx.append({"src": ins["sfx"], "at": ins["at"], "vol": ins.get("sfx_vol", 0.6)})
@@ -81,6 +86,7 @@ fc.append(f"{''.join(amix)}amix=inputs={len(amix)}:duration=first:normalize=0,al
 
 total = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", c["base"]]))
 total += ins["dur"] if ins else 0
+total += hold
 
 cmd = ["ffmpeg", "-v", "error", "-stats", "-y", *inputs, "-filter_complex", ";".join(fc),
        "-map", "[vout]", "-map", "[aout]", "-t", f"{total:.3f}", "-r", str(fps),

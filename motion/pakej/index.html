@@ -15,7 +15,8 @@
     {"id":"face","type":"string","label":"Klip muka","default":"assets/face_pakej.mp4"},
     {"id":"aroll","type":"string","label":"Klip A-roll","default":"assets/aroll_pakej.mp4"},
     {"id":"wipe","type":"number","label":"Masa sapuan","default":2.64},
-    {"id":"dur","type":"number","label":"Durasi","default":24}
+    {"id":"dur","type":"number","label":"Durasi","default":24},
+    {"id":"cue","type":"string","label":"Cue JSON {cards:[{in,labelAt,priceAt,subAt,bestAt}],switches:[[t,on]],note}","default":""}
   ]'>
   <head>
     <meta charset="UTF-8" />
@@ -73,9 +74,9 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="24" data-width="1080" data-height="1920">
-      <video id="aroll" src="assets/aroll_pakej.mp4" class="clip" data-start="0" data-duration="24" data-track-index="0" muted playsinline></video>
-      <div id="stage" class="clip" data-start="0" data-duration="24" data-track-index="1">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1080" data-height="1920">
+      <video id="aroll" src="assets/aroll_pakej.mp4" class="clip" data-start="0" data-duration="30" data-track-index="0" muted playsinline></video>
+      <div id="stage" class="clip" data-start="0" data-duration="30" data-track-index="1">
         <div id="grain"></div>
         <div id="title"><span class="script">sediakan</span><span class="box">3 PAKEJ</span></div>
         <div id="note"><span>setiap bajet<br>ada pilihan</span>
@@ -83,13 +84,13 @@
         
         <div id="cards"></div>
       </div>
-      <div id="faceWrap"><video id="face" src="assets/face_pakej.mp4" class="clip" data-start="0" data-duration="24" data-track-index="2" muted playsinline></video></div>
-      <div id="wipe2" class="clip" data-start="0" data-duration="24" data-track-index="3"></div>
-      <div id="wipe" class="clip" data-start="0" data-duration="24" data-track-index="4"></div>
+      <div id="faceWrap"><video id="face" src="assets/face_pakej.mp4" class="clip" data-start="0" data-duration="30" data-track-index="2" muted playsinline></video></div>
+      <div id="wipe2" class="clip" data-start="0" data-duration="30" data-track-index="3"></div>
+      <div id="wipe" class="clip" data-start="0" data-duration="30" data-track-index="4"></div>
     </div>
     <script>
       const V = window.__hyperframes.getVariables();
-      const D = Number(V.dur) || 24, W0 = Number(V.wipe) || 2.64;
+      const D = 30, W0 = Number(V.wipe) || 2.64;
       const $ = (s) => document.querySelector(s);
 
       // Masa (s) = masa dalam klip ini. Setiap elemen ikut perkataan Sir.
@@ -99,8 +100,13 @@
         { in: 18.95, pill: "PAKEJ <b>3</b>", ico: "👑", label: "betul-betul nak hasil", labelAt: 19.2, best: "PALING LENGKAP", bestAt: 20.35, from: 150, to: 200, priceAt: 21.05, sub: "ke atas", subAt: 21.65 },
       ];
       // Sapuan berselang: B-roll ↔ muka penuh (A-roll). [masa, 1=B-roll masuk | 0=balik A-roll]
-      const SWITCH = [[W0, 1], [9.26, 0], [12.0, 1], [14.74, 0], [18.86, 1]];
-      const NOTE_AT = 22.4;
+      let SWITCH = [[W0, 1], [9.26, 0], [12.0, 1], [14.74, 0], [18.86, 1]];
+      let NOTE_AT = 22.4;
+      // Masa sebenar (ikut timeline video) dihantar melalui variable "cue"
+      const CUE = V.cue ? JSON.parse(V.cue) : null;
+      if (CUE) { CARDS.forEach((c, i) => Object.assign(c, CUE.cards[i])); SWITCH = CUE.switches; NOTE_AT = CUE.note; }
+      const ON0 = SWITCH[0][0];
+      document.querySelector("#face").setAttribute("src", V.face); document.querySelector("#aroll").setAttribute("src", V.aroll);
 
       const tl = gsap.timeline({ paused: true });
       tl.fromTo("#grain", { x: 0 }, { x: 6, duration: D, ease: "steps(" + Math.round(D * 12) + ")" }, 0);
@@ -113,10 +119,10 @@
         tl.set(["#stage", "#faceWrap"], { opacity: on }, t);
       });
 
-      tl.fromTo("#faceWrap", { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.4, ease: "back.out(1.8)" }, W0 + 0.08);
-      tl.fromTo("#title .script", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, W0 + 0.2);
+      tl.fromTo("#faceWrap", { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.4, ease: "back.out(1.8)" }, ON0 + 0.08);
+      tl.fromTo("#title .script", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, ON0 + 0.2);
       const box = $("#title .box"); const bw = box.getBoundingClientRect().width;
-      tl.fromTo(box, { width: 0, paddingLeft: 0, paddingRight: 0 }, { width: bw, paddingLeft: 22, paddingRight: 22, duration: 0.35, ease: "steps(8)" }, W0 + 0.32);
+      tl.fromTo(box, { width: 0, paddingLeft: 0, paddingRight: 0 }, { width: bw, paddingLeft: 22, paddingRight: 22, duration: 0.35, ease: "steps(8)" }, ON0 + 0.32);
 
       const wrap = $("#cards"); const els = [];
       CARDS.forEach((c, i) => {

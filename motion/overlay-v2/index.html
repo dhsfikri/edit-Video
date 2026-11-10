@@ -60,8 +60,8 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
-      <div id="layer" class="clip" data-start="0" data-duration="20" data-track-index="0"></div>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="70" data-width="1080" data-height="1920">
+      <div id="layer" class="clip" data-start="0" data-duration="70" data-track-index="0"></div>
     </div>
     <script>
       const E = window.EDIT, D = E.duration;
@@ -78,6 +78,7 @@
       // Tajuk kinetik
       (E.titles || []).forEach((g) => {
         const box = put(`<div class="title shadow"></div>`);
+        if (g.top) box.style.top = g.top + "px"; // optional: kedudukan menegak (cth bawah muka bila syot rapat)
         if (g.start > 0) { tl.set(box, { opacity: 0 }, 0); tl.set(box, { opacity: 1 }, g.start); }
         g.lines.forEach((line) => {
           const ln = el(`<span class="tl"></span>`); box.appendChild(ln);
@@ -129,7 +130,7 @@
       const groups = []; let cur = [];
       E.words.forEach((w, i) => {
         const prev = E.words[i - 1];
-        const brk = cur.length >= (E.maxWords || 4) || (prev && (w.s - prev.e > 0.3 || /[.,?!]$/.test(prev.w)));
+        const brk = cur.length >= (E.maxWords || 4) || w.b || (prev && (w.s - prev.e > 0.3 || /[.,?!]$/.test(prev.w))); // w.b = paksa kumpulan baru (mula ayat)
         if (cur.length && brk) { groups.push(cur); cur = []; }
         cur.push(w);
       });

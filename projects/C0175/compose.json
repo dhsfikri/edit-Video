@@ -1,0 +1,153 @@
+{
+ "base": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0175/base.mov",
+ "out": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0175/C0175_draf_v1.mp4",
+ "fps": 30,
+ "insert": {
+  "at": 49.41,
+  "dur": 4.0,
+  "overlay": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0175/iklan.mov",
+  "sfx": "/home/user/edit-Video/motion/iklan/assets/ding.wav",
+  "sfx_vol": 0.6
+ },
+ "hold": 1.0,
+ "broll": [
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0175/broll_offer.mp4",
+   "start": 11.033,
+   "dur": 5.933333333333334
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0175/broll_pakej.mp4",
+   "start": 27.767,
+   "dur": 21.633333333333333
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0175/broll_nama.mp4",
+   "start": 58.233,
+   "dur": 4.966666666666667
+  }
+ ],
+ "overlay": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0175/overlay.mov",
+ "sfx": [
+  {
+   "src": "/home/user/edit-Video/motion/intro/assets/signature.wav",
+   "at": 0.03,
+   "vol": 0.4
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 11.21,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 16.34,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 11.65,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 13.05,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 14.43,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 15.76,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 27.92,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 34.515,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 37.255,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 39.995,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 44.115,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 48.72,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 28.67,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 37.575,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 44.445,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/tick.wav",
+   "at": 33.465,
+   "vol": 0.12
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/tick.wav",
+   "at": 38.635,
+   "vol": 0.12
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/tick.wav",
+   "at": 46.865,
+   "vol": 0.12
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 58.405,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 62.555,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 58.765,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 60.095,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 61.595,
+   "vol": 0.14
+  }
+ ]
+}
