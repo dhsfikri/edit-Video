@@ -1,0 +1,165 @@
+<!doctype html>
+<!--
+  B-roll "TANGGA 3 PAKEJ" — Gaya v2+ (1080x1920, ambil alih skrin penuh).
+  A-roll penuh → sapuan hijau → latar hijau gelap · muka Sir dalam bulatan · 3 kad harga naik macam tangga,
+  setiap elemen masuk ikut suara · harga mengira naik · coretan tangan.
+  Variables:
+    face  : klip muka (pipeline/facecrop.py)      aroll : klip A-roll sebelum sapuan (1080x1920)
+    wipe  : masa sapuan (s)                        dur   : durasi penuh (s)
+    cards : JSON [{in,label,labelAt,to,priceAt,sub,subAt,pill}]   note: [masa, teks]
+  Render: npx hyperframes render -f 30 -q high -w 4 -o out.mp4   → trim ffmpeg -t <dur>
+  Zon: semua teks x 60–900, y 250–1250 (subtitle video utama y 1300–1400 kekal kosong).
+-->
+<html lang="ms" data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"face","type":"string","label":"Klip muka","default":"assets/face_pakej.mp4"},
+    {"id":"aroll","type":"string","label":"Klip A-roll","default":"assets/aroll_pakej.mp4"},
+    {"id":"wipe","type":"number","label":"Masa sapuan","default":2.64},
+    {"id":"dur","type":"number","label":"Durasi","default":24}
+  ]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/caveat-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      :root { --bg1: #0b3d2e; --bg2: #06180f; --green: #25d366; --deep: #0b3d2e; --white: #fff; --yellow: #ffd60a; --ink: #0b0b0b; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
+      #aroll { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      #stage { position: absolute; inset: 0; background: radial-gradient(90% 60% at 50% 42%, var(--bg1) 0%, var(--bg2) 100%); }
+      #grain { position: absolute; inset: 0; opacity: .07;
+        background-image: radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px); background-size: 6px 6px; }
+      #wipe { position: absolute; top: -100px; left: 0; width: 1700px; height: 2120px; background: var(--green); transform: translateX(-1900px) skewX(-8deg); }
+      #wipe2 { position: absolute; top: -100px; left: 0; width: 1700px; height: 2120px; background: #0b0b0b; transform: translateX(-1900px) skewX(-8deg); }
+
+      #faceWrap { position: absolute; left: 60px; top: 255px; width: 230px; height: 230px; border-radius: 50%; overflow: hidden;
+        border: 7px solid var(--white); box-shadow: 0 16px 40px rgba(0,0,0,.45); }
+      #face { width: 100%; height: 100%; object-fit: cover; }
+
+      #title { position: absolute; left: 322px; top: 286px; }
+      #title .script { display: block; font-family: "Caveat", cursive; font-weight: 700; font-size: 58px; color: rgba(255,255,255,.92); line-height: 1; }
+      #title .box { display: inline-block; margin-top: 10px; background: var(--white); color: var(--deep); font-weight: 800; font-size: 76px;
+        padding: 2px 22px; border-radius: 10px; white-space: nowrap; overflow: hidden; vertical-align: top; }
+
+      /* Tangga: 3 kad, bawah sejajar di y=1250 */
+      .card { position: absolute; width: 262px; border-radius: 26px; background: var(--ink); border: 4px solid rgba(255,255,255,.16);
+        box-shadow: 0 24px 60px rgba(0,0,0,.5); padding: 22px 18px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; color: #fff; }
+      #c0 { left: 60px;  top: 800px; height: 450px; }
+      #c1 { left: 349px; top: 690px; height: 560px; }
+      #c2 { left: 638px; top: 570px; height: 680px; }
+      .glow { position: absolute; inset: -4px; border-radius: 26px; border: 5px solid var(--green); box-shadow: 0 0 46px rgba(37,211,102,.55), inset 0 0 30px rgba(37,211,102,.12); opacity: 0; }
+      .pill { font-weight: 800; font-size: 24px; letter-spacing: 1.5px; padding: 7px 16px; border-radius: 30px; border: 2.5px solid var(--green); color: #fff; white-space: nowrap; }
+      .pill b { color: var(--green); }
+      .ico { font-size: 68px; line-height: 1; margin-top: 18px; }
+      .label { font-family: "Caveat", cursive; font-weight: 700; font-size: 46px; line-height: .98; margin-top: 10px; color: #fff; }
+      .best { margin-top: 14px; background: var(--green); color: var(--ink); font-weight: 800; font-size: 22px; padding: 6px 14px; border-radius: 10px; white-space: nowrap; }
+      .price { margin-top: auto; position: relative; width: 100%; padding: 8px 0 4px; }
+      .price .num { font-weight: 800; color: var(--yellow); font-size: 68px; line-height: 1; white-space: nowrap; }
+      .price .num small { font-size: 36px; font-weight: 800; margin-right: 3px; }
+      .price .sub { display: block; font-weight: 600; font-size: 28px; margin-top: 6px; color: rgba(255,255,255,.92); white-space: nowrap; }
+      .price .sub b { font-weight: 800; color: var(--yellow); }
+      .price svg { position: absolute; left: -6px; top: -6px; width: 238px; height: 100px; overflow: visible; }
+      .price svg path { fill: none; stroke: #fff; stroke-width: 5; stroke-linecap: round; }
+
+      #note { position: absolute; left: 70px; top: 545px; width: 540px; transform: rotate(-5deg); font-family: "Caveat", cursive; font-weight: 700; font-size: 62px; line-height: 1; color: var(--yellow); }
+      #note svg { display: block; width: 360px; height: 30px; margin-top: 2px; overflow: visible; }
+      #note svg path, #arrow path { fill: none; stroke: var(--yellow); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+      #arrow { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24" data-width="1080" data-height="1920">
+      <video id="aroll" src="assets/aroll_pakej.mp4" class="clip" data-start="0" data-duration="2.75" data-track-index="0" muted playsinline></video>
+      <div id="stage" class="clip" data-start="0" data-duration="24" data-track-index="1">
+        <div id="grain"></div>
+        <div id="title"><span class="script">sediakan</span><span class="box">3 PAKEJ</span></div>
+        <div id="note"><span>setiap bajet ada pilihan</span>
+          <svg viewBox="0 0 360 30"><path d="M4 16 C 60 4, 120 26, 180 13 S 300 6, 356 15"/></svg></div>
+        <svg id="arrow" viewBox="0 0 1080 1920"><path id="arrowLine" d="M120 770 C 130 700, 200 665, 318 668"/><path id="arrowHead" d="M288 642 L 322 668 L 290 698"/></svg>
+        <div id="cards"></div>
+      </div>
+      <div id="faceWrap"><video id="face" src="assets/face_pakej.mp4" class="clip" data-start="2.64" data-duration="21.36" data-track-index="2" muted playsinline></video></div>
+      <div id="wipe2" class="clip" data-start="0" data-duration="24" data-track-index="3"></div>
+      <div id="wipe" class="clip" data-start="0" data-duration="24" data-track-index="4"></div>
+    </div>
+    <script>
+      const V = window.__hyperframes.getVariables();
+      const D = Number(V.dur) || 24, W0 = Number(V.wipe) || 2.64;
+      const $ = (s) => document.querySelector(s);
+
+      // Masa (s) = masa dalam klip ini. Setiap elemen ikut perkataan Sir.
+      const CARDS = [
+        { in: 3.40, pill: "PAKEJ <b>1</b>", ico: "🌱", label: "baru nak cuba", labelAt: 6.45, from: 0, to: 100, priceAt: 7.85, sub: "ke bawah", subAt: 8.45 },
+        { in: 9.50, pill: "PAKEJ <b>2</b>", ico: "🛡️", label: "nak cuba, tapi tak nak rugi", labelAt: 10.50, from: 100, to: 150, priceAt: 13.00, sub: "sampai <b>RM200</b>", subAt: 14.20 },
+        { in: 15.35, pill: "PAKEJ <b>3</b>", ico: "👑", label: "betul-betul nak hasil", labelAt: 16.20, best: "PALING LENGKAP", bestAt: 20.55, from: 150, to: 200, priceAt: 21.25, sub: "ke atas", subAt: 21.85 },
+      ];
+      const NOTE_AT = 22.5;
+
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#grain", { x: 0 }, { x: 6, duration: D, ease: "steps(" + Math.round(D * 12) + ")" }, 0);
+
+      // Sapuan: jalur hitam + hijau melintas; di tengah-tengah, latar bertukar
+      tl.set(["#stage", "#faceWrap"], { opacity: 0 }, 0);
+      tl.fromTo("#wipe2", { x: -1900 }, { x: 1300, duration: 0.5, ease: "none" }, W0 - 0.29);
+      tl.fromTo("#wipe", { x: -1900 }, { x: 1300, duration: 0.5, ease: "none" }, W0 - 0.24);
+      tl.set(["#stage", "#faceWrap"], { opacity: 1 }, W0);
+
+      tl.fromTo("#faceWrap", { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.4, ease: "back.out(1.8)" }, W0 + 0.08);
+      tl.fromTo("#title .script", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, W0 + 0.2);
+      const box = $("#title .box"); const bw = box.getBoundingClientRect().width;
+      tl.fromTo(box, { width: 0, paddingLeft: 0, paddingRight: 0 }, { width: bw, paddingLeft: 22, paddingRight: 22, duration: 0.35, ease: "steps(8)" }, W0 + 0.32);
+
+      const wrap = $("#cards"); const els = [];
+      CARDS.forEach((c, i) => {
+        const el = document.createElement("div"); el.className = "card"; el.id = "c" + i;
+        el.innerHTML = `<div class="glow"></div><div class="pill">${c.pill}</div><div class="ico">${c.ico}</div><div class="label">${c.label}</div>` +
+          (c.best ? `<div class="best">${c.best}</div>` : "") +
+          `<div class="price"><svg viewBox="0 0 238 100"><path d="M120 6 C 40 2, 6 28, 10 52 C 14 84, 90 96, 150 92 C 210 88, 236 66, 228 40 C 220 14, 160 4, 96 10"/></svg>` +
+          `<span class="num"><small>RM</small><span class="n">${c.from}</span></span><span class="sub">${c.sub}</span></div>`;
+        wrap.appendChild(el); els.push(el);
+      });
+
+      CARDS.forEach((c, i) => {
+        const el = els[i], q = (s) => el.querySelector(s);
+        // kad naik dari bawah
+        tl.fromTo(el, { y: 420, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, c.in);
+        tl.fromTo(q(".pill"), { scale: 0 }, { scale: 1, duration: 0.25, ease: "back.out(2.2)" }, c.in + 0.2);
+        tl.fromTo(q(".ico"), { scale: 0, rotation: -30 }, { scale: 1, rotation: 0, duration: 0.3, ease: "back.out(2.5)" }, c.in + 0.32);
+        // kad aktif menyala, yang lain malap
+        tl.to(q(".glow"), { opacity: 1, duration: 0.25 }, c.in + 0.1);
+        els.forEach((o, j) => { if (j < i) { tl.to(o.querySelector(".glow"), { opacity: 0, duration: 0.25 }, c.in); tl.to(o, { opacity: 0.5, scale: 0.97, duration: 0.3 }, c.in); } });
+        // label tulisan tangan
+        tl.fromTo(q(".label"), { opacity: 0, y: 14, rotation: -4 }, { opacity: 1, y: 0, rotation: -2, duration: 0.28, ease: "power2.out" }, c.labelAt);
+        if (c.best) tl.fromTo(q(".best"), { scale: 0, rotation: 8 }, { scale: 1, rotation: -3, duration: 0.3, ease: "back.out(2.4)" }, c.bestAt);
+        // harga mengira naik + bulatan coretan
+        const n = q(".n"), o = { v: c.from };
+        tl.fromTo(q(".num"), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)" }, c.priceAt - 0.05);
+        tl.fromTo(o, { v: c.from }, { v: c.to, duration: 0.5, ease: "power2.out", onUpdate: () => { n.textContent = Math.round(o.v); } }, c.priceAt);
+        tl.fromTo(q(".num"), { scale: 1 }, { scale: 1.14, duration: 0.1, yoyo: true, repeat: 1 }, c.priceAt + 0.5);
+        tl.fromTo(q(".sub"), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.22 }, c.subAt);
+        const p = q("svg path"), L = p.getTotalLength();
+        tl.set(p, { opacity: 0 }, 0); tl.set(p, { opacity: 1 }, c.priceAt + 0.45);
+        tl.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.4, ease: "power1.inOut" }, c.priceAt + 0.45);
+      });
+
+      // Penutup: semua kad menyala semula + nota tulisan tangan + anak panah naik tangga
+      els.forEach((o, j) => { tl.to(o, { opacity: 1, scale: 1, duration: 0.3 }, NOTE_AT - 0.1); tl.to(o.querySelector(".glow"), { opacity: 1, duration: 0.3 }, NOTE_AT - 0.1 + j * 0.1); });
+      tl.fromTo("#note span", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.3 }, NOTE_AT);
+      [["#note svg path", NOTE_AT + 0.25, 0.3], ["#arrowLine", NOTE_AT + 0.35, 0.45], ["#arrowHead", NOTE_AT + 0.8, 0.15]].forEach(([s, t, d]) => {
+        const p = $(s), L = p.getTotalLength();
+        tl.set(p, { strokeDasharray: L, strokeDashoffset: L, opacity: 0 }, 0); tl.set(p, { opacity: 1 }, t);
+        tl.to(p, { strokeDashoffset: 0, duration: d, ease: "power1.inOut" }, t);
+      });
+      tl.set("#note span", { opacity: 0 }, 0);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
