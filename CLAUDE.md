@@ -37,6 +37,12 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 - `Folder Video/Aset` (id 1BvpjU99Can-NpRC2qbW4_pzIRQbdShGq):
   - `01 Intro` (1LAPSkDfYMTDljeh9k2dsTFtIVBeSuwwD) · `02 B-Roll` (1DI7CBy7abVmU4Kj0brD94chd5jXwTDDI)
   - `03 Outro` (19Zucgqv_279GQ27CzY7muqMQ3-tZElWy) · `04 Iklan 2s` (1ZFuMen20VBMqrRmI5WncmWC9TgFwLM9r)
+  - `05 SFX` (1AhUahjvZgEOKhm1Pf1BC6Faj5ylIasKv) · `06 Muzik` (1dTkEF8cMVYXLo9HkF3Jop94-k951nXwe)
+- `Folder Video/Material` (id 1ZqG_d_rPEAygS5_N_vtjalDfJdoFHdCX) — bahan khusus per video dari Sir:
+  - `01 Screenshot Chat` (1CDqlCWNpp3c3G_t15nP2Fs4hBOXLF1zF) · `02 Bukti & Testimoni` (1qtLaKQaEuNl5Jp6mB8mG7cap6F6PEYxH)
+  - `03 Skrip & Bank Ayat` (125WjwLwMoxc0FEZ2MR_9yc65MnpNqDAK) · `04 Rujukan Video` (1WkXi5i1Pwe425k4kZp-gjJ7koWva0nhj)
+- `Folder Video/Edited` (id 1XQvZGEOJpoDoe7yKeQRwAq5hvACET_QN) — DRAF untuk semakan Sir (subfolder `<SIRI-NN>_<Tajuk>`)
+- `Folder Video/Final` (id 1dQgYEcrcn6DawR362tiVy714YWMZKLtR) — video LULUS + thumbnail + caption (subfolder per episod)
 - Baca/senarai fail: Google Drive connector. **Download** fail besar: `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t` (folder perlu "Anyone with the link").
 - **Upload** video ke Drive melalui connector TIDAK praktikal (kandungan mesti dihantar inline). Hantar fail kepada Sir (zip), Sir upload ke folder yang betul.
 - Sumber asal semua aset (template HyperFrames) ada dalam repo `motion/` — boleh render semula bila-bila.
