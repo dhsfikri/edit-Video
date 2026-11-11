@@ -1,0 +1,70 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/raw-251121/C0042.MP4",
+ "transcript": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/work-251121/C0042-transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/b",
+ "rotate": "cw",
+ "fps": 30,
+ "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+ "corrections": {
+  "amat": "amal",
+  "4more": "for more"
+ },
+ "eyeline": {
+  "y": 620,
+  "x": 540
+ },
+ "segments": [
+  {
+   "note": "b1 step kedua buat orang PERLU",
+   "start": 7.82,
+   "end": 9.3,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.18
+    ]
+   ]
+  },
+  {
+   "note": "b2 visual & bunyi ... orang akan perlu dapatkan produk kita",
+   "start": 10.74,
+   "end": 19.55,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.3
+    ]
+   ]
+  },
+  {
+   "note": "b3 makanan / supplement banyak benda boleh touch",
+   "start": 19.64,
+   "end": 22.95,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.18
+    ]
+   ]
+  },
+  {
+   "note": "b4 [selepas iklan] yang ketiga paling penting, di mana letak produk",
+   "start": 29.54,
+   "end": 33.95,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.3
+    ]
+   ]
+  }
+ ]
+}

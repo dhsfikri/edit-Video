@@ -1,0 +1,83 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/raw-251121/C0043.MP4",
+ "transcript": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/work-251121/C0043-transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/c",
+ "rotate": "cw",
+ "fps": 30,
+ "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+ "corrections": {
+  "amat": "amal",
+  "4more": "for more"
+ },
+ "eyeline": {
+  "y": 620,
+  "x": 540
+ },
+ "segments": [
+  {
+   "note": "c1 tak semua orang mampu beli produk",
+   "start": 11.58,
+   "end": 14.04,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.18
+    ]
+   ]
+  },
+  {
+   "note": "c2 kena pandai letak produk kat mana",
+   "start": 14.42,
+   "end": 17.3,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.3
+    ]
+   ]
+  },
+  {
+   "note": "c3 2 benda dalam MAMPU: ada duit / mampu amal",
+   "start": 17.54,
+   "end": 25.1,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.18
+    ]
+   ]
+  },
+  {
+   "note": "c4 Choco Jar: anak muda vs orang dewasa",
+   "start": 29.44,
+   "end": 37.1,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.3
+    ]
+   ]
+  },
+  {
+   "note": "c5 target market, jual pada orang yang betul",
+   "start": 38.36,
+   "end": 40.6,
+   "zoom": 1.0,
+   "cy": 0.4,
+   "zk": [
+    [
+     0,
+     1.18
+    ]
+   ]
+  }
+ ]
+}
