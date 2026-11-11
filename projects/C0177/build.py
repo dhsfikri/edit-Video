@@ -49,17 +49,17 @@ def run(cmd, **kw):
 if "broll" in STEPS:
     adir = REPO / "motion/poin/assets"
     for name, b in B.items():
-        ar, fc, tmp = adir / f"aroll_{name}.mp4", adir / f"face_{name}.mp4", WD / f"_face_{name}.mp4"
+        ar, fc, tmp = adir / ("aroll_cur.mp4" if b.get("comp", "poin") == "poin" else f"aroll_{name}.mp4"), adir / ("face_cur.mp4" if b.get("comp", "poin") == "poin" else f"face_{name}.mp4"), WD / f"_face_{name}.mp4"  # poin: src statik
         pad = 12 - b["dur"] + 0.5
         run(["ffmpeg", "-v", "error", "-y", "-ss", f"{b['a']:.3f}", "-t", f"{b['dur']:.3f}", "-i", BASE, "-an",
              "-vf", f"fps={FPS},tpad=stop_mode=clone:stop_duration={pad:.2f}", "-t", "12",
-             "-c:v", "libx264", "-crf", "14", "-pix_fmt", "yuv420p", str(ar)])
+             "-c:v", "libx264", "-crf", "14", "-g", "15", "-pix_fmt", "yuv420p", str(ar)])
         run([sys.executable, "-I", str(REPO / "pipeline/facecrop.py"), BASE, str(tmp), "--rotate", "none",
              "--seg", f"{b['a']:.3f}:{b['b']:.3f}", "--fps", str(FPS)], stdout=subprocess.DEVNULL)
         run(["ffmpeg", "-v", "error", "-y", "-i", str(tmp), "-vf", f"tpad=stop_mode=clone:stop_duration={pad:.2f}", "-t", "12",
-             "-c:v", "libx264", "-crf", "14", "-pix_fmt", "yuv420p", str(fc)])
+             "-c:v", "libx264", "-crf", "14", "-g", "15", "-pix_fmt", "yuv420p", str(fc)])
         cue = dict(on=rel(b, b["on"]), off=rel(b, b["off"]) if b["off"] < TOTAL - 0.05 else 99, items=[rel(b, t) for t in b["items"]])
-        var = dict(scene=name, face=f"assets/face_{name}.mp4", aroll=f"assets/aroll_{name}.mp4", cue=json.dumps(cue))
+        var = dict(scene=name, face=f"assets/{fc.name}", aroll=f"assets/{ar.name}", cue=json.dumps(cue))
         raw = WD / f"_broll_{name}.mp4"
         run(["npx", "hyperframes", "render", "--variables", json.dumps(var), "-f", str(FPS), "-q", "high", "-w", "4", "-o", str(raw)],
             cwd=REPO / "motion/poin", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

@@ -1,0 +1,163 @@
+{
+ "base": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/base_eye.mov",
+ "out": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/C0041_draf_v1.mp4",
+ "fps": 30,
+ "insert": {
+  "at": 37.28,
+  "dur": 4.0,
+  "overlay": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/iklan.mov",
+  "sfx": "/home/user/edit-Video/motion/iklan/assets/ding.wav",
+  "sfx_vol": 0.6
+ },
+ "hold": 1.0,
+ "broll": [
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/broll_hook.mp4",
+   "start": 0,
+   "dur": 3.433333333333333
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/broll_validate.mp4",
+   "start": 8.833,
+   "dur": 7.033333333333333
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/broll_step1.mp4",
+   "start": 18.167,
+   "dur": 5.966666666666667
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/broll_step3.mp4",
+   "start": 37.267,
+   "dur": 4.7
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/broll_mampu.mp4",
+   "start": 50.7,
+   "dur": 8.133333333333333
+  }
+ ],
+ "overlay": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/overlay.mov",
+ "sfx": [
+  {
+   "src": "/home/user/edit-Video/motion/intro/assets/signature.wav",
+   "at": 0.03,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/kaching.wav",
+   "at": 0.15,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/kaching.wav",
+   "at": 0.55,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/kaching.wav",
+   "at": 0.95,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/kaching.wav",
+   "at": 1.3,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/kaching.wav",
+   "at": 1.6,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/kaching.wav",
+   "at": 1.85,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/kaching.wav",
+   "at": 2.1,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/scratch.wav",
+   "at": 2.44,
+   "vol": 0.7
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 2.9,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 9.005,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 15.215,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 12.6,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 13.72,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 15.16,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 18.335,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 23.605,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 19.295,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 45.415,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 44.69,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 50.855,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/whoosh.wav",
+   "at": 58.28,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 54.175,
+   "vol": 0.14
+  },
+  {
+   "src": "/home/user/edit-Video/motion/pakej/assets/pop.wav",
+   "at": 55.735,
+   "vol": 0.14
+  }
+ ]
+}

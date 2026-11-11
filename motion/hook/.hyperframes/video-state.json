@@ -1,7 +1,7 @@
 {
   "version": 1,
   "historyId": "ef2fe6e4-3990-49b0-97a8-a16107f8acca",
-  "currentRevision": "f323225d-4de0-41cb-b031-c889cc286837",
+  "currentRevision": "649f44ea-68ac-47cd-8b23-f6e3bd16c4df",
   "pendingChanges": false,
   "files": {
     "assets/caveat-latin-700-normal.woff2": {
@@ -25,8 +25,8 @@
       "content": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/53/53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
     },
     "index.html": {
-      "hash": "4b665c0675ec4a7d38affc0e15e5c667107421c6b91758f2d40b4bc414823041",
-      "content": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/4b/4b665c0675ec4a7d38affc0e15e5c667107421c6b91758f2d40b4bc414823041"
+      "hash": "a61ac23993de2077f208eb239e28f26187d447ad6b1c7af3851f044a7d6d10ed",
+      "content": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/a6/a61ac23993de2077f208eb239e28f26187d447ad6b1c7af3851f044a7d6d10ed"
     },
     "meta.json": {
       "hash": "74b051bd21d2acf8f099db5845f8d2a4ff34dc2f152e4c308ad316c865533e7a",
@@ -37,8 +37,8 @@
       "content": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/9d/9d6726fbec6e5f67b2f3d1a4852b9eccd48eb55f0181521a0419dd787daecded"
     },
     "assets/face_hook.mp4": {
-      "hash": "a19324766243c2c567596c772fa81912c4da0569d52d68f3010b095824cc8e6f",
-      "content": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/a1/a19324766243c2c567596c772fa81912c4da0569d52d68f3010b095824cc8e6f"
+      "hash": "d956253e605e948b3d318fac2846ad26006dabb26b71c106012ef148969cbd99",
+      "content": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/d9/d956253e605e948b3d318fac2846ad26006dabb26b71c106012ef148969cbd99"
     }
   },
   "revisions": {
@@ -71,6 +71,40 @@
           "after": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/a1/a19324766243c2c567596c772fa81912c4da0569d52d68f3010b095824cc8e6f"
         }
       }
+    },
+    "f0b237fc-8d9e-485f-b7a0-0337d160724a": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1794380042132,
+      "endedAt": 1794380042147,
+      "files": {
+        "assets/face_hook.mp4": {
+          "before": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/a1/a19324766243c2c567596c772fa81912c4da0569d52d68f3010b095824cc8e6f",
+          "after": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/d9/d956253e605e948b3d318fac2846ad26006dabb26b71c106012ef148969cbd99"
+        },
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/4b/4b665c0675ec4a7d38affc0e15e5c667107421c6b91758f2d40b4bc414823041",
+          "after": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/cb/cb81e2cb6d610461900fc291d2bd2d816e6ba2e75f4c19f2a2931374a2e5fd0a"
+        }
+      }
+    },
+    "649f44ea-68ac-47cd-8b23-f6e3bd16c4df": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1794381340431,
+      "endedAt": 1794381340441,
+      "files": {
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/cb/cb81e2cb6d610461900fc291d2bd2d816e6ba2e75f4c19f2a2931374a2e5fd0a",
+          "after": "/root/.cache/hyperframes/history/ef2fe6e4-3990-49b0-97a8-a16107f8acca/blobs/a6/a61ac23993de2077f208eb239e28f26187d447ad6b1c7af3851f044a7d6d10ed"
+        }
+      }
     }
   },
   "checks": {
@@ -85,15 +119,15 @@
   },
   "renders": {
     "latest": {
-      "id": "788b2382-10ee-4b64-8de7-73f2d855f5a2",
-      "completedAt": 1794374392478,
+      "id": "7b55ad4f-147c-47c0-a9ba-fa6a46d8616f",
+      "completedAt": 1794381371034,
       "output": "/tmp/claude-0/-home-user-edit-Video/b826d7aa-5c91-5e09-8676-2ff866d47c0b/scratchpad/C0041/hook.mov",
       "status": "completed",
-      "revision": "f323225d-4de0-41cb-b031-c889cc286837"
+      "revision": "649f44ea-68ac-47cd-8b23-f6e3bd16c4df"
     },
     "retainedRevisions": [
-      "f323225d-4de0-41cb-b031-c889cc286837",
-      "effe0201-38fa-4e51-9913-7737fa314d41"
+      "649f44ea-68ac-47cd-8b23-f6e3bd16c4df",
+      "f0b237fc-8d9e-485f-b7a0-0337d160724a"
     ]
   },
   "pendingArtifactCleanup": []
