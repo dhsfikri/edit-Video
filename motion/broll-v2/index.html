@@ -1,0 +1,180 @@
+<!doctype html>
+<!--
+  B-ROLL v2 — babak infografik Gaya v2 (1080x1920, penuh skrin).
+  Latar hijau gelap · muka Sir dalam bulatan kiri-atas (klip ikut muka, pipeline/facecrop.py) · tajuk (tulisan tangan + kotak putih)
+  · grafik generik di tengah (y 540–1280; subtitle video utama ditindih di y 1320).
+  Variables:
+    scene : kad | tangga | mampu | kalendar | sasaran   (tambah babak baru dalam SCENES)
+    dur   : durasi (s)
+    face  : klip muka dalam assets/
+    at    : (optional) JSON masa animasi untuk ikut suara, cth '{"b":1.46}' — ganti nilai default babak
+  Render: npx hyperframes render --variables '{"scene":"kad","dur":3.9,"face":"assets/face_kad.mp4"}' -f 60 -o out.mp4
+          → trim: ffmpeg -t <dur> (composition 8s)
+  Semua teks dalam safe zone x 60–900.
+-->
+<html lang="ms" data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"scene","type":"string","label":"Babak","default":"kad"},
+    {"id":"dur","type":"number","label":"Durasi (s)","default":4},
+    {"id":"face","type":"string","label":"Klip muka","default":"assets/face_kad.mp4"},
+    {"id":"at","type":"string","label":"Masa animasi (JSON)","default":"{}"}
+  ]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/caveat-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      :root { --bg1: #0b2e1f; --bg2: #06180f; --green: #25d366; --deep: #0b3d2e; --white: #fff; --red: #ff4d4f; --ink: #0b0b0b; --yel: #ffd60a; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg2); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", "Noto Color Emoji", sans-serif; color: #fff;
+        background: radial-gradient(90% 60% at 50% 40%, var(--bg1) 0%, var(--bg2) 100%); }
+      #grain { position: absolute; inset: 0; opacity: .07; background-image: radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px); background-size: 6px 6px; }
+
+      #faceWrap { position: absolute; left: 60px; top: 260px; width: 250px; height: 250px; border-radius: 50%; overflow: hidden;
+        border: 7px solid var(--white); box-shadow: 0 16px 40px rgba(0,0,0,.45); }
+      #face { width: 100%; height: 100%; object-fit: cover; }
+      #title { position: absolute; left: 345px; top: 298px; }
+      #title .script { display: block; font-family: "Caveat", cursive; font-weight: 700; font-size: 58px; color: rgba(255,255,255,.9); line-height: 1; }
+      #title .box { display: inline-block; margin-top: 10px; background: var(--white); color: var(--deep); font-weight: 800; font-size: 76px;
+        padding: 2px 22px; border-radius: 10px; white-space: nowrap; overflow: hidden; vertical-align: top; }
+
+      .stage { position: absolute; left: 60px; width: 840px; top: 560px; height: 720px; }
+      /* kad */
+      .card { position: absolute; left: 20px; width: 800px; border-radius: 32px; background: rgba(255,255,255,.07); border: 3px solid rgba(255,255,255,.18);
+        padding: 30px 34px; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+      .card .hd { display: flex; align-items: center; gap: 22px; font-weight: 800; font-size: 60px; }
+      .card .hd .em { font-size: 78px; }
+      .chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+      .chip { background: var(--white); color: var(--deep); font-weight: 800; font-size: 34px; padding: 10px 22px; border-radius: 999px; white-space: nowrap; }
+      .chip.g { background: var(--green); color: var(--ink); }
+      .sub { margin-top: 14px; font-weight: 600; font-size: 34px; color: rgba(255,255,255,.75); }
+      /* tangga */
+      .stp { position: absolute; bottom: 60px; width: 250px; border-radius: 22px 22px 0 0; background: linear-gradient(#2fe07a, #169c4c);
+        display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 22px; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+      .stp .n { font-weight: 800; font-size: 90px; color: var(--ink); line-height: 1; }
+      .stp .l { font-weight: 800; font-size: 40px; color: var(--ink); margin-top: 6px; }
+      .stp.lock { background: linear-gradient(#3b4a43, #26302b); } .stp.lock .n, .stp.lock .l { color: #fff; }
+      .tick { position: absolute; width: 84px; height: 84px; border-radius: 50%; background: var(--white); color: var(--green); font-weight: 800; font-size: 54px;
+        display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+      .floor { position: absolute; left: 0; right: 0; bottom: 56px; height: 6px; background: rgba(255,255,255,.3); border-radius: 3px; }
+      /* kalendar */
+      .row { position: absolute; left: 0; width: 840px; }
+      .row .who { font-weight: 800; font-size: 46px; margin-bottom: 18px; display: flex; align-items: center; gap: 16px; }
+      .days { display: flex; gap: 12px; }
+      .day { width: 108px; height: 150px; border-radius: 20px; background: rgba(255,255,255,.08); border: 3px solid rgba(255,255,255,.2);
+        display: flex; flex-direction: column; align-items: center; padding-top: 10px; }
+      .day small { font-weight: 800; font-size: 24px; color: rgba(255,255,255,.7); }
+      .day .j { font-size: 64px; margin-top: 8px; }
+      .badge { display: inline-block; font-weight: 800; font-size: 36px; padding: 6px 18px; border-radius: 999px; }
+      .badge.g { background: var(--green); color: var(--ink); } .badge.y { background: var(--yel); color: var(--ink); }
+      /* sasaran */
+      .ring { position: absolute; border-radius: 50%; }
+      .ppl { position: absolute; font-size: 64px; }
+      .arrow { position: absolute; width: 300px; height: 14px; background: var(--white); border-radius: 7px; transform-origin: 100% 50%; }
+      .arrow::after { content: ""; position: absolute; right: -6px; top: -16px; border-left: 40px solid var(--white); border-top: 23px solid transparent; border-bottom: 23px solid transparent; }
+      .arrow::before { content: ""; position: absolute; left: -10px; top: -14px; width: 50px; height: 42px; background: var(--yel); clip-path: polygon(0 0, 100% 50%, 0 100%, 30% 50%); }
+      .pill { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; font-weight: 800; font-size: 50px; padding: 14px 34px; border-radius: 18px;
+        background: var(--green); color: var(--ink); box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="8" data-width="1080" data-height="1920">
+      <div id="stage0" class="clip" data-start="0" data-duration="8" data-track-index="0">
+        <div id="grain"></div>
+        <div id="title"><span class="script"></span><span class="box"></span></div>
+        <div class="stage" id="st"></div>
+      </div>
+      <div id="faceWrap"><video id="face" src="assets/face_kad.mp4" class="clip" data-start="0" data-duration="8" data-track-index="1" muted playsinline></video></div>
+    </div>
+    <script>
+      const V = window.__hyperframes.getVariables();
+      const D = Number(V.dur) || 4;
+      let AT = {}; try { AT = JSON.parse(V.at || "{}"); } catch (e) {}
+      const $ = (s) => document.querySelector(s);
+      $("#face").setAttribute("src", V.face);
+      const st = $("#st");
+      const add = (h, p = st) => { const t = document.createElement("template"); t.innerHTML = h.trim(); const n = t.content.firstChild; p.appendChild(n); return n; };
+      const tl = gsap.timeline({ paused: true });
+      const pop = (n, t, from = { scale: 0.6, opacity: 0 }) => { tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, from, { scale: 1, opacity: 1, x: 0, y: 0, duration: 0.25, ease: "back.out(2)" }, t); };
+
+      const SCENES = {
+        // #02: makanan vs supplement
+        kad: { script: "setiap produk", box: "LAIN CARA", at: { a: 0.15, b: 1.45 }, build(a) {
+          const c1 = add(`<div class="card" style="top:0"><div class="hd"><span class="em">🍫</span>MAKANAN</div>
+            <div class="chips"><span class="chip">👀 nampak sedap</span><span class="chip">👂 dengar sedap</span></div></div>`);
+          const c2 = add(`<div class="card" style="top:350px"><div class="hd"><span class="em">💊</span>SUPPLEMENT</div>
+            <div class="chips"><span class="chip g">✨ khasiat</span><span class="chip g">😋 rasa</span><span class="chip g">🔁 mudah amal</span></div></div>`);
+          pop(c1, a.a, { y: 120, opacity: 0, scale: 0.9 }); pop(c2, a.b, { y: 120, opacity: 0, scale: 0.9 });
+          [c1, c2].forEach((c, k) => c.querySelectorAll(".chip").forEach((ch, i) => pop(ch, (k ? a.b : a.a) + 0.35 + i * 0.18)));
+        } },
+        // #02: tangga 3 langkah
+        tangga: { script: "3 langkah", box: "ORANG BELI", at: { a: 0.9, b: 3.25, c: 3.8 }, build(a) {
+          add(`<div class="floor"></div>`);
+          const s = [[1, "TAHU", 30, 230, ""], [2, "PERLU", 295, 400, ""], [3, "???", 560, 570, "lock"]].map(([n, l, x, h, cls]) =>
+            add(`<div class="stp ${cls}" style="left:${x}px;height:${h}px"><span class="n">${n === 3 ? "🔒" : n}</span><span class="l">${l}</span></div>`));
+          s.forEach((n, i) => { tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { scaleY: 0, opacity: 1, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.3, ease: "power3.out" }, 0.1 + i * 0.12); });
+          const t1 = add(`<div class="tick" style="left:113px;top:${720 - 60 - 230 - 100}px">✓</div>`);
+          const t2 = add(`<div class="tick" style="left:378px;top:${720 - 60 - 400 - 100}px">✓</div>`);
+          pop(t1, a.a, { scale: 2.2, opacity: 0 }); pop(t2, a.b, { scale: 2.2, opacity: 0 });
+          const q = add(`<div class="pill" style="top:-10px;left:${560 + 125}px;font-size:36px;background:var(--yel)">part 3 👀</div>`);
+          pop(q, a.c); tl.to(s[2], { x: 8, duration: 0.05, yoyo: true, repeat: 5 }, a.c);
+        } },
+        // #03: 2 jenis mampu
+        mampu: { script: "2 jenis", box: "MAMPU", at: { a: 0.2, a2: 1.8, b: 2.3, b2: 3.9 }, build(a) {
+          const c1 = add(`<div class="card" style="top:0"><div class="hd"><span class="em">💰</span>MAMPU BELI</div><div class="sub">✓ ada duit untuk beli</div></div>`);
+          const c2 = add(`<div class="card" style="top:330px"><div class="hd"><span class="em">🔁</span>MAMPU AMAL</div><div class="sub">✓ mampu guna selalu</div></div>`);
+          pop(c1, a.a, { x: -140, opacity: 0, scale: 0.95 }); pop(c2, a.b, { x: 140, opacity: 0, scale: 0.95 });
+          pop(c1.querySelector(".sub"), a.a2, { y: 20, opacity: 0, scale: 1 }); pop(c2.querySelector(".sub"), a.b2, { y: 20, opacity: 0, scale: 1 });
+          tl.to(c1, { opacity: 0.45, scale: 0.97, duration: 0.25 }, a.b);
+          tl.to(c2, { borderColor: "#25d366", duration: 0.2 }, a.b2);
+        } },
+        // #03: kalendar seminggu
+        kalendar: { script: "berapa kali?", box: "SEMINGGU", at: { a: 0.2, a2: 1.5, b: 3.7, b2: 5.3 }, build(a) {
+          const d = ["ISN", "SEL", "RAB", "KHA", "JUM", "SAB", "AHD"];
+          const mk = (top, who) => add(`<div class="row" style="top:${top}px"><div class="who">${who}</div><div class="days">${d.map((x) => `<div class="day"><small>${x}</small><span class="j">🍫</span></div>`).join("")}</div></div>`);
+          const r1 = mk(0, `🧑 anak muda <span class="badge g">7x ✓</span>`), r2 = mk(360, `🧓 dewasa <span class="badge y">1x</span>`);
+          pop(r1, a.a, { y: 40, opacity: 0, scale: 1 }); pop(r2, a.b, { y: 40, opacity: 0, scale: 1 });
+          const j1 = r1.querySelectorAll(".j"), j2 = r2.querySelectorAll(".j");
+          j1.forEach((j, i) => pop(j, a.a + 0.25 + i * 0.16, { scale: 0, opacity: 0 }));
+          j2.forEach((j) => tl.set(j, { opacity: 0 }, 0));
+          pop(j2[5], a.b2, { scale: 0, opacity: 0 });
+          pop(r1.querySelector(".badge"), a.a2, { scale: 0, opacity: 0 }); pop(r2.querySelector(".badge"), a.b2 + 0.2, { scale: 0, opacity: 0 });
+        } },
+        // #03: sasaran
+        sasaran: { script: "kena ada", box: "TARGET", at: { a: 0.35, b: 1.6 }, build(a) {
+          const cx = 420, cy = 300;
+          [[300, "#ff4d4f"], [235, "#ffffff"], [170, "#ff4d4f"], [105, "#ffffff"], [45, "#25d366"]].forEach(([r, c], i) => {
+            const n = add(`<div class="ring" style="left:${cx - r}px;top:${cy - r}px;width:${r * 2}px;height:${r * 2}px;background:${c}"></div>`);
+            pop(n, 0.05 + i * 0.05, { scale: 0, opacity: 0 });
+          });
+          [[20, 0], [700, 40], [10, 520], [720, 500]].forEach(([x, y], i) => {
+            const p = add(`<div class="ppl" style="left:${x}px;top:${y}px">👤</div>`); pop(p, 0.15 + i * 0.05, { scale: 0, opacity: 0 });
+            tl.to(p, { opacity: 0.2, duration: 0.2 }, a.a + 0.3);
+          });
+          const ar = add(`<div class="arrow" style="left:${cx - 300}px;top:${cy - 7}px"></div>`);
+          tl.set(ar, { opacity: 0 }, 0);
+          tl.fromTo(ar, { opacity: 1, x: 640, y: -420, rotation: -35 }, { x: 0, y: 0, rotation: -35, duration: 0.3, ease: "power4.in" }, a.a);
+          tl.to(st.querySelectorAll(".ring"), { x: 6, duration: 0.04, yoyo: true, repeat: 3 }, a.a + 0.3);
+          const pl = add(`<div class="pill" style="top:640px">🎯 ORANG YANG BETUL</div>`); pop(pl, a.b, { scale: 0, opacity: 0 });
+        } },
+      };
+      const sc = SCENES[V.scene] || SCENES.kad;
+      $("#title .script").textContent = sc.script; $("#title .box").textContent = sc.box;
+      tl.fromTo("#grain", { x: 0 }, { x: 6, duration: D, ease: "steps(" + Math.round(D * 12) + ")" }, 0);
+      tl.fromTo("#faceWrap", { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.35, ease: "back.out(1.8)" }, 0);
+      tl.fromTo("#title .script", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.05);
+      // kotak "ditaip" guna clip-path (tak ukur lebar — elak huruf terpotong bila font lambat dimuat)
+      tl.fromTo("#title .box", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.3, ease: "steps(8)" }, 0.15);
+      sc.build(Object.assign({}, sc.at, AT));
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

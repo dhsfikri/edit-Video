@@ -112,10 +112,11 @@
           line.forEach((tok) => {
             const s = el(`<span class="tk ${tok.k}">${tok.text}</span>`); ln.appendChild(s);
             if (tok.k === "box") {
-              const w = s.getBoundingClientRect().width, n = tok.text.length;
+              // "ditaip" guna clip-path (tak ukur lebar — elak huruf terpotong bila font lambat dimuat)
+              const n = tok.text.length;
               tl.set(s, { opacity: 0 }, 0);
-              tl.fromTo(s, { opacity: 1, width: 0, paddingLeft: 0, paddingRight: 0 },
-                { width: w, paddingLeft: 18, paddingRight: 18, duration: Math.min(0.06 * n, 0.4), ease: `steps(${n})` }, tok.t);
+              tl.fromTo(s, { opacity: 1, clipPath: "inset(0 100% 0 0)" },
+                { clipPath: "inset(0 0% 0 0)", duration: Math.min(0.06 * n, 0.4), ease: `steps(${n})` }, tok.t);
             } else {
               tl.fromTo(s, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, tok.t);
             }

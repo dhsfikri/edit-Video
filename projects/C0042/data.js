@@ -4,7 +4,12 @@ window.EDIT = {
  "series": "TIPS JUALAN",
  "episode": "02",
  "maxWords": 4,
- "hideBadge": [],
+ "hideBadge": [
+  [
+   10.55,
+   19.0
+  ]
+ ],
  "hook": {
   "end": 2.78,
   "size": 150,
@@ -26,7 +31,7 @@ window.EDIT = {
  "titles": [
   {
    "start": 7.0,
-   "end": 14.5,
+   "end": 10.55,
    "lines": [
     [
      {
@@ -111,38 +116,6 @@ window.EDIT = {
    "x": 80,
    "y": 1120,
    "text": "dengar sedap",
-   "kind": "ok"
-  },
-  {
-   "t": 11.09,
-   "end": 14.45,
-   "x": 80,
-   "y": 1040,
-   "text": "🍫 makanan",
-   "kind": "tag"
-  },
-  {
-   "t": 12.01,
-   "end": 14.45,
-   "x": 80,
-   "y": 1120,
-   "text": "💊 supplement",
-   "kind": "tag"
-  },
-  {
-   "t": 15.46,
-   "end": 18.95,
-   "x": 80,
-   "y": 1040,
-   "text": "1. orang TAHU",
-   "kind": "ok"
-  },
-  {
-   "t": 17.76,
-   "end": 18.95,
-   "x": 80,
-   "y": 1120,
-   "text": "2. orang PERLU",
    "kind": "ok"
   },
   {

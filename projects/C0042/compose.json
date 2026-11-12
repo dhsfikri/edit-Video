@@ -1,12 +1,23 @@
 {
   "base": "/tmp/claude-0/-home-user-edit-Video/05c4ead9-c89f-552f-8908-5a1fed2fa3d5/scratchpad/C0042/base.mov",
-  "out": "/tmp/claude-0/-home-user-edit-Video/05c4ead9-c89f-552f-8908-5a1fed2fa3d5/scratchpad/C0042/C0042_draf_v2.mp4",
+  "out": "/tmp/claude-0/-home-user-edit-Video/05c4ead9-c89f-552f-8908-5a1fed2fa3d5/scratchpad/C0042/C0042_draf_v3.mp4",
   "fps": 60,
   "insert": {
     "at": 24.74,
     "dur": 1.0
   },
-  "broll": [],
+  "broll": [
+    {
+      "src": "/tmp/claude-0/-home-user-edit-Video/05c4ead9-c89f-552f-8908-5a1fed2fa3d5/scratchpad/C0042/broll_kad.mp4",
+      "start": 10.55,
+      "dur": 3.93
+    },
+    {
+      "src": "/tmp/claude-0/-home-user-edit-Video/05c4ead9-c89f-552f-8908-5a1fed2fa3d5/scratchpad/C0042/broll_tangga.mp4",
+      "start": 14.48,
+      "dur": 4.52
+    }
+  ],
   "overlay": "/tmp/claude-0/-home-user-edit-Video/05c4ead9-c89f-552f-8908-5a1fed2fa3d5/scratchpad/C0042/overlay.mov",
   "sfx": [
     {
@@ -23,6 +34,16 @@
       "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
       "at": 2.55,
       "vol": 0.3
+    },
+    {
+      "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+      "at": 10.4,
+      "vol": 0.22
+    },
+    {
+      "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+      "at": 14.33,
+      "vol": 0.22
     }
   ]
 }

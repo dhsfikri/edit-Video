@@ -4,7 +4,16 @@ window.EDIT = {
  "series": "TIPS JUALAN",
  "episode": "03",
  "maxWords": 4,
- "hideBadge": [],
+ "hideBadge": [
+  [
+   8.2,
+   13.3
+  ],
+  [
+   15.0,
+   23.84
+  ]
+ ],
  "hook": {
   "end": 2.55,
   "size": 120,
@@ -26,7 +35,7 @@ window.EDIT = {
  "titles": [
   {
    "start": 5.62,
-   "end": 13.3,
+   "end": 8.2,
    "lines": [
     [
      {
@@ -45,26 +54,26 @@ window.EDIT = {
    ]
   },
   {
-   "start": 21.1,
+   "start": 23.84,
    "end": 27.75,
    "lines": [
     [
      {
-      "t": 21.12,
+      "t": 23.86,
       "text": "jual pada",
       "k": "script"
      }
     ],
     [
      {
-      "t": 21.26,
+      "t": 24.0,
       "text": "ORANG",
       "k": "bold"
      }
     ],
     [
      {
-      "t": 21.4,
+      "t": 24.14,
       "text": "YANG BETUL",
       "k": "box"
      }
@@ -83,43 +92,11 @@ window.EDIT = {
    "kind": "tag"
   },
   {
-   "t": 9.04,
-   "end": 13.3,
+   "t": 13.4,
+   "end": 15.0,
    "x": 80,
-   "y": 1040,
-   "text": "💰 MAMPU BELI",
-   "kind": "ok"
-  },
-  {
-   "t": 12.54,
-   "end": 13.3,
-   "x": 80,
-   "y": 1120,
-   "text": "🔁 MAMPU AMAL",
-   "kind": "ok"
-  },
-  {
-   "t": 15.47,
-   "end": 21.05,
-   "x": 80,
-   "y": 1040,
-   "text": "anak muda = selalu",
-   "kind": "ok"
-  },
-  {
-   "t": 19.35,
-   "end": 21.05,
-   "x": 80,
-   "y": 1120,
-   "text": "dewasa = seminggu 1",
-   "kind": "no"
-  },
-  {
-   "t": 22.52,
-   "end": 23.8,
-   "x": 80,
-   "y": 1080,
-   "text": "✓ TAHU  ✓ PERLU  ✓ MAMPU",
+   "y": 1060,
+   "text": "🍫 contoh: Choco Jar",
    "kind": "tag"
   }
  ],
