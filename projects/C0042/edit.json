@@ -1,0 +1,19 @@
+{
+  "source": "/tmp/claude-0/-home-user-edit-Video/05c4ead9-c89f-552f-8908-5a1fed2fa3d5/scratchpad/raw-251121/C0042.MP4",
+  "transcript": "/home/user/edit-Video/projects/C0042/transcript.json",
+  "workdir": "/tmp/claude-0/-home-user-edit-Video/05c4ead9-c89f-552f-8908-5a1fed2fa3d5/scratchpad/C0042",
+  "rotate": "cw",
+  "fps": 60,
+  "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+  "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "corrections": {},
+  "segments": [
+    {"note": "HOOK A: jar rapat kamera - ni orang perlu nampak visual macam ni", "start": 10.74, "end": 13.5, "zoom": 1.0, "zoom_to": 1.12, "zoom_dur": 0.3, "cy": 0.5},
+    {"note": "bunyi macam ni, nampak sedap dengar pun sedap", "start": 13.5, "end": 17.62, "zoom": 1.15, "cy": 0.4},
+    {"note": "step kedua adalah buat orang perlu", "start": 7.84, "end": 9.38, "zoom": 1.2, "cy": 0.38},
+    {"note": "so orang akan perlu dapatkan produk kita ... makanan / supplement ... touch", "start": 17.62, "end": 23.46, "zoom": 1.2, "cy": 0.38},
+    {"note": "yang pertama orang kena tahu kita, kedua orang kena perlu produk kita", "start": 23.7, "end": 28.14, "zoom": 1.2, "cy": 0.38},
+    {"note": "dan yang ketiga paling penting, di mana kita nak letak produk kita?", "start": 29.54, "end": 34.3, "zoom": 1.2, "cy": 0.38},
+    {"note": "CTA comment part 3", "start": 34.56, "end": 35.52, "zoom": 1.2, "cy": 0.38}
+  ]
+}

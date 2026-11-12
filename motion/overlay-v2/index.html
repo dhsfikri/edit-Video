@@ -9,6 +9,9 @@
     callouts  : pil kecil {t, end, x, y, text, kind:"ok"|"no"|"tag"}
     words     : subtitle kecil bawah, perkataan aktif dalam kotak hijau (karaoke)
     cta       : pil CTA kecil {start, text}
+    hook      : (optional) HOOK BESAR {end, lines:[[{text, k:"big"|"hl"}]]} — Anton besar, ADA dari frame 0
+                (tiada animasi masuk), keyword "hl" dalam kotak kuning; auto-kecil supaya muat x 60–900;
+                keluar dengan mengecil ke kiri-atas pada `end`.
 -->
 <html lang="ms" data-resolution="portrait">
   <head>
@@ -20,6 +23,7 @@
       @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
       @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
       @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/caveat-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Anton"; font-weight: 400; src: url("assets/anton-latin-400-normal.woff2") format("woff2"); }
       @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
       :root { --green: #25d366; --deep: #0b3d2e; --white: #fff; --ink: #0b0b0b; --red: #ff6b6b; }
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,6 +42,12 @@
       .tk.script { font-family: "Caveat", cursive; font-weight: 700; font-size: 54px; color: #fff; }
       .tk.bold { font-weight: 800; font-size: 66px; color: #fff; }
       .tk.box { font-weight: 800; font-size: 80px; color: var(--deep); background: #fff; padding: 0 18px; border-radius: 10px; overflow: hidden; white-space: nowrap; }
+
+      #hook { position: absolute; left: 60px; top: 300px; width: 840px; transform-origin: 0 0; }
+      #hook .hl0 { display: block; white-space: nowrap; line-height: 1.02; margin-bottom: 10px; }
+      #hook .hk { display: inline-block; font-family: "Anton", sans-serif; font-size: 128px; letter-spacing: .01em; text-transform: uppercase; }
+      #hook .hk.big { color: #fff; -webkit-text-stroke: 3px #0b0b0b; paint-order: stroke fill; text-shadow: 0 6px 18px rgba(0,0,0,.55); }
+      #hook .hk.hl { color: #0b0b0b; background: #ffd60a; padding: 0 20px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.45); }
 
       .br { position: absolute; width: 58px; height: 58px; border-color: #fff; border-style: solid; border-width: 0; }
       .br.tl0 { border-top-width: 7px; border-left-width: 7px; } .br.tr0 { border-top-width: 7px; border-right-width: 7px; }
@@ -60,8 +70,8 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
-      <div id="layer" class="clip" data-start="0" data-duration="20" data-track-index="0"></div>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1080" data-height="1920">
+      <div id="layer" class="clip" data-start="0" data-duration="30" data-track-index="0"></div>
     </div>
     <script>
       const E = window.EDIT, D = E.duration;
@@ -74,6 +84,21 @@
       const badge = put(`<div id="badge"><i></i><b>${E.series} <span>#${E.episode}</span></b></div>`);
       tl.fromTo(badge, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, 0);
       (E.hideBadge || []).forEach(([a, b]) => { tl.set(badge, { opacity: 0 }, a); if (b < D) tl.set(badge, { opacity: 1 }, b); });
+
+      // HOOK BESAR — mesti nampak pada frame 0
+      if (E.hook) {
+        const h = put(`<div id="hook"></div>`);
+        E.hook.lines.forEach((line) => {
+          const ln = el(`<span class="hl0"></span>`); h.appendChild(ln);
+          line.forEach((tok) => ln.appendChild(el(`<span class="hk ${tok.k}">${tok.text}</span>`)));
+        });
+        // auto-kecil: baris paling lebar mesti muat 840px (safe zone x 60–900)
+        const widest = Math.max(...[...h.querySelectorAll(".hl0")].map((n) => [...n.children].reduce((a, c) => a + c.getBoundingClientRect().width, 0)));
+        if (E.hook.size) h.querySelectorAll(".hk").forEach((n) => (n.style.fontSize = E.hook.size + "px"));
+        else if (widest > 840) h.querySelectorAll(".hk").forEach((n) => (n.style.fontSize = Math.floor(128 * 840 / widest) + "px"));
+        tl.fromTo(h, { scale: 1.06 }, { scale: 1, duration: 0.2, ease: "power2.out" }, 0);
+        tl.to(h, { scale: 0.5, opacity: 0, duration: 0.25, ease: "power2.in" }, E.hook.end - 0.25);
+      }
 
       // Tajuk kinetik
       (E.titles || []).forEach((g) => {

@@ -1,0 +1,19 @@
+{
+  "source": "/tmp/claude-0/-home-user-edit-Video/05c4ead9-c89f-552f-8908-5a1fed2fa3d5/scratchpad/raw-251121/C0043.MP4",
+  "transcript": "/home/user/edit-Video/projects/C0043/transcript.json",
+  "workdir": "/tmp/claude-0/-home-user-edit-Video/05c4ead9-c89f-552f-8908-5a1fed2fa3d5/scratchpad/C0043",
+  "rotate": "cw",
+  "fps": 60,
+  "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+  "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "corrections": {"amat": "amal", "4more": "for more"},
+  "segments": [
+    {"note": "HOOK A punch-in: tak semua orang mampu beli produk", "start": 11.4, "end": 14.02, "zoom": 1.0, "zoom_to": 1.35, "zoom_dur": 0.25, "cy": 0.38},
+    {"note": "so kat sini you kena pandai letak produk tu kat mana", "start": 14.42, "end": 17.54, "zoom": 1.2, "cy": 0.38},
+    {"note": "ada 2 benda dalam mampu: mampu beli / mampu guna mampu amal", "start": 17.54, "end": 25.24, "zoom": 1.2, "cy": 0.38},
+    {"note": "so contoh Choco Jar", "start": 25.24, "end": 26.12, "zoom": 1.2, "cy": 0.38},
+    {"note": "ni mungkin anak muda boleh amalkan, dewasa seminggu satu", "start": 30.34, "end": 37.24, "zoom": 1.2, "cy": 0.38},
+    {"note": "so kena target market anda dan jual pada orang yang betul", "start": 38.36, "end": 41.06, "zoom": 1.2, "cy": 0.38},
+    {"note": "CTA follow", "start": 41.3, "end": 44.3, "zoom": 1.2, "cy": 0.38}
+  ]
+}

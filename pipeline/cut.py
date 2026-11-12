@@ -12,7 +12,8 @@ edit.json:
   "fps": 50,
   "color": "eq=brightness=0.03:contrast=1.06:saturation=1.08:gamma=1.08",
   "corrections": {"say": "sale"},
-  "segments": [{"start": 7.82, "end": 11.15, "zoom": 1.0, "zoom_to": 1.0, "cy": 0.42}, ...]
+  "segments": [{"start": 7.82, "end": 11.15, "zoom": 1.0, "zoom_to": 1.0, "zoom_dur": 0.25, "cy": 0.42}, ...]
+                # zoom_dur (optional): masa zoom -> zoom_to (punch-in hook); default = sepanjang segmen
 }
 
 Output (dalam workdir):
@@ -79,7 +80,8 @@ for i, s in enumerate(segs):
     z0, z1 = s.get("zoom", 1.0), s.get("zoom_to", s.get("zoom", 1.0))
     cy = s.get("cy", 0.42)  # pusat zoom menegak (muka)
     # zoom linear z0 -> z1 sepanjang segmen: scale ikut frame, kemudian crop 1080x1920 berpusat pada muka
-    z = f"({z0}+({z1}-{z0})*t/{d:.3f})" if z0 != z1 else str(z0)
+    zd = s.get("zoom_dur", d)  # punch-in laju: capai zoom_to dalam zoom_dur saat, kemudian kekal
+    z = f"({z0}+({z1}-{z0})*min(t/{zd:.3f},1))" if z0 != z1 else str(z0)
     zoom = (
         f"scale=w='trunc({W}*{z}/2)*2':h='trunc({H}*{z}/2)*2':eval=frame:flags=lanczos,"
         f"crop={W}:{H}:x='(iw-{W})/2':y='(ih-{H})*{cy}'"
