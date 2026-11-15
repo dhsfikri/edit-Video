@@ -1,9 +1,11 @@
 <!doctype html>
 <!--
-  UJIAN 5s — gaya pembukaan "IKEA Together" (allkustom): bar jatuh → bina perkataan, tali + manik, tangan
-  tarik → huruf runtuh jadi bar, lampu menyala → bilik hangat, perabot bercantum. Isi & warna milik Sir.
-  1080x1920 · teks dalam safe zone (x 60–900, y 220–1440).
-  Render: ../node_modules/.bin/hyperframes render -f 30 -q high -w 4 -o out.mp4
+  UJIAN 5s v3 — gaya pembukaan "IKEA Together" (allkustom), isi & warna Sir.
+  Prinsip animasi: lengan berayun dari bahu (pivot luar skrin), overshoot & settle, tangan "bernafas",
+  anticipation sebelum tarik, huruf ditolak & penyek → runtuh jadi blok tebal (bounce), manik = bandul,
+  bar mendarat dengan squash, perabot mendarat dengan squash & stretch.
+  Tangan: ilustrasi VectorCraft (projects/IKEA5/hand_vector.py → assets/hand.svg, disisip di bawah).
+  1080x1920 · teks dalam safe zone (x 60–900, y 220–1440). Render: ../node_modules/.bin/hyperframes render -f 30 -q high -w 4 -o out.mp4
 -->
 <html lang="ms" data-resolution="portrait">
 <head>
@@ -12,14 +14,14 @@
 <script src="assets/gsap.min.js"></script>
 <style>
   @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
-  :root { --y: #ffd60a; --ink: #0b0b0b; --g: #25d366; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--y); }
-  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--y); }
-  #word { position: absolute; left: 60px; width: 840px; top: 980px; text-align: center; font-family: "Montserrat"; font-weight: 800;
-    font-size: 176px; line-height: 1; letter-spacing: 2px; color: var(--ink); white-space: nowrap; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #ffd60a; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #ffd60a; }
+  #wordWrap { position: absolute; left: 60px; width: 840px; top: 960px; height: 200px; transform-origin: 50% 100%; }
+  #word { position: absolute; left: 0; width: 840px; top: 0; text-align: center; font-family: "Montserrat"; font-weight: 800;
+    font-size: 168px; line-height: 1; color: #0b0b0b; white-space: nowrap; }
   #word span { display: inline-block; }
-  .bar { position: absolute; background: var(--ink); }
+  .bar { position: absolute; background: #0b0b0b; }
   svg { position: absolute; left: 0; top: 0; overflow: visible; }
   #room { position: absolute; inset: 0; opacity: 0; }
   #wipe { position: absolute; left: 480px; top: 2300px; width: 2600px; height: 2600px; margin: -1300px 0 0 -1300px; background: #c08d4e; transform: rotate(45deg) scale(0); }
@@ -28,96 +30,86 @@
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1080" data-height="1920">
  <div id="stage" class="clip" data-start="0" data-duration="5" data-track-index="0">
-  <div id="word"><span>W</span><span>A</span><span>S</span><span>S</span><span>A</span><span>P</span></div>
-  <div id="bars"></div>
+  <div id="wordWrap"><div id="word"><span>W</span><span>A</span><span>S</span><span>S</span><span>A</span><span>P</span></div><div id="bars"></div></div>
 
-  <!-- tali + manik + tangan -->
-  <svg id="handsvg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <svg id="rigsvg" width="1080" height="1920" viewBox="0 0 1080 1920">
    <defs>
-    <linearGradient id="skin" gradientUnits="userSpaceOnUse" x1="0" y1="-120" x2="0" y2="118">
-     <stop offset="0" stop-color="#f6cfa8"/><stop offset=".55" stop-color="#e9b386"/><stop offset="1" stop-color="#cf9064"/>
-    </linearGradient>
-    <linearGradient id="arm" x1="0" y1="0" x2="1" y2="0">
-     <stop offset="0" stop-color="#ebb68a"/><stop offset="1" stop-color="#e2a87b"/>
-    </linearGradient>
-    <linearGradient id="sleeve" x1="0" y1="0" x2="0" y2="1">
-     <stop offset="0" stop-color="#2a2a2a"/><stop offset="1" stop-color="#050505"/>
-    </linearGradient>
-    <radialGradient id="beadG" cx=".35" cy=".3" r=".75">
-     <stop offset="0" stop-color="#9dfcc4"/><stop offset=".45" stop-color="#25d366"/><stop offset="1" stop-color="#0d7a3a"/>
-    </radialGradient>
-    <filter id="hs" x="-30%" y="-30%" width="160%" height="190%">
-     <feGaussianBlur in="SourceAlpha" stdDeviation="22"/><feOffset dy="44" dx="-8"/>
-     <feComponentTransfer><feFuncA type="linear" slope=".22"/></feComponentTransfer>
+    <radialGradient id="beadG" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#9dfcc4"/><stop offset=".45" stop-color="#25d366"/><stop offset="1" stop-color="#0d7a3a"/></radialGradient>
+    <filter id="hs" x="-30%" y="-40%" width="160%" height="200%">
+     <feGaussianBlur in="SourceAlpha" stdDeviation="20"/><feOffset dy="40" dx="-10"/>
+     <feComponentTransfer><feFuncA type="linear" slope=".2"/></feComponentTransfer>
      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    
-    <linearGradient id="hg-linear-gradient-1" x1="700" y1="128" x2="700" y2="408" gradientUnits="userSpaceOnUse">
+    <filter id="bs" x="-60%" y="-60%" width="220%" height="260%"><feGaussianBlur in="SourceAlpha" stdDeviation="6"/><feOffset dy="12"/>
+     <feComponentTransfer><feFuncA type="linear" slope=".25"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+
+    <linearGradient id="hg-linear-gradient-1" x1="700" y1="120" x2="700" y2="440" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
       <stop offset="0.45" stop-color="#d3f5c8"/>
-      <stop offset="0.82" stop-color="#b4e2a8"/>
+      <stop offset="0.8" stop-color="#b4e2a8"/>
       <stop offset="1" stop-color="#9fd293"/>
     </linearGradient>
-    <linearGradient id="hg-linear-gradient-2" x1="234.003" y1="352" x2="234.003" y2="406" gradientUnits="userSpaceOnUse">
+    <linearGradient id="hg-linear-gradient-2" x1="229.004" y1="368" x2="229.004" y2="432" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
-      <stop offset="0.6" stop-color="#d3f5c8"/>
-      <stop offset="1" stop-color="#b4e2a8"/>
+      <stop offset="0.5" stop-color="#d3f5c8"/>
+      <stop offset="0.85" stop-color="#b4e2a8"/>
+      <stop offset="1" stop-color="#9fd293"/>
     </linearGradient>
-    <linearGradient id="hg-linear-gradient-3" x1="193.004" y1="290" x2="193.004" y2="352" gradientUnits="userSpaceOnUse">
+    <linearGradient id="hg-linear-gradient-3" x1="188.005" y1="296" x2="188.005" y2="372" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
-      <stop offset="0.6" stop-color="#d3f5c8"/>
-      <stop offset="1" stop-color="#b4e2a8"/>
+      <stop offset="0.5" stop-color="#d3f5c8"/>
+      <stop offset="0.85" stop-color="#b4e2a8"/>
+      <stop offset="1" stop-color="#9fd293"/>
     </linearGradient>
-    <linearGradient id="hg-linear-gradient-4" x1="179.004" y1="222" x2="179.004" y2="288" gradientUnits="userSpaceOnUse">
+    <linearGradient id="hg-linear-gradient-4" x1="173.005" y1="222" x2="173.005" y2="302" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
-      <stop offset="0.6" stop-color="#d3f5c8"/>
-      <stop offset="1" stop-color="#b4e2a8"/>
+      <stop offset="0.5" stop-color="#d3f5c8"/>
+      <stop offset="0.85" stop-color="#b4e2a8"/>
+      <stop offset="1" stop-color="#9fd293"/>
     </linearGradient>
-    <linearGradient id="hg-linear-gradient-5" x1="197.004" y1="158" x2="197.004" y2="218" gradientUnits="userSpaceOnUse">
+    <linearGradient id="hg-linear-gradient-5" x1="194.005" y1="150" x2="194.005" y2="226" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
-      <stop offset="0.6" stop-color="#d3f5c8"/>
-      <stop offset="1" stop-color="#b4e2a8"/>
+      <stop offset="0.5" stop-color="#d3f5c8"/>
+      <stop offset="0.85" stop-color="#b4e2a8"/>
+      <stop offset="1" stop-color="#9fd293"/>
     </linearGradient>
-    <linearGradient id="hg-linear-gradient-6" x1="700" y1="60" x2="700" y2="230" gradientUnits="userSpaceOnUse">
+    <linearGradient id="hg-linear-gradient-6" x1="700" y1="44" x2="700" y2="230" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
       <stop offset="0.5" stop-color="#d3f5c8"/>
       <stop offset="1" stop-color="#b4e2a8"/>
     </linearGradient>
   
-    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.2"/></filter>
    </defs>
-   <line id="cord" x1="470" y1="-20" x2="470" y2="-20" stroke="#14904a" stroke-width="5"/>
-   <!-- tangan: ilustrasi VectorCraft (projects/IKEA5/hand_vector.py → assets/hand.svg), manik di (335,140) -->
-   <g id="hand" filter="url(#hs)" transform="translate(1700,640)"><g id="handArt" transform="scale(1.12) translate(-335,-140)">
+   <line id="cord" x1="470" y1="-30" x2="470" y2="-30" stroke="#14904a" stroke-width="5" stroke-linecap="round"/>
+   <g id="rig" transform="translate(1000,0) rotate(7 1700 1150)" opacity="0"><g id="hand" filter="url(#hs)" transform="translate(470,600)">
+    <g id="handArt" transform="scale(1.12) translate(-335,-140)">
 
-    <path id="palm" d="M300 150 C420 140 530 150 640 160 L640 346 C540 392 420 408 300 400 C292 330 290 214 300 150 Z" fill="url(#hg-linear-gradient-1)"/>
-    <path id="arm" d="M560 160 C760 148 980 136 1400 128 L1400 392 C1000 378 780 356 560 346 Z" fill="url(#hg-linear-gradient-1)"/>
-    <path id="pinky" d="M177 352 L318 352 L318 406 L177 406 C141.009 406 141.009 352 177 352 Z" fill="url(#hg-linear-gradient-2)"/>
-    <path id="ring" d="M95 290 L322 290 L322 352 L95 352 C53.677 352 53.677 290 95 290 Z" fill="url(#hg-linear-gradient-3)"/>
-    <path id="middle" d="M67 222 L324 222 L324 288 L67 288 C23.011 288 23.011 222 67 222 Z" fill="url(#hg-linear-gradient-4)"/>
-    <path id="index" d="M102 158 L322 158 L322 218 L102 218 C62.01 218 62.01 158 102 158 Z" fill="url(#hg-linear-gradient-5)"/>
-    <path id="gap1" d="M318 220 C340 221 356 223 368 226" fill="none" stroke="#b4e2a8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="gap2" d="M318 289 C340 290 356 292 368 295" fill="none" stroke="#b4e2a8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="gap3" d="M318 352 C340 353 356 355 368 358" fill="none" stroke="#b4e2a8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="indexJ1" d="M150 172 C145 188 145 188 150 204" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="indexJ2" d="M214 172 C209 188 209 188 214 204" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="middleJ1" d="M122 236 C117 255 117 255 122 274" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="middleJ2" d="M198 236 C193 255 193 255 198 274" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="ringJ1" d="M148 304 C143 321 143 321 148 338" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="ringJ2" d="M214 304 C209 321 209 321 214 338" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="pinkyJ1" d="M212 366 C207 379 207 379 212 392" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="pinkyJ2" d="M258 366 C253 379 253 379 258 392" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="thumb" d="M430 190 C420 132 410 100 420 82 C434 60 474 64 490 86 C506 110 524 150 566 182 C520 204 470 204 430 190 Z" fill="url(#hg-linear-gradient-6)"/>
-    <path id="thumbNail" d="M428 90 C432 78 452 76 460 86 L466 118 C458 126 440 126 434 118 Z" fill="#bfe6b3"/>
-    <path id="palmCrease" d="M388 206 C392 250 426 268 474 266" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="palm" d="M300 146 C420 134 540 146 660 156 L660 370 C560 420 430 440 300 430 C290 350 288 214 300 146 Z" fill="url(#hg-linear-gradient-1)"/>
+    <path id="arm" d="M580 156 C780 142 1000 128 1400 118 L1400 414 C1000 402 800 384 580 370 Z" fill="url(#hg-linear-gradient-1)"/>
+    <path id="pinky" d="M172 368 L318 368 L318 432 L172 432 C129.344 432 129.344 368 172 368 Z" fill="url(#hg-linear-gradient-2)"/>
+    <path id="ring" d="M90 296 L324 296 L324 372 L90 372 C39.346 372 39.346 296 90 296 Z" fill="url(#hg-linear-gradient-3)"/>
+    <path id="middle" d="M60 222 L326 222 L326 302 L60 302 C6.68 302 6.68 222 60 222 Z" fill="url(#hg-linear-gradient-4)"/>
+    <path id="index" d="M100 150 L326 150 L326 226 L100 226 C49.346 226 49.346 150 100 150 Z" fill="url(#hg-linear-gradient-5)"/>
+    <path id="gap1" d="M320 224 C344 225 362 228 376 232" fill="none" stroke="#b4e2a8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="gap2" d="M320 297 C344 298 362 301 376 305" fill="none" stroke="#b4e2a8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="gap3" d="M320 368 C344 369 362 372 376 376" fill="none" stroke="#b4e2a8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="indexJ1" d="M146 162 C140 188 140 188 146 214" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="indexJ2" d="M214 162 C208 188 208 188 214 214" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="middleJ1" d="M110 234 C104 262 104 262 110 290" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="middleJ2" d="M192 234 C186 262 186 262 192 290" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="ringJ1" d="M138 308 C132 334 132 334 138 360" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="ringJ2" d="M210 308 C204 334 204 334 210 360" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="pinkyJ1" d="M206 380 C200 400 200 400 206 420" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="pinkyJ2" d="M256 380 C250 400 250 400 256 420" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="thumb" d="M424 190 C410 128 398 90 410 66 C428 40 480 44 500 72 C520 104 538 148 580 182 C530 208 470 208 424 190 Z" fill="url(#hg-linear-gradient-6)"/>
+    <path id="thumbNail" d="M420 76 C426 60 452 58 464 70 L470 108 C460 118 438 118 430 108 Z" fill="#bfe6b3"/>
+    <path id="palmCrease" d="M392 214 C396 262 430 282 482 280" fill="none" stroke="#9ccc90" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   
-   </g></g>
-   <circle id="bead" cx="470" cy="-40" r="30" fill="url(#beadG)"/>
+    </g></g></g>
+   <circle id="bead" cx="470" cy="-60" r="32" fill="url(#beadG)" filter="url(#bs)"/>
   </svg>
 
-  <!-- peralihan: bentuk berlian dari bawah -->
   <div id="wipe"></div>
-
   <!-- BILIK HANGAT -->
   <div id="room">
    <svg width="1080" height="1920" viewBox="0 0 1080 1920">
@@ -140,6 +132,7 @@
     <rect width="1080" height="1920" fill="#c08d4e"/>
     <ellipse id="glow" cx="480" cy="1080" rx="760" ry="900" fill="url(#warm)"/>
     <rect y="1330" width="1080" height="590" fill="#b07f44" opacity=".55"/>
+    <g id="furn" transform="translate(480,1300) scale(1.22) translate(-524,-1250)">
     <!-- lampu lantai -->
     <g id="lamp" filter="url(#rs)">
      <rect x="148" y="1310" width="110" height="18" rx="6" fill="#111"/>
@@ -164,94 +157,132 @@
     <g id="phone">
      <rect x="582" y="1122" width="64" height="104" rx="12" fill="#111"/>
      <rect x="577" y="1220" width="74" height="8" rx="3" fill="#2a2a2a"/>
-    </g>
     <g id="phoneScr" opacity="0"><rect x="588" y="1130" width="52" height="86" rx="7" fill="url(#screen)"/>
      <rect x="594" y="1150" width="34" height="12" rx="6" fill="#fff"/><rect x="600" y="1170" width="34" height="12" rx="6" fill="#d7f8e3"/></g>
     <g id="notif" opacity="0"><circle cx="648" cy="1112" r="20" fill="#ff3b30"/><text x="648" y="1121" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="24" fill="#fff">1</text></g>
+    </g>
     <!-- bangku sisi hijau + mug -->
     <g id="stool" filter="url(#rs)">
      <rect x="780" y="1172" width="120" height="20" rx="4" fill="#25d366"/>
      <path d="M800,1192 L782,1312 M880,1192 L898,1312 M792,1262 h96" stroke="#25d366" stroke-width="15" stroke-linecap="round" fill="none"/>
      <g id="mug"><rect x="818" y="1126" width="44" height="48" rx="8" fill="#fff"/><path d="M862,1138 q22,0 22,16 q0,16 -22,16" stroke="#fff" stroke-width="8" fill="none"/></g>
     </g>
+    </g>
    </svg>
   </div>
+ </div>
+</div>
+
  </div>
 </div>
 <script>
   const $ = (s) => document.querySelector(s);
   const tl = gsap.timeline({ paused: true });
+  const R = { a: 7, tx: 1000 }, PX = 1700, PY = 1150, HX = 470, HY = 600, BX = 470, TOPY = -30;
+  const rig = $("#rig"), bead = $("#bead"), cord = $("#cord");
+  // titik manik di tangan (ikut putaran bahu)
+  const handPt = (a) => { const r = a * Math.PI / 180, dx = HX - PX, dy = HY - PY;
+    return [R.tx + PX + dx * Math.cos(r) - dy * Math.sin(r), PY + dx * Math.sin(r) + dy * Math.cos(r)]; };
+  // B: kedudukan manik. mode "hold": ikut tangan; selain itu: nilai sendiri (jatuh / bandul)
+  const B = { x: BX, y: -60, hold: 0, sw: 0, swT: 0 };
+  const draw = () => {
+    rig.setAttribute("transform", `translate(${R.tx},0) rotate(${R.a} ${PX} ${PY})`);
+    let x = B.x, y = B.y;
+    if (B.hold > 0) { const [hx, hy] = handPt(R.a); x = x + (hx - x) * B.hold; y = y + (hy - y) * B.hold; }
+    // bandul: ayunan teredam selepas dilepaskan
+    if (B.swT > 0) { const t = B.swT; const ang = B.sw * Math.exp(-3.2 * t) * Math.sin(t * 9.5); const L = y - TOPY;
+      x = BX + Math.sin(ang) * L; y = TOPY + Math.cos(ang) * L; }
+    bead.setAttribute("cx", x); bead.setAttribute("cy", y);
+    cord.setAttribute("x2", x); cord.setAttribute("y2", y - 30);
+  };
 
-  // ── Bina perkataan daripada bar (gaya IKEA): setiap huruf ada bar yang jatuh dan "melukis" huruf itu
+  // ── 1) BAR → HURUF (laju di awal, mendarat dengan squash, berselang-seli atas/bawah)
   const word = $("#word"), letters = [...word.querySelectorAll("span")], bars = $("#bars");
-  const root = $("#root").getBoundingClientRect();
-  const capTop = 980 + 176 * 0.17, capH = 176 * 0.72;   // anggaran kotak huruf besar Montserrat
-  const order = [2, 0, 4, 1, 5, 3], starts = [0.30, 0.42, 0.52, 0.62, 0.74, 0.86];
-  const fromTop = [true, false, true, true, false, true];
-  letters.forEach((L, i) => {
-    const r = L.getBoundingClientRect(), x = r.left - root.left, w = r.width;
-    const b = document.createElement("div"); b.className = "bar"; bars.appendChild(b);
-    gsap.set(b, { left: x + w * 0.04, top: capTop, width: Math.min(46, w * 0.3), height: capH });
+  const base = $("#wordWrap").getBoundingClientRect();
+  const capTop = 168 * 0.17, capH = 168 * 0.72, stem = 37;
+  const order = [0, 2, 1, 4, 3, 5], starts = [0.18, 0.3, 0.4, 0.52, 0.62, 0.74];
+  const fromTop = [true, false, true, false, true, true];
+  const blocks = [];
+  letters.forEach((Lt, i) => {
+    const r = Lt.getBoundingClientRect(), x = r.left - base.left, w = r.width;
     const k = order.indexOf(i), t0 = starts[k];
-    tl.fromTo(b, { y: fromTop[k] ? -1300 : 1300, scaleY: 2.2 }, { y: 0, scaleY: 1, duration: 0.36, ease: "power3.out" }, t0);
-    tl.set(L, { clipPath: "inset(0 100% 0 0)" }, 0);
-    tl.to(L, { clipPath: "inset(0 0% 0 0)", duration: 0.2, ease: "power2.out" }, t0 + 0.34);
-    tl.to(b, { opacity: 0, duration: 0.06 }, t0 + 0.4);
-    // bar runtuh (selepas tarikan tali)
+    const b = document.createElement("div"); b.className = "bar"; bars.appendChild(b);
+    gsap.set(b, { left: x + w * 0.03, top: capTop, width: stem, height: capH, transformOrigin: fromTop[k] ? "50% 100%" : "50% 0%" });
+    tl.fromTo(b, { y: fromTop[k] ? -1500 : 1500, scaleY: 2.6 }, { y: 0, scaleY: 1, duration: 0.34, ease: "expo.out" }, t0);
+    tl.to(b, { keyframes: [{ scaleY: 0.86, scaleX: 1.15, duration: 0.06 }, { scaleY: 1.05, scaleX: 0.97, duration: 0.07 }, { scaleY: 1, scaleX: 1, duration: 0.08 }] }, t0 + 0.2);
+    tl.set(Lt, { clipPath: "inset(0 100% 0 0)" }, 0);
+    tl.to(Lt, { clipPath: "inset(0 0% 0 0)", duration: 0.18, ease: "power3.out" }, t0 + 0.27);
+    tl.fromTo(Lt, { scale: 0.94 }, { scale: 1, duration: 0.25, ease: "back.out(3)" }, t0 + 0.27);
+    tl.to(b, { opacity: 0, duration: 0.05 }, t0 + 0.44);
+    // blok runtuh (tebal, macam IKEA)
     const cb = document.createElement("div"); cb.className = "bar"; bars.appendChild(cb);
-    gsap.set(cb, { left: x + (i === 0 ? w * 0.55 : 8), top: capTop + capH - 34, width: i === 0 ? w * 0.4 : w - 16, height: 34, opacity: 0, transformOrigin: "50% 100%" });
-    tl.set(cb, { opacity: 1, scaleY: capH / 34 }, 2.98 + i * 0.012);
-    tl.to(cb, { scaleY: 1, duration: 0.22, ease: "power4.out" }, 2.98 + i * 0.012);
-    tl.set(L, { opacity: 0 }, 2.98 + i * 0.012);
+    const bw = i === 0 ? w * 0.42 : w - 18;
+    gsap.set(cb, { left: x + (i === 0 ? w * 0.5 : 9), top: capTop + capH - 46, width: bw, height: 46, opacity: 0, transformOrigin: "50% 100%" });
+    blocks.push(cb);
   });
+  // perkataan bernafas sedikit selepas siap
+  tl.to("#wordWrap", { scale: 1.02, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 1.3);
 
-  // ── Tali + manik jatuh dari atas
-  const cord = $("#cord"), bead = $("#bead"), hand = $("#hand");
-  const bobj = { y: -40 };
-  const setBead = () => { bead.setAttribute("cy", bobj.y); cord.setAttribute("y2", bobj.y - 28); };
-  tl.to(bobj, { y: 640, duration: 0.42, ease: "back.out(1.6)", onUpdate: setBead }, 1.55);
+  // ── 2) TALI + MANIK jatuh, melantun
+  tl.to(B, { y: 520, duration: 0.55, ease: "bounce.out", onUpdate: draw }, 1.25);
 
-  // ── Tangan masuk dari kanan, pegang manik (hujung jari di x≈470)
-  const H = { x: 1700, y: 640, r: 0 };
-  const setHand = () => hand.setAttribute("transform", `translate(${H.x},${H.y}) rotate(${H.r})`);
-  tl.to(H, { x: 470, duration: 0.5, ease: "power3.out", onUpdate: setHand }, 1.78);
-  tl.to(H, { x: 458, r: -1.5, duration: 0.25, ease: "sine.inOut", onUpdate: setHand }, 2.28);
-  tl.to(H, { x: 466, r: 0, duration: 0.4, ease: "sine.inOut", onUpdate: setHand }, 2.53);
-  // tarik!
-  tl.to(H, { y: 700, r: 2, duration: 0.14, ease: "power3.in", onUpdate: setHand }, 2.86);
-  tl.to(bobj, { y: 700, duration: 0.14, ease: "power3.in", onUpdate: setBead }, 2.86);
-  tl.to(H, { y: 660, r: 0, duration: 0.5, ease: "elastic.out(1,0.5)", onUpdate: setHand }, 3.0);
-  tl.to(bobj, { y: 660, duration: 0.5, ease: "elastic.out(1,0.5)", onUpdate: setBead }, 3.0);
-  tl.to(H, { x: 460, duration: 0.6, ease: "sine.inOut", onUpdate: setHand }, 3.3);
-  tl.to("#thumb, #thumbNail", { rotation: 10, svgOrigin: "500 180", duration: 0.12, ease: "power2.in" }, 2.84);
-  tl.to("#thumb, #thumbNail", { rotation: 0, svgOrigin: "500 180", duration: 0.3, ease: "power2.out" }, 3.6);
-  // lepas & keluar
-  tl.to(H, { x: 1800, y: 560, r: -6, duration: 0.42, ease: "power3.in", onUpdate: setHand }, 3.75);
-  tl.to(bobj, { y: 620, duration: 0.3, ease: "back.out(2)", onUpdate: setBead }, 3.78);
+  // ── 3) LENGAN berayun masuk dari bawah kanan (pivot bahu), terlajak & mendap
+  tl.set("#rig", { attr: { opacity: 1 } }, 1.55);
+  tl.to(R, { tx: -14, duration: 0.55, ease: "power3.out", onUpdate: draw }, 1.55);
+  tl.to(R, { tx: 0, duration: 0.35, ease: "sine.inOut", onUpdate: draw }, 2.1);
+  tl.to(R, { a: -1.6, duration: 0.55, ease: "power2.out", onUpdate: draw }, 1.55);
+  tl.to(B, { hold: 1, duration: 0.18, ease: "power2.out", onUpdate: draw }, 1.98);   // jari menangkap manik
+  tl.to(R, { a: -0.8, duration: 0.3, ease: "sine.inOut", onUpdate: draw }, 2.15);
+  tl.to(R, { a: 0.4, duration: 0.3, ease: "sine.inOut", onUpdate: draw }, 2.45);   // bernafas
+  // anticipation: angkat sedikit
+  tl.to(R, { a: 2.6, duration: 0.16, ease: "power2.out", onUpdate: draw }, 2.75);
+  tl.to("#thumb, #thumbNail", { rotation: 12, svgOrigin: "520 190", duration: 0.12, ease: "power2.in" }, 2.78);
+  // TARIK!
+  tl.to(R, { a: -4.2, duration: 0.13, ease: "power3.in", onUpdate: draw }, 2.91);
+  // huruf ditolak ke bawah & penyek → runtuh jadi blok tebal
+  tl.to("#wordWrap", { y: 46, scaleY: 0.78, scaleX: 1.05, duration: 0.1, ease: "power2.in" }, 2.96);
+  tl.set(letters, { opacity: 0 }, 3.06);
+  tl.set("#wordWrap", { y: 0, scaleY: 1, scaleX: 1 }, 3.06);
+  blocks.forEach((cb, i) => {
+    tl.set(cb, { opacity: 1, scaleY: capH * 0.7 / 46 }, 3.06);
+    tl.to(cb, { scaleY: 1, duration: 0.42, ease: "elastic.out(1.1, 0.45)" }, 3.06 + i * 0.015);
+  });
+  // tangan melantun naik (spring)
+  tl.to(R, { a: 0, duration: 0.6, ease: "elastic.out(1, 0.4)", onUpdate: draw }, 3.05);
+  tl.to(R, { a: 0.6, duration: 0.3, ease: "sine.inOut", onUpdate: draw }, 3.62);
+  // ── 4) LEPAS: lengan berayun keluar, manik jadi bandul
+  tl.to("#thumb, #thumbNail", { rotation: -8, svgOrigin: "520 190", duration: 0.12 }, 3.86);
+  tl.add(() => {}, 3.9);
+  tl.to(B, { hold: 0, duration: 0.01, onUpdate: draw, onStart: () => { const [hx, hy] = handPt(R.a); B.x = hx; B.y = hy; } }, 3.9);
+  tl.fromTo(B, { swT: 0, sw: -0.35 }, { swT: 1.2, duration: 1.2, ease: "none", onUpdate: draw, immediateRender: false }, 3.9);
+  tl.to(R, { tx: 1100, a: 8, duration: 0.45, ease: "power2.in", onUpdate: draw }, 3.92);
 
-  // ── Peralihan berlian + lampu menyala → bilik
-  tl.to("#wipe", { scale: 1.6, duration: 0.32, ease: "power2.in" }, 3.98);
-  tl.set("#room", { opacity: 1 }, 4.28);
-  tl.fromTo("#glow", { opacity: 0.25, attr: { rx: 380, ry: 450 } }, { opacity: 1, attr: { rx: 760, ry: 900 }, duration: 0.5, ease: "power2.out" }, 4.28);
-  tl.fromTo("#bulb", { attr: { fill: "#555" } }, { attr: { fill: "#fff6d0" }, duration: 0.05 }, 4.32);
-  // perabot terbang masuk & bercantum
-  const fly = (sel, from, t, d = 0.34) => tl.fromTo(sel, from, { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1, duration: d, ease: "back.out(1.7)", transformOrigin: "50% 50%" }, t);
-  fly("#lamp", { y: -700, opacity: 1 }, 4.28, 0.3);
-  fly("#sback", { y: -500, rotation: -8 }, 4.32);
-  fly("#sseat", { x: 600, rotation: 10 }, 4.38);
-  fly("#sarmL", { x: -500, rotation: -30 }, 4.44);
-  fly("#sarmR", { x: 500, rotation: 30 }, 4.47);
-  fly("#slegs", { y: 200, opacity: 0 }, 4.5, 0.2);
-  fly("#ttop", { x: -700, rotation: -12 }, 4.5);
-  fly("#tlegs", { y: 220, opacity: 0 }, 4.58, 0.2);
-  fly("#stool", { y: -600, rotation: 20 }, 4.52);
-  fly("#phone", { y: -400, rotation: 40 }, 4.6, 0.24);
-  tl.to("#phoneScr", { opacity: 1, duration: 0.06 }, 4.76);
-  tl.fromTo("#notif", { opacity: 0, scale: 0, transformOrigin: "648px 1112px" }, { opacity: 1, scale: 1, duration: 0.18, ease: "back.out(3)" }, 4.82);
+  // ── 5) PERALIHAN berlian + lampu menyala → bilik, perabot mendarat dengan squash & stretch
+  tl.to("#wipe", { scale: 1.6, duration: 0.3, ease: "power2.in" }, 4.0);
+  tl.set("#room", { opacity: 1 }, 4.3);
+  tl.fromTo("#glow", { opacity: 0.2, attr: { rx: 300, ry: 360 } }, { opacity: 1, attr: { rx: 760, ry: 900 }, duration: 0.55, ease: "expo.out" }, 4.3);
+  tl.fromTo("#bulb", { attr: { fill: "#555" } }, { attr: { fill: "#fff6d0" }, duration: 0.05 }, 4.34);
+  const land = (sel, from, t, d = 0.32) => {
+    gsap.set(sel, { transformOrigin: "50% 100%", smoothOrigin: false });   // kunci titik asal (elak kepingan teranjak)
+    tl.fromTo(sel, from, { x: 0, y: 0, rotation: 0, opacity: 1, duration: d, ease: "power3.out" }, t);
+    tl.to(sel, { keyframes: [{ scaleY: 0.82, scaleX: 1.12, duration: 0.06 }, { scaleY: 1.06, scaleX: 0.96, duration: 0.07 }, { scaleY: 1, scaleX: 1, duration: 0.08 }] }, t + d - 0.06);
+  };
+  land("#lamp", { y: -900, rotation: -14 }, 4.3);
+  land("#sback", { y: -700, rotation: -10 }, 4.36);
+  land("#sseat", { x: 700, rotation: 14 }, 4.42);
+  land("#sarmL", { x: -600, rotation: -40 }, 4.48);
+  land("#sarmR", { x: 600, rotation: 40 }, 4.5);
+  land("#slegs", { y: 240, opacity: 0 }, 4.52, 0.2);
+  land("#ttop", { x: -800, rotation: -16 }, 4.54);
+  land("#tlegs", { y: 240, opacity: 0 }, 4.6, 0.2);
+  land("#stool", { y: -800, rotation: 24 }, 4.56);
+  land("#phone", { y: -500, rotation: 50 }, 4.62, 0.26);
+  tl.to("#phoneScr", { opacity: 1, duration: 0.06 }, 4.8);
+  tl.fromTo("#notif", { opacity: 0, scale: 0, transformOrigin: "648px 1112px" }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(3)" }, 4.8);
 
   window.__timelines = window.__timelines || {};
   window.__timelines["main"] = tl;
-  tl.seek(0);
+  tl.seek(0); draw();
 </script>
 </body>
 </html>

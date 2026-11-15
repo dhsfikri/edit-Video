@@ -21,35 +21,35 @@ def shape(name, d=None, rect=None, fill=None, stroke=None, weight=None):
     if stroke and weight: c("stroke.set", weight=weight, cap="round", join="round")
     c("object.setProps", name=name)
 
-def dgrad(stops, y0=128, y1=408):   # gradient dalam koordinat dokumen: bahagian bertindih bersambung tanpa garis
+def dgrad(stops, y0=120, y1=440):   # gradient dalam koordinat dokumen: bahagian bertindih bersambung tanpa garis
     return {"kind": "linear", "start": [700, y0], "end": [700, y1], "stops": [{"offset": o, "color": col} for o, col in stops]}
-SKIN = dgrad([(0, LIGHT), (0.45, BASE), (0.82, SHADE), (1, DEEP)])
-FING = grad([(0, LIGHT), (0.6, BASE), (1, SHADE)])
+SKIN = dgrad([(0, LIGHT), (0.45, BASE), (0.8, SHADE), (1, DEEP)])
+FING = grad([(0, LIGHT), (0.5, BASE), (0.85, SHADE), (1, DEEP)])
 
-def finger(name, x, y, x2, h):   # hujung kiri bulat, pangkal kanan rata (masuk ke tapak tangan)
+def finger(name, x, y, x2, h):   # hujung kiri bulat, pangkal kanan rata (masuk ke tapak tangan); jari lebih gemuk
     r = h / 2; k = r * 1.333
     shape(name, d=f"M{x+r},{y} L{x2},{y} L{x2},{y+h} L{x+r},{y+h} C{x+r-k},{y+h} {x+r-k},{y} {x+r},{y} Z", fill=FING)
 
-# tapak tangan + lengan (gradient sama → licin)
-shape("palm", d="M300,150 C420,140 530,150 640,160 L640,346 C540,392 420,408 300,400 C292,330 290,214 300,150 Z", fill=SKIN)
-shape("arm", d="M560,160 C760,148 980,136 1400,128 L1400,392 C1000,378 780,356 560,346 Z", fill=SKIN)
-# jari di atas tapak tangan
-finger("pinky", 150, 352, 318, 54)
-finger("ring", 64, 290, 322, 62)
-finger("middle", 34, 222, 324, 66)
-finger("index", 72, 158, 322, 60)
+# tapak tangan + lengan (lebih berisi)
+shape("palm", d="M300,146 C420,134 540,146 660,156 L660,370 C560,420 430,440 300,430 C290,350 288,214 300,146 Z", fill=SKIN)
+shape("arm", d="M580,156 C780,142 1000,128 1400,118 L1400,414 C1000,402 800,384 580,370 Z", fill=SKIN)
+# jari di atas tapak tangan (tebal, rapat)
+finger("pinky", 140, 368, 318, 64)
+finger("ring", 52, 296, 324, 76)
+finger("middle", 20, 222, 326, 80)
+finger("index", 62, 150, 326, 76)
 # bayang pendek di celah jari, atas tapak tangan
-for k, yy in enumerate((220, 289, 352)):
-    shape(f"gap{k+1}", d=f"M318,{yy} C340,{yy+1} 356,{yy+3} 368,{yy+6}", stroke=SHADE, weight=4)
+for k, yy in enumerate((224, 297, 368)):
+    shape(f"gap{k+1}", d=f"M320,{yy} C344,{yy+1} 362,{yy+4} 376,{yy+8}", stroke=SHADE, weight=5)
 # garis sendi jari
-for nm, xs, y0, y1 in (("indexJ", (150, 214), 166, 210), ("middleJ", (122, 198), 230, 280), ("ringJ", (148, 214), 298, 344), ("pinkyJ", (212, 258), 360, 398)):
+for nm, xs, y0, y1 in (("indexJ", (146, 214), 150, 226), ("middleJ", (110, 192), 222, 302), ("ringJ", (138, 210), 296, 372), ("pinkyJ", (206, 256), 368, 432)):
     for k, x in enumerate(xs):
-        shape(f"{nm}{k+1}", d=f"M{x},{y0+6} C{x-5},{(y0+y1)/2} {x-5},{(y0+y1)/2} {x},{y1-6}", stroke=LINE, weight=3)
-# ibu jari (naik ke atas) + kuku
-shape("thumb", d="M430,190 C420,132 410,100 420,82 C434,60 474,64 490,86 C506,110 524,150 566,182 C520,204 470,204 430,190 Z", fill=dgrad([(0, LIGHT), (0.5, BASE), (1, SHADE)], 60, 230))
-shape("thumbNail", d="M428,90 C432,78 452,76 460,86 L466,118 C458,126 440,126 434,118 Z", fill=NAIL)
+        shape(f"{nm}{k+1}", d=f"M{x},{y0+12} C{x-6},{(y0+y1)/2} {x-6},{(y0+y1)/2} {x},{y1-12}", stroke=LINE, weight=3.5)
+# ibu jari (lebih besar, naik ke atas) + kuku
+shape("thumb", d="M424,190 C410,128 398,90 410,66 C428,40 480,44 500,72 C520,104 538,148 580,182 C530,208 470,208 424,190 Z", fill=dgrad([(0, LIGHT), (0.5, BASE), (1, SHADE)], 44, 230))
+shape("thumbNail", d="M420,76 C426,60 452,58 464,70 L470,108 C460,118 438,118 430,108 Z", fill=NAIL)
 # garis tapak tangan (thenar)
-shape("palmCrease", d="M388,206 C392,250 426,268 474,266", stroke=LINE, weight=3.5)
+shape("palmCrease", d="M392,214 C396,262 430,282 482,280", stroke=LINE, weight=4)
 
 args = [VC, "run"]
 for cid, p in cmds: args += ["--cmd", cid, "--params", json.dumps(p)]

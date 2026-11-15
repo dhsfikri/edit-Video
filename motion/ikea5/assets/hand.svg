@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1400" height="520" viewBox="0 0 1400 520">
   <defs>
-    <linearGradient id="linear-gradient-1" x1="700" y1="128" x2="700" y2="408" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linear-gradient-1" x1="700" y1="120" x2="700" y2="440" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
       <stop offset="0.45" stop-color="#d3f5c8"/>
-      <stop offset="0.82" stop-color="#b4e2a8"/>
+      <stop offset="0.8" stop-color="#b4e2a8"/>
       <stop offset="1" stop-color="#9fd293"/>
     </linearGradient>
-    <linearGradient id="linear-gradient-2" x1="234.003" y1="352" x2="234.003" y2="406" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linear-gradient-2" x1="229.004" y1="368" x2="229.004" y2="432" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
-      <stop offset="0.6" stop-color="#d3f5c8"/>
-      <stop offset="1" stop-color="#b4e2a8"/>
+      <stop offset="0.5" stop-color="#d3f5c8"/>
+      <stop offset="0.85" stop-color="#b4e2a8"/>
+      <stop offset="1" stop-color="#9fd293"/>
     </linearGradient>
-    <linearGradient id="linear-gradient-3" x1="193.004" y1="290" x2="193.004" y2="352" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linear-gradient-3" x1="188.005" y1="296" x2="188.005" y2="372" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
-      <stop offset="0.6" stop-color="#d3f5c8"/>
-      <stop offset="1" stop-color="#b4e2a8"/>
+      <stop offset="0.5" stop-color="#d3f5c8"/>
+      <stop offset="0.85" stop-color="#b4e2a8"/>
+      <stop offset="1" stop-color="#9fd293"/>
     </linearGradient>
-    <linearGradient id="linear-gradient-4" x1="179.004" y1="222" x2="179.004" y2="288" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linear-gradient-4" x1="173.005" y1="222" x2="173.005" y2="302" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
-      <stop offset="0.6" stop-color="#d3f5c8"/>
-      <stop offset="1" stop-color="#b4e2a8"/>
+      <stop offset="0.5" stop-color="#d3f5c8"/>
+      <stop offset="0.85" stop-color="#b4e2a8"/>
+      <stop offset="1" stop-color="#9fd293"/>
     </linearGradient>
-    <linearGradient id="linear-gradient-5" x1="197.004" y1="158" x2="197.004" y2="218" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linear-gradient-5" x1="194.005" y1="150" x2="194.005" y2="226" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
-      <stop offset="0.6" stop-color="#d3f5c8"/>
-      <stop offset="1" stop-color="#b4e2a8"/>
+      <stop offset="0.5" stop-color="#d3f5c8"/>
+      <stop offset="0.85" stop-color="#b4e2a8"/>
+      <stop offset="1" stop-color="#9fd293"/>
     </linearGradient>
-    <linearGradient id="linear-gradient-6" x1="700" y1="60" x2="700" y2="230" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linear-gradient-6" x1="700" y1="44" x2="700" y2="230" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e6fcdc"/>
       <stop offset="0.5" stop-color="#d3f5c8"/>
       <stop offset="1" stop-color="#b4e2a8"/>
@@ -35,25 +39,25 @@
   </defs>
   <title>hand</title>
   <g id="Layer_1" data-name="Layer 1">
-    <path id="palm" d="M300 150 C420 140 530 150 640 160 L640 346 C540 392 420 408 300 400 C292 330 290 214 300 150 Z" fill="url(#linear-gradient-1)"/>
-    <path id="arm" d="M560 160 C760 148 980 136 1400 128 L1400 392 C1000 378 780 356 560 346 Z" fill="url(#linear-gradient-1)"/>
-    <path id="pinky" d="M177 352 L318 352 L318 406 L177 406 C141.009 406 141.009 352 177 352 Z" fill="url(#linear-gradient-2)"/>
-    <path id="ring" d="M95 290 L322 290 L322 352 L95 352 C53.677 352 53.677 290 95 290 Z" fill="url(#linear-gradient-3)"/>
-    <path id="middle" d="M67 222 L324 222 L324 288 L67 288 C23.011 288 23.011 222 67 222 Z" fill="url(#linear-gradient-4)"/>
-    <path id="index" d="M102 158 L322 158 L322 218 L102 218 C62.01 218 62.01 158 102 158 Z" fill="url(#linear-gradient-5)"/>
-    <path id="gap1" d="M318 220 C340 221 356 223 368 226" fill="none" stroke="#b4e2a8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="gap2" d="M318 289 C340 290 356 292 368 295" fill="none" stroke="#b4e2a8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="gap3" d="M318 352 C340 353 356 355 368 358" fill="none" stroke="#b4e2a8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="indexJ1" d="M150 172 C145 188 145 188 150 204" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="indexJ2" d="M214 172 C209 188 209 188 214 204" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="middleJ1" d="M122 236 C117 255 117 255 122 274" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="middleJ2" d="M198 236 C193 255 193 255 198 274" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="ringJ1" d="M148 304 C143 321 143 321 148 338" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="ringJ2" d="M214 304 C209 321 209 321 214 338" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="pinkyJ1" d="M212 366 C207 379 207 379 212 392" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="pinkyJ2" d="M258 366 C253 379 253 379 258 392" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path id="thumb" d="M430 190 C420 132 410 100 420 82 C434 60 474 64 490 86 C506 110 524 150 566 182 C520 204 470 204 430 190 Z" fill="url(#linear-gradient-6)"/>
-    <path id="thumbNail" d="M428 90 C432 78 452 76 460 86 L466 118 C458 126 440 126 434 118 Z" fill="#bfe6b3"/>
-    <path id="palmCrease" d="M388 206 C392 250 426 268 474 266" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="palm" d="M300 146 C420 134 540 146 660 156 L660 370 C560 420 430 440 300 430 C290 350 288 214 300 146 Z" fill="url(#linear-gradient-1)"/>
+    <path id="arm" d="M580 156 C780 142 1000 128 1400 118 L1400 414 C1000 402 800 384 580 370 Z" fill="url(#linear-gradient-1)"/>
+    <path id="pinky" d="M172 368 L318 368 L318 432 L172 432 C129.344 432 129.344 368 172 368 Z" fill="url(#linear-gradient-2)"/>
+    <path id="ring" d="M90 296 L324 296 L324 372 L90 372 C39.346 372 39.346 296 90 296 Z" fill="url(#linear-gradient-3)"/>
+    <path id="middle" d="M60 222 L326 222 L326 302 L60 302 C6.68 302 6.68 222 60 222 Z" fill="url(#linear-gradient-4)"/>
+    <path id="index" d="M100 150 L326 150 L326 226 L100 226 C49.346 226 49.346 150 100 150 Z" fill="url(#linear-gradient-5)"/>
+    <path id="gap1" d="M320 224 C344 225 362 228 376 232" fill="none" stroke="#b4e2a8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="gap2" d="M320 297 C344 298 362 301 376 305" fill="none" stroke="#b4e2a8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="gap3" d="M320 368 C344 369 362 372 376 376" fill="none" stroke="#b4e2a8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="indexJ1" d="M146 162 C140 188 140 188 146 214" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="indexJ2" d="M214 162 C208 188 208 188 214 214" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="middleJ1" d="M110 234 C104 262 104 262 110 290" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="middleJ2" d="M192 234 C186 262 186 262 192 290" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="ringJ1" d="M138 308 C132 334 132 334 138 360" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="ringJ2" d="M210 308 C204 334 204 334 210 360" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="pinkyJ1" d="M206 380 C200 400 200 400 206 420" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="pinkyJ2" d="M256 380 C250 400 250 400 256 420" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="thumb" d="M424 190 C410 128 398 90 410 66 C428 40 480 44 500 72 C520 104 538 148 580 182 C530 208 470 208 424 190 Z" fill="url(#linear-gradient-6)"/>
+    <path id="thumbNail" d="M420 76 C426 60 452 58 464 70 L470 108 C460 118 438 118 430 108 Z" fill="#bfe6b3"/>
+    <path id="palmCrease" d="M392 214 C396 262 430 282 482 280" fill="none" stroke="#9ccc90" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>

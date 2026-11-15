@@ -75,13 +75,15 @@ def riser(d=1.2):
     n = int(d * SR); tt = np.arange(n) / SR; f = 200 + 1400 * (tt / d) ** 2
     return (np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.3 + whoosh(d, True)[:n] * 0.6) * (tt / d) ** 1.5
 
-for t in (0.66, 0.78, 0.88, 0.98, 1.1, 1.22): add(thud(90, 0.18), t, 0.35); add(click(), t, 0.5)
-add(tone(1760, 0.4, 0.002, 0.2), 1.9, 0.12); add(whoosh(0.4), 1.75, 0.3)
-add(click(), 2.86, 0.9); add(thud(70, 0.3), 2.98, 0.5)
-add(whoosh(0.35), 3.75, 0.25); add(whoosh(0.3, True), 3.98, 0.35)
-add(click(), 4.3, 1.0); add(sparkle(), 4.32, 0.15)
-for t in (4.32, 4.38, 4.44, 4.5, 4.56, 4.62): add(pop(), t, 0.3)
-add(ding, 4.82, 0.35)
+for t in (0.38, 0.50, 0.60, 0.72, 0.82, 0.94): add(thud(95, 0.16), t, 0.4); add(click(), t, 0.55)   # bar mendarat
+add(tone(1760, 0.35, 0.002, 0.18), 1.5, 0.12); add(tone(1975, 0.25, 0.002, 0.12), 1.64, 0.08)       # manik melantun
+add(whoosh(0.5), 1.55, 0.3)                                                                          # lengan masuk
+add(click(), 2.78, 0.6); add(click(), 2.92, 1.0); add(thud(65, 0.35), 3.0, 0.55)                     # tarik tali
+for k in range(6): add(pop(), 3.06 + k * 0.015, 0.18)                                                # huruf runtuh
+add(whoosh(0.4), 3.92, 0.28); add(whoosh(0.3, True), 4.0, 0.35)                                      # lepas + peralihan
+add(click(), 4.34, 1.0); add(sparkle(), 4.36, 0.15)                                                  # lampu menyala
+for t in (4.62, 4.68, 4.74, 4.8, 4.82, 4.86): add(thud(110, 0.12), t, 0.3)                          # perabot mendarat
+add(ding, 4.8, 0.32)
 
 mix *= 0.9 / max(1e-9, np.abs(mix).max())
 w = wave.open(out, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
