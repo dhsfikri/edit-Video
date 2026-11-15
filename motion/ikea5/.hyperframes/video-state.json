@@ -1,7 +1,7 @@
 {
   "version": 1,
   "historyId": "6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b",
-  "currentRevision": "e85d2341-7a59-4113-b337-c27cc5961d5f",
+  "currentRevision": "aa7e5ad9-93bd-477d-9c78-2ac5cdc84b3c",
   "pendingChanges": false,
   "files": {
     "assets/gsap.min.js": {
@@ -21,12 +21,16 @@
       "content": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/53/53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
     },
     "index.html": {
-      "hash": "c220b5f77e2cdc8dc7a8b3299f64fb59a740db011d723add832e106291f3c3a2",
-      "content": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/c2/c220b5f77e2cdc8dc7a8b3299f64fb59a740db011d723add832e106291f3c3a2"
+      "hash": "8bc04722d3fe634ad5f8537485d7d08605a80f681d174dc35211c78b70131a3e",
+      "content": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/8b/8bc04722d3fe634ad5f8537485d7d08605a80f681d174dc35211c78b70131a3e"
     },
     "meta.json": {
       "hash": "326e61671f730cc9c8b4e687bb7f8cfed09dccf826834dc7d89cc98acf6175e0",
       "content": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/32/326e61671f730cc9c8b4e687bb7f8cfed09dccf826834dc7d89cc98acf6175e0"
+    },
+    "assets/hand.svg": {
+      "hash": "fb2d71cb946d9bb9041c733aaa956c2366fb2f5e369201847be9f302d62d627f",
+      "content": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/fb/fb2d71cb946d9bb9041c733aaa956c2366fb2f5e369201847be9f302d62d627f"
     }
   },
   "revisions": {
@@ -89,6 +93,40 @@
           "after": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/c2/c220b5f77e2cdc8dc7a8b3299f64fb59a740db011d723add832e106291f3c3a2"
         }
       }
+    },
+    "5fdc42f7-6e8a-4d1c-a6bb-501c258a8751": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1794756405367,
+      "endedAt": 1794756405377,
+      "files": {
+        "assets/hand.svg": {
+          "before": null,
+          "after": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/fb/fb2d71cb946d9bb9041c733aaa956c2366fb2f5e369201847be9f302d62d627f"
+        },
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/c2/c220b5f77e2cdc8dc7a8b3299f64fb59a740db011d723add832e106291f3c3a2",
+          "after": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/56/561134643c45d2053046ce3367fe942d16d577c6db2274c150248a5de6ce5b3c"
+        }
+      }
+    },
+    "aa7e5ad9-93bd-477d-9c78-2ac5cdc84b3c": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1794756434803,
+      "endedAt": 1794756434804,
+      "files": {
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/56/561134643c45d2053046ce3367fe942d16d577c6db2274c150248a5de6ce5b3c",
+          "after": "/root/.cache/hyperframes/history/6d16e832-24ba-49d7-9b7c-bc1f4ae94c3b/blobs/8b/8bc04722d3fe634ad5f8537485d7d08605a80f681d174dc35211c78b70131a3e"
+        }
+      }
     }
   },
   "checks": {
@@ -103,15 +141,15 @@
   },
   "renders": {
     "latest": {
-      "id": "18169153-65bc-4aac-b68d-58be7a276279",
-      "completedAt": 1794755976307,
+      "id": "4a051947-ff6e-4f9f-90f3-54925768a90d",
+      "completedAt": 1794756442208,
       "output": "/tmp/claude-0/-home-user-edit-Video/bbf4b2dd-3f63-5ec4-bd37-55965d2fb0ef/scratchpad/ikea5/v.mp4",
       "status": "completed",
-      "revision": "e85d2341-7a59-4113-b337-c27cc5961d5f"
+      "revision": "aa7e5ad9-93bd-477d-9c78-2ac5cdc84b3c"
     },
     "retainedRevisions": [
-      "e85d2341-7a59-4113-b337-c27cc5961d5f",
-      "74d6997f-98b9-43ee-8c7a-1b3b23121c0e"
+      "aa7e5ad9-93bd-477d-9c78-2ac5cdc84b3c",
+      "5fdc42f7-6e8a-4d1c-a6bb-501c258a8751"
     ]
   },
   "pendingArtifactCleanup": []

@@ -16,7 +16,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--y); }
   #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--y); }
-  #word { position: absolute; left: 60px; width: 840px; top: 820px; text-align: center; font-family: "Montserrat"; font-weight: 800;
+  #word { position: absolute; left: 60px; width: 840px; top: 980px; text-align: center; font-family: "Montserrat"; font-weight: 800;
     font-size: 176px; line-height: 1; letter-spacing: 2px; color: var(--ink); white-space: nowrap; }
   #word span { display: inline-block; }
   .bar { position: absolute; background: var(--ink); }
@@ -51,37 +51,67 @@
      <feComponentTransfer><feFuncA type="linear" slope=".22"/></feComponentTransfer>
      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    
+    <linearGradient id="hg-linear-gradient-1" x1="700" y1="128" x2="700" y2="408" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6fcdc"/>
+      <stop offset="0.45" stop-color="#d3f5c8"/>
+      <stop offset="0.82" stop-color="#b4e2a8"/>
+      <stop offset="1" stop-color="#9fd293"/>
+    </linearGradient>
+    <linearGradient id="hg-linear-gradient-2" x1="234.003" y1="352" x2="234.003" y2="406" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6fcdc"/>
+      <stop offset="0.6" stop-color="#d3f5c8"/>
+      <stop offset="1" stop-color="#b4e2a8"/>
+    </linearGradient>
+    <linearGradient id="hg-linear-gradient-3" x1="193.004" y1="290" x2="193.004" y2="352" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6fcdc"/>
+      <stop offset="0.6" stop-color="#d3f5c8"/>
+      <stop offset="1" stop-color="#b4e2a8"/>
+    </linearGradient>
+    <linearGradient id="hg-linear-gradient-4" x1="179.004" y1="222" x2="179.004" y2="288" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6fcdc"/>
+      <stop offset="0.6" stop-color="#d3f5c8"/>
+      <stop offset="1" stop-color="#b4e2a8"/>
+    </linearGradient>
+    <linearGradient id="hg-linear-gradient-5" x1="197.004" y1="158" x2="197.004" y2="218" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6fcdc"/>
+      <stop offset="0.6" stop-color="#d3f5c8"/>
+      <stop offset="1" stop-color="#b4e2a8"/>
+    </linearGradient>
+    <linearGradient id="hg-linear-gradient-6" x1="700" y1="60" x2="700" y2="230" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6fcdc"/>
+      <stop offset="0.5" stop-color="#d3f5c8"/>
+      <stop offset="1" stop-color="#b4e2a8"/>
+    </linearGradient>
+  
     <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.2"/></filter>
    </defs>
    <line id="cord" x1="470" y1="-20" x2="470" y2="-20" stroke="#14904a" stroke-width="5"/>
-   <g id="hand" filter="url(#hs)" transform="translate(1700,610) scale(1.38)">
-    <!-- lengan + lengan baju -->
-    <path d="M-40,-62 C120,-70 300,-86 520,-92 L520,96 C300,92 120,78 -40,66 Z" fill="url(#skin)"/>
-    <path d="M330,-92 L700,-104 L700,112 L330,98 C318,40 318,-30 330,-92 Z" fill="url(#sleeve)"/>
-    <path d="M330,-92 C318,-30 318,40 330,98" stroke="#3a3a3a" stroke-width="6" fill="none"/>
-    <!-- jari (belakang tangan, ke kiri) -->
-    <g fill="url(#skin)">
-     <rect x="-372" y="-52" width="200" height="44" rx="22" transform="rotate(-3 -172 -30)"/>
-     <rect x="-392" y="-8" width="220" height="45" rx="22.5"/>
-     <rect x="-370" y="38" width="200" height="42" rx="21" transform="rotate(3 -170 59)"/>
-     <rect x="-318" y="80" width="150" height="36" rx="18" transform="rotate(7 -168 98)"/>
-     <!-- tapak / belakang tangan -->
-     <path d="M-200,-58 C-140,-72 -60,-66 0,-62 L60,-64 L60,70 C0,74 -80,104 -160,116 -205,112 C-230,60 -232,-20 -200,-58 Z"/>
-     <!-- ibu jari: naik menjepit manik -->
-     <path d="M-120,-60 C-140,-92 -170,-118 -196,-128 C-214,-134 -228,-120 -220,-104 C-206,-84 -186,-70 -166,-52 Z"/>
-    </g>
-    <!-- kuku -->
-    <g fill="#f8dcc2" opacity=".85">
-     <rect x="-364" y="-46" width="30" height="20" rx="8"/><rect x="-384" y="-1" width="30" height="20" rx="8"/>
-     <rect x="-362" y="45" width="28" height="18" rx="8"/><rect x="-310" y="86" width="24" height="16" rx="7"/>
-     <rect x="-224" y="-130" width="22" height="18" rx="7" transform="rotate(-30 -213 -121)"/>
-    </g>
-    <!-- garis buku jari & pergelangan -->
-    <g stroke="#b97a52" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".55" filter="url(#soft)">
-     <path d="M-262,-40 q6,10 0,20"/><path d="M-280,4 q6,10 0,22"/><path d="M-262,50 q6,9 0,19"/><path d="M-236,90 q5,8 0,15"/>
-     <path d="M-130,20 q30,26 70,30"/>
-    </g>
-   </g>
+   <!-- tangan: ilustrasi VectorCraft (projects/IKEA5/hand_vector.py → assets/hand.svg), manik di (335,140) -->
+   <g id="hand" filter="url(#hs)" transform="translate(1700,640)"><g id="handArt" transform="scale(1.12) translate(-335,-140)">
+
+    <path id="palm" d="M300 150 C420 140 530 150 640 160 L640 346 C540 392 420 408 300 400 C292 330 290 214 300 150 Z" fill="url(#hg-linear-gradient-1)"/>
+    <path id="arm" d="M560 160 C760 148 980 136 1400 128 L1400 392 C1000 378 780 356 560 346 Z" fill="url(#hg-linear-gradient-1)"/>
+    <path id="pinky" d="M177 352 L318 352 L318 406 L177 406 C141.009 406 141.009 352 177 352 Z" fill="url(#hg-linear-gradient-2)"/>
+    <path id="ring" d="M95 290 L322 290 L322 352 L95 352 C53.677 352 53.677 290 95 290 Z" fill="url(#hg-linear-gradient-3)"/>
+    <path id="middle" d="M67 222 L324 222 L324 288 L67 288 C23.011 288 23.011 222 67 222 Z" fill="url(#hg-linear-gradient-4)"/>
+    <path id="index" d="M102 158 L322 158 L322 218 L102 218 C62.01 218 62.01 158 102 158 Z" fill="url(#hg-linear-gradient-5)"/>
+    <path id="gap1" d="M318 220 C340 221 356 223 368 226" fill="none" stroke="#b4e2a8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="gap2" d="M318 289 C340 290 356 292 368 295" fill="none" stroke="#b4e2a8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="gap3" d="M318 352 C340 353 356 355 368 358" fill="none" stroke="#b4e2a8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="indexJ1" d="M150 172 C145 188 145 188 150 204" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="indexJ2" d="M214 172 C209 188 209 188 214 204" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="middleJ1" d="M122 236 C117 255 117 255 122 274" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="middleJ2" d="M198 236 C193 255 193 255 198 274" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="ringJ1" d="M148 304 C143 321 143 321 148 338" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="ringJ2" d="M214 304 C209 321 209 321 214 338" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="pinkyJ1" d="M212 366 C207 379 207 379 212 392" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="pinkyJ2" d="M258 366 C253 379 253 379 258 392" fill="none" stroke="#9ccc90" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="thumb" d="M430 190 C420 132 410 100 420 82 C434 60 474 64 490 86 C506 110 524 150 566 182 C520 204 470 204 430 190 Z" fill="url(#hg-linear-gradient-6)"/>
+    <path id="thumbNail" d="M428 90 C432 78 452 76 460 86 L466 118 C458 126 440 126 434 118 Z" fill="#bfe6b3"/>
+    <path id="palmCrease" d="M388 206 C392 250 426 268 474 266" fill="none" stroke="#9ccc90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+   </g></g>
    <circle id="bead" cx="470" cy="-40" r="30" fill="url(#beadG)"/>
   </svg>
 
@@ -155,7 +185,7 @@
   // ── Bina perkataan daripada bar (gaya IKEA): setiap huruf ada bar yang jatuh dan "melukis" huruf itu
   const word = $("#word"), letters = [...word.querySelectorAll("span")], bars = $("#bars");
   const root = $("#root").getBoundingClientRect();
-  const capTop = 820 + 176 * 0.17, capH = 176 * 0.72;   // anggaran kotak huruf besar Montserrat
+  const capTop = 980 + 176 * 0.17, capH = 176 * 0.72;   // anggaran kotak huruf besar Montserrat
   const order = [2, 0, 4, 1, 5, 3], starts = [0.30, 0.42, 0.52, 0.62, 0.74, 0.86];
   const fromTop = [true, false, true, true, false, true];
   letters.forEach((L, i) => {
@@ -178,24 +208,26 @@
   // ── Tali + manik jatuh dari atas
   const cord = $("#cord"), bead = $("#bead"), hand = $("#hand");
   const bobj = { y: -40 };
-  const setBead = () => { bead.setAttribute("cy", bobj.y); cord.setAttribute("y2", bobj.y - 24); };
-  tl.to(bobj, { y: 490, duration: 0.42, ease: "back.out(1.6)", onUpdate: setBead }, 1.55);
+  const setBead = () => { bead.setAttribute("cy", bobj.y); cord.setAttribute("y2", bobj.y - 28); };
+  tl.to(bobj, { y: 640, duration: 0.42, ease: "back.out(1.6)", onUpdate: setBead }, 1.55);
 
   // ── Tangan masuk dari kanan, pegang manik (hujung jari di x≈470)
-  const H = { x: 1700, y: 610, r: 0 };
-  const setHand = () => hand.setAttribute("transform", `translate(${H.x},${H.y}) rotate(${H.r}) scale(1.38)`);
-  tl.to(H, { x: 762, duration: 0.5, ease: "power3.out", onUpdate: setHand }, 1.78);
-  tl.to(H, { x: 748, r: -1.5, duration: 0.25, ease: "sine.inOut", onUpdate: setHand }, 2.28);
-  tl.to(H, { x: 754, r: 0, duration: 0.4, ease: "sine.inOut", onUpdate: setHand }, 2.53);
+  const H = { x: 1700, y: 640, r: 0 };
+  const setHand = () => hand.setAttribute("transform", `translate(${H.x},${H.y}) rotate(${H.r})`);
+  tl.to(H, { x: 470, duration: 0.5, ease: "power3.out", onUpdate: setHand }, 1.78);
+  tl.to(H, { x: 458, r: -1.5, duration: 0.25, ease: "sine.inOut", onUpdate: setHand }, 2.28);
+  tl.to(H, { x: 466, r: 0, duration: 0.4, ease: "sine.inOut", onUpdate: setHand }, 2.53);
   // tarik!
-  tl.to(H, { y: 670, r: 2, duration: 0.14, ease: "power3.in", onUpdate: setHand }, 2.86);
-  tl.to(bobj, { y: 550, duration: 0.14, ease: "power3.in", onUpdate: setBead }, 2.86);
-  tl.to(H, { y: 630, r: 0, duration: 0.5, ease: "elastic.out(1,0.5)", onUpdate: setHand }, 3.0);
-  tl.to(bobj, { y: 510, duration: 0.5, ease: "elastic.out(1,0.5)", onUpdate: setBead }, 3.0);
-  tl.to(H, { x: 748, duration: 0.6, ease: "sine.inOut", onUpdate: setHand }, 3.3);
+  tl.to(H, { y: 700, r: 2, duration: 0.14, ease: "power3.in", onUpdate: setHand }, 2.86);
+  tl.to(bobj, { y: 700, duration: 0.14, ease: "power3.in", onUpdate: setBead }, 2.86);
+  tl.to(H, { y: 660, r: 0, duration: 0.5, ease: "elastic.out(1,0.5)", onUpdate: setHand }, 3.0);
+  tl.to(bobj, { y: 660, duration: 0.5, ease: "elastic.out(1,0.5)", onUpdate: setBead }, 3.0);
+  tl.to(H, { x: 460, duration: 0.6, ease: "sine.inOut", onUpdate: setHand }, 3.3);
+  tl.to("#thumb, #thumbNail", { rotation: 10, svgOrigin: "500 180", duration: 0.12, ease: "power2.in" }, 2.84);
+  tl.to("#thumb, #thumbNail", { rotation: 0, svgOrigin: "500 180", duration: 0.3, ease: "power2.out" }, 3.6);
   // lepas & keluar
-  tl.to(H, { x: 1800, y: 530, r: -6, duration: 0.42, ease: "power3.in", onUpdate: setHand }, 3.75);
-  tl.to(bobj, { y: 470, duration: 0.3, ease: "back.out(2)", onUpdate: setBead }, 3.78);
+  tl.to(H, { x: 1800, y: 560, r: -6, duration: 0.42, ease: "power3.in", onUpdate: setHand }, 3.75);
+  tl.to(bobj, { y: 620, duration: 0.3, ease: "back.out(2)", onUpdate: setBead }, 3.78);
 
   // ── Peralihan berlian + lampu menyala → bilik
   tl.to("#wipe", { scale: 1.6, duration: 0.32, ease: "power2.in" }, 3.98);
