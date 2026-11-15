@@ -88,3 +88,6 @@ Gaya: latar putih kebiruan → putih kehijauan, aksen hijau #25D366, Montserrat.
   - Animasi & render: **EffectCraft** (`v2/iklan_v2.jsx` → `effectcraft-cli script` → `render --format h264`), ~2 min render CPU.
   - Audio: `v2/audio_v2.py` (sintetik). QC: teks dalam safe zone · -14.7 LUFS · peak -2.9 dB.
   - Keperluan: font Montserrat dipasang ke sistem (woff2 → ttf, nama keluarga dibetulkan) supaya EffectCraft kenal font.
+- **Draf v3 (2026-11-15) — 3D penuh** (Sir: "v2 baru 10%, takde 3D effect"). `v3/iklan_v3.jsx`: setiap babak comp sendiri + kamera 3D + motion blur (EffectCraft).
+  - Terowong telefon heksagon (kamera dolly + roll), telefon terbang melepasi kamera, kad ikon rebah jadi satah perspektif, panel pustaka ebook condong + halaman flip ke kamera, halaman bertebaran pada kedalaman berbeza (parallax), kad produk condong + kamera tolak ke butang, perisai berpusing 3D, confetti 3D, cover 3D.
+  - Render ~4.5 min CPU. QC: teks dalam safe zone · loudness ~-14 LUFS.
