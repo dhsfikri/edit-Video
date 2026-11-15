@@ -64,3 +64,22 @@
 - **Draf v1 (2026-11-15):** sumber `motion/iklan-ebook/index.html`, audio `projects/IKLAN-EBOOK2026/audio.py` (muzik + SFX sintetik, bebas royalti). Cover dari halaman 1 PDF ebook.
   - Ikut peraturan skill (mockup generik, tiada bukti bayaran palsu): babak 20–24s guna **balasan ikut skrip → "Ok, saya nak 1"**, BUKAN resit transfer.
   - QC: safe zone lulus · -14.4 LUFS · peak -2.1 dB · 1080x1920 30fps H.264.
+
+## Cadangan v2: animasi ikut reference (MENUNGGU APPROVAL)
+Sir minta semua animasi sama macam reference. Teknik animasi diikut babak demi babak; kandungan, aset, teks & warna milik Sir (bukan salin aset/UI/logo LangEase).
+| Masa | Teknik reference | Versi Sir |
+|---|---|---|
+| 0–3s | Perkataan muncul satu-satu di tengah, latar putih | "Customer" · "SEEN" · "tak reply?" |
+| 3–5s | Ayat + ikon kad terapung di tengah ayat | "Chat banyak [ikon chat] Closing sikit" |
+| 5–6s | Kad besar zoom-out ke tengah | Kad chat customer |
+| 6–7s | "Just drop and…" | "Cuma buka dan…" |
+| 7–10s | 3 telefon 3D berpusing + teks kecil berganti | 3 telefon (chat / ebook / skrip) · "Skrip." "Skrip. Formula. Team." "Semua dalam 1 ebook" |
+| 10–12s | Swoosh warna penuh skrin + progress bar 79→99/100 | Swoosh hijau · bar "Closing" naik |
+| 12–14s | "Done ✓" dalam bulatan + confetti | "Closed ✓" + confetti |
+| 14–17s | Kad-kad video bergerak masuk dari tepi | Kad muka surat ebook (halaman sebenar PDF) |
+| 17–19s | Kad bertebaran 3D + teks tengah | "105 muka surat" |
+| 19–23s | UI senarai + kursor klik butang | Kad bcl.my generik → kursor klik "Dapatkan · RM37" |
+| 23–26s | Butang + bintang ✦ | Jaminan "Tak membantu? REFUND balik duit" (7 hari) |
+| 26–28s | 3 perkataan tagline | "Seen. Reply. Closed." |
+| 28–30s | Logo + URL kecil | Cover + @sirdharma_ (tiada URL) |
+Gaya: latar putih kebiruan → putih kehijauan, aksen hijau #25D366, Montserrat. Alat: HyperFrames (render terbukti); VectorCraft/EffectCraft bila MCP aktif dalam sesi baru.
