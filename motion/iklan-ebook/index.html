@@ -1,0 +1,287 @@
+<!doctype html>
+<!--
+  IKLAN EBOOK 2026 "Wassap Masih Relevan?" — animasi penuh 30s, 1080x1920 (brief: projects/IKLAN-EBOOK2026/brief.md)
+  Gaya: kinetic typography + chat generik (diilham dari reference "SaaS launch", diadaptasi ke brand kit Sir).
+  Babak:
+    0–3    Hook   : chat — mesej Sir ✓✓ biru, "typing…" hilang, tiada balasan
+    3–8    Pain   : bantahan "mahal / fikir dulu / tunggu gaji" + kaunter "Closing hari ni: 0"
+    8–14   Reveal : cover ebook masuk 3D + glow
+    14–20  Isi    : "Formula 1-4-6-10." · "Susun team." · "Skrip 2026."
+    20–24  Ubah   : chat sama, jawapan ikut skrip → customer "Ok, saya nak 1" → cop SEEN → CLOSED (ilustrasi, tiada resit/angka)
+    24–28  Jaminan: refund 7 hari + harga RM67 → RM37
+    28–30  CTA    : butang "Dapatkan sekarang" (TIADA URL di skrin)
+  Safe zone TikTok: semua teks x 60–900, y 220–1440 (pusat mendatar = 480).
+  Render: npx hyperframes render -f 30 -q high -w 4 -o iklan.mp4   (audio dicampur dalam FFmpeg: sfx.json)
+-->
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      :root { --green: #25d366; --yellow: #ffd60a; --ink: #0b0b0b; --white: #fff; --red: #ff4d4f; --blue: #34b7f1; --deep: #0b3d2e; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", "Noto Color Emoji", sans-serif; color: var(--white);
+        background: radial-gradient(70% 45% at 45% 42%, #12301f 0%, var(--ink) 70%); }
+      #grain { position: absolute; inset: 0; opacity: .06; background-image: radial-gradient(rgba(255,255,255,.7) 1px, transparent 1px); background-size: 6px 6px; }
+      #glow { position: absolute; left: 480px; top: 800px; width: 900px; height: 900px; margin: -450px 0 0 -450px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(37,211,102,.45) 0%, rgba(37,211,102,0) 65%); opacity: 0; }
+
+      /* Tajuk (zon 60–900) */
+      .ttl { position: absolute; left: 60px; width: 840px; text-align: center; font-weight: 800; line-height: 1.08; }
+      .ttl .w { display: inline-block; white-space: pre; }
+      .k { color: var(--yellow); }
+      .g { color: var(--green); }
+      #t1 { top: 250px; font-size: 76px; }
+      #t2 { top: 250px; font-size: 76px; }
+      #t3 { top: 250px; font-size: 64px; }
+      #t5 { top: 250px; font-size: 70px; }
+
+      /* Telefon / chat generik */
+      #phone { position: absolute; left: 480px; top: 470px; width: 640px; height: 760px; margin-left: -320px; border-radius: 56px; background: #f3f5f4;
+        border: 14px solid #1a1f1c; box-shadow: 0 40px 90px rgba(0,0,0,.6); overflow: hidden; }
+      #bar { height: 116px; background: var(--deep); display: flex; align-items: center; gap: 18px; padding: 22px 28px 0; color: #fff; }
+      #bar .av { width: 62px; height: 62px; border-radius: 50%; background: #cfe9dc; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+      #bar b { display: block; font-size: 30px; } #bar small { display: block; font-weight: 600; font-size: 22px; opacity: .85; height: 28px; }
+      #msgs { position: absolute; left: 0; right: 0; top: 116px; bottom: 92px; padding: 20px 22px 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; overflow: hidden; }
+      .m { max-width: 84%; padding: 16px 22px 12px; border-radius: 26px; font-weight: 600; font-size: 31px; line-height: 1.28; box-shadow: 0 3px 8px rgba(0,0,0,.08); display: none; }
+      .m.c { align-self: flex-start; background: #fff; color: #1d2421; border-bottom-left-radius: 8px; }
+      .m.s { align-self: flex-end; background: #d7f8e3; color: #0b2e1f; border-bottom-right-radius: 8px; }
+      .m .t { display: block; text-align: right; font-size: 19px; opacity: .6; margin-top: 2px; }
+      .tk { font-weight: 800; color: #9aa5a0; letter-spacing: -4px; margin-left: 6px; }
+      .typing { align-self: flex-start; background: #fff; border-radius: 26px; padding: 18px 24px; gap: 8px; display: none; }
+      .typing i { width: 12px; height: 12px; border-radius: 50%; background: #9aa5a0; display: inline-block; margin: 0 3px; }
+      #input { position: absolute; left: 18px; right: 18px; bottom: 16px; height: 62px; border-radius: 31px; background: #fff; color: #9aa5a0;
+        font-weight: 600; font-size: 24px; display: flex; align-items: center; padding: 0 26px; }
+
+      /* Kaunter closing */
+      #counter { position: absolute; left: 480px; top: 1270px; transform: translateX(-50%); white-space: nowrap; background: #1b1b1b; border: 4px solid var(--red);
+        border-radius: 22px; padding: 14px 34px; font-weight: 800; font-size: 52px; }
+      #counter b { color: var(--red); display: inline-block; min-width: 40px; text-align: center; }
+
+      /* Cover ebook */
+      #coverWrap { position: absolute; left: 480px; top: 790px; width: 480px; height: 750px; margin: -375px 0 0 -240px; perspective: 1600px; }
+      #cover { width: 100%; height: 100%; border-radius: 10px 18px 18px 10px; background: url("assets/cover.png") center / cover;
+        box-shadow: -14px 0 0 #8d0f12 inset, 0 40px 90px rgba(0,0,0,.7), 0 0 0 2px rgba(255,255,255,.08); transform-style: preserve-3d; }
+      #coverInfo { position: absolute; left: 60px; width: 840px; top: 1220px; text-align: center; font-weight: 800; font-size: 46px; }
+      #coverInfo span { display: inline-block; background: var(--green); color: var(--ink); padding: 8px 26px; border-radius: 14px; margin: 0 6px; }
+      .spark { position: absolute; width: 60px; height: 60px; margin: -30px 0 0 -30px; opacity: 0; }
+
+      /* Isi kinetic */
+      #lines { position: absolute; left: 60px; width: 840px; top: 760px; text-align: center; }
+      .ln { font-weight: 800; font-size: 78px; line-height: 1.0; margin-bottom: 70px; white-space: nowrap; }
+      .ln .chip { display: inline-flex; align-items: center; justify-content: center; width: 92px; height: 92px; border-radius: 26px; vertical-align: middle;
+        background: #fff; color: var(--ink); font-size: 58px; margin: 0 18px; box-shadow: 0 16px 36px rgba(0,0,0,.45); transform: translateY(-8px); }
+
+      /* Cop CLOSED */
+      #stamp { position: absolute; left: 480px; top: 1268px; transform: translateX(-50%); white-space: nowrap; font-weight: 800; font-size: 60px;
+        padding: 14px 34px; border-radius: 20px; background: var(--green); color: var(--ink); box-shadow: 0 18px 44px rgba(0,0,0,.5); }
+      #stamp s { color: #0b3d2e; opacity: .6; }
+      .cf { position: absolute; width: 18px; height: 30px; border-radius: 4px; opacity: 0; }
+
+      /* Jaminan */
+      #shield { position: absolute; left: 480px; top: 300px; width: 230px; height: 260px; margin-left: -115px; }
+      #g1 { position: absolute; left: 60px; width: 840px; top: 600px; text-align: center; font-weight: 800; font-size: 62px; line-height: 1.1; white-space: nowrap; }
+      #g2 { position: absolute; left: 60px; width: 840px; top: 710px; text-align: center; }
+      #g2 span { display: inline-block; background: var(--yellow); color: var(--ink); font-weight: 800; font-size: 80px; line-height: 1.1; padding: 14px 34px;
+        border-radius: 22px; border: 6px solid var(--ink); box-shadow: 10px 10px 0 var(--green); }
+      #g3 { position: absolute; left: 60px; width: 840px; top: 975px; text-align: center; font-weight: 600; font-size: 38px; color: rgba(255,255,255,.85); }
+      #price { position: absolute; left: 60px; width: 840px; top: 1070px; text-align: center; font-weight: 800; white-space: nowrap; }
+      #old { position: relative; display: inline-block; font-size: 80px; color: rgba(255,255,255,.55); margin-right: 34px; vertical-align: middle; }
+      #strike { position: absolute; left: -8px; right: -8px; top: 50%; height: 9px; margin-top: -4px; background: var(--red); border-radius: 5px; transform-origin: left center; }
+      #new { display: inline-block; font-size: 136px; color: var(--green); vertical-align: middle; }
+
+      /* CTA */
+      #ctaTop { position: absolute; left: 60px; width: 840px; top: 470px; text-align: center; font-weight: 800; font-size: 70px; line-height: 1.1; }
+      #ctaMini { position: absolute; left: 480px; top: 640px; width: 250px; height: 390px; margin-left: -125px; border-radius: 8px 12px 12px 8px;
+        background: url("assets/cover.png") center / cover; box-shadow: 0 30px 70px rgba(0,0,0,.6); }
+      #btn { position: absolute; left: 480px; top: 1110px; transform: translateX(-50%); white-space: nowrap; background: var(--green); color: var(--ink);
+        font-weight: 800; font-size: 46px; padding: 28px 44px; border-radius: 999px; box-shadow: 0 0 0 0 rgba(37,211,102,.6), 0 20px 50px rgba(0,0,0,.5); }
+      #cursor { position: absolute; left: 700px; top: 1250px; width: 84px; height: 84px; }
+      #handle { position: absolute; left: 60px; width: 840px; top: 1310px; text-align: center; font-weight: 800; font-size: 44px; color: rgba(255,255,255,.9); }
+
+      .scene { position: absolute; inset: 0; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1080" data-height="1920">
+      <div id="stage" class="clip" data-start="0" data-duration="30" data-track-index="0">
+        <div id="grain"></div>
+        <div id="glow"></div>
+
+        <!-- Tajuk babak chat -->
+        <div class="ttl" id="t1"><span class="w">Customer </span><span class="w k">SEEN…</span><br /><span class="w">tapi tak reply?</span></div>
+        <div class="ttl" id="t2"><span class="w">Chat </span><span class="w g">banyak.</span><br /><span class="w">Closing </span><span class="w" style="color:var(--red)">sikit.</span></div>
+        <div class="ttl" id="t5"><span class="w">Guna </span><span class="w k">skrip</span><span class="w"> yang betul…</span></div>
+
+        <div id="phone">
+          <div id="bar"><div class="av">👤</div><div><b>Customer</b><small id="status">online</small></div></div>
+          <div id="msgs">
+            <div class="m s" id="m1">Salam boss 😊 Ini info produk yang boss tanya tadi ye.<span class="t">9:41 <span class="tk" id="tk1">✓✓</span></span></div>
+            <div class="typing" id="ty1"><i></i><i></i><i></i></div>
+            <div class="m c" id="o1">Mahal la…</div>
+            <div class="m c" id="o2">Nanti saya fikir dulu</div>
+            <div class="m c" id="o3">Tunggu gaji dulu ye</div>
+            <div class="m s" id="r1">Faham boss. Kalau saya bagi cara bayar lebih ringan, boss okay? 🙏<span class="t">9:52 <span class="tk" id="tk2">✓✓</span></span></div>
+            <div class="typing" id="ty2"><i></i><i></i><i></i></div>
+            <div class="m c" id="r2">Ok, saya nak 1 😊</div>
+          </div>
+          <div id="input">Tulis mesej…</div>
+        </div>
+        <div id="counter">Closing hari ni: <b id="cnt">0</b></div>
+        <div id="stamp"><s>SEEN</s> → CLOSED ✓</div>
+
+        <!-- Reveal cover -->
+        <div class="ttl" id="t3"><span class="w">Jawapan dia ada dalam</span><br /><span class="w g">ebook ni 👇</span></div>
+        <div id="coverWrap"><div id="cover"></div></div>
+        <div id="coverInfo"><span>105 muka surat</span><span>Edisi 2026</span></div>
+
+        <!-- Isi -->
+        <div id="lines">
+          <div class="ln" id="L1"><span class="w">Formula</span><span class="chip">🧩</span><span class="w k">1-4-6-10.</span></div>
+          <div class="ln" id="L2"><span class="w">Susun</span><span class="chip">👥</span><span class="w g">team.</span></div>
+          <div class="ln" id="L3"><span class="w">Skrip</span><span class="chip">💬</span><span class="w k">2026.</span></div>
+        </div>
+
+        <!-- Jaminan -->
+        <svg id="shield" viewBox="0 0 230 260">
+          <path id="shp" d="M115 8 L214 46 V128 C214 192 170 234 115 252 C60 234 16 192 16 128 V46 Z" fill="#25d366" stroke="#0b0b0b" stroke-width="8" />
+          <path id="chk" d="M66 132 L102 168 L168 96" fill="none" stroke="#0b0b0b" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div id="g1">Ebook ni tak membantu?</div>
+        <div id="g2"><span>Kita REFUND<br />balik duit.</span></div>
+        <div id="g3">Dalam 7 hari · claim terus via WhatsApp</div>
+        <div id="price"><span id="old">RM67<span id="strike"></span></span><span id="new">RM37</span></div>
+
+        <!-- CTA -->
+        <div id="ctaTop"><span class="w">Wassap masih</span><br /><span class="w k">relevan.</span></div>
+        <div id="ctaMini"></div>
+        <div id="btn">Dapatkan sekarang · RM37</div>
+        <svg id="cursor" viewBox="0 0 84 84"><path d="M10 6 L10 66 L26 52 L38 78 L50 72 L38 47 L60 47 Z" fill="#fff" stroke="#0b0b0b" stroke-width="5" stroke-linejoin="round" /></svg>
+        <div id="handle">@sirdharma_</div>
+      </div>
+    </div>
+    <script>
+      const $ = (s) => document.querySelector(s);
+      const root = $("#stage");
+      // Sparkle ✦ dan confetti (kedudukan tetap, deterministik)
+      let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      const SP = [[200, 470], [780, 520], [170, 1010], [800, 1060], [480, 380]];
+      SP.forEach(([x, y]) => { const e = document.createElement("div"); e.className = "spark"; e.style.left = x + "px"; e.style.top = y + "px";
+        e.innerHTML = '<svg viewBox="0 0 60 60"><path d="M30 0 C33 22 38 27 60 30 C38 33 33 38 30 60 C27 38 22 33 0 30 C22 27 27 22 30 0Z" fill="#25d366"/></svg>'; root.appendChild(e); });
+      const CF = ["#25d366", "#ffd60a", "#ffffff", "#34b7f1"]; const confetti = [];
+      for (let i = 0; i < 40; i++) { const e = document.createElement("div"); e.className = "cf"; e.style.left = "480px"; e.style.top = "1290px";
+        e.style.background = CF[i % 4]; root.appendChild(e); confetti.push({ e, x: (rnd() - 0.5) * 860, y: -250 - rnd() * 650, r: (rnd() - 0.5) * 720 }); }
+
+      const tl = gsap.timeline({ paused: true });
+      const show = (sel, t) => { tl.set(sel, { display: sel.startsWith("#ty") ? "flex" : "block" }, t);
+        tl.fromTo(sel, { y: 30, scale: 0.85, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.28, ease: "back.out(2)" }, t); };
+      const hide = (sel, t) => tl.set(sel, { display: "none" }, t);
+      const words = (sel, t, gap = 0.12) => tl.fromTo(sel + " .w", { y: 50, opacity: 0, filter: "blur(8px)" },
+        { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.35, stagger: gap, ease: "power3.out" }, t);
+      const out = (sel, t, d = 0.3) => tl.to(sel, { opacity: 0, y: -40, duration: d, ease: "power2.in" }, t);
+
+      // Keadaan awal
+      tl.set(["#t1 .w", "#t2 .w", "#t3 .w", "#t5 .w", "#ctaTop .w", ".ln .w", ".ln .chip"], { opacity: 0 }, 0);
+      tl.set(["#counter", "#stamp", "#coverWrap", "#coverInfo", "#shield", "#g1", "#g2", "#g3", "#price", "#ctaMini", "#btn", "#cursor", "#handle"], { opacity: 0 }, 0);
+      tl.set("#phone", { opacity: 0, y: 120 }, 0);
+
+      // ── 0–3s HOOK
+      tl.to("#phone", { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0);
+      show("#m1", 0.25);
+      words("#t1", 0.15, 0.14);
+      tl.to("#tk1", { color: "#34b7f1", duration: 0.1 }, 0.95);
+      tl.set("#status", { textContent: "typing…" }, 1.25);
+      show("#ty1", 1.25);
+      tl.to("#ty1 i", { y: -8, duration: 0.18, stagger: 0.08, yoyo: true, repeat: 3, ease: "sine.inOut" }, 1.4);
+      hide("#ty1", 2.35);
+      tl.set("#status", { textContent: "online" }, 2.35);
+      tl.to("#t1 .k", { scale: 1.12, duration: 0.15, yoyo: true, repeat: 1, transformOrigin: "50% 60%" }, 2.4);
+      out("#t1", 2.8, 0.2);
+
+      // ── 3–8s PAIN
+      words("#t2", 3.0, 0.15);
+      show("#o1", 3.4); show("#o2", 4.4); show("#o3", 5.4);
+      tl.to("#phone", { x: -10, duration: 0.05, yoyo: true, repeat: 5 }, 5.45);
+      tl.fromTo("#counter", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)" }, 6.0);
+      tl.to("#cnt", { scale: 1.4, color: "#ff4d4f", duration: 0.12, yoyo: true, repeat: 3 }, 6.5);
+      out("#t2", 7.55); out("#counter", 7.55);
+      tl.to("#phone", { opacity: 0, scale: 0.8, y: 200, duration: 0.4, ease: "power2.in" }, 7.6);
+
+      // ── 8–14s REVEAL
+      words("#t3", 8.1, 0.12);
+      tl.to("#glow", { opacity: 1, duration: 0.8 }, 8.3);
+      tl.fromTo("#coverWrap", { opacity: 0, y: 500, scale: 0.6 }, { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out" }, 8.4);
+      tl.fromTo("#cover", { rotationY: -65, rotationX: 12 }, { rotationY: -14, rotationX: 4, duration: 1.1, ease: "power3.out" }, 8.4);
+      tl.to("#cover", { rotationY: 10, rotationX: -2, duration: 3.6, ease: "sine.inOut" }, 9.5);
+      tl.fromTo(".spark", { opacity: 0, scale: 0, rotation: 0 }, { opacity: 1, scale: 1, rotation: 90, duration: 0.4, stagger: 0.1, ease: "back.out(3)" }, 9.2);
+      tl.to(".spark", { opacity: 0, scale: 0.4, duration: 0.4, stagger: 0.05 }, 12.6);
+      tl.fromTo("#coverInfo span", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.18, ease: "back.out(2)" }, 10.2);
+      tl.set("#coverInfo", { opacity: 1 }, 10.2);
+      out("#t3", 13.4); out("#coverInfo", 13.4);
+      tl.to("#coverWrap", { opacity: 0, scale: 0.55, y: -380, duration: 0.5, ease: "power2.in" }, 13.5);
+      tl.to("#glow", { opacity: 0.5, duration: 0.5 }, 13.5);
+
+      // ── 14–20s ISI (ayat muncul perkataan demi perkataan, ikon terapung di tengah)
+      [["#L1", 14.2], ["#L2", 15.9], ["#L3", 17.6]].forEach(([l, t]) => {
+        tl.fromTo(l + " .w", { y: 70, opacity: 0, filter: "blur(10px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.4, stagger: 0.32, ease: "power3.out" }, t);
+        tl.fromTo(l + " .chip", { opacity: 0, scale: 0, rotation: -25 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.4, ease: "back.out(3)" }, t + 0.2);
+        tl.to(l + " .chip", { y: -22, duration: 0.8, yoyo: true, repeat: 1, ease: "sine.inOut" }, t + 0.6);
+      });
+      tl.to("#lines .ln", { opacity: 0.35, duration: 0.25 }, 19.3);
+      tl.to("#lines", { opacity: 0, y: -60, duration: 0.35, ease: "power2.in" }, 19.6);
+
+      // ── 20–24s UBAH (chat sama, jawapan ikut skrip)
+      ["#m1", "#o2", "#o3"].forEach((s) => hide(s, 19.9));
+      tl.set("#phone", { scale: 1, y: 0 }, 19.9);
+      tl.to("#phone", { opacity: 1, duration: 0.35 }, 20.0);
+      words("#t5", 20.05, 0.12);
+      show("#r1", 20.5);
+      tl.to("#tk2", { color: "#34b7f1", duration: 0.1 }, 21.0);
+      tl.set("#status", { textContent: "typing…" }, 21.1);
+      show("#ty2", 21.1);
+      tl.to("#ty2 i", { y: -8, duration: 0.15, stagger: 0.06, yoyo: true, repeat: 1, ease: "sine.inOut" }, 21.2);
+      hide("#ty2", 21.75);
+      tl.set("#status", { textContent: "online" }, 21.75);
+      show("#r2", 21.75);
+      tl.fromTo("#stamp", { opacity: 0, scale: 2.4, rotation: -10 }, { opacity: 1, scale: 1, rotation: -3, duration: 0.32, ease: "power4.in" }, 22.35);
+      confetti.forEach((c, i) => {
+        tl.fromTo(c.e, { opacity: 1, x: 0, y: 0, rotation: 0 }, { x: c.x, y: c.y, rotation: c.r, duration: 1.0, ease: "power3.out", immediateRender: false }, 22.62 + (i % 5) * 0.01);
+        tl.to(c.e, { y: c.y + 520, opacity: 0, duration: 0.9, ease: "power1.in" }, 23.62);
+      });
+      out("#t5", 23.6); out("#stamp", 23.65);
+      tl.to("#phone", { opacity: 0, y: 160, duration: 0.35, ease: "power2.in" }, 23.65);
+
+      // ── 24–28s JAMINAN + HARGA
+      tl.fromTo("#shield", { opacity: 0, scale: 0, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.5)", transformOrigin: "50% 50%" }, 24.1);
+      tl.fromTo("#chk", { strokeDasharray: 200, strokeDashoffset: 200 }, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 24.45);
+      tl.fromTo("#g1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 24.35);
+      tl.fromTo("#g2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.5)" }, 25.0);
+      tl.fromTo("#g3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3 }, 25.6);
+      tl.fromTo("#price", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 26.1);
+      tl.fromTo("#strike", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power2.out" }, 26.5);
+      tl.fromTo("#new", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(3)" }, 26.75);
+      tl.to("#new", { scale: 1.08, duration: 0.2, yoyo: true, repeat: 1 }, 27.2);
+      tl.to(["#shield", "#g1", "#g2", "#g3", "#price"], { opacity: 0, y: -50, duration: 0.3, stagger: 0.03, ease: "power2.in" }, 27.65);
+
+      // ── 28–30s CTA
+      words("#ctaTop", 28.0, 0.12);
+      tl.fromTo("#ctaMini", { opacity: 0, y: 80, rotation: -8 }, { opacity: 1, y: 0, rotation: -4, duration: 0.4, ease: "back.out(2)" }, 28.05);
+      tl.fromTo("#btn", { opacity: 0, y: 60, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)" }, 28.2);
+      tl.fromTo("#cursor", { opacity: 0, x: 220, y: 220 }, { opacity: 1, x: 0, y: 0, duration: 0.45, ease: "power2.out" }, 28.45);
+      tl.to("#cursor", { scale: 0.82, duration: 0.08, yoyo: true, repeat: 1, transformOrigin: "20% 10%" }, 28.95);
+      tl.to("#btn", { scale: 0.94, duration: 0.08, yoyo: true, repeat: 1 }, 28.95);
+      tl.to("#btn", { boxShadow: "0 0 0 34px rgba(37,211,102,0), 0 20px 50px rgba(0,0,0,.5)", duration: 0.6, ease: "power1.out" }, 29.0);
+      tl.fromTo("#handle", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, 29.15);
+      tl.to("#root", { opacity: 1, duration: 0.01 }, 29.99);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

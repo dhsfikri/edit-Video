@@ -1,14 +1,14 @@
 # Brief Edit Video: Iklan Ebook 2026 "Wassap Masih Relevan?"
 
-**Tarikh:** 2026-11-15  **Tajuk/Topik:** Iklan animasi penuh Ebook 2026  **Versi brief:** v2
+**Tarikh:** 2026-11-15  **Tajuk/Topik:** Iklan animasi penuh Ebook 2026  **Versi brief:** v3
 
 ## 1. Objektif
 - Tujuan video: **closing / jualan terus** (iklan berbayar + post organik)
 - Target penonton: owner bisnes & team sales yang closing melalui WhatsApp, chat banyak tapi closing sikit
 - Produk: **Ebook 2026: Wassap Masih Relevan?** (105 muka surat · Formula 1-4-6-10 · susun team · skrip 2026)
 - Harga: ~~RM67~~ **RM37** (ikut bcl.my)
-- Jaminan: **"Ebook ni tak membantu, kita refund balik duit."** Claim melalui WhatsApp, refund dibuat hari yang sama.
-- CTA: "Dapatkan sekarang, RM37" + link https://sweetcactusenterprise.bcl.my/form/ebook-sirdharma
+- Jaminan: **"Ebook ni tak membantu, kita refund balik duit."** Dalam **7 hari** selepas beli; claim melalui WhatsApp, refund dibuat hari yang sama.
+- CTA: "Dapatkan sekarang, RM37" (butang dalam video, TIADA URL di skrin). Link https://sweetcactusenterprise.bcl.my/form/ebook-sirdharma diletak dalam setting iklan (Meta destination / TikTok link).
 
 ## 2. Konsep & gaya
 - Konsep: **Chat Simulation + Kinetic Typography** (gaya reference "SaaS product launch", diadaptasi ke brand Sir)
@@ -29,7 +29,7 @@
 | 8–14s | Reveal produk | Cover ebook (gambar dari bcl.my) terbang masuk dalam 3D, glow hijau, sparkle ✦ | "**Ebook 2026: Wassap Masih Relevan?**" · "105 muka surat" | Riser, kemudian impact |
 | 14–20s | Isi / manfaat | Ikon kecil terapung di tengah ayat (gaya reference) | "Formula **1-4-6-10**." → "Susun **team**." → "Skrip **2026**." | Klik setiap perkataan |
 | 20–24s | Transformasi (ilustrasi) | Chat sama: customer balas "Ok, nak 1 😊" → resit "Dah transfer" + confetti ✓ | "Dari SEEN → **CLOSED**" | Ding + confetti |
-| 24–28s | Jaminan + harga | Ikon perisai hijau | "Ebook ni tak membantu? **Kita REFUND balik duit.**" · kecil: "Claim via WhatsApp · refund hari sama" · ~~RM67~~ **RM37** | Stamp / thud |
+| 24–28s | Jaminan + harga | Ikon perisai hijau | "Ebook ni tak membantu? **Kita REFUND balik duit.**" · kecil: "Dalam 7 hari · claim via WhatsApp" · ~~RM67~~ **RM37** | Stamp / thud |
 | 28–30s | CTA + loop | Butang "Dapatkan sekarang" ditekan kursor | "Klik link · RM37" · @sirdharma_ | Bunyi signature |
 
 ## 5. Style
@@ -53,8 +53,14 @@
 1. Refund: claim melalui WhatsApp, refund dibuat hari yang sama ✅
 2. Link CTA: `ebook-sirdharma` ✅
 3. Platform: Meta Ads + TikTok ✅ (satu master 9:16; teks dalam safe zone TikTok supaya selamat untuk kedua-dua)
-4. Suara: *cadangan default:* muzik + SFX sahaja (iklan banyak ditonton mute; teks dah bawa mesej) ⏳
-5. Babak "SEEN → CLOSED": *cadangan default:* kekal sebagai ilustrasi, tanpa angka % ⏳
+4. Suara: muzik + SFX sahaja ✅
+5. Babak "SEEN → CLOSED": ilustrasi, tanpa angka % ✅
+6. Tempoh refund: 7 hari ✅
 
 ---
-**Status:** ☑ Menunggu approval  ☐ Approved  ☐ Perlu ubah (nota: ____)
+**Status:** ☐ Menunggu approval  ☑ Approved (2026-11-15)  ☐ Perlu ubah (nota: ____)
+
+## Revisi / log
+- **Draf v1 (2026-11-15):** sumber `motion/iklan-ebook/index.html`, audio `projects/IKLAN-EBOOK2026/audio.py` (muzik + SFX sintetik, bebas royalti). Cover dari halaman 1 PDF ebook.
+  - Ikut peraturan skill (mockup generik, tiada bukti bayaran palsu): babak 20–24s guna **balasan ikut skrip → "Ok, saya nak 1"**, BUKAN resit transfer.
+  - QC: safe zone lulus · -14.4 LUFS · peak -2.1 dB · 1080x1920 30fps H.264.
