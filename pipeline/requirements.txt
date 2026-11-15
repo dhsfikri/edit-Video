@@ -1,0 +1,4 @@
+# Pakej Python untuk pipeline edit video.
+# Install: pip install -r pipeline/requirements.txt
+faster-whisper   # transcribe Bahasa Melayu
+yt-dlp           # muat turun video rujukan (TikTok/YouTube)
