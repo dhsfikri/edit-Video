@@ -83,3 +83,8 @@ Sir minta semua animasi sama macam reference. Teknik animasi diikut babak demi b
 | 26–28s | 3 perkataan tagline | "Seen. Reply. Closed." |
 | 28–30s | Logo + URL kecil | Cover + @sirdharma_ (tiada URL) |
 Gaya: latar putih kebiruan → putih kehijauan, aksen hijau #25D366, Montserrat. Alat: HyperFrames (render terbukti); VectorCraft/EffectCraft bila MCP aktif dalam sesi baru.
+- **Draf v2 (2026-11-15) — APPROVED oleh Sir ("guna vector dan effectcraft"):** animasi ikut babak reference, latar terang.
+  - Aset vektor: **VectorCraft** (`v2/vector_assets.py`: telefon, kad produk, ikon, perisai, kursor, sparkle). Halaman sebenar PDF (ms 2, 5, 13, 15, 19, 25, 33).
+  - Animasi & render: **EffectCraft** (`v2/iklan_v2.jsx` → `effectcraft-cli script` → `render --format h264`), ~2 min render CPU.
+  - Audio: `v2/audio_v2.py` (sintetik). QC: teks dalam safe zone · -14.7 LUFS · peak -2.9 dB.
+  - Keperluan: font Montserrat dipasang ke sistem (woff2 → ttf, nama keluarga dibetulkan) supaya EffectCraft kenal font.
