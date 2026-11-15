@@ -10,3 +10,11 @@
   anticipation sebelum tarik, huruf ditolak & penyek → runtuh jadi blok tebal (elastic), manik = bandul teredam,
   bar mendarat dengan squash, perabot mendarat dengan squash & stretch (titik asal transform dikunci).
 - QC: teks dalam safe zone · -14.5 LUFS · peak -3.2 dB.
+
+## v4 — dibina terus dalam EffectCraft (MCP) + VectorCraft
+- Projek: `ikea5_effectcraft.ecproj` (comp `IKEA5`, 1080x1920, 30fps, 5s). Render:
+  `effectcraft-cli render --project projects/IKEA5/ikea5_effectcraft.ecproj --comp IKEA5 --out out.mp4 --format h264 --fps 30 --audio off`
+- Fungsi EffectCraft yang diguna: Import SVG (VectorCraft) → **Create Shapes from Vector Layer**; **Create Shapes from Text** (setiap huruf satu kumpulan);
+  rig **Null "Bahu" + Parent**; **Expressions** (ayunan bahu, overshoot, bernafas, anticipation, bounce, bandul `toComp`), **Beam** (tali ikut manik),
+  **Bevel Alpha** (manik), **Drop Shadow**, **Exposure** (lampu menyala), **Motion Blur**.
+- Aset bilik: `motion/ikea5/assets/room/*.svg` (satu perabot satu fail, pendaratan squash & stretch).
