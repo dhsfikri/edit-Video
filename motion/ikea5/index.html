@@ -1,0 +1,225 @@
+<!doctype html>
+<!--
+  UJIAN 5s — gaya pembukaan "IKEA Together" (allkustom): bar jatuh → bina perkataan, tali + manik, tangan
+  tarik → huruf runtuh jadi bar, lampu menyala → bilik hangat, perabot bercantum. Isi & warna milik Sir.
+  1080x1920 · teks dalam safe zone (x 60–900, y 220–1440).
+  Render: ../node_modules/.bin/hyperframes render -f 30 -q high -w 4 -o out.mp4
+-->
+<html lang="ms" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+  :root { --y: #ffd60a; --ink: #0b0b0b; --g: #25d366; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--y); }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--y); }
+  #word { position: absolute; left: 60px; width: 840px; top: 820px; text-align: center; font-family: "Montserrat"; font-weight: 800;
+    font-size: 176px; line-height: 1; letter-spacing: 2px; color: var(--ink); white-space: nowrap; }
+  #word span { display: inline-block; }
+  .bar { position: absolute; background: var(--ink); }
+  svg { position: absolute; left: 0; top: 0; overflow: visible; }
+  #room { position: absolute; inset: 0; opacity: 0; }
+  #wipe { position: absolute; left: 480px; top: 2300px; width: 2600px; height: 2600px; margin: -1300px 0 0 -1300px; background: #c08d4e; transform: rotate(45deg) scale(0); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1080" data-height="1920">
+ <div id="stage" class="clip" data-start="0" data-duration="5" data-track-index="0">
+  <div id="word"><span>W</span><span>A</span><span>S</span><span>S</span><span>A</span><span>P</span></div>
+  <div id="bars"></div>
+
+  <!-- tali + manik + tangan -->
+  <svg id="handsvg" width="1080" height="1920" viewBox="0 0 1080 1920">
+   <defs>
+    <linearGradient id="skin" gradientUnits="userSpaceOnUse" x1="0" y1="-120" x2="0" y2="118">
+     <stop offset="0" stop-color="#f6cfa8"/><stop offset=".55" stop-color="#e9b386"/><stop offset="1" stop-color="#cf9064"/>
+    </linearGradient>
+    <linearGradient id="arm" x1="0" y1="0" x2="1" y2="0">
+     <stop offset="0" stop-color="#ebb68a"/><stop offset="1" stop-color="#e2a87b"/>
+    </linearGradient>
+    <linearGradient id="sleeve" x1="0" y1="0" x2="0" y2="1">
+     <stop offset="0" stop-color="#2a2a2a"/><stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="beadG" cx=".35" cy=".3" r=".75">
+     <stop offset="0" stop-color="#9dfcc4"/><stop offset=".45" stop-color="#25d366"/><stop offset="1" stop-color="#0d7a3a"/>
+    </radialGradient>
+    <filter id="hs" x="-30%" y="-30%" width="160%" height="190%">
+     <feGaussianBlur in="SourceAlpha" stdDeviation="22"/><feOffset dy="44" dx="-8"/>
+     <feComponentTransfer><feFuncA type="linear" slope=".22"/></feComponentTransfer>
+     <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.2"/></filter>
+   </defs>
+   <line id="cord" x1="470" y1="-20" x2="470" y2="-20" stroke="#14904a" stroke-width="5"/>
+   <g id="hand" filter="url(#hs)" transform="translate(1700,610) scale(1.38)">
+    <!-- lengan + lengan baju -->
+    <path d="M-40,-62 C120,-70 300,-86 520,-92 L520,96 C300,92 120,78 -40,66 Z" fill="url(#skin)"/>
+    <path d="M330,-92 L700,-104 L700,112 L330,98 C318,40 318,-30 330,-92 Z" fill="url(#sleeve)"/>
+    <path d="M330,-92 C318,-30 318,40 330,98" stroke="#3a3a3a" stroke-width="6" fill="none"/>
+    <!-- jari (belakang tangan, ke kiri) -->
+    <g fill="url(#skin)">
+     <rect x="-372" y="-52" width="200" height="44" rx="22" transform="rotate(-3 -172 -30)"/>
+     <rect x="-392" y="-8" width="220" height="45" rx="22.5"/>
+     <rect x="-370" y="38" width="200" height="42" rx="21" transform="rotate(3 -170 59)"/>
+     <rect x="-318" y="80" width="150" height="36" rx="18" transform="rotate(7 -168 98)"/>
+     <!-- tapak / belakang tangan -->
+     <path d="M-200,-58 C-140,-72 -60,-66 0,-62 L60,-64 L60,70 C0,74 -80,104 -160,116 -205,112 C-230,60 -232,-20 -200,-58 Z"/>
+     <!-- ibu jari: naik menjepit manik -->
+     <path d="M-120,-60 C-140,-92 -170,-118 -196,-128 C-214,-134 -228,-120 -220,-104 C-206,-84 -186,-70 -166,-52 Z"/>
+    </g>
+    <!-- kuku -->
+    <g fill="#f8dcc2" opacity=".85">
+     <rect x="-364" y="-46" width="30" height="20" rx="8"/><rect x="-384" y="-1" width="30" height="20" rx="8"/>
+     <rect x="-362" y="45" width="28" height="18" rx="8"/><rect x="-310" y="86" width="24" height="16" rx="7"/>
+     <rect x="-224" y="-130" width="22" height="18" rx="7" transform="rotate(-30 -213 -121)"/>
+    </g>
+    <!-- garis buku jari & pergelangan -->
+    <g stroke="#b97a52" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".55" filter="url(#soft)">
+     <path d="M-262,-40 q6,10 0,20"/><path d="M-280,4 q6,10 0,22"/><path d="M-262,50 q6,9 0,19"/><path d="M-236,90 q5,8 0,15"/>
+     <path d="M-130,20 q30,26 70,30"/>
+    </g>
+   </g>
+   <circle id="bead" cx="470" cy="-40" r="30" fill="url(#beadG)"/>
+  </svg>
+
+  <!-- peralihan: bentuk berlian dari bawah -->
+  <div id="wipe"></div>
+
+  <!-- BILIK HANGAT -->
+  <div id="room">
+   <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+    <defs>
+     <radialGradient id="warm" cx=".45" cy=".56" r=".5">
+      <stop offset="0" stop-color="#f6e2a6"/><stop offset=".45" stop-color="#dcb873"/><stop offset="1" stop-color="#c08d4e"/>
+     </radialGradient>
+     <linearGradient id="sofaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2fb768"/><stop offset="1" stop-color="#16804a"/></linearGradient>
+     <linearGradient id="sofaD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f9a55"/><stop offset="1" stop-color="#0f6236"/></linearGradient>
+     <filter id="rs" x="-30%" y="-30%" width="160%" height="170%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/><feOffset dy="16"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".3"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+     </filter>
+     <filter id="fab"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .14 0" result="na"/>
+      <feComposite in="na" in2="SourceGraphic" operator="in" result="t"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="t"/></feMerge></filter>
+     <radialGradient id="screen" cx=".5" cy=".5" r=".7"><stop offset="0" stop-color="#7cf3ad"/><stop offset="1" stop-color="#25d366"/></radialGradient>
+    </defs>
+    <rect width="1080" height="1920" fill="#c08d4e"/>
+    <ellipse id="glow" cx="480" cy="1080" rx="760" ry="900" fill="url(#warm)"/>
+    <rect y="1330" width="1080" height="590" fill="#b07f44" opacity=".55"/>
+    <!-- lampu lantai -->
+    <g id="lamp" filter="url(#rs)">
+     <rect x="148" y="1310" width="110" height="18" rx="6" fill="#111"/>
+     <rect x="198" y="900" width="10" height="414" fill="#111"/>
+     <path d="M203,900 L268,850" stroke="#111" stroke-width="9" stroke-linecap="round"/>
+     <g id="shade"><path d="M232,800 L318,826 L300,892 L222,868 Z" fill="#111"/><ellipse id="bulb" cx="262" cy="882" rx="34" ry="12" fill="#fff6d0" transform="rotate(17 262 882)"/></g>
+    </g>
+    <!-- sofa -->
+    <g id="sofa" filter="url(#rs)">
+     <g id="sback"><rect x="300" y="1030" width="420" height="150" rx="26" fill="url(#sofaG)" filter="url(#fab)"/>
+      <path d="M440,1040 v128 M580,1040 v128" stroke="#13703f" stroke-width="5" opacity=".5"/></g>
+     <g id="sseat"><rect x="290" y="1160" width="440" height="110" rx="20" fill="url(#sofaD)" filter="url(#fab)"/></g>
+     <g id="sarmL"><rect x="262" y="1110" width="62" height="160" rx="30" fill="url(#sofaG)"/><circle cx="293" cy="1150" r="16" fill="#13703f" opacity=".6"/></g>
+     <g id="sarmR"><rect x="696" y="1110" width="62" height="160" rx="30" fill="url(#sofaG)"/><circle cx="727" cy="1150" r="16" fill="#13703f" opacity=".6"/></g>
+     <g id="slegs" fill="#111"><rect x="318" y="1268" width="14" height="44"/><rect x="688" y="1268" width="14" height="44"/></g>
+    </g>
+    <!-- meja kopi + telefon -->
+    <g id="table" filter="url(#rs)">
+     <rect id="ttop" x="440" y="1224" width="330" height="22" rx="4" fill="#111"/>
+     <g id="tlegs" fill="#111"><rect x="458" y="1244" width="12" height="70"/><rect x="740" y="1244" width="12" height="70"/></g>
+    </g>
+    <g id="phone">
+     <rect x="582" y="1122" width="64" height="104" rx="12" fill="#111"/>
+     <rect x="577" y="1220" width="74" height="8" rx="3" fill="#2a2a2a"/>
+    </g>
+    <g id="phoneScr" opacity="0"><rect x="588" y="1130" width="52" height="86" rx="7" fill="url(#screen)"/>
+     <rect x="594" y="1150" width="34" height="12" rx="6" fill="#fff"/><rect x="600" y="1170" width="34" height="12" rx="6" fill="#d7f8e3"/></g>
+    <g id="notif" opacity="0"><circle cx="648" cy="1112" r="20" fill="#ff3b30"/><text x="648" y="1121" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="24" fill="#fff">1</text></g>
+    <!-- bangku sisi hijau + mug -->
+    <g id="stool" filter="url(#rs)">
+     <rect x="780" y="1172" width="120" height="20" rx="4" fill="#25d366"/>
+     <path d="M800,1192 L782,1312 M880,1192 L898,1312 M792,1262 h96" stroke="#25d366" stroke-width="15" stroke-linecap="round" fill="none"/>
+     <g id="mug"><rect x="818" y="1126" width="44" height="48" rx="8" fill="#fff"/><path d="M862,1138 q22,0 22,16 q0,16 -22,16" stroke="#fff" stroke-width="8" fill="none"/></g>
+    </g>
+   </svg>
+  </div>
+ </div>
+</div>
+<script>
+  const $ = (s) => document.querySelector(s);
+  const tl = gsap.timeline({ paused: true });
+
+  // ── Bina perkataan daripada bar (gaya IKEA): setiap huruf ada bar yang jatuh dan "melukis" huruf itu
+  const word = $("#word"), letters = [...word.querySelectorAll("span")], bars = $("#bars");
+  const root = $("#root").getBoundingClientRect();
+  const capTop = 820 + 176 * 0.17, capH = 176 * 0.72;   // anggaran kotak huruf besar Montserrat
+  const order = [2, 0, 4, 1, 5, 3], starts = [0.30, 0.42, 0.52, 0.62, 0.74, 0.86];
+  const fromTop = [true, false, true, true, false, true];
+  letters.forEach((L, i) => {
+    const r = L.getBoundingClientRect(), x = r.left - root.left, w = r.width;
+    const b = document.createElement("div"); b.className = "bar"; bars.appendChild(b);
+    gsap.set(b, { left: x + w * 0.04, top: capTop, width: Math.min(46, w * 0.3), height: capH });
+    const k = order.indexOf(i), t0 = starts[k];
+    tl.fromTo(b, { y: fromTop[k] ? -1300 : 1300, scaleY: 2.2 }, { y: 0, scaleY: 1, duration: 0.36, ease: "power3.out" }, t0);
+    tl.set(L, { clipPath: "inset(0 100% 0 0)" }, 0);
+    tl.to(L, { clipPath: "inset(0 0% 0 0)", duration: 0.2, ease: "power2.out" }, t0 + 0.34);
+    tl.to(b, { opacity: 0, duration: 0.06 }, t0 + 0.4);
+    // bar runtuh (selepas tarikan tali)
+    const cb = document.createElement("div"); cb.className = "bar"; bars.appendChild(cb);
+    gsap.set(cb, { left: x + (i === 0 ? w * 0.55 : 8), top: capTop + capH - 34, width: i === 0 ? w * 0.4 : w - 16, height: 34, opacity: 0, transformOrigin: "50% 100%" });
+    tl.set(cb, { opacity: 1, scaleY: capH / 34 }, 2.98 + i * 0.012);
+    tl.to(cb, { scaleY: 1, duration: 0.22, ease: "power4.out" }, 2.98 + i * 0.012);
+    tl.set(L, { opacity: 0 }, 2.98 + i * 0.012);
+  });
+
+  // ── Tali + manik jatuh dari atas
+  const cord = $("#cord"), bead = $("#bead"), hand = $("#hand");
+  const bobj = { y: -40 };
+  const setBead = () => { bead.setAttribute("cy", bobj.y); cord.setAttribute("y2", bobj.y - 24); };
+  tl.to(bobj, { y: 490, duration: 0.42, ease: "back.out(1.6)", onUpdate: setBead }, 1.55);
+
+  // ── Tangan masuk dari kanan, pegang manik (hujung jari di x≈470)
+  const H = { x: 1700, y: 610, r: 0 };
+  const setHand = () => hand.setAttribute("transform", `translate(${H.x},${H.y}) rotate(${H.r}) scale(1.38)`);
+  tl.to(H, { x: 762, duration: 0.5, ease: "power3.out", onUpdate: setHand }, 1.78);
+  tl.to(H, { x: 748, r: -1.5, duration: 0.25, ease: "sine.inOut", onUpdate: setHand }, 2.28);
+  tl.to(H, { x: 754, r: 0, duration: 0.4, ease: "sine.inOut", onUpdate: setHand }, 2.53);
+  // tarik!
+  tl.to(H, { y: 670, r: 2, duration: 0.14, ease: "power3.in", onUpdate: setHand }, 2.86);
+  tl.to(bobj, { y: 550, duration: 0.14, ease: "power3.in", onUpdate: setBead }, 2.86);
+  tl.to(H, { y: 630, r: 0, duration: 0.5, ease: "elastic.out(1,0.5)", onUpdate: setHand }, 3.0);
+  tl.to(bobj, { y: 510, duration: 0.5, ease: "elastic.out(1,0.5)", onUpdate: setBead }, 3.0);
+  tl.to(H, { x: 748, duration: 0.6, ease: "sine.inOut", onUpdate: setHand }, 3.3);
+  // lepas & keluar
+  tl.to(H, { x: 1800, y: 530, r: -6, duration: 0.42, ease: "power3.in", onUpdate: setHand }, 3.75);
+  tl.to(bobj, { y: 470, duration: 0.3, ease: "back.out(2)", onUpdate: setBead }, 3.78);
+
+  // ── Peralihan berlian + lampu menyala → bilik
+  tl.to("#wipe", { scale: 1.6, duration: 0.32, ease: "power2.in" }, 3.98);
+  tl.set("#room", { opacity: 1 }, 4.28);
+  tl.fromTo("#glow", { opacity: 0.25, attr: { rx: 380, ry: 450 } }, { opacity: 1, attr: { rx: 760, ry: 900 }, duration: 0.5, ease: "power2.out" }, 4.28);
+  tl.fromTo("#bulb", { attr: { fill: "#555" } }, { attr: { fill: "#fff6d0" }, duration: 0.05 }, 4.32);
+  // perabot terbang masuk & bercantum
+  const fly = (sel, from, t, d = 0.34) => tl.fromTo(sel, from, { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1, duration: d, ease: "back.out(1.7)", transformOrigin: "50% 50%" }, t);
+  fly("#lamp", { y: -700, opacity: 1 }, 4.28, 0.3);
+  fly("#sback", { y: -500, rotation: -8 }, 4.32);
+  fly("#sseat", { x: 600, rotation: 10 }, 4.38);
+  fly("#sarmL", { x: -500, rotation: -30 }, 4.44);
+  fly("#sarmR", { x: 500, rotation: 30 }, 4.47);
+  fly("#slegs", { y: 200, opacity: 0 }, 4.5, 0.2);
+  fly("#ttop", { x: -700, rotation: -12 }, 4.5);
+  fly("#tlegs", { y: 220, opacity: 0 }, 4.58, 0.2);
+  fly("#stool", { y: -600, rotation: 20 }, 4.52);
+  fly("#phone", { y: -400, rotation: 40 }, 4.6, 0.24);
+  tl.to("#phoneScr", { opacity: 1, duration: 0.06 }, 4.76);
+  tl.fromTo("#notif", { opacity: 0, scale: 0, transformOrigin: "648px 1112px" }, { opacity: 1, scale: 1, duration: 0.18, ease: "back.out(3)" }, 4.82);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+  tl.seek(0);
+</script>
+</body>
+</html>
