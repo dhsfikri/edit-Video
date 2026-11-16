@@ -1,0 +1,94 @@
+{
+ "aset": [
+  {
+   "id": "ikon-bell-25d366",
+   "jenis": "ikon",
+   "fail": "library/ikon/bell-25d366.svg",
+   "sumber": "Tabler Icons 3.35.0",
+   "url": "https://tabler.io/icons",
+   "kredit": "Tabler",
+   "lesen": "MIT (percuma, komersial OK)",
+   "kategori": "ikon",
+   "tag": [
+    "bell"
+   ],
+   "tarikh": "2026-11-16",
+   "digunakan": []
+  },
+  {
+   "id": "ikon-check-25d366",
+   "jenis": "ikon",
+   "fail": "library/ikon/check-25d366.svg",
+   "sumber": "Tabler Icons 3.35.0",
+   "url": "https://tabler.io/icons",
+   "kredit": "Tabler",
+   "lesen": "MIT (percuma, komersial OK)",
+   "kategori": "ikon",
+   "tag": [
+    "check"
+   ],
+   "tarikh": "2026-11-16",
+   "digunakan": []
+  },
+  {
+   "id": "ikon-clock-hour-3-25d366",
+   "jenis": "ikon",
+   "fail": "library/ikon/clock-hour-3-25d366.svg",
+   "sumber": "Tabler Icons 3.35.0",
+   "url": "https://tabler.io/icons",
+   "kredit": "Tabler",
+   "lesen": "MIT (percuma, komersial OK)",
+   "kategori": "ikon",
+   "tag": [
+    "clock-hour-3"
+   ],
+   "tarikh": "2026-11-16",
+   "digunakan": []
+  },
+  {
+   "id": "ikon-message-circle-25d366",
+   "jenis": "ikon",
+   "fail": "library/ikon/message-circle-25d366.svg",
+   "sumber": "Tabler Icons 3.35.0",
+   "url": "https://tabler.io/icons",
+   "kredit": "Tabler",
+   "lesen": "MIT (percuma, komersial OK)",
+   "kategori": "ikon",
+   "tag": [
+    "message-circle"
+   ],
+   "tarikh": "2026-11-16",
+   "digunakan": []
+  },
+  {
+   "id": "ikon-phone-25d366",
+   "jenis": "ikon",
+   "fail": "library/ikon/phone-25d366.svg",
+   "sumber": "Tabler Icons 3.35.0",
+   "url": "https://tabler.io/icons",
+   "kredit": "Tabler",
+   "lesen": "MIT (percuma, komersial OK)",
+   "kategori": "ikon",
+   "tag": [
+    "phone"
+   ],
+   "tarikh": "2026-11-16",
+   "digunakan": []
+  },
+  {
+   "id": "ikon-x-25d366",
+   "jenis": "ikon",
+   "fail": "library/ikon/x-25d366.svg",
+   "sumber": "Tabler Icons 3.35.0",
+   "url": "https://tabler.io/icons",
+   "kredit": "Tabler",
+   "lesen": "MIT (percuma, komersial OK)",
+   "kategori": "ikon",
+   "tag": [
+    "x"
+   ],
+   "tarikh": "2026-11-16",
+   "digunakan": []
+  }
+ ]
+}

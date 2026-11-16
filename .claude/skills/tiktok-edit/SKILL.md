@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.1 (2026-11-16)
+**Versi:** 1.2 (2026-11-16)
 **Changelog:**
+- 1.2 — Tambah pustaka aset `library/` + `pipeline/aset.py` (Pexels, ikon Tabler, frame Sir). Semua aset yang diguna direkod dalam `library/katalog.json`.
 - 1.1 — Siri closing ditukar nama: `AYAT CLOSING` → `ALL ABOUT CLOSING` (episod bersambung #02).
 - 1.0 — Versi pertama, dari pengalaman C0029 (TIPS JUALAN #01) & C0296 (AYAT CLOSING #01).
 
@@ -81,6 +82,7 @@ Simpan JSON `{"segments":[{start,end,text,words:[{w,s,e}]}]}`. Cetak word timest
 2. Babak baru → tambah dalam `SCENES` (index.html): `script`, `box`, `stamp`, `msgs[[t,"c"|"s"|"sys"|"typing",teks]]`, `stampAt`.
 3. Render: `npx hyperframes render --variables '{"scene":"x","dur":D,"face":"assets/face_x.mp4"}' -f <fps> -q high -w 4 -o ex.mp4` → **trim** `ffmpeg -t D` (composition `data-duration` tetap; render lebih panjang).
 - Letak B-roll **semasa Sir bercakap** (bukan senyap).
+**Pustaka aset** — `library/` (baca `library/README.md`): semak `aset.py senarai` dulu, guna semula kalau ada; kalau tiada → `aset.py cari/ambil/ikon/frame`, kemudian `aset.py guna <id> <ID projek>`. Sir tak perlu upload gambar.
 **Animasi kedai/troli** — `motion/broll/` (`scene`: kupon/troli/kosong/selesai/konten).
 **Higgsfield (AI)** — hanya B-roll suasana, semak kredit & anggaran dalam brief dulu.
 
