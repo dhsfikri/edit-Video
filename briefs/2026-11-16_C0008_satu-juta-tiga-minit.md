@@ -59,3 +59,6 @@ Subtitle karaoke Gaya v2 · grade lembut · tiada muzik (atau bed perlahan) · a
 
 ## Revisi
 - **Draf v1 (40.9s)** — 2026-11-16. Arahan Sir selepas klip ujian: SFX **ketuk pintu** (saat 0 + pada "peluang"), **zoom berpaksi mata** (`anchor` [565,722] dalam cut.py — eye line kekal), setiap babak muka mula rapat lalu **zoom out**. Babak motion: crowd, live (RM0→RM1,000,000, 03:00), malam (✕), lapan (3 MINIT→8 TAHUN), banding (≠), tangga (TERUS USAHA). "tunggu usaha" → subtitle "terus usaha". QC lulus, -14.0 LUFS.
+
+## ✅ FINAL — 2026-11-16
+Sir approve draf v1 → `20261116_sejuta-3-minit.mp4` (40.9s). Thumbnail `projects/C0008/thumbnail.png` (frame 38.6s, "SEJUTA DALAM [3 MINIT]?" + ✕ sebenarnya 8 tahun) + `caption.md`.
