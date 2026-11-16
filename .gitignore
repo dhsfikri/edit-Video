@@ -3,3 +3,6 @@ motion/intro/renders/
 .thumbnails/
 motion/thumbnail/frame.png
 *_draf_*.mp4
+
+# Fail keadaan dalaman HyperFrames (berubah setiap render)
+motion/*/.hyperframes/video-state.json
