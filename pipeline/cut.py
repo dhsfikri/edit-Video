@@ -13,6 +13,7 @@ edit.json:
   "color": "eq=brightness=0.03:contrast=1.06:saturation=1.08:gamma=1.08",
   "corrections": {"say": "sale"},
   "segments": [{"start": 7.82, "end": 11.15, "zoom": 1.0, "zoom_to": 1.0, "cy": 0.42}, ...]
+        # pilihan: "keys": [[t_relatif_segmen, zoom, cy], ...] → punch-in/zoom keyframe (gaya dynamic)
 }
 
 Output (dalam workdir):
@@ -73,16 +74,31 @@ for s in cfg["segments"]:
 rot = {"cw": "transpose=1,", "ccw": "transpose=2,", "none": ""}[cfg.get("rotate", "none")]
 color = cfg.get("color", "null")
 
+def piecewise(keys, idx):
+    """Ungkapan FFmpeg linear sekeping-sekeping atas t. keys=[[t, zoom, cy], ...] (t relatif segmen).
+    Dua kunci pada masa hampir sama (cth 1.20 & 1.21) = punch-in serta-merta."""
+    pts = [(k[0], k[idx]) for k in keys]
+    expr = f"{pts[-1][1]}"
+    for (ta, va), (tb, vb) in reversed(list(zip(pts, pts[1:]))):
+        seg = f"({va}+({vb}-{va})*(t-{ta})/{max(tb - ta, 1e-3):.4f})"
+        expr = f"if(lt(t,{tb}),{seg},{expr})"
+    return f"if(lt(t,{pts[0][0]}),{pts[0][1]},{expr})"
+
+
 parts, labels = [], []
 for i, s in enumerate(segs):
     d = s["end"] - s["start"]
     z0, z1 = s.get("zoom", 1.0), s.get("zoom_to", s.get("zoom", 1.0))
     cy = s.get("cy", 0.42)  # pusat zoom menegak (muka)
-    # zoom linear z0 -> z1 sepanjang segmen: scale ikut frame, kemudian crop 1080x1920 berpusat pada muka
-    z = f"({z0}+({z1}-{z0})*t/{d:.3f})" if z0 != z1 else str(z0)
+    if s.get("keys"):
+        # zoom keyframe (gaya dynamic/ads): punch-in ikut perkataan dalam satu segmen, audio tak dipotong
+        z, cy = piecewise(s["keys"], 1), piecewise(s["keys"], 2)
+    else:
+        # zoom linear z0 -> z1 sepanjang segmen: scale ikut frame, kemudian crop 1080x1920 berpusat pada muka
+        z = f"({z0}+({z1}-{z0})*t/{d:.3f})" if z0 != z1 else str(z0)
     zoom = (
-        f"scale=w='trunc({W}*{z}/2)*2':h='trunc({H}*{z}/2)*2':eval=frame:flags=lanczos,"
-        f"crop={W}:{H}:x='(iw-{W})/2':y='(ih-{H})*{cy}'"
+        f"scale=w='trunc({W}*({z})/2)*2':h='trunc({H}*({z})/2)*2':eval=frame:flags=lanczos,"
+        f"crop={W}:{H}:x='(iw-{W})/2':y='(ih-{H})*({cy})'"
     )
     vf = (
         f"[0:v]trim={s['start']}:{s['end']},setpts=PTS-STARTPTS,{rot}fps={fps},"

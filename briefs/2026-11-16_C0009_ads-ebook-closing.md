@@ -59,5 +59,26 @@ Subtitle besar karaoke · grade lembut · bed muzik perlahan (pilihan) · -14 LU
 - **Ads panjang sahaja** (±38s) — versi pendek (4b) tidak dibuat
 - "kata BQP": suara kekal, **subtitle tidak tulis** perkataan tu
 
+## Brief v2 — "lebih dynamic" (permintaan Sir selepas draf v1) — ☑ APPROVED 2026-11-16
+Keputusan Sir: **lebih agresif lagi** (visual tukar setiap 1–1.5s) · gaya dynamic untuk **ADS sahaja** (organik kekal Gaya v2) · **tiada muzik**, SFX sahaja.
+Masalah v1: 14.5s muka statik (3.7–18.2s), visual tukar ±6 kali/40s, tiada gerakan kamera (Gaya v2 larang punch-in), tajuk statik & kurang jelas (putih atas latar terang).
+Sasaran v2: **visual berubah setiap 1.5–3s (±18 kali)**, ikut reference danushkmotion + calsaistudio.
+
+| Masa | Ayat | v2 (baru) |
+|---|---|---|
+| 0–1.6s | Sekejap ×4 | **4 punch-in berturut** (zoom 1.0→1.15→1.3→1.45, satu setiap "sekejap") + perkataan **SEKEJAP** besar bertindan + goncang kecil + pop ×4 |
+| 1.6–3.7s | Dah tengok iklan saya banyak kali? | Zoom keluar laju + kinetic **"BANYAK KALI?"** kuning besar tengah |
+| 3.7–6.5s | Macam-macam video dah tunjuk | **Split:** grid jubin video generik terbang masuk (atas) + muka Sir (bawah) |
+| 6.5–11.7s | Dah dapat ke belum e-book 3 buku? | **Punch-in ke buku sebenar** di tangan Sir + kaunter **1 → 2 → 3 BUKU** |
+| 11.7–18.2s | Versi pertama… masih relevan | **Split:** garis masa **2020 → 2026 ✓ MASIH RELEVAN** (2020 dari cover "2020 eBook Collection") + muka bawah |
+| 18.2–32.3s | Isi 3 buku / bonus | Babak kad v1 dikekalkan, masuk lebih laju + kamera hanyut perlahan |
+| 32.3–37s | Lebih mudah, guide team | Punch-in pada "mudahkan" → kinetic **LEBIH MUDAH** → split ikon team ✓ |
+| 37–40.3s | Tiru sahaja | Punch-in + cop **TIRU SAHAJA** + **butang LEARN MORE besar berdenyut** (bukan pil kecil) |
+
+- **Peralihan:** whip-blur / zoom-blur antara layout (bukan potongan keras)
+- **Tajuk:** latar pil gelap (kuning/putih) — jelas atas latar terang
+- **SFX:** whoosh setiap tukar layout, pop setiap kinetic word
+- ⚠️ Ini **ubah peraturan Gaya v2** ("tiada punch-in besar") — untuk ads / video dynamic sahaja, atau semua video lepas ni?
+
 ## Revisi
 - **Draf v1 (40.3s)** — 2026-11-16. A-roll 39.25s (6 potongan) + tahan 1s. Babak kad baru `motion/kad/` (ISI 3 E-BOOK 18.25–25.8s, BONUS 25.8–32.3s). Subtitle pil gelap (`subPill`), 3 perkataan/≤22 huruf sebaris. "kata BQP" & "under" tiada dalam subtitle; "setiru" → "just tiru". Buku dalam kad = generik "Learning Lab Vol.1–3" (bukan cover sebenar). QC: safe zone lulus, -14.0 LUFS, peak -2.9 dB.

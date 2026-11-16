@@ -38,6 +38,10 @@
       .tk.script { font-family: "Caveat", cursive; font-weight: 700; font-size: 54px; color: #fff; }
       .tk.bold { font-weight: 800; font-size: 66px; color: #fff; }
       .tk.box { font-weight: 800; font-size: 80px; color: var(--deep); background: #fff; padding: 0 18px; border-radius: 10px; overflow: hidden; white-space: nowrap; }
+      /* titleStyle "solid": latar pil gelap supaya tajuk jelas atas latar terang/sibuk */
+      .title.solid .tl { margin-bottom: 10px; }
+      .title.solid .tk.script { color: #ffd60a; font-size: 60px; background: rgba(11,11,11,.85); padding: 0 18px 4px; border-radius: 10px; }
+      .title.solid .tk.bold { font-size: 70px; background: rgba(11,11,11,.85); padding: 2px 18px; border-radius: 10px; }
 
       .br { position: absolute; width: 58px; height: 58px; border-color: #fff; border-style: solid; border-width: 0; }
       .br.tl0 { border-top-width: 7px; border-left-width: 7px; } .br.tr0 { border-top-width: 7px; border-right-width: 7px; }
@@ -80,7 +84,7 @@
 
       // Tajuk kinetik
       (E.titles || []).forEach((g) => {
-        const box = put(`<div class="title shadow"></div>`);
+        const box = put(`<div class="title shadow${E.titleStyle === "solid" ? " solid" : ""}"></div>`);
         if (g.start > 0) { tl.set(box, { opacity: 0 }, 0); tl.set(box, { opacity: 1 }, g.start); }
         g.lines.forEach((line) => {
           const ln = el(`<span class="tl"></span>`); box.appendChild(ln);

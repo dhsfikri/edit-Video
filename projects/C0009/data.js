@@ -5,6 +5,7 @@ window.EDIT = {
  "episode": "",
  "maxWords": 3,
  "maxChars": 22,
+ "titleStyle": "solid",
  "subPill": true,
  "hideBadge": [
   [
