@@ -34,11 +34,12 @@
       #badge i { width: 14px; height: 14px; border-radius: 50%; background: var(--green); }
       #badge b { color: #fff; font-size: 24px; letter-spacing: .06em; } #badge b span { color: var(--green); }
 
-      .title { position: absolute; left: 60px; top: 300px; }
+      .title { position: absolute; left: 60px; top: 305px; }
+      #shade { position: absolute; left: 0; top: 0; width: 1080px; height: 760px; background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.28) 55%, rgba(0,0,0,0)); }
       .tl { display: block; white-space: nowrap; line-height: 1.05; margin-bottom: 6px; }
       .tk { display: inline-block; margin-right: 14px; vertical-align: bottom; }
-      .tk.script { font-family: "Caveat", cursive; font-weight: 700; font-size: 54px; color: #fff; }
-      .tk.bold { font-weight: 800; font-size: 66px; color: #fff; }
+      .tk.script { font-family: "Caveat", cursive; font-weight: 700; font-size: 62px; color: #FFD60A; -webkit-text-stroke: 3px #0b0b0b; paint-order: stroke fill; }
+      .tk.bold { font-weight: 800; font-size: 70px; color: #fff; -webkit-text-stroke: 4px #0b0b0b; paint-order: stroke fill; }
       .tk.box { font-weight: 800; font-size: 80px; color: var(--deep); background: #fff; padding: 0 18px; border-radius: 10px; overflow: hidden; white-space: nowrap; }
 
       .br { position: absolute; width: 58px; height: 58px; border-color: #fff; border-style: solid; border-width: 0; }
@@ -78,6 +79,8 @@
       const el = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstChild; };
       const put = (h) => layer.appendChild(el(h));
 
+      // Bayang atas (kontras tajuk)
+      put(`<div id="shade"></div>`);
       // Badge siri
       const badge = put(`<div id="badge"><i></i><b>${E.series} <span>#${E.episode}</span></b></div>`);
       tl.fromTo(badge, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, 0);
