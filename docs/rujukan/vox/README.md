@@ -22,7 +22,7 @@ Storyboard: `briefs/2026-11-16_C0007_storyboard-intro-VOX.png`
 | Tajuk | **Jalur kertas krim + highlighter kuning** |
 | Coretan tangan | **Merah** |
 | Grain / bingkai pada video Sir | **Tiada** |
-| Chat B-roll | **Keratan chat atas kertas** + pita + tanda merah (generik, tiada emoji) |
+| Chat B-roll | **Kad chat UI ala reel Hiiiilo** (`docs/rujukan/broll-hiiiilo/README.md`: inbox, typing, pil status, kalendar, tajuk 01/02/03) **atas latar kertas krim**, masuk/keluar dengan koyakan kertas. Aksen **hijau #25D366**. Generik, tiada emoji. (Dipilih director 2026-11-16; Sir tiada pilihan — boleh tukar.) |
 | Gambar | **Stok berlesen + `aset/gambar/`** (catat lesen dalam `LESEN.md`) |
 | Intro | **Soalan dulu**: "Nak orang percaya?" → "bila percaya, beli" → "teringat dendeng kampung time raya" |
 | Muzik | Tiada dalam fail — Sir tambah dari TikTok Commercial Music Library |
