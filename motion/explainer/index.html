@@ -94,6 +94,18 @@
                  [1.25, "s", "Saya hantar link bayaran sekarang ya?"], [1.8, "typing"], [2.1, "c", "Ok boleh ✅"]],
           stampAt: 2.35,
         },
+        pandai: {
+          script: "selalu jadi… tunjuk", box: "PANDAI ❌", stamp: ["no", "❌ BANYAK CAKAP"],
+          msgs: [[0.2, "c", "Hi, nak tanya pasal produk ni"], [0.6, "s", "Produk kami teknologi terkini, 7 lapisan, gred A…"],
+                 [1.3, "s", "Kami juga ada sijil, anugerah, dan 1001 kelebihan lagi 📚📚"], [2.0, "sys", "Customer dah tak online… 😶"]],
+          stampAt: 2.4,
+        },
+        jelas: {
+          script: "cuba macam ni… tunjuk", box: "JELAS ✅", stamp: ["ok", "✅ DIA NAMPAK MANFAAT"],
+          msgs: [[0.15, "c", "Dinding ni ok ke?"], [0.5, "s", "Bayangkan raya nanti, ruang tamu akak rasa macam rumah kampung 🌙🏡"],
+                 [1.25, "typing"], [1.5, "c", "Wah, teringat rumah nenek 🥹 Nak!"]],
+          stampAt: 1.9,
+        },
       };
       const sc = SCENES[V.scene] || SCENES.salah;
       $("#title .script").textContent = sc.script;
