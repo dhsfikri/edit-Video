@@ -32,7 +32,7 @@
 | 14–15s | Loop | Fade ke frame hook | — | — |
 
 ## 5. Style
-- Font: Montserrat ExtraBold/SemiBold. Warna: hijau #25D366, hitam #0B0B0B, putih, kuning #FFD60A (satu keyword sahaja: "Monitoring 30 hari"), merah #FF5A5A untuk ✕ sahaja.
+- Font: Montserrat ExtraBold/SemiBold. Warna: hijau #25D366, hitam #0B0B0B, putih, kuning #FFD60A (satu keyword setiap babak: "team sales" masa hook, "Monitoring 30 hari" masa solusi), merah #FF5A5A untuk ✕ sahaja.
 - Latar: hitam dengan cahaya hijau lembut (sama macam sampel iPhone).
 - Muzik: upbeat korporat moden, bebas royalti (perlu pilih; atau Sir guna sound TikTok masa upload).
 - **Patuh brand kit:** chat mockup generik (tiada logo WhatsApp), **tiada janji hasil** (cth "sales naik 2x").
