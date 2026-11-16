@@ -18,4 +18,4 @@ Jadi soalan saya: apa SATU langkah awak minggu ni? 👇
 💬 Komen langkah awak · Save untuk ingat · Share pada kawan yang tengah rasa "lambat sangat"
 🔔 Follow @sirdharma_ untuk lagi tips jualan
 
-#tipsjualan #mindsetusahawan #trustheprocess #bisnesonline #jualanonline #usahawanmalaysia #sellermalaysia #livejualan #motivasibisnes #sirdharma
+#tipsjualan #mindsetusahawan #trusttheprocess #bisnesonline #jualanonline #usahawanmalaysia #sellermalaysia #livejualan #motivasibisnes #sirdharma
