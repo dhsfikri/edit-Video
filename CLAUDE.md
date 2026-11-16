@@ -49,3 +49,10 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 ## Gaya komunikasi
 - Guna Bahasa Melayu Malaysia yang santai tapi teliti.
 - Niche: sales closing melalui WhatsApp.
+
+## Keputusan & Keutamaan Sir (WAJIB ikut — dikemas kini setiap kali Sir bagi komen)
+- **2026-11-16 — Gaya Dynamic:** "dynamic" = **transition + motion graphic** (video Sir sendiri bergerak: kad, zoom/expand, kad TIP skrin penuh, grafik ikut perkataan). BUKAN sekadar caption/pop teks + bunyi.
+- **2026-11-16 — TIADA EMOJI** dalam video (sticker, tajuk, pop, mockup chat). Guna **grafik motion** (ikon garisan SVG yang dilukis, bentuk, tipografi kinetik).
+- **2026-11-16 — Reference gaya: video Apple** (product film / keynote): latar gelap bersih, tipografi besar yang muncul perkataan demi perkataan (mask reveal), ikon garisan nipis, kad bersudut bulat dengan bayang lembut, gerakan licin tanpa lantunan/gegaran, glow lembut, kaca kabur (glass). Hijau brand sebagai aksen.
+- Template: `motion/dynamic/` (lapisan motion + video) + `motion/overlay-dyn/` (teks/subtitle). Koreografi per video: `projects/<ID>/scene.js`.
+- Sumber isi: dengar betul-betul — contoh C0007 "dinding" sebenarnya **dendeng** (lauk). Ayat tak pasti → tanya Sir.
