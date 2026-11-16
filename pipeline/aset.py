@@ -5,7 +5,9 @@ Setiap aset yang diambil disimpan dalam library/<kategori>/ dan direkod (sumber,
 video yang guna). Semua video ambil aset dari sini, jadi aset yang sama boleh diguna semula.
 
 Guna:
-  python3 -I pipeline/aset.py cari "customer phone" [--video] [--n 10]   # Pexels (perlu key)
+  python3 -I pipeline/aset.py cari "customer phone" [--n 10]             # Openverse (tanpa key, default)
+  python3 -I pipeline/aset.py cari "customer phone" --sumber pexels [--video]  # Pexels (perlu key)
+  python3 -I pipeline/aset.py ambil ov:<openverse_id> --kategori suasana --tag "phone"
   python3 -I pipeline/aset.py ambil <pexels_id> --kategori suasana --tag "phone,customer" [--video]
   python3 -I pipeline/aset.py ikon message-circle phone check x --warna 25D366
   python3 -I pipeline/aset.py frame <raw.mp4> <saat> --nama sir-terkejut --tag "ekspresi,terkejut" [--rotate cw|ccw]
@@ -73,7 +75,24 @@ def shrink(p):
     im.convert("RGB").save(p, "JPEG", quality=85, optimize=True)
 
 
+OV_LESEN = "cc0,pdm,by"  # komersial OK. CC-BY = WAJIB kredit dalam caption. Tiada NC/ND/SA.
+
+
+def openverse(path, **q):
+    url = f"https://api.openverse.org/v1/{path}" + (f"?{urllib.parse.urlencode(q)}" if q else "")
+    req = urllib.request.Request(url, headers={"User-Agent": "edit-video-library/1.0"})
+    return json.load(urllib.request.urlopen(req, timeout=30))
+
+
 def cmd_cari(a):
+    if a.sumber == "openverse":
+        q = dict(q=a.q, license=OV_LESEN, page_size=a.n, mature="false")
+        if a.orientasi == "portrait":
+            q["aspect_ratio"] = "tall"
+        for r in openverse("images/", **q)["results"]:
+            print(f"ov:{r['id']}  {r.get('width')}x{r.get('height')}  {r['license'].upper():<4} {r['source']:<10} "
+                  f"{(r.get('title') or '')[:50]}  {r.get('foreign_landing_url','')}")
+        return
     if a.video:
         d = pexels("videos/search", query=a.q, per_page=a.n, orientation="portrait")
         for v in d.get("videos", []):
@@ -87,7 +106,19 @@ def cmd_cari(a):
 def cmd_ambil(a):
     k = load()
     tags = [t.strip() for t in a.tag.split(",") if t.strip()]
-    if a.video:
+    if a.id.startswith("ov:"):
+        r = openverse(f"images/{a.id[3:]}/")
+        if r["license"] not in OV_LESEN.split(","):
+            sys.exit(f"✗ lesen {r['license']} tak dibenarkan (hanya {OV_LESEN})")
+        aid = f"ov-{r['id'][:8]}"
+        dest = LIB / a.kategori / f"{aid}.jpg"
+        download(r["url"], dest)
+        shrink(dest)
+        rec = dict(id=aid, jenis="gambar", fail=str(dest.relative_to(ROOT)), sumber=f"Openverse/{r['source']}",
+                   url=r.get("foreign_landing_url", ""), kredit=r.get("creator") or "",
+                   lesen=f"{r['license'].upper()} {r.get('license_version') or ''}".strip(),
+                   kredit_wajib=r["license"] == "by", atribusi=r.get("attribution", ""), alt=r.get("title", ""))
+    elif a.video:
         v = pexels(f"videos/videos/{a.id}")
         files = sorted([f for f in v["video_files"] if f.get("height") and f["height"] <= 1920],
                        key=lambda f: f["height"], reverse=True)
@@ -171,6 +202,7 @@ def main():
     s = ap.add_subparsers(dest="cmd", required=True)
     p = s.add_parser("cari"); p.add_argument("q"); p.add_argument("--n", type=int, default=10)
     p.add_argument("--video", action="store_true"); p.add_argument("--orientasi", default="portrait")
+    p.add_argument("--sumber", choices=["openverse", "pexels"], default="openverse")
     p = s.add_parser("ambil"); p.add_argument("id"); p.add_argument("--kategori", required=True)
     p.add_argument("--tag", default=""); p.add_argument("--video", action="store_true")
     p = s.add_parser("ikon"); p.add_argument("nama", nargs="+"); p.add_argument("--warna")
