@@ -22,6 +22,13 @@
       "computedHash": "0e6398ef34b30dec730d4225a20bdb20e7ed2309ece8abea95949549fe19f3ac",
       "installMode": "copy"
     },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "computedHash": "7bc223e2aafbdbf6e50ea243ba6ef67fe432bb069ab439fea0390795dac0bf7f",
+      "installMode": "copy"
+    },
     "gsap-core": {
       "source": "greensock/gsap-skills",
       "sourceType": "github",
