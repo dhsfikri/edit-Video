@@ -84,6 +84,26 @@
       .tile img { width: 100%; height: 100%; object-fit: cover; }
       .tile .pl { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: rgba(255,255,255,.92);
         display: flex; align-items: center; justify-content: center; font-size: 34px; color: var(--deep); padding-left: 6px; }
+      /* babak timeline: 2020 -> 2026 */
+      #tline { position: absolute; left: 80px; top: 470px; width: 820px; height: 720px; display: none; }
+      .yr { position: absolute; top: 120px; width: 330px; padding: 34px 0 30px; text-align: center; border-radius: 34px; background: #fff;
+        box-shadow: 0 24px 50px rgba(11,61,46,.2); }
+      .yr b { display: block; font-weight: 800; font-size: 110px; color: var(--deep); line-height: 1; }
+      .yr span { display: inline-block; margin-top: 14px; font-weight: 800; font-size: 34px; color: var(--ink); background: var(--yellow); padding: 6px 16px; border-radius: 10px; }
+      #y1 { left: 0; } #y2 { right: 0; } #y2 b { color: var(--green); }
+      #tl-rail { position: absolute; left: 330px; top: 228px; height: 14px; width: 0; border-radius: 7px; background: var(--deep); }
+      #stampR { position: absolute; left: 50%; top: 520px; transform: translateX(-50%) rotate(-4deg); white-space: nowrap; font-weight: 800; font-size: 62px;
+        color: var(--ink); background: var(--green); padding: 18px 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(37,211,102,.4); }
+      /* babak team */
+      #team { position: absolute; left: 80px; top: 470px; width: 820px; display: none; text-align: center; }
+      .ppl { display: flex; justify-content: center; gap: 40px; }
+      .pp { width: 200px; height: 250px; border-radius: 30px; background: #fff; box-shadow: 0 20px 40px rgba(11,61,46,.18); position: relative; }
+      .pp i { position: absolute; left: 50%; top: 40px; width: 90px; height: 90px; margin-left: -45px; border-radius: 50%; background: var(--deep); }
+      .pp u { position: absolute; left: 50%; top: 140px; width: 140px; height: 80px; margin-left: -70px; border-radius: 70px 70px 16px 16px; background: var(--deep); }
+      .pp em { position: absolute; right: -14px; top: -14px; width: 60px; height: 60px; border-radius: 50%; background: var(--green); color: #fff; font-style: normal;
+        font-size: 34px; display: flex; align-items: center; justify-content: center; border: 5px solid #fff; }
+      #teamLbl { display: inline-block; margin-top: 60px; font-weight: 800; font-size: 66px; color: #fff; background: var(--ink); padding: 14px 36px; border-radius: 18px; }
+      #teamLbl mark { background: none; color: var(--yellow); }
       #faceWrap { position: absolute; left: 70px; top: 1040px; width: 230px; height: 230px; border-radius: 50%; overflow: hidden;
         border: 7px solid #fff; box-shadow: 0 0 0 4px var(--green), 0 16px 40px rgba(0,0,0,.3); }
       #face { width: 100%; height: 100%; object-fit: cover; }
@@ -98,6 +118,8 @@
         <div id="card"><div id="books"></div><div id="list"><div id="rail"></div></div></div>
         <div id="phone"><div class="scr"><div class="notch"></div><div id="feed"></div></div></div>
         <div id="grid"></div>
+        <div id="tline"><div id="tl-rail"></div><div class="yr" id="y1"><b>2020</b><span>VERSI PERTAMA</span></div><div class="yr" id="y2"><b>2026</b><span>HARI INI</span></div><div id="stampR">✓ MASIH RELEVAN</div></div>
+        <div id="team"><div class="ppl"><div class="pp"><i></i><u></u><em>✓</em></div><div class="pp"><i></i><u></u><em>✓</em></div><div class="pp"><i></i><u></u><em>✓</em></div></div><div id="teamLbl">GUIDE <mark>TEAM</mark> AWAK</div></div>
         <div id="plus"></div>
         <div id="btn"></div>
         <div id="ring"></div>
@@ -119,6 +141,8 @@
           books: [[0.25, "VOL.1", "Learning<br>Lab", 0], [0.45, "VOL.2", "Learning<br>Lab", 0], [0.65, "VOL.3", "Learning<br>Lab", 0]],
           items: [[1.69, "<span>Template closing</span>"], [2.59, "<span>SOP closing</span>"], [5.0, "<span>Khas closing guna <mark>WhatsApp</mark></span>"]],
         },
+        timeline: { type: "timeline", head: "<i>/</i>VERSI PERTAMA", face: [690, 205, 200], books: [], items: [], at: [0.2, 3.75, 4.2] },
+        team: { type: "team", head: "<i>/</i>UNTUK TEAM", face: [690, 205, 200], books: [], items: [], at: [0.3, 1.85, 2.2] },
         phone: { type: "phone", books: [], items: [] },
         grid: { type: "grid", books: [], items: [], tiles: [0.25, 0.4, 0.55, 0.9, 1.05, 1.2] },
         bonus: {
@@ -188,6 +212,26 @@
         tl.to("#card", { x: 8, duration: 0.05, yoyo: true, repeat: 3 }, sc.plus[0] + 0.28);
       }
 
+      if (sc.type === "timeline" || sc.type === "team") { ["#card", "#plus"].forEach((q) => ($(q).style.display = "none")); }
+      if (sc.type === "timeline") {
+        $("#tline").style.display = "block";
+        tl.fromTo("#y1", { scale: 0.4, opacity: 0, filter: "blur(14px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.32, ease: "back.out(1.7)" }, sc.at[0]);
+        tl.set(["#y2", "#stampR"], { opacity: 0 }, 0);
+        tl.to("#tl-rail", { width: 160, duration: 0.5, ease: "power2.inOut" }, sc.at[1]);
+        tl.fromTo("#y2", { scale: 0.4, opacity: 0, x: 120 }, { scale: 1, opacity: 1, x: 0, duration: 0.3, ease: "back.out(1.7)" }, sc.at[1] + 0.35);
+        const yr = { v: 2020 }; tl.to(yr, { v: 2026, duration: 0.5, ease: "power1.out", onUpdate: () => ($("#y2 b").textContent = Math.round(yr.v)) }, sc.at[1] + 0.35);
+        tl.fromTo("#stampR", { opacity: 0, scale: 2.4 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power4.in" }, sc.at[2]);
+        tl.to("#tline", { x: 8, duration: 0.05, yoyo: true, repeat: 3 }, sc.at[2] + 0.25);
+      }
+      if (sc.type === "team") {
+        $("#team").style.display = "block";
+        document.querySelectorAll(".pp").forEach((n, k) => {
+          tl.fromTo(n, { opacity: 0, y: 220, rotation: k === 1 ? 0 : (k ? 10 : -10) }, { opacity: 1, y: 0, rotation: 0, duration: 0.3, ease: "back.out(1.8)" }, sc.at[0] + k * 0.15);
+          tl.fromTo(n.querySelector("em"), { scale: 0 }, { scale: 1, duration: 0.22, ease: "back.out(3)" }, sc.at[1] + k * 0.12);
+        });
+        tl.fromTo("#teamLbl", { opacity: 0, scale: 2, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.25, ease: "back.out(1.6)" }, sc.at[2]);
+      }
+
       // Babak jenis khas (motion graphic penuh, tiada kad)
       if (sc.type === "phone" || sc.type === "grid") {
         ["#card", "#head", "#faceWrap"].forEach((q) => ($(q).style.display = "none"));
@@ -212,7 +256,7 @@
       }
 
       // keluar: whip kabur ke kiri (0.22s terakhir) — peralihan balik ke A-roll
-      tl.to(["#card", "#head", "#plus", "#faceWrap", "#phone", "#grid"], { x: -500, opacity: 0, filter: "blur(16px)", duration: 0.22, ease: "power2.in" }, D - 0.22);
+      tl.to(["#card", "#head", "#plus", "#faceWrap", "#phone", "#grid", "#tline", "#team"], { x: -500, opacity: 0, filter: "blur(16px)", duration: 0.22, ease: "power2.in" }, D - 0.22);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;
