@@ -1,10 +1,10 @@
 # Brief Edit Video — Iklan Animasi: Setup & Monitor Team Sales
 
-**Tarikh:** 2026-11-16  **Tajuk/Topik:** Iklan servis Setup Team Sales A–Z + Monitoring 30 hari  **Versi brief:** v1
+**Tarikh:** 2026-11-16  **Tajuk/Topik:** Iklan servis Setup Team Sales A–Z + Monitoring 30 hari  **Versi brief:** v2 (headline baru dari Sir; visual ikut teks)
 
 ## 1. Objektif
 - Tujuan video: **lead** (owner bisnes DM / WhatsApp untuk tanya servis)
-- Target penonton: owner bisnes / ketua team sales yang ada 2–20 orang sales (closer WhatsApp), leads banyak tapi closing tak konsisten
+- Target penonton: owner bisnes yang **kali pertama nak bina team sales** (closer WhatsApp), belum ada sistem, tak tahu nak mula dari mana
 - CTA: **"WhatsApp link di bio"** + @sirdharma_
 
 ## 2. Konsep & gaya
@@ -12,21 +12,23 @@
 - Gaya editing: **F. Cinematic + E. Chat Simulation**
   - iPhone 3D (three.js, dari sampel BEDAH CHAT) sebagai "hero"
   - Teks kinetik GSAP (huruf/perkataan masuk ikut rentak), timing ikut prinsip `motion-design`
-- Kenapa: servis ni tentang **team & WhatsApp**. Telefon dengan chat yang tak berjawab terus kena dengan masalah penonton. Gaya 3D bagi rasa "premium" dan sesuai dengan servis berbayar.
+- **Prinsip v2 (arahan Sir): setiap teks di skrin mesti ada visual yang menunjukkan benda yang sama, pada masa yang sama.**
+- Benang cerita: skrin iPhone tunjuk **group chat "Team Sales"** (mockup generik). Mula-mula kosong (1 ahli, owner seorang), kemudian dibina langkah demi langkah sampai lengkap.
 
 ## 3. Hook
-- Hook title atas skrin (maks 8 patah): **"Team sales ramai, closing sikit?"**
-- Animasi hook: perkataan "slam" masuk satu-satu; "closing sikit?" warna kuning, bergegar sedikit. Di bawahnya iPhone 3D penuh notifikasi chat belum dibalas (badge merah "27").
-- SFX: whoosh pendek + "ding" notifikasi (`motion/iklan/assets/ding.wav`)
-- Hook versi B (A/B test): **"Leads masuk banyak, sales tak jalan?"**
+- Hook title atas skrin: **"First time setup team sales?"** ("team sales" warna kuning)
+- Visual hook: iPhone 3D berpusing masuk; skrin tunjuk group baru **"Team Sales · 1 ahli"** yang kosong, cuma mesej sistem "Anda mencipta group ini".
+- SFX: whoosh pendek + "pop" bila group dibuka
 
 ## 4. Plan timeline (15s, tiada suara: teks + muzik)
 | Masa | Isi | Visual | Teks / motion graphic | SFX / muzik |
 |---|---|---|---|---|
-| 0–2.5s | Hook | iPhone 3D masuk berpusing; senarai chat "27 belum dibalas" | "Team sales ramai, **closing sikit?**" | whoosh + ding berulang |
-| 2.5–6s | Masalah | Telefon ke tepi, 3 kad masalah masuk satu-satu (✕ merah) | ✕ Leads lambat dibalas · ✕ Tiada skrip & SOP · ✕ Tak tahu siapa perform | "tick" setiap kad |
-| 6–11s | Solusi | Badge **SETUP TEAM SALES A–Z**; skrin telefon bertukar jadi papan pantau team (bar prestasi setiap sales, generik) | ✓ Setup team & struktur · ✓ Skrip & SOP closing WhatsApp · ✓ **Monitoring 30 hari** (kuning) | muzik naik, "ding" setiap ✓ |
-| 11–14s | CTA | Butang hijau berdenyut | **"WhatsApp link di bio"** · @sirdharma_ | hit akhir |
+| 0–2.5s | Hook | Group "Team Sales · 1 ahli", kosong | "**First time** setup **team sales?**" | whoosh + pop |
+| 2.5–6s | Masalah | 3 soalan muncul satu-satu sebagai mesej owner dalam group (tiada siapa jawab, "dibaca" sahaja) | "Tak tahu nak mula dari mana?" · bubble: *Nak ambil berapa orang?* · *Nak bagi skrip apa?* · *Macam mana nak pantau?* | "ding" setiap bubble |
+| 6–8s | Solusi 1 | Ahli masuk satu-satu: "Aina menyertai", "Hafiz menyertai", "Mira menyertai"; kiraan ahli naik 1 → 4 | Badge **SETUP TEAM SALES A–Z** · ✓ Bina team & struktur | pop setiap ahli |
+| 8–9.5s | Solusi 2 | Mesej disematkan (📌) muncul: dokumen "SOP & Skrip Closing WhatsApp" | ✓ Skrip & SOP closing | swoosh |
+| 9.5–11s | Solusi 3 | Kad laporan mingguan dalam group: bar prestasi setiap ahli + "Minggu 1/4" | ✓ **Monitoring 30 hari** (kuning) | ding |
+| 11–14s | CTA | Group lengkap & aktif; butang hijau berdenyut di bawah telefon | **"WhatsApp link di bio"** · @sirdharma_ | hit akhir |
 | 14–15s | Loop | Fade ke frame hook | — | — |
 
 ## 5. Style
@@ -38,7 +40,7 @@
 ## 6. Aset
 - Ada: template iPhone 3D (`motion/threejs-test/`), ding.wav, font, warna, salinan iklan 4s sedia ada (`motion/iklan/`).
 - Masih perlu: muzik latar (atau tanpa muzik, Sir letak sound masa upload).
-- Info sensitif: tiada (nama dalam chat & papan pantau rekaan).
+- Info sensitif: tiada (nama ahli group & laporan semuanya rekaan).
 
 ## 7. Kualiti & export
 - 1080x1920 · 30fps · H.264 ~16 Mbps · AAC · +faststart
@@ -47,7 +49,7 @@
 ## 8. Soalan / perkara untuk Sir putuskan
 1. **Format:** iklan 15s berasingan (post sendiri / TikTok Ads) **atau** ganti iklan 4s yang disisip dalam video? (Cadangan: buat 15s dulu, kemudian potong versi 4s daripadanya.)
 2. **Tawaran / harga:** nak tunjuk harga atau tawaran (cth slot terhad bulan ni)? Atau kekal tanpa harga?
-3. **Butiran servis:** checklist 3 perkara di atas betul? Ada yang nak tambah (cth latihan team, KPI mingguan, laporan)?
+3. **Butiran servis:** checklist betul? Khususnya "Bina team & struktur": adakah servis ni termasuk **cari / rekrut** sales, atau hanya susun struktur team yang owner dah ambil? (Visual "ahli menyertai" perlu ikut jawapan ni.)
 4. **CTA:** "WhatsApp link di bio" ok, atau nak "DM 'TEAM'"?
 5. **Muzik:** saya pilih muzik bebas royalti, atau tanpa muzik (Sir letak sound TikTok sendiri)?
 
