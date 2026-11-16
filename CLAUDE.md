@@ -40,7 +40,7 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
   - `01 Intro` (1LAPSkDfYMTDljeh9k2dsTFtIVBeSuwwD) · `02 B-Roll` (1DI7CBy7abVmU4Kj0brD94chd5jXwTDDI)
   - `03 Outro` (19Zucgqv_279GQ27CzY7muqMQ3-tZElWy) · `04 Iklan 2s` (1ZFuMen20VBMqrRmI5WncmWC9TgFwLM9r)
 - Baca/senarai fail: Google Drive connector. **Download** fail besar: `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t` (folder perlu "Anyone with the link").
-- **Upload** video ke Drive melalui connector TIDAK praktikal (kandungan mesti dihantar inline). Hantar fail kepada Sir (zip), Sir upload ke folder yang betul.
+- **Upload** ke Drive melalui connector: boleh guna rujukan fail (`sha256:<hash>:<laluan>`), tapi had **~3 MB setiap fail** (had permintaan 4.2 MB). Fail lebih besar (video draf/final): hantar kepada Sir, Sir upload ke folder yang betul. Folder output: `Folder Video/Edited/<projek>`.
 - Sumber asal semua aset (template HyperFrames) ada dalam repo `motion/` — boleh render semula bila-bila.
 
 ## Rujukan
