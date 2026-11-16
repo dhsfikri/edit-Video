@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.3.1 (2026-11-16)
+**Versi:** 1.4 (2026-11-16)
 **Changelog:**
+- 1.4 — **Gaya ADS dynamic** (diluluskan Sir, C0009): untuk iklan sahaja; organik kekal Gaya v2. Lihat §6b.
 - 1.3.1 — Template `motion/kad/` (babak kad + senarai tumbuh, gaya reference danushkmotion). Overlay-v2: `subPill`, `maxChars`, `word.br`, badge tiada bila `series` kosong, betulkan subtitle tertinggal bila masa Whisper bertindih. Nota: overlay-v2 `data-duration` = 20s — video lebih panjang, ubah sementara masa render. HyperFrames `-f` mesti rasional (`30000/1001`, bukan 29.97).
 - 1.3 — **Claude tentukan konsep & style** setiap video (arahan Sir 2026-11-16), berdasarkan rakaman + pustaka reference `references/` (`pipeline/ref.py`: Sir hantar link sahaja). Masih dibentang dalam brief untuk approval.
 - 1.2 — Tambah pustaka aset `library/` + `pipeline/aset.py` (Pexels, ikon Tabler, frame Sir). Semua aset yang diguna direkod dalam `library/katalog.json`.
@@ -96,6 +97,14 @@ Sir tak perlu pilih konsep/style sendiri. Claude cadangkan **satu** pilihan utam
 **Babak kad (produk/senarai/bonus)** — `motion/kad/`: latar putih pucat + grid titik, kad zoom+blur, senarai tumbuh ikut suara, butang + cursor tap, muka dalam bulatan (`facecrop.py`). Babak baru → tambah dalam `SCENES`.
 **Animasi kedai/troli** — `motion/broll/` (`scene`: kupon/troli/kosong/selesai/konten).
 **Higgsfield (AI)** — hanya B-roll suasana, semak kredit & anggaran dalam brief dulu.
+
+## 6b. Gaya ADS dynamic (iklan sahaja — rujukan: projects/C0009 v2)
+- **Motion graphic sahaja + rakaman Sir. TIADA footage stok/tangan** (arahan Sir).
+- Visual bertukar setiap **1–1.5s**: punch-in `keys` dalam `edit.json` (cut.py), babak `motion/kad/` (`phone`, `grid`, `timeline`, `team`, `ebook`, `bonus`).
+- Kinetic typography `pops` (overlay-v2) untuk keyword; `subPill`, `maxWords 3`, `maxChars 22`; tiada badge siri.
+- Whoosh setiap tukar layout, pop setiap kinetic word; tiada muzik.
+- Tamat dengan **rakaman sebenar + salam + `ctaBig` LEARN MORE berdenyut** — jangan tahan frame beku senyap.
+- **Hantar klip ujian 8s dulu** untuk semakan gaya sebelum render penuh (jimat token).
 
 ## 7. Overlay Gaya v2 — `motion/overlay-v2/`
 `projects/<ID>/data.js` → salin ke `motion/overlay-v2/data.js`. Skema `window.EDIT`:

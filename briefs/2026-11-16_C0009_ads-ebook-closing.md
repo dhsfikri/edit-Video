@@ -85,6 +85,9 @@ Sasaran v2: **visual berubah setiap 1.5–3s (±18 kali)**, ikut reference danus
 - Fail: `projects/C0009/edit_v2.json` (A-roll 41.77s, hujung Assalamualaikum), `projects/C0009/data_v2_ujian.js` (overlay 0–7.85s).
 - **Seterusnya:** babak 3 (kaunter 1→2→3 BUKU + punch-in buku, 7.85–11.7s) → babak 4 (garis masa 2020→2026 MASIH RELEVAN, 11.7–18.2s) → babak 5 (kad ebook/bonus, render semula pada masa v2) → babak 6 (LEBIH MUDAH, team, TIRU SAHAJA, butang LEARN MORE besar atas rakaman sebenar 39.1–41.8s) → draf penuh v2 → QC → hantar.
 
+## ✅ FINAL — 2026-11-16
+Sir approve draf v2 → `20261116_ads-ebook-closing.mp4` (41.8s, 1080x1920, 29.97fps, -14 LUFS). Gaya ini = **standard ADS** (organik kekal Gaya v2).
+
 ## Revisi
 - **Draf v2 (41.8s, ads dynamic)** — 2026-11-16 petang. Motion graphic sahaja (phone feed, grid video, kaunter 1→2→3 BUKU, garis masa 2020→2026, kad e-book/bonus, team, CTA besar). Punch-in `keys` pada sekejap ×4, buku, 'saya tulis', 'mudahkan', 'tiru sahaja'. Hujung: Assalamualaikum + rakaman sebenar + LEARN MORE berdenyut (tiada frame beku). ±24 kinetic pops, ±50 SFX. QC lulus, -14.0 LUFS.
 - **Draf v1 (40.3s)** — 2026-11-16. A-roll 39.25s (6 potongan) + tahan 1s. Babak kad baru `motion/kad/` (ISI 3 E-BOOK 18.25–25.8s, BONUS 25.8–32.3s). Subtitle pil gelap (`subPill`), 3 perkataan/≤22 huruf sebaris. "kata BQP" & "under" tiada dalam subtitle; "setiru" → "just tiru". Buku dalam kad = generik "Learning Lab Vol.1–3" (bukan cover sebenar). QC: safe zone lulus, -14.0 LUFS, peak -2.9 dB.
