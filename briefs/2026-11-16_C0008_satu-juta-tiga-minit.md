@@ -1,6 +1,6 @@
 # Brief Edit — C0008 · "Sejuta dalam 3 minit?"
 
-**Tarikh:** 2026-11-16 · **Siri:** TIPS JUALAN #03 · **Versi brief:** v1
+**Tarikh:** 2026-11-16 · **Siri:** TIPS JUALAN #02 · **Versi brief:** v1
 **Rakaman:** Drive `Raw/060224/C0008.MP4`, 1920x1080 baring → putar `cw`, 29.97fps, 43.5s
 **Flow:** Raw → Cerita → **Organik** sahaja (kandungan mindset, kurang sesuai jadi ads)
 
@@ -50,4 +50,9 @@ Subtitle karaoke Gaya v2 · grade lembut · tiada muzik (atau bed perlahan) · a
 3. Siri **TIPS JUALAN #03** okey, atau Sir nak siri baru untuk mindset?
 
 ---
-**Status:** ☐ Menunggu approval
+**Status:** ☑ APPROVED Sir (2026-11-16) dengan keputusan:
+- **TIPS JUALAN #02**, organik sahaja (C0007 jadi #03)
+- Nama tidak ditulis dalam subtitle/grafik (suara kekal), tiada gambar; angka 1 juta / 3 minit / 8 tahun kekal
+- **Gaya dynamic macam C0009** (motion graphic sahaja, kinetic pops, punch-in, tukar visual 1–1.5s)
+- "menggembir" → "mengambil"; buang "Faham ya?" & "Faham-faham?"; tamat dengan Assalamualaikum + rakaman sebenar
+- Klip ujian 0–8.7s: babak `crowd` (semua orang nak jadi…) + `live` (RM0 → RM1,000,000, jam 3:00)

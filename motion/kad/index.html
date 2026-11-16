@@ -104,6 +104,21 @@
         font-size: 34px; display: flex; align-items: center; justify-content: center; border: 5px solid #fff; }
       #teamLbl { display: inline-block; margin-top: 60px; font-weight: 800; font-size: 66px; color: #fff; background: var(--ink); padding: 14px 36px; border-radius: 18px; }
       #teamLbl mark { background: none; color: var(--yellow); }
+      /* babak crowd: ramai orang */
+      #crowd { position: absolute; left: 90px; top: 520px; width: 800px; display: none; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+      .cp { height: 190px; border-radius: 26px; background: #fff; position: relative; box-shadow: 0 14px 28px rgba(11,61,46,.16); }
+      .cp i { position: absolute; left: 50%; top: 26px; width: 70px; height: 70px; margin-left: -35px; border-radius: 50%; background: var(--deep); }
+      .cp u { position: absolute; left: 50%; top: 104px; width: 110px; height: 62px; margin-left: -55px; border-radius: 55px 55px 12px 12px; background: var(--deep); }
+      .cp.hl i, .cp.hl u { background: var(--green); }
+      /* babak live: phone LIVE + kaunter jualan */
+      #phone.live .scr { background: radial-gradient(120% 80% at 50% 30%, #1d3b2f 0%, #07140e 100%) !important; }
+      #lv-top { position: absolute; left: 28px; right: 28px; top: 70px; display: flex; justify-content: space-between; font-weight: 800; font-size: 30px; color: #fff; }
+      #lv-top b { background: #ff3b3b; padding: 6px 16px; border-radius: 10px; } #lv-top span { background: rgba(255,255,255,.18); padding: 6px 16px; border-radius: 10px; }
+      #lv-lbl { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-weight: 800; font-size: 34px; color: rgba(255,255,255,.75); letter-spacing: .08em; }
+      #lv-rm { position: absolute; left: 0; right: 0; top: 395px; text-align: center; font-weight: 800; font-size: 60px; color: var(--yellow); white-space: nowrap; }
+      #lv-time { position: absolute; left: 50%; top: 600px; transform: translateX(-50%); font-weight: 800; font-size: 64px; color: #fff; background: rgba(255,255,255,.14);
+        padding: 14px 34px; border-radius: 22px; white-space: nowrap; }
+      #lv-sold { position: absolute; left: 0; right: 0; bottom: 120px; text-align: center; font-weight: 800; font-size: 40px; color: var(--green); }
       #faceWrap { position: absolute; left: 70px; top: 1040px; width: 230px; height: 230px; border-radius: 50%; overflow: hidden;
         border: 7px solid #fff; box-shadow: 0 0 0 4px var(--green), 0 16px 40px rgba(0,0,0,.3); }
       #face { width: 100%; height: 100%; object-fit: cover; }
@@ -118,6 +133,7 @@
         <div id="card"><div id="books"></div><div id="list"><div id="rail"></div></div></div>
         <div id="phone"><div class="scr"><div class="notch"></div><div id="feed"></div></div></div>
         <div id="grid"></div>
+        <div id="crowd"></div>
         <div id="tline"><div id="tl-rail"></div><div class="yr" id="y1"><b>2020</b><span>VERSI PERTAMA</span></div><div class="yr" id="y2"><b>2026</b><span>HARI INI</span></div><div id="stampR">✓ MASIH RELEVAN</div></div>
         <div id="team"><div class="ppl"><div class="pp"><i></i><u></u><em>✓</em></div><div class="pp"><i></i><u></u><em>✓</em></div><div class="pp"><i></i><u></u><em>✓</em></div></div><div id="teamLbl">GUIDE <mark>TEAM</mark> AWAK</div></div>
         <div id="plus"></div>
@@ -143,6 +159,8 @@
         },
         timeline: { type: "timeline", head: "<i>/</i>VERSI PERTAMA", face: [690, 205, 200], books: [], items: [], at: [0.2, 3.75, 4.2] },
         team: { type: "team", head: "<i>/</i>UNTUK TEAM", face: [690, 205, 200], books: [], items: [], at: [0.3, 1.85, 2.2] },
+        crowd: { type: "crowd", books: [], items: [] },
+        live: { type: "live", books: [], items: [], at: [1.38, 1.95, 3.3] },
         phone: { type: "phone", books: [], items: [] },
         grid: { type: "grid", books: [], items: [], tiles: [0.25, 0.4, 0.55, 0.9, 1.05, 1.2] },
         bonus: {
@@ -162,7 +180,7 @@
       tl.fromTo("#curves path", { strokeDashoffset: 0 }, { strokeDashoffset: -280, duration: D, ease: "none" }, 0);
 
       // masuk: header + kad zoom dari kecil dengan kabur (gaya reference)
-      $("#head").innerHTML = sc.head;
+      $("#head").innerHTML = sc.head || "";
       tl.fromTo("#head", { opacity: 0, x: -60, filter: "blur(12px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out" }, 0.02);
       tl.fromTo("#card", { scale: 0.55, opacity: 0, filter: "blur(18px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.38, ease: "back.out(1.4)" }, 0.0);
       tl.fromTo("#faceWrap", { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.35, ease: "back.out(1.8)" }, 0.1);
@@ -232,6 +250,32 @@
         tl.fromTo("#teamLbl", { opacity: 0, scale: 2, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.25, ease: "back.out(1.6)" }, sc.at[2]);
       }
 
+      if (sc.type === "crowd") {
+        ["#card", "#plus", "#faceWrap"].forEach((q) => ($(q).style.display = "none"));
+        const c = $("#crowd"); c.style.display = "grid";
+        for (let k = 0; k < 12; k++) {
+          c.insertAdjacentHTML("beforeend", `<div class="cp${k === 5 ? " hl" : ""}"><i></i><u></u></div>`);
+          const el = c.lastElementChild; tl.set(el, { opacity: 0 }, 0);
+          tl.fromTo(el, { opacity: 0, scale: 0.2, y: 120 }, { opacity: 1, scale: 1, y: 0, duration: 0.22, ease: "back.out(2)" }, 0.05 + k * 0.05);
+        }
+        tl.to("#crowd .cp:not(.hl)", { x: (i) => (i % 4 < 2 ? 12 : -12), duration: 0.4, ease: "sine.inOut" }, 0.8); // semua condong ke tengah
+      }
+      if (sc.type === "live") {
+        ["#card", "#plus", "#faceWrap"].forEach((q) => ($(q).style.display = "none"));
+        const ph = $("#phone"); ph.classList.add("live"); ph.style.display = "block";
+        ph.querySelector(".scr").innerHTML = `<div class="notch"></div><div id="lv-top"><b>● LIVE</b><span>👁 12.4K</span></div>
+          <div id="lv-lbl">JUALAN</div><div id="lv-rm">RM 0</div><div id="lv-time">⏱ 00:00</div><div id="lv-sold">🔥 TERJUAL!</div>`;
+        tl.fromTo(ph, { y: 900, rotation: -8 }, { y: 0, rotation: 2, duration: 0.3, ease: "power3.out" }, 0);
+        const rm = { v: 0 }, fmt = (n) => "RM " + Math.round(n).toLocaleString("en-US");
+        tl.to(rm, { v: 1000000, duration: sc.at[1] - sc.at[0], ease: "power3.in", onUpdate: () => ($("#lv-rm").textContent = fmt(rm.v)) }, sc.at[0]);
+        tl.to("#lv-rm", { scale: 1.25, duration: 0.15, yoyo: true, repeat: 1 }, sc.at[1]);
+        const tm = { v: 0 }; tl.to(tm, { v: 180, duration: sc.at[2] - 0.2, ease: "none", onUpdate: () => {
+          const m = Math.floor(tm.v / 60), sx = Math.round(tm.v % 60); $("#lv-time").textContent = `⏱ 0${m}:${sx < 10 ? "0" : ""}${sx}`; } }, 0.2);
+        tl.set("#lv-sold", { opacity: 0 }, 0);
+        tl.fromTo("#lv-sold", { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)" }, sc.at[1] + 0.1);
+        tl.to("#phone", { x: 10, duration: 0.05, yoyo: true, repeat: 3 }, sc.at[1]);
+      }
+
       // Babak jenis khas (motion graphic penuh, tiada kad)
       if (sc.type === "phone" || sc.type === "grid") {
         ["#card", "#head", "#faceWrap"].forEach((q) => ($(q).style.display = "none"));
@@ -256,7 +300,7 @@
       }
 
       // keluar: whip kabur ke kiri (0.22s terakhir) — peralihan balik ke A-roll
-      tl.to(["#card", "#head", "#plus", "#faceWrap", "#phone", "#grid", "#tline", "#team"], { x: -500, opacity: 0, filter: "blur(16px)", duration: 0.22, ease: "power2.in" }, D - 0.22);
+      tl.to(["#card", "#head", "#plus", "#faceWrap", "#phone", "#grid", "#tline", "#team", "#crowd"], { x: -500, opacity: 0, filter: "blur(16px)", duration: 0.22, ease: "power2.in" }, D - 0.22);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;
