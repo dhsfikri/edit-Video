@@ -68,3 +68,19 @@ Sumber: Drive `Website Sales - Testimoni / 05 Potret Sir Dharma (Studio 2024)`
 | 3 Senyap | IMG_0248 (isyarat diam) → `p_senyap.jpg` | Masuk tepat bila keluar "TERUS SENYAP?" (selepas mockup chat) |
 | 7 Logo | IMG_0239 (tangan di dada) → `p_dada.jpg` | Wajah Sir di atas nama DHARMA |
 Gelembung chat babak 1 dibuang (diganti potret, lebih bersih macam rujukan).
+
+---
+## Draf v3 (2026-11-16): ikut struktur rujukan + collage cut-out
+Sir minta ikut rujukan dengan rapat, dan cut terus gaya collage. Gambar Sir dipotong dari latar (rembg `u2net_human_seg`).
+| Masa | Rujukan | Versi kita |
+|---|---|---|
+| 0–2.8 | Helmet + YOU DON'T NEED + kotak ditaip | Cut-out Sir **tunjuk** + KAU TAK PERLU *lebih ramai* [LEAD UNTUK CLOSING] |
+| 2.8–5.0 | Otak emas + orbit label + *Rewire* | Orb chat hijau + orbit YAKIN/PERCAYA/SEGERA + *Faham* cara customer **berfikir** |
+| 5.0–6.6 | Flash → orang intai di sebalik langsir + UNDERSTAND WHAT CAPTURES | Flash → cut-out Sir **shh** di celah langsir hijau + KENAPA DIA [SENYAP?] |
+| 6.6–7.8 | Makro mata + *their* ATTENTION | Makro gelembung chat kabur + ✓✓ Seen + *dia dah baca...* TAPI TAK BALAS |
+| 7.8–10.2 | Kertas + bingkai emas patung + bunga | Kertas + **bingkai hijau-kuning potret Sir** + selotep + sticker chat (ganti bunga) + *Cakap terus apa yang dia nak* |
+| 10.2–13.5 | Partikel → bulatan merah → ACTION | Partikel → bulatan hijau → **CLOSING** |
+| 13.5–16.8 | Kertas, petikan ditaip + highlight hitam | " Customer tak beli produk. [Dia beli rasa yakin.] |
+| 16.8–19.1 | Grid titik + garisan ke titik merah | satu ayat *boleh ubah satu sale* |
+| 19.1–21.5 | Logo Velkine | **DHARMA** · SALES GURU · @sirdharma_ |
+Nota: teks kabur besar di babak makro sengaja keluar tepi (latar grafik, macam shot mata dalam rujukan), bukan teks utama.

@@ -6,7 +6,7 @@ import sys, wave
 import numpy as np
 
 SR = 48000
-DUR = 21.0
+DUR = 21.5
 N = int(SR * DUR)
 out = np.zeros(N)
 rng = np.random.default_rng(7)
@@ -65,7 +65,7 @@ def riser(d=1.0):
 beat = 0.6
 for k in range(int(DUR / beat)):
     tt = k * beat
-    if 10.4 < tt < 11.6:  # senyap sekejap sekitar klimaks
+    if 12.4 < tt < 13.6:  # senyap sekejap sekitar klimaks
         continue
     add(hit(0.4), tt, 0.35 if k % 2 == 0 else 0.2)
 pad = (np.sin(2 * np.pi * 110 * t_all) + 0.5 * np.sin(2 * np.pi * 164.8 * t_all) + 0.4 * np.sin(2 * np.pi * 220 * t_all)) * 0.03
@@ -74,19 +74,22 @@ out += pad
 
 # SFX
 add(hit(0.6), 0.0, 0.9)
-for at in [2.7, 5.5, 8.1, 14.9, 17.45]:
+for at in [2.6, 4.85, 6.45, 7.7, 16.65, 18.95]:
     add(whoosh(), at, 0.5)
 for k in range(18):
     add(click(), 1.1 + k * 0.039, 0.25)
 for k in range(25):
-    add(click(), 12.1 + k * 0.036, 0.25)
-add(hit(0.5), 3.0, 0.7)
-add(hit(0.4), 7.2, 0.6)
-add(riser(1.0), 9.5, 1.0)
-add(boom(), 10.55, 1.0)
-add(whoosh(0.35), 11.45, 0.6)
-add(hit(0.4), 13.35, 0.6)
-add(hit(0.4), 16.75, 0.6)
+    add(click(), 14.1 + k * 0.036, 0.25)
+add(hit(0.5), 2.8, 0.7)
+add(hit(0.5), 5.05, 0.8)
+add(hit(0.4), 5.75, 0.6)
+add(hit(0.5), 7.2, 0.7)
+add(hit(0.5), 8.45, 0.7)
+add(riser(1.0), 11.5, 1.0)
+add(boom(), 12.55, 1.0)
+add(whoosh(0.35), 13.45, 0.6)
+add(hit(0.4), 15.25, 0.6)
+add(hit(0.4), 18.4, 0.6)
 
 # signature
 try:
@@ -98,7 +101,7 @@ try:
         raw = raw.reshape(-1, ch).mean(1)
     if sr2 != SR:
         raw = np.interp(np.arange(0, len(raw), sr2 / SR), np.arange(len(raw)), raw)
-    add(raw, 17.75, 0.9)
+    add(raw, 19.2, 0.9)
 except FileNotFoundError:
     pass
 
