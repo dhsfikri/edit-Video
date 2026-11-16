@@ -1,0 +1,77 @@
+{
+ "base": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0007vox/voxbase.mov",
+ "out": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0007vox/C0007_sampel_vox.mp4",
+ "fps": 30,
+ "sfx": [
+  {
+   "src": "/home/user/edit-Video/motion/intro/assets/signature.wav",
+   "at": 0.03,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
+   "at": 0.1,
+   "vol": 0.5
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
+   "at": 2.95,
+   "vol": 0.5
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
+   "at": 4.3,
+   "vol": 0.5
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
+   "at": 6.6,
+   "vol": 0.5
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
+   "at": 8.0,
+   "vol": 0.5
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
+   "at": 8.36,
+   "vol": 0.5
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
+   "at": 9.0,
+   "vol": 0.5
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pen.wav",
+   "at": 1.75,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pen.wav",
+   "at": 2.05,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pen.wav",
+   "at": 9.7,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pen.wav",
+   "at": 10.25,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/kertas_koyak.wav",
+   "at": 6.0,
+   "vol": 0.55
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/kertas_koyak.wav",
+   "at": 8.78,
+   "vol": 0.55
+  }
+ ]
+}

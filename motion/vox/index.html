@@ -1,0 +1,154 @@
+<!doctype html>
+<!--
+  GAYA VOX — komposisi penuh (LEGAP 1080x1920): video Sir + kertas + kolaj + jalur + coretan + subtitle karaoke.
+  Spesifikasi: docs/rujukan/vox/README.md (§Keputusan Sir). Video Sir BERSIH penuh skrin; koyakan kertas
+  hanya pada gambar & transition. Koreografi per video: scene.js (salin dari projects/<ID>/scene_vox.js):
+    window.VOX = { duration, words:[{w,s,e}], paper:[[a,b],...] (subtitle gelap), scene(tl, api) }
+  API: strip, hl, circle, note, arrow, photo, tearIn, tearOut, badge
+  Easing: masuk power3.out .35–.45s · keluar power2.in .2–.25s · coretan power1.inOut .45s (tiada lantunan)
+  Video: assets/base.mp4 (dari base.mov). Tukar data-duration ikut durasi.
+-->
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/caveat-latin-700-normal.woff2") format("woff2"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #e3d8c2; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", sans-serif; }
+      .L { position: absolute; inset: 0; }
+      #cam video { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .sheet { position: absolute; left: -40px; width: 1160px; background: radial-gradient(120% 80% at 50% 40%, #f3ecdd 0%, #e3d8c2 100%); overflow: hidden; }
+      .sheet svg { position: absolute; inset: 0; opacity: .35; mix-blend-mode: multiply; }
+      .torn { clip-path: polygon(0% 1.5%, 6% 0%, 13% 2%, 21% 0.4%, 30% 1.8%, 38% 0%, 47% 2%, 55% 0.3%, 64% 1.8%, 72% 0.2%, 81% 1.6%, 90% 0.3%, 100% 1.4%,
+          98.6% 9%, 100% 18%, 98.9% 28%, 100% 38%, 98.6% 49%, 100% 60%, 98.9% 71%, 100% 82%, 98.6% 92%, 100% 98.6%,
+          92% 100%, 83% 98.4%, 74% 100%, 65% 98.5%, 56% 100%, 46% 98.3%, 37% 100%, 28% 98.5%, 19% 100%, 10% 98.4%, 0% 100%,
+          1.2% 90%, 0% 80%, 1.3% 69%, 0% 58%, 1% 47%, 0% 36%, 1.3% 25%, 0% 14%); }
+      .tornB { clip-path: polygon(0 0, 100% 0, 100% 96%, 94% 99%, 87% 96.5%, 79% 100%, 71% 97%, 63% 99.5%, 55% 96.5%, 47% 100%, 39% 97%, 31% 99.5%, 23% 96.8%, 15% 100%, 7% 97%, 0 99%); }
+      .tornT { clip-path: polygon(0 1%, 7% 3%, 15% 0, 23% 3.2%, 31% 0.5%, 39% 3%, 47% 0, 55% 3.5%, 63% 0.5%, 71% 3%, 79% 0, 87% 3.5%, 94% 1%, 100% 4%, 100% 100%, 0 100%); }
+      .tp { position: absolute; filter: drop-shadow(0 16px 24px rgba(60,40,10,.35)); }
+      .tp .pp { background: #fbf8f1; padding: 18px 18px 64px; }
+      .tp .img { background-size: cover; background-position: center; }
+      .tp .cap { position: absolute; left: 30px; bottom: 16px; font-family: "Caveat"; font-weight: 700; font-size: 44px; color: #333; }
+      .tape { position: absolute; width: 180px; height: 60px; background: rgba(240,228,190,.88); box-shadow: 0 2px 6px rgba(0,0,0,.12); transform-origin: left center; }
+      .strip { position: absolute; background: #fbf8f1; padding: 16px 28px; font-weight: 800; font-size: 70px; color: #1a1a1a; letter-spacing: -.02em;
+        box-shadow: 0 10px 22px rgba(0,0,0,.28); white-space: nowrap; }
+      .strip .lt { font-weight: 600; color: #6b6355; }
+      .hl { position: relative; display: inline-block; }
+      .hl .hb { position: absolute; left: -8px; right: -8px; top: 18%; bottom: 6%; background: #FFD60A; transform: skew(-6deg) scaleX(0); transform-origin: left center; z-index: -1; }
+      .hl .sb { position: absolute; left: -6px; right: -6px; top: 50%; height: 9px; background: #d62828; border-radius: 5px; transform: rotate(-3deg) scaleX(0); transform-origin: left center; }
+      .hl .tx { position: relative; }
+      .note { position: absolute; font-family: "Caveat"; font-weight: 700; font-size: 64px; color: #d62828; white-space: nowrap; }
+      svg.ink { position: absolute; overflow: visible; }
+      svg.ink path { fill: none; stroke: #d62828; stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+      .badge { position: absolute; left: 70px; top: 228px; background: #1a1a1a; color: #fbf8f1; font-weight: 800; font-size: 26px; letter-spacing: .12em;
+        padding: 8px 18px; transform: rotate(-2deg); }
+      .badge b { color: #FFD60A; }
+      #subs { position: absolute; left: 60px; right: 180px; top: 1300px; height: 80px; }
+      .grp { position: absolute; left: 0; right: 0; top: 0; text-align: center; }
+      .sw { display: inline-block; margin: 0 4px; font-weight: 800; font-size: 54px; color: #fff; text-shadow: 0 4px 18px rgba(0,0,0,.75); }
+      .sw.on { color: #25D366; }
+      #subs.dark .sw { color: #1a1a1a; text-shadow: none; } #subs.dark .sw.on { color: #1a8f45; }
+    </style>
+    <script src="scene.js"></script>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10.97" data-width="1080" data-height="1920">
+      <div id="cam" class="L"><video id="base" src="assets/base.mp4" class="clip" data-start="0" data-duration="10.97" data-track-index="0" muted playsinline></video></div>
+      <div id="fx" class="L"></div>
+      <div id="top" class="L"></div>
+      <div id="subs"></div>
+    </div>
+    <script>
+      const V = window.VOX, D = V.duration;
+      const tl = gsap.timeline({ paused: true });
+      const $ = (s) => document.querySelector(s);
+      const el = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstChild; };
+      const put = (h, layer = "#fx") => $(layer).appendChild(el(h));
+      const GRAIN = '<svg width="1160" height="2000"><filter id="gn"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3"/><feColorMatrix values="0 0 0 0 .3  0 0 0 0 .25  0 0 0 0 .15  0 0 0 .9 0"/></filter><rect width="100%" height="100%" filter="url(#gn)"/></svg>';
+      const out = (n, end, dy = -30) => { if (end < D) tl.to(n, { opacity: 0, y: dy, duration: 0.22, ease: "power2.in" }, end - 0.22); };
+      const draw = (svg, t, dur = 0.45) => {
+        const ps = svg.querySelectorAll("path");
+        ps.forEach((p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+        tl.to(ps, { strokeDashoffset: 0, duration: dur, ease: "power1.inOut", stagger: dur * 0.8 }, t);
+      };
+      const api = {
+        badge(t, end, series, ep) { const n = put(`<div class="badge">${series} <b>#${ep}</b></div>`, "#top"); tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out", immediateRender: false }, t); out(n, end); return n; },
+        // jalur kertas; html boleh ada <hl id> (highlight) / <st id> (pangkah) yang dicetus dengan api.hl(id, t)
+        strip(t, end, html, x, y, rot = -1, size) {
+          html = html.replace(/<hl>(.*?)<\/hl>/g, '<span class="hl"><span class="hb"></span><span class="tx">$1</span></span>')
+                     .replace(/<st>(.*?)<\/st>/g, '<span class="hl"><span class="tx">$1</span><span class="sb"></span></span>');
+          const n = put(`<div class="strip" style="left:${x}px;top:${y}px;${size ? `font-size:${size}px` : ""}">${html}</div>`, "#top");
+          tl.set(n, { opacity: 0 }, 0);
+          tl.fromTo(n, { opacity: 0, y: -50, rotation: rot - 5 }, { opacity: 1, y: 0, rotation: rot, duration: 0.4, ease: "power3.out", immediateRender: false }, t);
+          out(n, end); return n;
+        },
+        hl(strip, t, i = 0) { const b = strip.querySelectorAll(".hb, .sb")[i]; tl.to(b, { scaleX: 1, duration: 0.35, ease: "power2.out" }, t); },
+        circle(t, end, x, y, w, h) {
+          const n = put(`<svg class="ink" style="left:${x}px;top:${y}px" width="${w}" height="${h}"><path d="M${w*.08} ${h*.55} C ${w*.05} ${h*.05}, ${w*.9} ${-h*.05}, ${w*.96} ${h*.45} C ${w*1.02} ${h*.95}, ${w*.15} ${h*1.05}, ${w*.04} ${h*.6} C 0 ${h*.35}, ${w*.2} ${h*.12}, ${w*.35} ${h*.08}"/></svg>`, "#top");
+          draw(n, t, 0.5); out(n, end, 0); return n;
+        },
+        arrow(t, end, x, y, w, h) {
+          const n = put(`<svg class="ink" style="left:${x}px;top:${y}px" width="${w}" height="${h}"><path d="M10 10 C ${w*.5} ${h*.1}, ${w*.7} ${h*.5}, ${w-20} ${h-20}"/><path d="M${w-70} ${h-28} L${w-20} ${h-20} L${w-26} ${h-72}"/></svg>`, "#top");
+          draw(n, t, 0.35); out(n, end, 0); return n;
+        },
+        note(t, end, text, x, y, rot = -4) {
+          const n = put(`<div class="note" style="left:${x}px;top:${y}px;transform:rotate(${rot}deg)">${text}</div>`, "#top");
+          tl.set(n, { clipPath: "inset(0 100% 0 0)" }, 0);
+          tl.to(n, { clipPath: "inset(0 0% 0 0)", duration: 0.12 + text.length * 0.035, ease: "none" }, t);
+          out(n, end, 0); return n;
+        },
+        // gambar bertepi koyak + pita; Ken Burns perlahan
+        photo(t, end, img, x, y, w, h, rot, cap = "", layer = "#fx") {
+          const n = put(`<div class="tp" style="left:${x}px;top:${y}px"><div class="pp torn"><div class="img" style="width:${w}px;height:${h}px;background-image:url(assets/${img})"></div></div><div class="cap">${cap}</div><div class="tape" style="left:${w / 2 - 70}px;top:-26px"></div></div>`, layer);
+          const tape = n.querySelector(".tape"), im = n.querySelector(".img");
+          tl.set(n, { opacity: 0 }, 0); tl.set(tape, { scaleX: 0, rotation: rot > 0 ? 6 : -6 }, 0);
+          tl.fromTo(n, { opacity: 0, scale: 1.15, rotation: rot + 8, y: -40 }, { opacity: 1, scale: 1, rotation: rot, y: 0, duration: 0.4, ease: "power3.out", immediateRender: false }, t);
+          tl.to(tape, { scaleX: 1, duration: 0.18, ease: "power2.out" }, t + 0.3);
+          tl.fromTo(im, { scale: 1 }, { scale: 1.07, duration: Math.max(0.5, end - t), ease: "none", immediateRender: false }, t);
+          out(n, end); return n;
+        },
+        // kertas turun menutup skrin (tepi bawah koyak) → babak kertas
+        tearIn(t, endOut) {
+          const n = put(`<div class="sheet tornB" style="top:-60px;height:2200px">${GRAIN}</div>`);
+          $("#fx").prepend(n);
+          tl.set(n, { yPercent: -105 }, 0);
+          tl.to(n, { yPercent: 0, duration: 0.35, ease: "power3.out" }, t);
+          if (endOut) api.tearOut(endOut, n);
+          return n;
+        },
+        // kertas terkoyak dua (atas naik, bawah turun) → dedah video Sir
+        tearOut(t, sheet) {
+          const a = put(`<div class="sheet tornB" style="top:-60px;height:1020px">${GRAIN}</div>`), b = put(`<div class="sheet tornT" style="top:900px;height:1080px">${GRAIN}</div>`);
+          $("#fx").prepend(b); $("#fx").prepend(a);
+          tl.set([a, b], { opacity: 0 }, 0); tl.set([a, b], { opacity: 1 }, t);
+          if (sheet) tl.set(sheet, { opacity: 0 }, t);
+          tl.to(a, { y: -1100, rotation: -3, duration: 0.45, ease: "power2.in" }, t + 0.03);
+          tl.to(b, { y: 1150, rotation: 3, duration: 0.45, ease: "power2.in" }, t + 0.03);
+        },
+      };
+      V.scene(tl, api);
+      // Subtitle karaoke (gelap atas kertas)
+      const subs = $("#subs"), groups = []; let cur = [];
+      V.words.forEach((w, i) => { const p = V.words[i - 1]; const cut = (V.breaks || []).some((x) => p && p.s < x && w.s >= x - 0.02);
+        if (cur.length && (cut || cur.length >= 3 || (p && (w.s - p.e > 0.3 || /[.,?!]$/.test(p.w))))) { groups.push(cur); cur = []; } cur.push(w); });
+      if (cur.length) groups.push(cur);
+      groups.forEach((g, gi) => {
+        const node = el(`<div class="grp"></div>`); subs.appendChild(node);
+        const sp = g.map((w) => { const s = el(`<span class="sw">${w.w}</span>`); node.appendChild(s); return s; });
+        tl.set(node, { opacity: 0 }, 0); tl.set(node, { opacity: 1 }, Math.max(g[0].s - 0.05, 0));
+        g.forEach((w, i) => { tl.set(sp[i], { className: "sw on" }, w.s); tl.set(sp[i], { className: "sw" }, g[i + 1] ? g[i + 1].s : w.e + 0.15); });
+        const nx = groups[gi + 1]; tl.set(node, { opacity: 0 }, nx ? nx[0].s - 0.05 : Math.min(g[g.length - 1].e + 0.4, D));
+      });
+      tl.set(subs, { className: "" }, 0);
+      (V.paper || []).forEach(([a, b]) => { tl.set(subs, { className: "dark" }, a); tl.set(subs, { className: "" }, b); });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
