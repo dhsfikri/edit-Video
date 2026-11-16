@@ -5,6 +5,8 @@
 - **`tiktok-thumbnail`** (`.claude/skills/tiktok-thumbnail/SKILL.md`) — thumbnail cover + caption.
 - Skill boleh dikemas kini: naikkan nombor versi + changelog. Perubahan besar (gaya/urutan/peraturan) → brief Sir dulu; pembetulan teknikal kecil → terus kemas kini & maklumkan.
 
+## WAJIB: Skill `director` dulu (reference → aset → storyboard visual), kemudian plan & brief
+
 ## WAJIB: Plan & brief dulu sebelum edit
 Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 1. **Buat plan** guna `templates/brief-edit.md` (objektif, konsep, gaya editing, hook, timeline, style, aset, kualiti).
@@ -53,6 +55,8 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 ## Keputusan & Keutamaan Sir (WAJIB ikut — dikemas kini setiap kali Sir bagi komen)
 - **2026-11-16 — Gaya Dynamic:** "dynamic" = **transition + motion graphic** (video Sir sendiri bergerak: kad, zoom/expand, kad TIP skrin penuh, grafik ikut perkataan). BUKAN sekadar caption/pop teks + bunyi.
 - **2026-11-16 — TIADA EMOJI** dalam video (sticker, tajuk, pop, mockup chat). Guna **grafik motion** (ikon garisan SVG yang dilukis, bentuk, tipografi kinetik).
-- **2026-11-16 — Reference gaya: video Apple** (product film / keynote): latar gelap bersih, tipografi besar yang muncul perkataan demi perkataan (mask reveal), ikon garisan nipis, kad bersudut bulat dengan bayang lembut, gerakan licin tanpa lantunan/gegaran, glow lembut, kaca kabur (glass). Hijau brand sebagai aksen.
+- **2026-11-16 — Reference gaya: Apple Style Motion** — fail dalam Drive `Reference & Inspo/04 Idea Konten`. Analisis: `docs/rujukan/apple-motion/README.md`. Ringkas: **latar cerah**, **komponen UI yang morph** (pil → kad produk → butang), **gambar sebenar dalam kad**, tipografi bersih campur berat, pil chat, gerakan licin. (Versi gelap + ikon lukisan = SALAH, Sir tolak.)
+- **2026-11-16 — Guna gambar/aset sebenar**, jangan lukis semula. Pustaka: `aset/gambar/` (+ `LESEN.md`), Drive `Aset`. Skill `director` WAJIB sebelum edit (reference → aset → storyboard VISUAL → approval).
+- **2026-11-16 — Vibe premium, bukan kartun** (tiada emoji, tiada lantunan/gegaran, tiada ilustrasi kartun).
 - Template: `motion/dynamic/` (lapisan motion + video) + `motion/overlay-dyn/` (teks/subtitle). Koreografi per video: `projects/<ID>/scene.js`.
 - Sumber isi: dengar betul-betul — contoh C0007 "dinding" sebenarnya **dendeng** (lauk). Ayat tak pasti → tanya Sir.
