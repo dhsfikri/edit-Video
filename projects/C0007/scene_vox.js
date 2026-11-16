@@ -15,7 +15,7 @@ window.VOX = {
     // 3) 2.93–6.2 "bila percaya, BELI" (highlight pada "membeli" 4.24) + gambar dendeng koyak
     const s2 = api.strip(2.95, 6.05, '<span class="lt">bila percaya, </span><hl>BELI</hl>', 80, 290, 1);
     api.hl(s2, 4.2);
-    api.prop(4.3, 6.05, "dendeng.png", 380, 960, 500, 6, "right");
+    api.prop(4.3, 6.05, "dendeng.png", 160, 930, 720, 5, "right");
     // 4) 6.21–8.9 KOLAJ atas kertas (suara Sir): kertas turun, gambar ditampal ikut perkataan
     api.tearIn(6.0, 8.78);
     api.prop(6.6, 8.78, "dendeng.png", 110, 420, 740, -4, "left", "up");
