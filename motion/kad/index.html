@@ -119,6 +119,25 @@
       #lv-time { position: absolute; left: 50%; top: 600px; transform: translateX(-50%); font-weight: 800; font-size: 64px; color: #fff; background: rgba(255,255,255,.14);
         padding: 14px 34px; border-radius: 22px; white-space: nowrap; }
       #lv-sold { position: absolute; left: 0; right: 0; bottom: 120px; text-align: center; font-weight: 800; font-size: 40px; color: var(--green); }
+      /* babak besar generik: malam / lapan / banding / tangga */
+      #big { position: absolute; left: 80px; top: 420px; width: 820px; height: 860px; display: none; }
+      .bigc { position: absolute; left: 50%; top: 80px; transform: translateX(-50%); width: 640px; padding: 50px 0; border-radius: 40px; background: #fff; text-align: center;
+        box-shadow: 0 30px 60px rgba(11,61,46,.2); }
+      .bigc .em { font-size: 170px; line-height: 1; } .bigc b { display: block; margin-top: 16px; font-weight: 800; font-size: 84px; color: var(--deep); white-space: nowrap; }
+      .xst { position: absolute; left: 50%; top: 210px; transform: translateX(-50%) rotate(-8deg); font-weight: 800; font-size: 300px; color: #ff4d4f; line-height: 1;
+        text-shadow: 0 10px 30px rgba(255,77,79,.4); }
+      .cnt { font-weight: 800; font-size: 150px; color: var(--deep); line-height: 1; white-space: nowrap; } .cnt.y { color: #e0a800; }
+      .dots { position: absolute; left: 50%; top: 560px; transform: translateX(-50%); display: flex; gap: 18px; }
+      .dots i { width: 62px; height: 62px; border-radius: 50%; background: #d8e2dd; font-style: normal; font-weight: 800; font-size: 26px; color: #fff;
+        display: flex; align-items: center; justify-content: center; }
+      .duo { position: absolute; left: 0; right: 0; top: 120px; display: flex; justify-content: center; align-items: center; gap: 40px; }
+      .duo .pp { position: relative; } .neq { font-weight: 800; font-size: 160px; color: #ff4d4f; }
+      .lbl { position: absolute; left: 50%; top: 560px; transform: translateX(-50%) rotate(-3deg); white-space: nowrap; font-weight: 800; font-size: 64px; color: #fff;
+        background: var(--ink); padding: 16px 38px; border-radius: 18px; } .lbl mark { background: none; color: var(--yellow); }
+      .stp { position: absolute; bottom: 260px; width: 150px; background: var(--deep); border-radius: 14px 14px 0 0; }
+      .hop { position: absolute; width: 110px; height: 150px; }
+      .hop i { position: absolute; left: 20px; top: 0; width: 70px; height: 70px; border-radius: 50%; background: var(--green); }
+      .hop u { position: absolute; left: 0; top: 78px; width: 110px; height: 70px; border-radius: 55px 55px 12px 12px; background: var(--green); }
       #faceWrap { position: absolute; left: 70px; top: 1040px; width: 230px; height: 230px; border-radius: 50%; overflow: hidden;
         border: 7px solid #fff; box-shadow: 0 0 0 4px var(--green), 0 16px 40px rgba(0,0,0,.3); }
       #face { width: 100%; height: 100%; object-fit: cover; }
@@ -134,6 +153,7 @@
         <div id="phone"><div class="scr"><div class="notch"></div><div id="feed"></div></div></div>
         <div id="grid"></div>
         <div id="crowd"></div>
+        <div id="big"></div>
         <div id="tline"><div id="tl-rail"></div><div class="yr" id="y1"><b>2020</b><span>VERSI PERTAMA</span></div><div class="yr" id="y2"><b>2026</b><span>HARI INI</span></div><div id="stampR">✓ MASIH RELEVAN</div></div>
         <div id="team"><div class="ppl"><div class="pp"><i></i><u></u><em>✓</em></div><div class="pp"><i></i><u></u><em>✓</em></div><div class="pp"><i></i><u></u><em>✓</em></div></div><div id="teamLbl">GUIDE <mark>TEAM</mark> AWAK</div></div>
         <div id="plus"></div>
@@ -159,6 +179,10 @@
         },
         timeline: { type: "timeline", head: "<i>/</i>VERSI PERTAMA", face: [690, 205, 200], books: [], items: [], at: [0.2, 3.75, 4.2] },
         team: { type: "team", head: "<i>/</i>UNTUK TEAM", face: [690, 205, 200], books: [], items: [], at: [0.3, 1.85, 2.2] },
+        malam: { type: "malam", head: "<i>/</i>BUKAN", face: [690, 205, 200], books: [], items: [], at: [1.5] },
+        lapan: { type: "lapan", head: "<i>/</i>SEBENARNYA", face: [690, 205, 200], books: [], items: [], at: [0.4, 0.9] },
+        banding: { type: "banding", head: "<i>/</i>INGAT", face: [690, 205, 200], books: [], items: [], at: [0.35, 0.55] },
+        tangga: { type: "tangga", head: "<i>/</i>TERUS", face: [690, 205, 200], books: [], items: [], at: [0.9] },
         crowd: { type: "crowd", books: [], items: [] },
         live: { type: "live", books: [], items: [], at: [1.38, 1.95, 3.3] },
         phone: { type: "phone", books: [], items: [] },
@@ -276,6 +300,42 @@
         tl.to("#phone", { x: 10, duration: 0.05, yoyo: true, repeat: 3 }, sc.at[1]);
       }
 
+      if (["malam", "lapan", "banding", "tangga"].includes(sc.type)) {
+        ["#card", "#plus"].forEach((q) => ($(q).style.display = "none"));
+        const B = $("#big"); B.style.display = "block"; const a = sc.at;
+        const pop = (q, t) => tl.fromTo(q, { opacity: 0, scale: 0.3, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.28, ease: "back.out(1.8)" }, t);
+        if (sc.type === "malam") {
+          B.innerHTML = `<div class="bigc"><div class="em">🌙</div><b>SATU MALAM</b></div><div class="xst">✕</div>`;
+          pop("#big .bigc", 0.05); tl.set("#big .xst", { opacity: 0 }, 0);
+          tl.fromTo("#big .xst", { opacity: 0, scale: 3 }, { opacity: 1, scale: 1, duration: 0.22, ease: "power4.in" }, a[0]);
+          tl.to("#big .bigc", { x: 10, duration: 0.05, yoyo: true, repeat: 3 }, a[0] + 0.22);
+        }
+        if (sc.type === "lapan") {
+          B.innerHTML = `<div class="bigc"><div class="cnt">3 MINIT</div></div><div class="dots">${[...Array(8)].map((_, k) => `<i>${k + 1}</i>`).join("")}</div>`;
+          pop("#big .bigc", 0.05);
+          tl.to("#big .cnt", { rotationX: 90, duration: 0.15, ease: "power2.in" }, a[0]);
+          tl.call(() => { const c = $("#big .cnt"); c.textContent = "8 TAHUN"; c.classList.add("y"); }, null, a[0] + 0.15);
+          tl.call(() => { const c = $("#big .cnt"); c.textContent = "3 MINIT"; c.classList.remove("y"); }, null, a[0] + 0.149); // seek ke belakang
+          tl.fromTo("#big .cnt", { rotationX: -90 }, { rotationX: 0, duration: 0.2, ease: "back.out(2)" }, a[0] + 0.15);
+          document.querySelectorAll("#big .dots i").forEach((d, k) => tl.to(d, { background: "#25d366", scale: 1.15, duration: 0.12, yoyo: true, repeat: 1 }, a[1] + k * 0.12));
+          document.querySelectorAll("#big .dots i").forEach((d, k) => tl.set(d, { background: "#25d366" }, a[1] + k * 0.12 + 0.24));
+        }
+        if (sc.type === "banding") {
+          B.innerHTML = `<div class="duo"><div class="pp"><i></i><u></u></div><div class="neq">≠</div><div class="pp" style="opacity:.55"><i></i><u></u></div></div><div class="lbl">JANGAN <mark>BANDING</mark></div>`;
+          tl.fromTo("#big .pp", { opacity: 0, y: 200 }, { opacity: (i) => (i ? 0.55 : 1), y: 0, duration: 0.3, stagger: 0.15, ease: "back.out(1.8)" }, 0.05);
+          pop("#big .neq", a[0]); tl.set(["#big .neq", "#big .lbl"], { opacity: 0 }, 0); pop("#big .lbl", a[1]);
+        }
+        if (sc.type === "tangga") {
+          let h = ""; for (let k = 0; k < 5; k++) h += `<div class="stp" style="left:${30 + k * 155}px;height:${80 + k * 90}px"></div>`;
+          B.innerHTML = h + `<div class="hop"><i></i><u></u></div><div class="lbl" style="top:640px">TERUS <mark>USAHA</mark> 💪</div>`;
+          tl.fromTo("#big .stp", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.25, stagger: 0.07, ease: "power3.out" }, 0.05);
+          const pos = (k) => ({ left: 50 + k * 155 + "px", top: 860 - 260 - (80 + k * 90) - 150 + "px" });
+          tl.set("#big .hop", pos(0), 0);
+          for (let k = 1; k < 5; k++) tl.to("#big .hop", { ...pos(k), duration: 0.22, ease: "power2.out" }, 0.4 + k * 0.25);
+          tl.set("#big .lbl", { opacity: 0 }, 0); pop("#big .lbl", a[0]);
+        }
+      }
+
       // Babak jenis khas (motion graphic penuh, tiada kad)
       if (sc.type === "phone" || sc.type === "grid") {
         ["#card", "#head", "#faceWrap"].forEach((q) => ($(q).style.display = "none"));
@@ -300,7 +360,7 @@
       }
 
       // keluar: whip kabur ke kiri (0.22s terakhir) — peralihan balik ke A-roll
-      tl.to(["#card", "#head", "#plus", "#faceWrap", "#phone", "#grid", "#tline", "#team", "#crowd"], { x: -500, opacity: 0, filter: "blur(16px)", duration: 0.22, ease: "power2.in" }, D - 0.22);
+      tl.to(["#card", "#head", "#plus", "#faceWrap", "#phone", "#grid", "#tline", "#team", "#crowd", "#big"], { x: -500, opacity: 0, filter: "blur(16px)", duration: 0.22, ease: "power2.in" }, D - 0.22);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;

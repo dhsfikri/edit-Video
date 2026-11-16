@@ -1,0 +1,240 @@
+{
+ "base": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008/base.mov",
+ "out": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008/C0008_draf_v1.mp4",
+ "fps": 29.97,
+ "broll": [
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008/mg_crowd.mp4",
+   "start": 2.17,
+   "dur": 0.96
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008/mg_live.mp4",
+   "start": 3.13,
+   "dur": 3.9
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008/mg_malam.mp4",
+   "start": 14.605,
+   "dur": 2.41
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008/mg_lapan.mp4",
+   "start": 17.905,
+   "dur": 2.3
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008/mg_banding.mp4",
+   "start": 22.885,
+   "dur": 1.88
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008/mg_tangga.mp4",
+   "start": 28.115,
+   "dur": 1.8
+  }
+ ],
+ "overlay": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008/overlay.mov",
+ "sfx": [
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/knock.wav",
+   "at": 0.0,
+   "vol": 0.7
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/knock.wav",
+   "at": 26.835,
+   "vol": 0.55
+  },
+  {
+   "src": "/home/user/edit-Video/motion/intro/assets/signature.wav",
+   "at": 0.5,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 0.43,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 2.2,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 2.43,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 6.07,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 7.05,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 8.37,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 10.33,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 11.93,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 13.625,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 17.045,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 21.025,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 25.465,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 26.425,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 26.905,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 29.925,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 31.685,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 32.935,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 34.475,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 35.155,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 36.575,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 37.555,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 38.71,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 2.09,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 2.98,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 3.05,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 6.879999999999999,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 14.525,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 16.865000000000002,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 17.825000000000003,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 20.055000000000003,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 22.805000000000003,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 24.615000000000002,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 28.035,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 29.765,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/iklan/assets/ding.wav",
+   "at": 5.03,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/iklan/assets/ding.wav",
+   "at": 16.165,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/iklan/assets/ding.wav",
+   "at": 18.485,
+   "vol": 0.3
+  }
+ ]
+}

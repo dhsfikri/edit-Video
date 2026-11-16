@@ -1,19 +1,322 @@
 {
- "source": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/raw-060224/C0008.MP4", "transcript": "/home/user/edit-Video/projects/C0008/transcript.json", "workdir": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008",
- "rotate": "cw", "fps": 29.97, "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+ "source": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/raw-060224/C0008.MP4",
+ "transcript": "/home/user/edit-Video/projects/C0008/transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0008",
+ "rotate": "cw",
+ "fps": 29.97,
+ "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
  "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
- "corrections": {"menggembir": "mengambil"},
+ "corrections": {
+  "menggembir": "mengambil",
+  "tunggu": "terus"
+ },
  "segments": [
-  {"note":"A hook: perasan tak... 1 juta dalam 3 minit","start":0.40,"end":6.95,"zoom":1.1,"cy":0.38,
-   "keys":[[0,1.0,0.38],[0.7,1.0,0.38],[0.71,1.25,0.34],[1.37,1.25,0.34],[1.38,1.1,0.38],[6.6,1.1,0.38]]},
-  {"note":"B tapi sebenarnya proses 3 minit... dikorbankan","start":7.00,"end":12.85,"zoom":1.1,"cy":0.38,
-   "keys":[[0,1.1,0.38],[0.02,1.3,0.34],[1.0,1.3,0.34],[1.02,1.1,0.38],[4.3,1.1,0.38],[4.32,1.35,0.33],[5.9,1.35,0.33]]},
-  {"note":"C bukan satu malam","start":12.85,"end":17.00,"zoom":1.1,"cy":0.38},
-  {"note":"D TWIST: ambil masa hampir 8 tahun","start":17.00,"end":20.20,"zoom":1.1,"cy":0.38},
-  {"note":"E trust the process, jangan banding (buang 'Faham ya?')","start":21.00,"end":25.55,"zoom":1.1,"cy":0.38},
-  {"note":"F masing-masing ada masa & peluang","start":25.55,"end":28.15,"zoom":1.1,"cy":0.38},
-  {"note":"G terus usaha, Allah akan bagi","start":28.15,"end":33.15,"zoom":1.1,"cy":0.38},
-  {"note":"H soalan penutup (buang 'Faham-faham?')","start":34.30,"end":40.60,"zoom":1.1,"cy":0.38},
-  {"note":"I Assalamualaikum + ekor rakaman","start":41.40,"end":43.45,"zoom":1.15,"cy":0.38}
+  {
+   "note": "A hook: perasan tak... 1 juta dalam 3 minit",
+   "start": 0.0,
+   "end": 6.95,
+   "zoom": 1.1,
+   "cy": 0.38,
+   "keys": [
+    [
+     0,
+     1.5,
+     0.38
+    ],
+    [
+     0.45,
+     1.5,
+     0.38
+    ],
+    [
+     1.0,
+     1.12,
+     0.38
+    ],
+    [
+     1.28,
+     1.12,
+     0.38
+    ],
+    [
+     1.29,
+     1.3,
+     0.38
+    ],
+    [
+     2.4,
+     1.3,
+     0.38
+    ]
+   ]
+  },
+  {
+   "note": "B tapi sebenarnya proses 3 minit... dikorbankan",
+   "start": 7.0,
+   "end": 12.85,
+   "zoom": 1.1,
+   "cy": 0.38,
+   "keys": [
+    [
+     0,
+     1.4,
+     0.38
+    ],
+    [
+     0.5,
+     1.12,
+     0.38
+    ],
+    [
+     1.32,
+     1.12,
+     0.38
+    ],
+    [
+     1.33,
+     1.3,
+     0.38
+    ],
+    [
+     2.7,
+     1.3,
+     0.38
+    ],
+    [
+     2.72,
+     1.12,
+     0.38
+    ],
+    [
+     4.88,
+     1.12,
+     0.38
+    ],
+    [
+     4.89,
+     1.42,
+     0.38
+    ],
+    [
+     5.9,
+     1.42,
+     0.38
+    ]
+   ]
+  },
+  {
+   "note": "C bukan satu malam",
+   "start": 12.85,
+   "end": 17.0,
+   "zoom": 1.1,
+   "cy": 0.38,
+   "keys": [
+    [
+     0,
+     1.4,
+     0.38
+    ],
+    [
+     0.5,
+     1.12,
+     0.38
+    ],
+    [
+     0.7,
+     1.12,
+     0.38
+    ],
+    [
+     0.71,
+     1.28,
+     0.38
+    ],
+    [
+     4.2,
+     1.28,
+     0.38
+    ]
+   ]
+  },
+  {
+   "note": "D TWIST: ambil masa hampir 8 tahun",
+   "start": 17.0,
+   "end": 20.2,
+   "zoom": 1.1,
+   "cy": 0.38,
+   "keys": [
+    [
+     0,
+     1.45,
+     0.38
+    ],
+    [
+     0.5,
+     1.15,
+     0.38
+    ],
+    [
+     3.3,
+     1.15,
+     0.38
+    ]
+   ]
+  },
+  {
+   "note": "EFG trust the process \u2026 masing-masing \u2026 terus usaha, Allah akan bagi",
+   "start": 21.0,
+   "end": 33.15,
+   "zoom": 1.1,
+   "cy": 0.38,
+   "keys": [
+    [
+     0,
+     1.4,
+     0.38
+    ],
+    [
+     0.5,
+     1.12,
+     0.38
+    ],
+    [
+     0.8,
+     1.12,
+     0.38
+    ],
+    [
+     0.81,
+     1.35,
+     0.38
+    ],
+    [
+     4.59,
+     1.4,
+     0.38
+    ],
+    [
+     5.09,
+     1.12,
+     0.38
+    ],
+    [
+     6.1899999999999995,
+     1.12,
+     0.38
+    ],
+    [
+     6.2,
+     1.3,
+     0.38
+    ],
+    [
+     6.6899999999999995,
+     1.3,
+     0.38
+    ],
+    [
+     6.699999999999999,
+     1.42,
+     0.38
+    ],
+    [
+     7.17,
+     1.4,
+     0.38
+    ],
+    [
+     7.67,
+     1.12,
+     0.38
+    ],
+    [
+     11.46,
+     1.12,
+     0.38
+    ],
+    [
+     11.469999999999999,
+     1.3,
+     0.38
+    ],
+    [
+     12.17,
+     1.3,
+     0.38
+    ]
+   ]
+  },
+  {
+   "note": "H soalan penutup (buang 'Faham-faham?')",
+   "start": 34.3,
+   "end": 40.6,
+   "zoom": 1.1,
+   "cy": 0.38,
+   "keys": [
+    [
+     0,
+     1.45,
+     0.38
+    ],
+    [
+     0.6,
+     1.12,
+     0.38
+    ],
+    [
+     2.02,
+     1.12,
+     0.38
+    ],
+    [
+     2.03,
+     1.3,
+     0.38
+    ],
+    [
+     4.12,
+     1.3,
+     0.38
+    ],
+    [
+     4.13,
+     1.45,
+     0.38
+    ],
+    [
+     6.3,
+     1.45,
+     0.38
+    ]
+   ]
+  },
+  {
+   "note": "I Assalamualaikum + ekor rakaman",
+   "start": 41.4,
+   "end": 43.45,
+   "zoom": 1.15,
+   "cy": 0.38,
+   "keys": [
+    [
+     0,
+     1.3,
+     0.38
+    ],
+    [
+     1.5,
+     1.08,
+     0.38
+    ],
+    [
+     2.1,
+     1.08,
+     0.38
+    ]
+   ]
+  }
+ ],
+ "anchor": [
+  565,
+  722
  ]
 }

@@ -56,3 +56,6 @@ Subtitle karaoke Gaya v2 · grade lembut · tiada muzik (atau bed perlahan) · a
 - **Gaya dynamic macam C0009** (motion graphic sahaja, kinetic pops, punch-in, tukar visual 1–1.5s)
 - "menggembir" → "mengambil"; buang "Faham ya?" & "Faham-faham?"; tamat dengan Assalamualaikum + rakaman sebenar
 - Klip ujian 0–8.7s: babak `crowd` (semua orang nak jadi…) + `live` (RM0 → RM1,000,000, jam 3:00)
+
+## Revisi
+- **Draf v1 (40.9s)** — 2026-11-16. Arahan Sir selepas klip ujian: SFX **ketuk pintu** (saat 0 + pada "peluang"), **zoom berpaksi mata** (`anchor` [565,722] dalam cut.py — eye line kekal), setiap babak muka mula rapat lalu **zoom out**. Babak motion: crowd, live (RM0→RM1,000,000, 03:00), malam (✕), lapan (3 MINIT→8 TAHUN), banding (≠), tangga (TERUS USAHA). "tunggu usaha" → subtitle "terus usaha". QC lulus, -14.0 LUFS.

@@ -14,6 +14,7 @@ edit.json:
   "corrections": {"say": "sale"},
   "segments": [{"start": 7.82, "end": 11.15, "zoom": 1.0, "zoom_to": 1.0, "cy": 0.42}, ...]
         # pilihan: "keys": [[t_relatif_segmen, zoom, cy], ...] → punch-in/zoom keyframe (gaya dynamic)
+        # pilihan: "anchor": [x, y] (segmen atau global) → zoom berpaksi titik mata, eye line tak lompat
 }
 
 Output (dalam workdir):
@@ -96,9 +97,16 @@ for i, s in enumerate(segs):
     else:
         # zoom linear z0 -> z1 sepanjang segmen: scale ikut frame, kemudian crop 1080x1920 berpusat pada muka
         z = f"({z0}+({z1}-{z0})*t/{d:.3f})" if z0 != z1 else str(z0)
+    anchor = s.get("anchor", cfg.get("anchor"))
+    if anchor:
+        # zoom berpaksi mata: titik anchor (x,y pada zoom 1.0) kekal di tempat sama di skrin → eye line terjaga
+        ax, ay = anchor
+        cx, cyy = f"'{ax}*(({z})-1)'", f"'{ay}*(({z})-1)'"
+    else:
+        cx, cyy = f"'(iw-{W})/2'", f"'(ih-{H})*({cy})'"
     zoom = (
         f"scale=w='trunc({W}*({z})/2)*2':h='trunc({H}*({z})/2)*2':eval=frame:flags=lanczos,"
-        f"crop={W}:{H}:x='(iw-{W})/2':y='(ih-{H})*({cy})'"
+        f"crop={W}:{H}:x={cx}:y={cyy}"
     )
     vf = (
         f"[0:v]trim={s['start']}:{s['end']},setpts=PTS-STARTPTS,{rot}fps={fps},"
