@@ -1,0 +1,18 @@
+{
+  "source": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/raw-060224/C0009.MP4",
+  "transcript": "/home/user/edit-Video/projects/C0009/transcript.json",
+  "workdir": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0009",
+  "rotate": "cw",
+  "fps": 29.97,
+  "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+  "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "corrections": {"setiru": "tiru", "sapa": "siapa", "-sapa": "-siapa"},
+  "segments": [
+    {"note": "A hook: sekejap x4, dah tengok iklan saya banyak kali?", "start": 0.50, "end": 4.30, "zoom": 1.2, "cy": 0.38},
+    {"note": "B dah macam-macam video... dah dapat e-book 3 buku ni?", "start": 4.40, "end": 12.32, "zoom": 1.1, "cy": 0.4},
+    {"note": "C ini versi pertama... masih relevan sampai hari ni", "start": 12.32, "end": 18.88, "zoom": 1.1, "cy": 0.4},
+    {"note": "D 3 buku: template & SOP closing WhatsApp", "start": 18.88, "end": 26.40, "zoom": 1.1, "cy": 0.4},
+    {"note": "E klik link / learn more -> e-book ke-4 terbaru, guide team", "start": 26.40, "end": 37.50, "zoom": 1.1, "cy": 0.4},
+    {"note": "F so guna script under ni, tiru sahaja (buang: 5 angka di tangan)", "start": 38.72, "end": 40.90, "zoom": 1.2, "cy": 0.38}
+  ]
+}

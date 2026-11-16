@@ -54,4 +54,10 @@ Subtitle besar karaoke · grade lembut · bed muzik perlahan (pilihan) · -14 LU
 4. Nak 2 versi ads (panjang + pendek), atau satu sahaja?
 
 ---
-**Status:** ☐ Menunggu approval
+**Status:** ☑ **APPROVED** Sir (2026-11-16) dengan keputusan:
+- Buang "insyaAllah 5 angka di tangan" (potong selepas "guna script, tiru sahaja")
+- **Ads panjang sahaja** (±38s) — versi pendek (4b) tidak dibuat
+- "kata BQP": suara kekal, **subtitle tidak tulis** perkataan tu
+
+## Revisi
+- **Draf v1 (40.3s)** — 2026-11-16. A-roll 39.25s (6 potongan) + tahan 1s. Babak kad baru `motion/kad/` (ISI 3 E-BOOK 18.25–25.8s, BONUS 25.8–32.3s). Subtitle pil gelap (`subPill`), 3 perkataan/≤22 huruf sebaris. "kata BQP" & "under" tiada dalam subtitle; "setiru" → "just tiru". Buku dalam kad = generik "Learning Lab Vol.1–3" (bukan cover sebenar). QC: safe zone lulus, -14.0 LUFS, peak -2.9 dB.

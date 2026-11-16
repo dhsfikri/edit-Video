@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.3 (2026-11-16)
+**Versi:** 1.3.1 (2026-11-16)
 **Changelog:**
+- 1.3.1 — Template `motion/kad/` (babak kad + senarai tumbuh, gaya reference danushkmotion). Overlay-v2: `subPill`, `maxChars`, `word.br`, badge tiada bila `series` kosong, betulkan subtitle tertinggal bila masa Whisper bertindih. Nota: overlay-v2 `data-duration` = 20s — video lebih panjang, ubah sementara masa render. HyperFrames `-f` mesti rasional (`30000/1001`, bukan 29.97).
 - 1.3 — **Claude tentukan konsep & style** setiap video (arahan Sir 2026-11-16), berdasarkan rakaman + pustaka reference `references/` (`pipeline/ref.py`: Sir hantar link sahaja). Masih dibentang dalam brief untuk approval.
 - 1.2 — Tambah pustaka aset `library/` + `pipeline/aset.py` (Pexels, ikon Tabler, frame Sir). Semua aset yang diguna direkod dalam `library/katalog.json`.
 - 1.1 — Siri closing ditukar nama: `AYAT CLOSING` → `ALL ABOUT CLOSING` (episod bersambung #02).
@@ -92,6 +93,7 @@ Sir tak perlu pilih konsep/style sendiri. Claude cadangkan **satu** pilihan utam
 3. Render: `npx hyperframes render --variables '{"scene":"x","dur":D,"face":"assets/face_x.mp4"}' -f <fps> -q high -w 4 -o ex.mp4` → **trim** `ffmpeg -t D` (composition `data-duration` tetap; render lebih panjang).
 - Letak B-roll **semasa Sir bercakap** (bukan senyap).
 **Pustaka aset** — `library/` (baca `library/README.md`): semak `aset.py senarai` dulu, guna semula kalau ada; kalau tiada → `aset.py cari/ambil/ikon/frame`, kemudian `aset.py guna <id> <ID projek>`. Sir tak perlu upload gambar.
+**Babak kad (produk/senarai/bonus)** — `motion/kad/`: latar putih pucat + grid titik, kad zoom+blur, senarai tumbuh ikut suara, butang + cursor tap, muka dalam bulatan (`facecrop.py`). Babak baru → tambah dalam `SCENES`.
 **Animasi kedai/troli** — `motion/broll/` (`scene`: kupon/troli/kosong/selesai/konten).
 **Higgsfield (AI)** — hanya B-roll suasana, semak kredit & anggaran dalam brief dulu.
 
@@ -109,7 +111,8 @@ cta{start,text}, words[{w,s,e}]
 - **CTA:** pendek (`🔔 follow @sirdharma_`).
 - Pembetulan subtitle (cth "buat payment") dalam `words`.
 - Bila parse `data.js` dengan Python: potong selepas `window.EDIT =` (komen mungkin ada `=`).
-- Render: `npx hyperframes render --format mov -f <fps> -w 4 -o overlay.mov`.
+- Render: `npx hyperframes render --format mov -f <fps> -w 4 -o overlay.mov`. Video > 20s: tukar sementara `data-duration="20"` dalam index.html ke durasi video, render, kemudian pulihkan (dan `git checkout` `data.js` + `.hyperframes/video-state.json`). FPS 29.97 → `-f 30000/1001`.
+- Atas latar terang (babak kad): `subPill: true`. Subtitle panjang: `maxChars: 22`, `maxWords: 3`.
 
 ## 8. Iklan (optional) — `motion/iklan/`
 Iklan 4s "Setup Team Sales A–Z" (telus). Disisip dengan **video dihentikan seketika** di sempadan ayat (tiada perkataan hilang) melalui `insert` dalam compose; anjak semua masa overlay selepas titik sisipan.

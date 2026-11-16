@@ -1,0 +1,177 @@
+<!doctype html>
+<!--
+  Babak KAD — gaya motion "kad + senarai tumbuh" (rujukan: references/tiktok-7613879612723957012), warna brand Sir.
+  Penuh skrin 1080x1920: latar putih pucat + grid titik + garis putus-putus bergerak · kad masuk zoom+blur ·
+  item senarai muncul ikut suara · muka Sir dalam bulatan kiri-bawah (klip dari pipeline/facecrop.py).
+  Variables:
+    scene : kunci dalam SCENES (di bawah)   dur : durasi (s)   face : klip muka dalam assets/
+  Render: npx hyperframes render --variables '{"scene":"ebook","dur":7.57,"face":"assets/face_ebook.mp4"}' -f 30 -q high -w 4 -o out.mp4
+  Safe zone: semua teks x 60–900, y 220–1440. Subtitle video utama (y ±1320) ditindih kemudian — kawasan y 1290–1440 dibiar kosong.
+-->
+<html lang="ms" data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"scene","type":"string","label":"Babak","default":"ebook"},
+    {"id":"dur","type":"number","label":"Durasi (s)","default":7},
+    {"id":"face","type":"string","label":"Klip muka","default":"assets/face_ebook.mp4"}
+  ]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/caveat-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      :root { --bg: #f3f5f4; --green: #25d366; --deep: #0b3d2e; --yellow: #ffd60a; --ink: #0b0b0b; --grey: #5d6863; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", "Noto Color Emoji", sans-serif; background: var(--bg); }
+      #dots { position: absolute; inset: -40px; background-image: radial-gradient(rgba(11,61,46,.16) 2px, transparent 2px); background-size: 34px 34px; }
+      #curves { position: absolute; inset: 0; }
+      #curves path { fill: none; stroke: rgba(11,61,46,.28); stroke-width: 4; stroke-dasharray: 14 14; }
+
+      /* header pil gaya slash */
+      #head { position: absolute; left: 80px; top: 280px; font-weight: 800; font-size: 64px; color: var(--ink); letter-spacing: -.01em; white-space: nowrap; }
+      #head i { font-style: normal; color: var(--green); margin-right: 6px; }
+
+      #card { position: absolute; left: 80px; top: 400px; width: 800px; border-radius: 40px; background: #fff; padding: 40px 44px 44px;
+        box-shadow: 0 30px 60px rgba(11,61,46,.18), 0 6px 14px rgba(0,0,0,.06); }
+
+      /* buku generik */
+      #books { display: flex; gap: 26px; justify-content: center; height: 360px; align-items: flex-end; }
+      .bk { position: relative; width: 220px; height: 330px; border-radius: 10px 18px 18px 10px; overflow: hidden;
+        background: linear-gradient(160deg, #0f5a43 0%, var(--deep) 70%); box-shadow: 0 16px 30px rgba(11,61,46,.35); }
+      .bk::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 16px; background: rgba(0,0,0,.25); }
+      .bk b { position: absolute; left: 30px; top: 28px; font-size: 30px; color: var(--green); letter-spacing: .08em; }
+      .bk span { position: absolute; left: 30px; right: 14px; top: 80px; font-weight: 800; font-size: 36px; line-height: 1.05; color: #fff; }
+      .bk em { position: absolute; left: 30px; bottom: 22px; font-style: normal; font-weight: 800; font-size: 44px; color: var(--yellow); }
+      .bk.new { background: linear-gradient(160deg, #ffe45c 0%, var(--yellow) 70%); }
+      .bk.new b { color: var(--deep); font-size: 24px; } .bk.new span { color: var(--ink); font-size: 32px; right: 8px; } .bk.new em { color: var(--deep); }
+
+      /* senarai timeline tumbuh */
+      #list { position: relative; margin-top: 40px; padding-left: 26px; }
+      #rail { position: absolute; left: 21px; top: 16px; width: 6px; border-radius: 3px; background: var(--deep); height: 0; }
+      .it { position: relative; display: flex; align-items: center; gap: 22px; margin: 0 0 26px; font-weight: 800; font-size: 50px; color: var(--ink); white-space: nowrap; }
+      .it .dot { position: absolute; left: -22px; width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: #fff;
+        font-size: 22px; display: flex; align-items: center; justify-content: center; border: 5px solid #fff; box-shadow: 0 0 0 3px var(--deep); }
+      .it span { margin-left: 30px; } .it mark { background: var(--yellow); color: var(--ink); padding: 0 10px; border-radius: 8px; }
+
+      /* butang & cursor */
+      #btn { position: absolute; left: 50%; top: 860px; transform: translateX(-50%); white-space: nowrap; background: var(--green); color: var(--ink);
+        font-weight: 800; font-size: 52px; padding: 26px 56px; border-radius: 999px; box-shadow: 0 18px 40px rgba(37,211,102,.45); }
+      #cursor { position: absolute; left: 640px; top: 930px; width: 70px; height: 70px; }
+      #ring { position: absolute; left: 600px; top: 890px; width: 90px; height: 90px; border-radius: 50%; border: 6px solid var(--green); }
+
+      #plus { position: absolute; right: 200px; top: 360px; background: var(--yellow); color: var(--ink); font-weight: 800; font-size: 50px;
+        padding: 14px 30px; border-radius: 18px; transform: rotate(4deg); box-shadow: 0 14px 30px rgba(0,0,0,.18); white-space: nowrap; }
+
+      #faceWrap { position: absolute; left: 70px; top: 1040px; width: 230px; height: 230px; border-radius: 50%; overflow: hidden;
+        border: 7px solid #fff; box-shadow: 0 0 0 4px var(--green), 0 16px 40px rgba(0,0,0,.3); }
+      #face { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920">
+      <div id="stage" class="clip" data-start="0" data-duration="12" data-track-index="0">
+        <div id="dots"></div>
+        <svg id="curves" viewBox="0 0 1080 1920"><path id="c1" d="M-60 520 C 260 380, 420 140, 760 90" /><path id="c2" d="M1140 1500 C 900 1560, 760 1700, 620 1990" /></svg>
+        <div id="head"></div>
+        <div id="card"><div id="books"></div><div id="list"><div id="rail"></div></div></div>
+        <div id="plus"></div>
+        <div id="btn"></div>
+        <div id="ring"></div>
+        <svg id="cursor" viewBox="0 0 24 24"><path d="M4 2 L4 19 L8.5 14.8 L11.6 21.5 L14.4 20.3 L11.4 13.7 L17.6 13.7 Z" fill="#0b0b0b" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      </div>
+      <div id="faceWrap"><video id="face" src="assets/face_ebook.mp4" class="clip" data-start="0" data-duration="12" data-track-index="1" muted playsinline></video></div>
+    </div>
+    <script>
+      const V = window.__hyperframes.getVariables();
+      const D = Number(V.dur) || 7;
+      const $ = (s) => document.querySelector(s);
+      $("#face").setAttribute("src", V.face);
+
+      // Babak. Masa (s) relatif kepada mula babak — selaraskan dengan words.json.
+      //  books: [[t, vol, tajuk, isNew]] · items: [[t, html]] · btn: [t, teks] · tap: t · plus: [t, teks]
+      const SCENES = {
+        ebook: {
+          head: "<i>/</i>ISI 3 E-BOOK", face: [690, 205, 200],
+          books: [[0.25, "VOL.1", "Learning<br>Lab", 0], [0.45, "VOL.2", "Learning<br>Lab", 0], [0.65, "VOL.3", "Learning<br>Lab", 0]],
+          items: [[1.69, "<span>Template closing</span>"], [2.59, "<span>SOP closing</span>"], [5.0, "<span>Khas closing guna <mark>WhatsApp</mark></span>"]],
+        },
+        bonus: {
+          head: "<i>/</i>BONUS",
+          books: [[0.15, "VOL.1", "", 0], [0.25, "VOL.2", "", 0], [0.35, "VOL.3", "", 0], [4.4, "E-BOOK #4", "Terbaru<br>&amp; lebih<br>mudah", 1]],
+          items: [],
+          btn: [1.0, "LEARN MORE ➜"], tap: 2.4,
+          plus: [4.55, "+1 E-BOOK 🎁"],
+        },
+      };
+      const sc = SCENES[V.scene] || SCENES.ebook;
+      if (sc.face) { const f = $("#faceWrap").style; [f.left, f.top, f.width, f.height] = [sc.face[0] + "px", sc.face[1] + "px", sc.face[2] + "px", sc.face[2] + "px"]; }
+      const tl = gsap.timeline({ paused: true });
+
+      // latar hidup: grid bergerak perlahan + garis putus-putus mengalir
+      tl.fromTo("#dots", { x: 0, y: 0 }, { x: -34, y: -34, duration: D, ease: "none" }, 0);
+      tl.fromTo("#curves path", { strokeDashoffset: 0 }, { strokeDashoffset: -280, duration: D, ease: "none" }, 0);
+
+      // masuk: header + kad zoom dari kecil dengan kabur (gaya reference)
+      $("#head").innerHTML = sc.head;
+      tl.fromTo("#head", { opacity: 0, x: -60, filter: "blur(12px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out" }, 0.02);
+      tl.fromTo("#card", { scale: 0.55, opacity: 0, filter: "blur(18px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.38, ease: "back.out(1.4)" }, 0.0);
+      tl.fromTo("#faceWrap", { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.35, ease: "back.out(1.8)" }, 0.1);
+
+      const books = $("#books");
+      if (sc.books.some((b) => b[3])) books.style.gap = "16px";
+      sc.books.forEach(([t, vol, name, isNew]) => {
+        const b = document.createElement("div");
+        b.className = "bk" + (isNew ? " new" : "");
+        if (sc.books.length > 3) { b.style.width = "165px"; b.style.height = isNew ? "340px" : "280px"; }
+        b.innerHTML = `<b>${vol}</b><span>${name}</span>${isNew ? "" : "<em>✓</em>"}`;
+        books.appendChild(b);
+        tl.set(b, { opacity: 0 }, 0);
+        tl.fromTo(b, { opacity: 0, y: -160, rotation: isNew ? 12 : -6, filter: "blur(10px)" },
+          { opacity: 1, y: 0, rotation: 0, filter: "blur(0px)", duration: 0.32, ease: "back.out(1.7)" }, t);
+        if (isNew) tl.to(b, { scale: 1.06, duration: 0.18, yoyo: true, repeat: 3, ease: "sine.inOut" }, t + 0.35);
+      });
+
+      // senarai tumbuh + rel menegak
+      const list = $("#list");
+      if (!sc.items.length) list.style.display = "none";
+      sc.items.forEach(([t, html], i) => {
+        const it = document.createElement("div");
+        it.className = "it"; it.innerHTML = `<div class="dot">✓</div>${html}`;
+        list.appendChild(it);
+        tl.set(it, { opacity: 0 }, 0);
+        tl.fromTo(it, { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.25, ease: "power3.out" }, t);
+        tl.fromTo(it.querySelector(".dot"), { scale: 0 }, { scale: 1, duration: 0.25, ease: "back.out(3)" }, t);
+        tl.to("#rail", { height: 22 + i * 90, duration: 0.25, ease: "power2.out" }, t);
+      });
+
+      // butang + tap cursor
+      ["#btn", "#cursor", "#ring", "#plus"].forEach((s) => tl.set(s, { opacity: 0 }, 0));
+      if (sc.btn) {
+        $("#btn").textContent = sc.btn[1];
+        tl.fromTo("#btn", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, sc.btn[0]);
+        tl.to("#btn", { scale: 1.05, duration: 0.35, yoyo: true, repeat: 1, ease: "sine.inOut" }, sc.btn[0] + 0.35);
+        tl.fromTo("#cursor", { opacity: 0, x: 220, y: 260 }, { opacity: 1, x: 0, y: 0, duration: 0.45, ease: "power3.out" }, sc.tap - 0.5);
+        tl.to("#cursor", { scale: 0.82, duration: 0.08, yoyo: true, repeat: 1 }, sc.tap);
+        tl.to("#btn", { scale: 0.94, duration: 0.08, yoyo: true, repeat: 1 }, sc.tap);
+        tl.fromTo("#ring", { opacity: 1, scale: 0.4 }, { opacity: 0, scale: 1.8, duration: 0.45, ease: "power2.out" }, sc.tap);
+        tl.to(["#btn", "#cursor"], { opacity: 0, y: 40, duration: 0.2 }, sc.plus ? sc.plus[0] - 0.4 : D);
+      }
+      if (sc.plus) {
+        $("#plus").textContent = sc.plus[1];
+        tl.fromTo("#plus", { opacity: 0, scale: 2.4, rotation: -10 }, { opacity: 1, scale: 1, rotation: 4, duration: 0.28, ease: "power4.in" }, sc.plus[0]);
+        tl.to("#card", { x: 8, duration: 0.05, yoyo: true, repeat: 3 }, sc.plus[0] + 0.28);
+      }
+
+      // keluar: whip kabur ke kiri (0.22s terakhir) — peralihan balik ke A-roll
+      tl.to(["#card", "#head", "#plus", "#faceWrap"], { x: -500, opacity: 0, filter: "blur(16px)", duration: 0.22, ease: "power2.in" }, D - 0.22);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

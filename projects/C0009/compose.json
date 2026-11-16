@@ -1,0 +1,94 @@
+{
+ "base": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0009/base.mov",
+ "out": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0009/C0009_draf_v1.mp4",
+ "fps": 29.97,
+ "insert": {
+  "at": 39.195,
+  "dur": 1.0
+ },
+ "broll": [
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0009/kad_ebook.mp4",
+   "start": 18.25,
+   "dur": 7.565
+  },
+  {
+   "src": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0009/kad_bonus.mp4",
+   "start": 25.815,
+   "dur": 6.485
+  }
+ ],
+ "overlay": "/tmp/claude-0/-home-user-edit-Video/b0af7eb8-166e-54e6-a0d1-df58d6277271/scratchpad/C0009/overlay.mov",
+ "sfx": [
+  {
+   "src": "/home/user/edit-Video/motion/intro/assets/signature.wav",
+   "at": 0.03,
+   "vol": 0.4
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 18.2,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 25.75,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/whoosh.wav",
+   "at": 32.1,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 12.7,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 15.9,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 19.94,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 20.84,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 23.25,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 28.29,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 32.91,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 35.69,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/kad/assets/sfx/pop.wav",
+   "at": 38.21,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/iklan/assets/ding.wav",
+   "at": 30.36,
+   "vol": 0.3
+  }
+ ]
+}
