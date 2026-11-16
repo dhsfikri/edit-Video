@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Mont"; font-weight: 600; src: url(montserrat-latin-600-normal.woff2); }
+  @font-face { font-family: "Mont"; font-weight: 800; src: url(montserrat-latin-800-normal.woff2); }
+  html, body { margin: 0; background: #0B0B0B; }
+  #out { display: block; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "./node_modules/three/build/three.module.js",
+  "three/addons/": "./node_modules/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<canvas id="out" width="1080" height="1920"></canvas>
+<script type="module">
+import * as THREE from "three";
+import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+
+const W = 1080, H = 1920;
+const GREEN = "#25D366", BLACK = "#0B0B0B", YELLOW = "#FFD60A";
+const SAFE_CX = 480; // tengah safe zone TikTok (x 60–900)
+
+// ---------- WebGL ----------
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H, false);
+renderer.setClearColor(0x000000, 0);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.6;
+
+const camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 100);
+camera.position.set(0, 0, 28);
+camera.lookAt(0, 0, 0);
+
+const key = new THREE.DirectionalLight(0xffffff, 2.2);
+key.position.set(4, 6, 8);
+scene.add(key);
+const rim = new THREE.DirectionalLight(0x25d366, 3);
+rim.position.set(-6, 2, -4);
+scene.add(rim);
+
+// Telefon
+const PW = 3.4, PH = 7.0, PD = 0.36;
+const phone = new THREE.Group();
+const body = new THREE.Mesh(
+  new RoundedBoxGeometry(PW, PH, PD, 6, 0.42),
+  new THREE.MeshStandardMaterial({ color: 0x1a1c20, metalness: 0.85, roughness: 0.28 }),
+);
+phone.add(body);
+
+// Skrin (canvas texture)
+const SCR_W = 460, SCR_H = 981;
+const scr = document.createElement("canvas");
+scr.width = SCR_W; scr.height = SCR_H;
+const sctx = scr.getContext("2d");
+const screenTex = new THREE.CanvasTexture(scr);
+screenTex.colorSpace = THREE.SRGBColorSpace;
+screenTex.anisotropy = 8;
+const screenGeo = new RoundedBoxGeometry(PW - 0.22, PH - 0.22, 0.02, 4, 0.32);
+// UV kotak: guna planar UV dari posisi supaya tekstur penuh di muka depan
+{
+  const pos = screenGeo.attributes.position, uv = screenGeo.attributes.uv;
+  for (let i = 0; i < pos.count; i++) {
+    uv.setXY(i, pos.getX(i) / (PW - 0.22) + 0.5, pos.getY(i) / (PH - 0.22) + 0.5);
+  }
+}
+const screen = new THREE.Mesh(screenGeo, new THREE.MeshBasicMaterial({ map: screenTex, toneMapped: false }));
+screen.position.z = PD / 2 + 0.005;
+phone.add(screen);
+scene.add(phone);
+
+// ---------- Utiliti ----------
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const easeOutBack = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3);
+const prog = (t, a, b) => clamp01((t - a) / (b - a));
+
+function rr(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+
+function wrap(ctx, text, maxW) {
+  const words = text.split(" "), lines = []; let line = "";
+  for (const w of words) {
+    const test = line ? line + " " + w : w;
+    if (ctx.measureText(test).width > maxW && line) { lines.push(line); line = w; } else line = test;
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+function bubble(ctx, text, side, y, p, time) {
+  if (p <= 0) return 0;
+  ctx.font = "600 34px Mont";
+  const lines = wrap(ctx, text, 320);
+  const lh = 44, padX = 24, padY = 18;
+  const tw = Math.max(...lines.map((l) => ctx.measureText(l).width));
+  const bw = Math.max(tw, 120) + padX * 2, bh = lines.length * lh + padY * 2 + 26;
+  const x = side === "in" ? 28 : SCR_W - 28 - bw;
+  const s = 0.6 + 0.4 * easeOutBack(p);
+  ctx.save();
+  ctx.globalAlpha = clamp01(p * 2);
+  ctx.translate(side === "in" ? x : x + bw, y + bh);
+  ctx.scale(s, s);
+  ctx.translate(side === "in" ? -x : -(x + bw), -(y + bh));
+  ctx.shadowColor = "rgba(0,0,0,0.12)"; ctx.shadowBlur = 6; ctx.shadowOffsetY = 2;
+  ctx.fillStyle = side === "in" ? "#FFFFFF" : "#D9FDD3";
+  rr(ctx, x, y, bw, bh, 22); ctx.fill();
+  ctx.shadowColor = "transparent";
+  ctx.fillStyle = "#111B21";
+  lines.forEach((l, i) => ctx.fillText(l, x + padX, y + padY + 34 + i * lh));
+  ctx.font = "600 22px Mont"; ctx.fillStyle = "#667781";
+  const tx = x + bw - padX - (side === "out" ? 112 : 70);
+  ctx.fillText(time, tx, y + bh - 14);
+  if (side === "out") { ctx.fillStyle = "#53BDEB"; ctx.fillText("✓✓", x + bw - padX - 38, y + bh - 14); }
+  ctx.restore();
+  return bh;
+}
+
+function drawScreen(t) {
+  const c = sctx;
+  c.fillStyle = "#EFE7DE"; c.fillRect(0, 0, SCR_W, SCR_H);
+  // corak halus latar chat
+  c.fillStyle = "rgba(0,0,0,0.035)";
+  for (let y = 150; y < SCR_H; y += 60) for (let x = (y / 60) % 2 ? 20 : 50; x < SCR_W; x += 60) { c.beginPath(); c.arc(x, y, 3, 0, 7); c.fill(); }
+  // header
+  c.fillStyle = BLACK; c.fillRect(0, 0, SCR_W, 140);
+  c.fillStyle = GREEN; c.beginPath(); c.arc(70, 100, 34, 0, 7); c.fill();
+  c.fillStyle = BLACK; c.font = "800 30px Mont"; c.textAlign = "center"; c.fillText("CA", 70, 111); c.textAlign = "left";
+  c.fillStyle = "#FFFFFF"; c.font = "800 32px Mont"; c.fillText("Cik Aina", 122, 94);
+  c.fillStyle = GREEN; c.font = "600 22px Mont";
+  const typing = t > 1.55 && t < 2.15;
+  c.fillText(typing ? "sedang menaip..." : "dalam talian", 122, 126);
+
+  let y = 175;
+  y += bubble(c, "Harga ok, tapi nanti saya fikir dulu ya", "in", y, prog(t, 0.95, 1.3), "9:41") + 18;
+  if (typing) {
+    // titik menaip (bubble keluar)
+    const bx = SCR_W - 28 - 130;
+    c.fillStyle = "#D9FDD3"; rr(c, bx, y, 130, 70, 22); c.fill();
+    for (let i = 0; i < 3; i++) {
+      const a = 0.35 + 0.65 * Math.max(0, Math.sin((t * 9) - i * 0.9));
+      c.fillStyle = `rgba(17,27,33,${a})`; c.beginPath(); c.arc(bx + 38 + i * 27, y + 35, 8, 0, 7); c.fill();
+    }
+  }
+  bubble(c, "Boleh! Kalau saya bagi bonus khas untuk hari ni, Cik nak ambil sekarang?", "out", y, prog(t, 2.15, 2.5), "9:42");
+  screenTex.needsUpdate = true;
+}
+
+// ---------- Komposit 2D ----------
+const out = document.getElementById("out");
+const octx = out.getContext("2d");
+
+function drawBG() {
+  octx.fillStyle = BLACK; octx.fillRect(0, 0, W, H);
+  const g = octx.createRadialGradient(SAFE_CX, 830, 40, SAFE_CX, 830, 700);
+  g.addColorStop(0, "rgba(37,211,102,0.32)"); g.addColorStop(1, "rgba(37,211,102,0)");
+  octx.fillStyle = g; octx.fillRect(0, 0, W, H);
+}
+
+function drawBadge(t) {
+  const p = prog(t, 0.1, 0.45);
+  if (p <= 0) return;
+  const s = easeOutBack(p), bw = 470, bh = 84, cx = SAFE_CX, cy = 300;
+  octx.save();
+  octx.translate(cx, cy); octx.scale(s, s);
+  octx.fillStyle = GREEN; rr(octx, -bw / 2, -bh / 2, bw, bh, 18); octx.fill();
+  octx.fillStyle = BLACK; octx.font = "800 46px Mont"; octx.textAlign = "center"; octx.textBaseline = "middle";
+  octx.fillText("BEDAH CHAT #01", 0, 3);
+  octx.restore();
+}
+
+function drawHook(t) {
+  const p = easeOutCubic(prog(t, 2.6, 3.0));
+  if (p <= 0) return;
+  octx.save();
+  octx.globalAlpha = p;
+  octx.translate(0, (1 - p) * 30);
+  octx.textAlign = "center"; octx.font = "800 56px Mont";
+    const l1 = "Tukar \"fikir dulu\"", l2 = "jadi \"ambil sekarang\"";
+  octx.fillStyle = "#FFFFFF"; octx.fillText(l1, SAFE_CX, 1345);
+  octx.fillStyle = YELLOW; octx.fillText(l2, SAFE_CX, 1420);
+  octx.restore();
+}
+
+window.renderAt = (t) => {
+  // gerakan telefon
+  const pin = easeOutCubic(prog(t, 0, 1.1));
+  phone.rotation.y = THREE.MathUtils.lerp(-1.25, 0.12, pin) + Math.sin(t * 1.4) * 0.05;
+  phone.rotation.x = THREE.MathUtils.lerp(0.35, -0.04, pin) + Math.sin(t * 1.1) * 0.02;
+  phone.rotation.z = THREE.MathUtils.lerp(0.18, 0, pin);
+  phone.scale.setScalar(THREE.MathUtils.lerp(0.55, 1, pin));
+  phone.position.y = THREE.MathUtils.lerp(-0.6, 1.0, pin) + Math.sin(t * 1.6) * 0.06;
+
+  drawScreen(t);
+  renderer.render(scene, camera);
+
+  drawBG();
+  octx.drawImage(renderer.domElement, SAFE_CX - W / 2, 0);
+  drawBadge(t);
+  drawHook(t);
+  return out.toDataURL("image/jpeg", 0.95);
+};
+
+await document.fonts.load("800 40px Mont");
+await document.fonts.load("600 40px Mont");
+window.ready = true;
+</script>
+</body>
+</html>
