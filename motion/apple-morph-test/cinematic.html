@@ -32,6 +32,8 @@ import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { BokehPass } from "three/addons/postprocessing/BokehPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+import { RectAreaLightUniformsLib } from "three/addons/lights/RectAreaLightUniformsLib.js";
+import { Reflector } from "three/addons/objects/Reflector.js";
 
 const W = 1080, H = 1920;
 const GREEN = "#25D366", YELLOW = "#FFD60A", BLACK = "#0B0B0B";
@@ -140,7 +142,7 @@ if (PAL.wallTex) {
 const key = new THREE.SpotLight(0xfff6ea, PAL.key, 0, 0.62, 0.85, 2);
 key.position.set(-1500, 1700, 2600); key.target.position.set(GX, 0, 0);
 key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 14; key.shadow.blurSamples = 20;
-key.shadow.bias = -0.0004; key.shadow.camera.near = 1500; key.shadow.camera.far = 6000;
+key.shadow.bias = -0.0004; key.shadow.camera.near = 1500; key.shadow.camera.far = 9000;
 scene.add(key, key.target);
 // cahaya kontak: hampir dari depan, bayang pendek & tajam rapat dengan objek
 const contact = new THREE.DirectionalLight(0xffffff, 0.5);
@@ -152,6 +154,90 @@ scene.add(contact, contact.target);
 // cahaya rim hijau dari bawah kanan belakang (aksen spektral, satu warna)
 const rim = new THREE.DirectionalLight(PAL.rim, PAL.rimI); rim.position.set(900, -1400, 600); scene.add(rim);
 scene.add(new THREE.HemisphereLight(...PAL.hemi));
+
+// ================= DUNIA "STUDIO" (?world=studio) =================
+// Ikut cinetic lighting.md §8: latar ialah TEMPAT dengan cahaya kunci, bukan gradient di belakang kad.
+// Dinding LED gergasi jauh di belakang (tekstur digital, defocus dibakar sekali = depth of field kamera),
+// lantai berkilat yang memantul cahaya LED & menerima bayang, kabus atmosfera, sinar cahaya, rim hijau dari LED.
+const WORLD = new URLSearchParams(location.search).get("world");
+let worldUpdate = () => {};
+if (WORLD === "studio") {
+  wall.visible = false;
+  const FLOOR_Y = -600, LED_Z = -2700;
+  // --- tekstur LED: gradient hijau + grid piksel + panel data, kemudian dikaburkan (defocus dibakar) ---
+  function ledCanvas(w, h, draw, blurPx) {
+    const a = document.createElement("canvas"); a.width = w; a.height = h; draw(a.getContext("2d"), w, h);
+    if (!blurPx) return a;
+    const b = document.createElement("canvas"); b.width = w; b.height = h; const g = b.getContext("2d");
+    g.filter = `blur(${blurPx}px)`; g.drawImage(a, 0, 0); g.filter = "none";
+    // dither halus supaya gradient tidak berjalur
+    const id = g.getImageData(0, 0, w, h); let r = 5;
+    for (let i = 0; i < id.data.length; i += 4) { r = (r * 1664525 + 1013904223) >>> 0; const n = ((r >>> 24) / 255 - 0.5) * 3; id.data[i] += n; id.data[i + 1] += n; id.data[i + 2] += n; }
+    g.putImageData(id, 0, 0); return b;
+  }
+  const rnd = (() => { let r = 31; return () => ((r = (r * 1664525 + 1013904223) >>> 0) / 4294967296); })();
+  const base = ledCanvas(1200, 1600, (g, w, h) => {
+    const lg = g.createLinearGradient(w * 0.1, 0, w * 0.9, h);
+    lg.addColorStop(0, "#2be27a"); lg.addColorStop(0.35, "#11994a"); lg.addColorStop(0.75, "#05461f"); lg.addColorStop(1, "#021a0b");
+    g.fillStyle = lg; g.fillRect(0, 0, w, h);
+    const rg = g.createRadialGradient(w * 0.35, h * 0.3, 20, w * 0.35, h * 0.3, w * 0.8);
+    rg.addColorStop(0, "rgba(170,255,200,0.35)"); rg.addColorStop(1, "rgba(0,0,0,0)"); g.fillStyle = rg; g.fillRect(0, 0, w, h);
+    // panel LED: jahitan gelap antara modul
+    g.fillStyle = "rgba(0,0,0,0.35)"; for (let x = 0; x < w; x += 150) g.fillRect(x, 0, 3, h); for (let y = 0; y < h; y += 150) g.fillRect(0, y, w, 3);
+    // grid piksel
+    for (let y = 4; y < h; y += 10) for (let x = 4; x < w; x += 10) { g.fillStyle = `rgba(210,255,225,${0.05 + rnd() * 0.07})`; g.fillRect(x, y, 3, 3); }
+    // blok data / UI digital
+    for (let i = 0; i < 90; i++) { const x = Math.floor(rnd() * w / 30) * 30, y = Math.floor(rnd() * h / 30) * 30;
+      g.fillStyle = `rgba(200,255,220,${0.08 + rnd() * 0.22})`; g.fillRect(x, y, 30 * (1 + Math.floor(rnd() * 5)), 10 + Math.floor(rnd() * 3) * 10); }
+  }, 7);
+  const ledTex = new THREE.CanvasTexture(base); ledTex.colorSpace = THREE.SRGBColorSpace;
+  const led = new THREE.Mesh(new THREE.PlaneGeometry(6200, 8300), new THREE.MeshBasicMaterial({ map: ledTex, color: 0xb8c8bd }));
+  led.position.set(GX, 900, LED_Z); scene.add(led);
+  // lapisan aliran data (bergerak perlahan ke atas = cahaya hidup), dikaburkan juga
+  const flow = ledCanvas(1200, 600, (g, w, h) => {
+    g.clearRect(0, 0, w, h);
+    // panel "dashboard" lembut: kad, bar & titik, tersusun mendatar
+    for (let i = 0; i < 16; i++) { const x = rnd() * w, y = rnd() * h, cw = 120 + rnd() * 200, ch = 60 + rnd() * 90;
+      g.fillStyle = `rgba(220,255,230,${0.05 + rnd() * 0.08})`; g.beginPath(); g.roundRect(x, y, cw, ch, 14); g.fill();
+      for (let k = 0; k < 4; k++) { g.fillStyle = `rgba(230,255,235,${0.12 + rnd() * 0.18})`; g.fillRect(x + 14, y + 14 + k * 14, (cw - 28) * (0.3 + rnd() * 0.7), 6); } }
+  }, 6);
+  const flowTex = new THREE.CanvasTexture(flow); flowTex.colorSpace = THREE.SRGBColorSpace; flowTex.wrapS = flowTex.wrapT = THREE.RepeatWrapping; flowTex.repeat.set(2, 3);
+  const flowMesh = new THREE.Mesh(new THREE.PlaneGeometry(6200, 8300), new THREE.MeshBasicMaterial({ map: flowTex, transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending, depthWrite: false }));
+  flowMesh.position.set(GX, 900, LED_Z + 5); scene.add(flowMesh);
+  // --- lantai berkilat: memantul cahaya LED (environment), menerima bayang ---
+  const mirror = new Reflector(new THREE.PlaneGeometry(9000, 9000), { textureWidth: 540, textureHeight: 960, color: 0x777777 });
+  mirror.rotation.x = -Math.PI / 2; mirror.position.set(GX, FLOOR_Y - 1, LED_Z + 4500); scene.add(mirror);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000),
+    new THREE.MeshStandardMaterial({ color: 0x040605, roughness: 0.6, metalness: 0.0, transparent: true, opacity: 0.84 }));
+  floor.rotation.x = -Math.PI / 2; floor.position.set(GX, FLOOR_Y, LED_Z + 4500); floor.receiveShadow = true; scene.add(floor);
+  // environment dari dinding LED → pantulan hijau real pada lantai, bevel kad & butang
+  const envScene = new THREE.Scene(); envScene.background = new THREE.Color(0x010302);
+  const envLed = new THREE.Mesh(new THREE.PlaneGeometry(40, 30), new THREE.MeshBasicMaterial({ map: ledTex })); envLed.position.set(0, 4, -14); envScene.add(envLed);
+  const envTop = new THREE.Mesh(new THREE.PlaneGeometry(12, 6), new THREE.MeshBasicMaterial({ color: 0xfff3e6 })); envTop.position.set(-8, 14, 4); envTop.lookAt(0, 0, 0); envScene.add(envTop);
+  scene.environment = pmrem.fromScene(envScene, 0.02).texture; scene.environmentIntensity = 0.35;
+  // --- cahaya dari dinding LED (kawasan segi empat hijau) → rim di tepi belakang & cahaya di lantai ---
+  RectAreaLightUniformsLib.init();
+  const ledLight = new THREE.RectAreaLight(0x3cf08a, 1.3, 5200, 2600); ledLight.position.set(GX, 300, LED_Z + 200); ledLight.lookAt(GX, 0, 0); scene.add(ledLight);
+  // --- kabus atmosfera: yang jauh menjadi lembut & berwarna udara ---
+  scene.fog = new THREE.Fog(0x07170d, 4200, 9800);
+  scene.background = new THREE.Color(0x07170d);
+  // --- sinar cahaya dari atas kiri (volumetrik palsu, additive, sangat lembut) ---
+  const beamCv = document.createElement("canvas"); beamCv.width = 64; beamCv.height = 512; { const g = beamCv.getContext("2d");
+    const lg = g.createLinearGradient(0, 0, 0, 512); lg.addColorStop(0, "rgba(255,248,235,0.9)"); lg.addColorStop(1, "rgba(255,248,235,0)"); g.fillStyle = lg; g.fillRect(0, 0, 64, 512);
+    const sg = g.createLinearGradient(0, 0, 64, 0); sg.addColorStop(0, "rgba(0,0,0,1)"); sg.addColorStop(0.5, "rgba(0,0,0,0)"); sg.addColorStop(1, "rgba(0,0,0,1)");
+    g.globalCompositeOperation = "destination-out"; g.fillStyle = sg; g.fillRect(0, 0, 64, 512); }
+  const beamTex = new THREE.CanvasTexture(beamCv);
+  const beams = [[-900, 0.32, 900, 0.07], [-450, 0.26, 600, 0.05], [-1250, 0.4, 700, 0.045]].map(([x, rz, w, op]) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, 5200), new THREE.MeshBasicMaterial({ map: beamTex, transparent: true, opacity: op, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
+    m.position.set(GX + x, 1400, -900); m.rotation.z = rz; scene.add(m); return { m, op, rz }; });
+  key.color.set(0xfff4e8); key.intensity = PAL.key * 0.95;
+  rim.intensity = 0; // rim kini datang dari dinding LED
+  worldUpdate = (t) => {
+    flowTex.offset.x = t * 0.018; // panel digital mengalir perlahan (mendatar)
+    led.material.color.setScalar(0.72 + 0.04 * Math.sin(t * 1.1)); // dinding LED "bernafas"
+    beams.forEach((b, i) => { b.m.material.opacity = b.op * (0.85 + 0.15 * Math.sin(t * 0.7 + i * 2)); b.m.rotation.z = b.rz + 0.01 * Math.sin(t * 0.3 + i); });
+  };
+}
 
 // kumpulan UI
 const group = new THREE.Group(); group.position.set(GX, 0, 0); scene.add(group);
@@ -275,10 +361,11 @@ function update(t) {
   group.rotation.z = THREE.MathUtils.degToRad(ROLL(t));
 
   // ---- cahaya hidup: kolam cahaya kunci bergerak perlahan (cahaya, bukan objek) ----
+  worldUpdate(t);
   key.position.x = -1500 + 140 * Math.sin(t * 0.35); key.position.y = 1700 + 90 * Math.sin(t * 0.27 + 1);
 
   // ---- kamera ----
-  const z = CZOOM(t), yaw = THREE.MathUtils.degToRad(CYAW(t)), pitch = THREE.MathUtils.degToRad(CPITCH(t));
+  const z = CZOOM(t), yaw = THREE.MathUtils.degToRad(CYAW(t)), pitch = THREE.MathUtils.degToRad(CPITCH(t) + (WORLD === "studio" ? 4 : 0));
   const tgt = new THREE.Vector3(GX, CTY(t), 40);
   const d = DIST / z;
   camera.position.set(tgt.x + d * Math.sin(yaw) * Math.cos(pitch), tgt.y + d * Math.sin(pitch), tgt.z + d * Math.cos(yaw) * Math.cos(pitch));
