@@ -55,14 +55,16 @@ def main():
             sys.exit(msg + "\n" + r.stderr[-400:])
     print(f"✓ Video: {mp4}")
 
-    # 3. Contact sheet (1 frame / 2s, 7 lajur)
+    # 3. Contact sheet ±36 frame dengan cap masa (video pendek → frame lebih rapat, min 0.5s)
     dur = float(run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(mp4)]).stdout or 0)
-    n = max(1, int(dur // 2))
-    rows = -(-n // 7)
+    step = max(0.5, round(dur / 36 * 2) / 2)
+    n = max(1, int(dur / step))
+    rows = -(-n // 9)
     (REF / "img").mkdir(parents=True, exist_ok=True)
     sheet = REF / "img" / f"{vid}.jpg"
     run(["ffmpeg", "-v", "error", "-y", "-i", str(mp4), "-vf",
-         f"fps=1/2,scale=240:-1,tile=7x{rows}:padding=4", "-frames:v", "1", "-q:v", "4", str(sheet)])
+         f"fps=1/{step},scale=200:-1,drawtext=text='%{{pts\\:hms}}':x=4:y=4:fontsize=14:fontcolor=red,"
+         f"tile=9x{rows}:padding=3", "-frames:v", "1", "-q:v", "4", str(sheet)])
     print(f"✓ Contact sheet: {sheet.relative_to(ROOT)}")
 
     # 4. Potongan scene (tukar visual) → rentak
@@ -85,8 +87,16 @@ def main():
     trans = [f"| {s.start:.1f}–{s.end:.1f}s | {s.text.strip()} |" for s in segs]
     print(f"✓ Transkrip ({tinfo.language}): {len(trans)} segmen")
 
-    # 6. Nota
+    # 6. Nota (kalau run semula: kekalkan Analisa + "Sir suka" yang sedia ada)
     nota = REF / f"{vid}.md"
+    analisa = "_(isi: struktur hook, layout, gaya teks, B-roll/motion, bunyi, CTA, apa nak pinjam, apa tak sesuai untuk Sir)_"
+    if nota.exists():
+        lama = nota.read_text()
+        if "## Analisa (Claude)\n" in lama:
+            analisa = lama.split("## Analisa (Claude)\n", 1)[1].strip()
+        m_suka = re.search(r"\*\*Sir suka:\*\* (.*)", lama)
+        if not a.nota and m_suka:
+            a.nota = m_suka.group(1).strip()
     desc = (info.get("description") or "").replace("\n", " ")
     stat = " · ".join(f"{k} {info[k]:,}" for k in ("view_count", "like_count", "comment_count", "repost_count", "save_count") if info.get(k))
     nota.write_text(f"""# Reference: {info.get('uploader') or info.get('channel') or ''} — {info.get('title','')[:70]}
@@ -95,13 +105,13 @@ def main():
 - **Tarikh simpan:** {date.today()} · **Durasi:** {dur:.1f}s · **Resolusi:** {info.get('width')}x{info.get('height')}
 - **Statistik (masa simpan):** {stat or '-'}
 - **Caption asal:** {desc[:400]}
-- **Sir suka:** {a.nota or '_(isi)_'}
+- **Sir suka:** {a.nota if a.nota and a.nota != '_(isi)_' else '_(isi)_'}
 
 ![contact sheet](img/{vid}.jpg)
 
 ## Rentak
-- Tukar visual dikesan: **{len(cuts)} kali** → purata **{purata:.1f}s** setiap visual
-- Titik: {', '.join(f'{c:.1f}' for c in cuts) or '-'}
+- Tukar visual (potongan keras) dikesan: **{len(cuts)} kali** → purata **{purata:.1f}s** setiap visual
+- Titik: {', '.join(f'{c:.1f}' for c in cuts) or '-'}\n- Contact sheet: 1 frame setiap {step}s. Nota: animasi berterusan (motion graphic) jarang dikesan sebagai potongan — rujuk contact sheet.
 
 ## Transkrip
 | Masa | Ayat |
@@ -109,8 +119,7 @@ def main():
 """ + "\n".join(trans) + """
 
 ## Analisa (Claude)
-_(isi: struktur hook, layout, gaya teks, B-roll/motion, bunyi, CTA, apa nak pinjam, apa tak sesuai untuk Sir)_
-""")
+""" + analisa + "\n")
     print(f"✓ Nota: {nota.relative_to(ROOT)}")
 
 

@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.2 (2026-11-16)
+**Versi:** 1.3 (2026-11-16)
 **Changelog:**
+- 1.3 — **Claude tentukan konsep & style** setiap video (arahan Sir 2026-11-16), berdasarkan rakaman + pustaka reference `references/` (`pipeline/ref.py`: Sir hantar link sahaja). Masih dibentang dalam brief untuk approval.
 - 1.2 — Tambah pustaka aset `library/` + `pipeline/aset.py` (Pexels, ikon Tabler, frame Sir). Semua aset yang diguna direkod dalam `library/katalog.json`.
 - 1.1 — Siri closing ditukar nama: `AYAT CLOSING` → `ALL ABOUT CLOSING` (episod bersambung #02).
 - 1.0 — Versi pertama, dari pengalaman C0029 (TIPS JUALAN #01) & C0296 (AYAT CLOSING #01).
@@ -64,6 +65,14 @@ segs,_=m.transcribe(a,language='ms',word_timestamps=True,vad_filter=True,beam_si
 ```
 Simpan JSON `{"segments":[{start,end,text,words:[{w,s,e}]}]}`. Cetak word timestamps untuk rancang potongan.
 **Salah dengar biasa:** "say"→**sale**, "dedisyen"→**decision**, "bayar bayaran"→**buat payment**, "geng-geng dof"/"bukan kesian" (tak jelas → tanya Sir/buang). Ayat tak jelas → transcribe semula snippet itu sahaja (temperature 0 & 0.4) dan **tanya Sir** dalam brief.
+
+## 3b. Konsep & style — Claude yang tentukan
+Sir tak perlu pilih konsep/style sendiri. Claude cadangkan **satu** pilihan utama (boleh beri 1 alternatif ringkas) dan bentang dalam brief:
+1. **Reference:** kalau Sir hantar link (TikTok/IG/FB/YouTube) → `python3 -I pipeline/ref.py "<link>" --nota "<apa Sir suka>" --kerja <scratchpad>/ref` → isi bahagian *Analisa* dalam `references/<id>.md`. Lihat juga reference sedia ada dalam `references/` (README di sana).
+2. **Pilih konsep** ikut isi rakaman: tutorial langkah (`/LANGKAH`), cerita mini 4 babak (soalan → watak → twist → penyelesaian), bedah chat, senarai pantas, dll.
+3. **Pilih style** dari reference + BRANDKIT: layout (grafik atas + muka bawah / full-face / grafik penuh), bahasa motion (kinetic type, kad, peralihan), rentak (tukar visual setiap 2–4s), SFX.
+4. Dalam brief, tulis: konsep dipilih + **kenapa**, reference mana diguna dan **apa yang dipinjam** (struktur/rentak/gaya — bukan tiru sebiji), apa ditukar ke brand Sir (warna hijau/kuning, safe zone, saiz teks min. 42px).
+5. Organik vs Ads: nyatakan versi mana yang dibuat dan beza struktur (Ads lebih pendek 15–25s, CTA jelas).
 
 ## 4. Brief → tunggu approval
 `briefs/<YYYY-MM-DD>_<ID>_<slug>.md`: spec, objektif, siri (`ALL ABOUT CLOSING` = closing/WhatsApp (dulu `AYAT CLOSING`), `TIPS JUALAN` = jualan umum/TikTok Shop), struktur timeline (sumber → ayat → grafik), ayat dibuang, B-roll, soalan untuk Sir (privasi peserta, ayat tak jelas, iklan ya/tidak).
