@@ -30,6 +30,8 @@
 | **Montserrat ExtraBold 800 / SemiBold 600** | Semua teks dalam video, badge, subtitle, callout | `@fontsource/montserrat` |
 | **Caveat 700** | Tulisan tangan (kicker kecil atas headline) | `@fontsource/caveat` |
 
+**Format headline video/iklan: Title Case** (huruf besar di awal setiap perkataan), cth **"Staf Ada, Sistem Belum?"**. Arahan Sir 2026-11-16. (Thumbnail kekal Anton huruf besar penuh.)
+
 ## 4. Siri (badge)
 `AYAT CLOSING #NN` · `TIPS JUALAN #NN` · `BEDAH CHAT #NN` · `OBJECTION KILLER #NN`
 Pil hitam, border hijau, titik hijau, nombor hijau.

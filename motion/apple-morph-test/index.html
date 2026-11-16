@@ -124,7 +124,7 @@ function drawScene(t) {
   const pillOut = 1 - ramp(t, 2.1, 0.14);
   if (t > 1.1 && pillOut > 0) {
     c.save(); c.beginPath(); rr(c, -fw / 2, -fh / 2, fw, fh, fr); c.clip();
-    dropWords(c, "Staf ada, sistem takde?", -fw / 2 + 52, 15, 1.12, t, { size: 40, alpha: pillOut, color: T.ink });
+    dropWords(c, "Staf Ada, Sistem Belum?", -fw / 2 + 52, 15, 1.12, t, { size: 40, alpha: pillOut, color: T.ink });
     c.restore();
   }
 
@@ -134,8 +134,8 @@ function drawScene(t) {
     const top = -fh / 2, L = -fw / 2 + 58;
     c.save(); c.beginPath(); rr(c, -fw / 2, -fh / 2, fw, fh, fr); c.clip();
     dropWords(c, "SETUP TEAM SALES A–Z", L, top + 96, 2.35, t, { size: 30, color: GREEN, stagger: 0.04, alpha: cardOut });
-    dropWords(c, "Staf ada,", L, top + 200, 2.45, t, { size: 84, alpha: cardOut });
-    dropWords(c, "sistem ada.", L, top + 292, 2.57, t, { size: 84, color: GREEN, alpha: cardOut });
+    dropWords(c, "Staf Ada,", L, top + 200, 2.45, t, { size: 84, alpha: cardOut });
+    dropWords(c, "Sistem Ada.", L, top + 292, 2.57, t, { size: 84, color: GREEN, alpha: cardOut });
     // garis pemisah tumbuh
     const lp = spring(t - 2.75, 0.7);
     c.save(); c.globalAlpha = cardOut; c.fillStyle = T.line; c.fillRect(L, top + 342, (fw - 116) * clamp(lp, 0, 1.05), 2); c.restore();

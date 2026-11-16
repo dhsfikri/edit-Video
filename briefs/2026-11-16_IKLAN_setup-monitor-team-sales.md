@@ -20,14 +20,14 @@
 
 ## 4. Hook
 - Kicker kecil (Caveat, tulisan tangan): *"Untuk company servis"*
-- Headline: **"Staf ada, sistem takde?"** ("sistem takde?" warna kuning)
+- Headline: **"Staf Ada, Sistem Belum?"** (Title Case; "Sistem Belum?" warna kuning. Dikemas kini atas arahan Sir 2026-11-16)
 - Visual: iPhone 3D berpusing masuk; group "Team Sales · 4 ahli" penuh mesej bercelaru.
 - SFX: whoosh + ding notifikasi berulang
 
 ## 5. Plan timeline (15s, tiada suara: teks + muzik)
 | Masa | Isi | Visual | Teks / motion graphic | SFX |
 |---|---|---|---|---|
-| 0–3s | Hook | Group "Team Sales · 4 ahli": *"Lead ni siapa pegang?"* · *"Saya ingat Hafiz dah reply"* · *"Quotation yang mana satu?"*; leads baru masuk tanpa jawapan | kicker *Untuk company servis* · "Staf ada, **sistem takde?**" | whoosh + ding |
+| 0–3s | Hook | Group "Team Sales · 4 ahli": *"Lead ni siapa pegang?"* · *"Saya ingat Hafiz dah reply"* · *"Quotation yang mana satu?"*; leads baru masuk tanpa jawapan | kicker *Untuk company servis* · "Staf Ada, **Sistem Belum?**" | whoosh + ding |
 | 3–5.5s | Masalah | Notifikasi leads bertimbun: *"Boleh dapat quotation?"*, *"Bila boleh datang survey?"*, kiraan "belum dibalas" naik | "Leads masuk, **tiada siapa follow up**" | ding laju |
 | 5.5–7.5s | Solusi 1 | Badge **SETUP TEAM SALES A–Z**; tag peranan melekat pada setiap staf: Aina · *Follow up leads*, Hafiz · *Closer*, Mira · *Quotation*, Danish · *After sales* | ✓ Susun peranan team | pop setiap tag |
 | 7.5–9.5s | Solusi 2 | Mesej 📌 disematkan: dokumen "SOP & Skrip Closing WhatsApp" | ✓ Skrip & SOP closing | swoosh |
@@ -37,7 +37,7 @@
 
 ## 6. Style
 - Font: Montserrat ExtraBold/SemiBold; Caveat untuk kicker.
-- Warna: hijau #25D366, hitam #0B0B0B, putih; kuning #FFD60A (satu keyword setiap babak: "sistem takde?", "Monitoring 30 hari", "PERCUMA"); merah #FF5A5A hanya untuk lencana "belum dibalas".
+- Warna: hijau #25D366, hitam #0B0B0B, putih; kuning #FFD60A (satu keyword setiap babak: "Sistem Belum?", "Monitoring 30 hari", "PERCUMA"); merah #FF5A5A hanya untuk lencana "belum dibalas".
 - Latar: hitam dengan cahaya hijau lembut. iPhone gaya titanium (tanpa logo).
 - **Muzik:** upbeat korporat, **dijana dalam code** (synth asal, rentak sederhana laju), jadi bebas hak cipta sepenuhnya; dicampur -14 LUFS, SFX di atas rentak.
 - **Patuh brand kit:** chat mockup generik (tiada logo WhatsApp), **tiada janji hasil**. Laporan hanya tunjuk apa yang dipantau.
@@ -59,7 +59,7 @@
 | Target | Company servis, dah ada 2–5 staf |
 | CTA | Konsultasi percuma 30 min online |
 | Segera | Slot terhad: **5 slot sebulan** |
-| Headline | "Staf ada, sistem takde?" |
+| Headline | "Staf Ada, Sistem Belum?" (Title Case) |
 | Format | 15s + muzik (upbeat korporat) |
 
 ---

@@ -34,7 +34,25 @@ import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js"
 import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 
 const W = 1080, H = 1920;
-const GREEN = "#25D366", YELLOW = "#FFD60A", BLACK = "#0B0B0B", INK = "#F4F4F2", SUBC = "rgba(255,255,255,0.6)";
+const GREEN = "#25D366", YELLOW = "#FFD60A", BLACK = "#0B0B0B";
+// ---------------- PALET (?pal=v1|A|B|C) ----------------
+// v1 = brand kit asal (hijau banyak). A/B/C = cadangan kontra: hijau hanya untuk CTA akhir & ikon chat.
+const PALS = {
+  v1: { bg: 0x050706, wall: 0x3a463f, card: 0x101311, ink: "#F4F4F2", sub: "rgba(255,255,255,0.6)", line: "rgba(255,255,255,0.1)",
+        kicker: GREEN, accent: GREEN, chk: GREEN, chkInk: BLACK, btn: 0x25d366, btnInk: BLACK, cta: 0x25d366, ctaInk: BLACK,
+        kw: YELLOW, kwBg: null, rim: 0x25d366, rimI: 1.1, hemi: [0xdfe9e2, 0x0b0f0c, 0.25], key: 5.5e6, glow: 0.55 },
+  A: { bg: 0x050505, wall: 0x2e2e30, card: 0xf3f3f0, ink: "#0B0B0B", sub: "rgba(0,0,0,0.55)", line: "rgba(0,0,0,0.12)",
+        kicker: "#0B0B0B", accent: "#0B0B0B", chk: BLACK, chkInk: "#FFFFFF", btn: 0x0b0b0b, btnInk: "#FFFFFF", cta: 0x25d366, ctaInk: BLACK,
+        kw: BLACK, kwBg: YELLOW, rim: 0xffffff, rimI: 0.5, hemi: [0xffffff, 0x0b0b0b, 0.25], key: 5.0e6, glow: 0.25 },
+  B: { bg: 0xd9d9d7, wall: 0xe9e9e7, card: 0xffffff, ink: "#0B0B0B", sub: "rgba(0,0,0,0.5)", line: "rgba(0,0,0,0.1)",
+        kicker: "#0B0B0B", accent: "#0B0B0B", chk: BLACK, chkInk: "#FFFFFF", btn: 0x0b0b0b, btnInk: "#FFFFFF", cta: 0x25d366, ctaInk: BLACK,
+        kw: BLACK, kwBg: YELLOW, rim: 0xffffff, rimI: 0.25, hemi: [0xffffff, 0x9a9a98, 0.6], key: 2.6e6, glow: 0.2, vig: 0.22 },
+  C: { bg: 0x030303, wall: 0x1e1e20, card: 0x101011, ink: "#F4F4F2", sub: "rgba(255,255,255,0.6)", line: "rgba(255,255,255,0.12)",
+        kicker: YELLOW, accent: YELLOW, chk: YELLOW, chkInk: BLACK, btn: 0xffd60a, btnInk: BLACK, cta: 0x25d366, ctaInk: BLACK,
+        kw: "#F4F4F2", kwBg: null, rim: 0xfff2c4, rimI: 0.6, hemi: [0xffffff, 0x0b0b0b, 0.22], key: 5.5e6, glow: 0.3 },
+};
+const PAL = PALS[new URLSearchParams(location.search).get("pal") || "v1"];
+const INK = PAL.ink, SUBC = PAL.sub;
 const GX = -60; // tengah safe zone (x 480 pada skrin) dalam koordinat dunia (1 unit = 1 px pada satah UI)
 
 // ---------------- spring & sifat berkunci ----------------
@@ -72,7 +90,7 @@ renderer.setPixelRatio(1); renderer.setSize(W, H, false);
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.VSMShadowMap;
 renderer.toneMapping = THREE.NeutralToneMapping; renderer.toneMappingExposure = 1.0;
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x050706);
+scene.background = new THREE.Color(PAL.bg);
 const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
 scene.environmentIntensity = 0.12;
@@ -83,11 +101,11 @@ camera.setViewOffset(W, H, 60, 0, W, H);
 
 // dinding latar (menerima bayang), warna dalam hue tanah brand
 const wall = new THREE.Mesh(new THREE.PlaneGeometry(9000, 12000),
-  new THREE.MeshStandardMaterial({ color: 0x3a463f, roughness: 0.95, metalness: 0 }));
+  new THREE.MeshStandardMaterial({ color: PAL.wall, roughness: 0.95, metalness: 0 }));
 wall.receiveShadow = true; scene.add(wall);
 
 // cahaya kunci: spot dari atas kiri (azimuth 315, elevation ~34°) → kolam cahaya + bayang lembut
-const key = new THREE.SpotLight(0xfff6ea, 5.5e6, 0, 0.62, 0.85, 2);
+const key = new THREE.SpotLight(0xfff6ea, PAL.key, 0, 0.62, 0.85, 2);
 key.position.set(-1500, 1700, 2600); key.target.position.set(GX, 0, 0);
 key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 14; key.shadow.blurSamples = 20;
 key.shadow.bias = -0.0004; key.shadow.camera.near = 1500; key.shadow.camera.far = 6000;
@@ -100,13 +118,13 @@ Object.assign(contact.shadow.camera, { left: -1200, right: 1200, top: 1400, bott
 contact.shadow.bias = -0.0003;
 scene.add(contact, contact.target);
 // cahaya rim hijau dari bawah kanan belakang (aksen spektral, satu warna)
-const rim = new THREE.DirectionalLight(0x25d366, 1.1); rim.position.set(900, -1400, 600); scene.add(rim);
-scene.add(new THREE.HemisphereLight(0xdfe9e2, 0x0b0f0c, 0.25));
+const rim = new THREE.DirectionalLight(PAL.rim, PAL.rimI); rim.position.set(900, -1400, 600); scene.add(rim);
+scene.add(new THREE.HemisphereLight(...PAL.hemi));
 
 // kumpulan UI
 const group = new THREE.Group(); group.position.set(GX, 0, 0); scene.add(group);
-const frameMat = new THREE.MeshPhysicalMaterial({ color: 0x101311, roughness: 0.7, metalness: 0.0, clearcoat: 0.25, clearcoatRoughness: 0.4 });
-const btnMat = new THREE.MeshPhysicalMaterial({ color: 0x25d366, roughness: 0.45, clearcoat: 0.4, clearcoatRoughness: 0.25, emissive: 0x25d366, emissiveIntensity: 0.55 });
+const frameMat = new THREE.MeshPhysicalMaterial({ color: PAL.card, roughness: 0.7, metalness: 0.0, clearcoat: 0.25, clearcoatRoughness: 0.4 });
+const btnMat = new THREE.MeshPhysicalMaterial({ color: PAL.btn, roughness: 0.45, clearcoat: 0.4, clearcoatRoughness: 0.25, emissive: PAL.btn, emissiveIntensity: PAL.glow });
 const frameMesh = new THREE.Mesh(new THREE.BufferGeometry(), frameMat); frameMesh.castShadow = frameMesh.receiveShadow = true; group.add(frameMesh);
 const btnMesh = new THREE.Mesh(new THREE.BufferGeometry(), btnMat); btnMesh.castShadow = true; btnMesh.receiveShadow = true; group.add(btnMesh);
 const FT = 18, BT = 16; // ketebalan kad & butang
@@ -160,9 +178,9 @@ function slideChars(c, text, x, y, t0, t, { size = 40, weight = 800, color = INK
 }
 function check(c, x, y, p, alpha) {
   if (p <= 0) return; c.globalAlpha = alpha;
-  c.fillStyle = GREEN; c.beginPath(); c.arc(x, y, 20 * clamp(p, 0, 1.2), 0, 7); c.fill();
+  c.fillStyle = PAL.chk; c.beginPath(); c.arc(x, y, 20 * clamp(p, 0, 1.2), 0, 7); c.fill();
   const d = clamp((p - 0.3) / 0.7);
-  if (d > 0) { c.strokeStyle = BLACK; c.lineWidth = 5; c.lineCap = c.lineJoin = "round"; c.beginPath(); c.moveTo(x - 9, y + 1);
+  if (d > 0) { c.strokeStyle = PAL.chkInk; c.lineWidth = 5; c.lineCap = c.lineJoin = "round"; c.beginPath(); c.moveTo(x - 9, y + 1);
     if (d < 0.4) c.lineTo(x - 9 + 6 * d / 0.4, y + 1 + 6 * d / 0.4); else { c.lineTo(x - 3, y + 7); c.lineTo(x - 3 + 13 * (d - 0.4) / 0.6, y + 7 - 15 * (d - 0.4) / 0.6); } c.stroke(); }
   c.globalAlpha = 1;
 }
@@ -180,18 +198,20 @@ function update(t) {
   cardC.m.position.set(0, 0, top); cardC.m.visible = frameMesh.visible;
   { const c = cardC.ctx; c.save(); rrPath(c, 0, 0, fw, fh, fr); c.clip();
     const pillOut = 1 - ramp(t, 2.1, 0.14);
-    if (t > 1.1 && pillOut > 0) dropWords(c, "Staf ada, sistem takde?", 52, fh / 2 + 15, 1.12, t, { size: 40, alpha: pillOut });
+    if (t > 1.1 && pillOut > 0) dropWords(c, "Staf Ada, Sistem Belum?", 52, fh / 2 + 15, 1.12, t, { size: 40, alpha: pillOut });
     const cardOut = 1 - ramp(t, 4.12, 0.18);
     if (t > 2.2 && cardOut > 0) {
       const L = 58;
-      dropWords(c, "SETUP TEAM SALES A–Z", L, 96, 2.35, t, { size: 30, color: GREEN, stagger: 0.04, alpha: cardOut });
-      dropWords(c, "Staf ada,", L, 200, 2.45, t, { size: 84, alpha: cardOut });
-      dropWords(c, "sistem ada.", L, 292, 2.57, t, { size: 84, color: GREEN, alpha: cardOut });
-      c.globalAlpha = cardOut; c.fillStyle = "rgba(255,255,255,0.1)"; c.fillRect(L, 342, (fw - 116) * clamp(soft(t - 2.75, 0.6)), 2); c.globalAlpha = 1;
+      dropWords(c, "SETUP TEAM SALES A–Z", L, 96, 2.35, t, { size: 30, color: PAL.kicker, stagger: 0.04, alpha: cardOut });
+      dropWords(c, "Staf Ada,", L, 200, 2.45, t, { size: 84, alpha: cardOut });
+      dropWords(c, "Sistem Ada.", L, 292, 2.57, t, { size: 84, color: PAL.accent, alpha: cardOut });
+      c.globalAlpha = cardOut; c.fillStyle = PAL.line; c.fillRect(L, 342, (fw - 116) * clamp(soft(t - 2.75, 0.6)), 2); c.globalAlpha = 1;
       ["Peranan team jelas", "Skrip & SOP closing", "Monitoring 30 hari"].forEach((r, i) => { const t0 = 2.85 + i * 0.13, y = 418 + i * 74;
         check(c, L + 20, y - 13, spring(t - t0, 0.55), cardOut);
         slideChars(c, r, L + 62, y, t0 + 0.06, t, { size: 38, weight: 600, alpha: cardOut }); });
-      slideChars(c, "PERCUMA", L, 688, 3.35, t, { size: 76, color: YELLOW, stagger: 0.03, alpha: cardOut });
+      if (PAL.kwBg) { const kp = soft(t - 3.3, 0.45); c.globalAlpha = cardOut; c.fillStyle = PAL.kwBg; c.font = "800 76px Mont";
+        rrPath(c, L - 14, 688 - 66, (c.measureText("PERCUMA").width + 40) * clamp(kp), 84, 12); c.fill(); c.globalAlpha = 1; }
+      slideChars(c, "PERCUMA", L + (PAL.kwBg ? 6 : 0), 688, 3.35, t, { size: 76, color: PAL.kw, stagger: 0.03, alpha: cardOut });
       dropWords(c, "konsultasi 30 min", L, 736, 3.5, t, { size: 32, weight: 600, color: SUBC, stagger: 0.05, alpha: cardOut });
     }
     c.restore(); cardC.tex.needsUpdate = true; }
@@ -200,21 +220,23 @@ function update(t) {
   const bw = Math.max(0, BW(t)), bh = Math.max(0, BH(t)), bs = BS(t);
   const bz = fl + FT + 10 + BL(t);
   setSlab(btnMesh, bw, bh, bh / 2, BT);
+  { const k = soft(t - 4.15, 0.45); const col = new THREE.Color(PAL.btn).lerp(new THREE.Color(PAL.cta), k);
+    btnMat.color.copy(col); btnMat.emissive.copy(col); btnMat.emissiveIntensity = PAL.glow + (0.55 - PAL.glow) * k; }
   btnMesh.position.set(BX(t), BY(t), bz); btnMesh.scale.set(bs, bs, 1);
   sizePlane(btnC, Math.max(bw, 2), Math.max(bh, 2));
   btnC.m.position.set(BX(t), BY(t), bz + BT + 5 + 0.6); btnC.m.scale.multiply(new THREE.Vector3(bs, bs, 1)); btnC.m.visible = bw > 2;
   { const c = btnC.ctx, cx = bw / 2, cy = bh / 2;
     c.save(); rrPath(c, 0, 0, bw, bh, bh / 2); c.clip();
     const as = clamp(BW(t - 0.1) / 118, 0, 1.2) * (1 - ramp(t, 2.1, 0.12)); // offset 0.1s
-    if (as > 0.01) { c.save(); c.translate(cx, cy); c.scale(as, as); c.strokeStyle = BLACK; c.lineWidth = 7; c.lineCap = c.lineJoin = "round";
+    if (as > 0.01) { c.save(); c.translate(cx, cy); c.scale(as, as); c.strokeStyle = PAL.btnInk; c.lineWidth = 7; c.lineCap = c.lineJoin = "round";
       c.beginPath(); c.moveTo(-8, -17); c.lineTo(10, 0); c.lineTo(-8, 17); c.stroke(); c.restore(); }
     const bt = 1 - ramp(t, 4.12, 0.12);
-    if (t > 2.3 && bt > 0) dropWords(c, "Tempah sekarang", cx, cy + 14, 2.55, t, { size: 40, color: BLACK, center: true, alpha: bt });
+    if (t > 2.3 && bt > 0) dropWords(c, "Tempah sekarang", cx, cy + 14, 2.55, t, { size: 40, color: PAL.btnInk, center: true, alpha: bt });
     if (t > 4.2) {
       const ip = spring(t - 4.42, 0.55), ix = cx - 190 - 30;
       c.save(); c.translate(ix, cy); c.scale(ip, ip); c.fillStyle = BLACK; c.beginPath(); c.arc(0, 0, 34, 0, 7); c.fill();
       c.fillStyle = GREEN; rrPath(c, -17, -14, 34, 24, 8); c.fill(); c.beginPath(); c.moveTo(-10, 8); c.lineTo(-14, 18); c.lineTo(-1, 9); c.fill(); c.restore();
-      dropWords(c, "Konsultasi PERCUMA", ix + 54, cy + 14, 4.36, t, { size: 40, color: BLACK, dir: 1 });
+      dropWords(c, "Konsultasi PERCUMA", ix + 54, cy + 14, 4.36, t, { size: 40, color: PAL.ctaInk, dir: 1 });
     }
     c.restore(); btnC.tex.needsUpdate = true; }
 
@@ -256,7 +278,7 @@ window.renderAt = (t) => {
   }
   o.globalAlpha = 1;
   const v = o.createRadialGradient(W * 0.44, H * 0.48, H * 0.3, W * 0.44, H * 0.5, H * 0.78);
-  v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,0.6)"); o.fillStyle = v; o.fillRect(0, 0, W, H);
+  v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, `rgba(0,0,0,${PAL.vig ?? 0.6})`); o.fillStyle = v; o.fillRect(0, 0, W, H);
   o.globalAlpha = 0.035; o.globalCompositeOperation = "overlay";
   const f = Math.floor(t * 60); o.save(); o.translate(-((f * 73) % 256), -((f * 151) % 256));
   o.fillStyle = o.createPattern(grain, "repeat"); o.fillRect(0, 0, W + 256, H + 256); o.restore();
