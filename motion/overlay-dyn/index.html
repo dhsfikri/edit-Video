@@ -27,7 +27,7 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
       #root { position: relative; width: 100%; height: 100%; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
-      .shadow { filter: drop-shadow(0 4px 14px rgba(0,0,0,.45)); }
+      .shadow { filter: drop-shadow(0 6px 24px rgba(0,0,0,.5)); }
 
       #badge { position: absolute; left: 60px; top: 240px; display: flex; align-items: center; gap: 10px; padding: 8px 18px 8px 14px;
         border-radius: 999px; background: rgba(11,11,11,.55); border: 2px solid rgba(37,211,102,.8); }
@@ -36,11 +36,11 @@
 
       .title { position: absolute; left: 60px; top: 305px; }
       #shade { position: absolute; left: 0; top: 0; width: 1080px; height: 760px; background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.28) 55%, rgba(0,0,0,0)); }
-      .tl { display: block; white-space: nowrap; line-height: 1.05; margin-bottom: 6px; }
+      .tl { display: block; white-space: nowrap; line-height: 1.05; margin-bottom: 4px; }
       .tk { display: inline-block; margin-right: 14px; vertical-align: bottom; }
-      .tk.script { font-family: "Caveat", cursive; font-weight: 700; font-size: 62px; color: #FFD60A; -webkit-text-stroke: 3px #0b0b0b; paint-order: stroke fill; }
-      .tk.bold { font-weight: 800; font-size: 70px; color: #fff; -webkit-text-stroke: 4px #0b0b0b; paint-order: stroke fill; }
-      .tk.box { font-weight: 800; font-size: 80px; color: var(--deep); background: #fff; padding: 0 18px; border-radius: 10px; overflow: hidden; white-space: nowrap; }
+      .tk.script { font-weight: 600; font-size: 28px; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.75); }
+      .tk.bold { font-weight: 800; font-size: 78px; color: #fff; letter-spacing: -.02em; }
+      .tk.box { font-weight: 800; font-size: 84px; color: var(--green); letter-spacing: -.02em; white-space: nowrap; }
 
       .br { position: absolute; width: 58px; height: 58px; border-color: #fff; border-style: solid; border-width: 0; }
       .br.tl0 { border-top-width: 7px; border-left-width: 7px; } .br.tr0 { border-top-width: 7px; border-right-width: 7px; }
@@ -54,15 +54,15 @@
 
       #subs { position: absolute; left: 60px; right: 180px; top: 1300px; height: 90px; }
       .grp { position: absolute; left: 0; right: 0; top: 0; text-align: center; }
-      .sw { display: inline-block; margin: 0 2px; padding: 2px 10px; border-radius: 10px; font-weight: 800; font-size: 56px; color: #fff;
-        text-shadow: 0 3px 10px rgba(0,0,0,.6); -webkit-text-stroke: 2px #0b0b0b; paint-order: stroke fill; }
-      .sw.on { background: var(--green); color: var(--ink); text-shadow: none; -webkit-text-stroke: 0; transform: scale(1.08); }
+      .sw { display: inline-block; margin: 0 2px; padding: 2px 10px; border-radius: 10px; font-weight: 800; font-size: 54px; color: #fff;
+        text-shadow: 0 4px 18px rgba(0,0,0,.7); }
+      .sw.on { color: var(--green); }
 
 
       #prog { position: absolute; left: 60px; top: 222px; width: 840px; height: 8px; border-radius: 4px; background: rgba(255,255,255,.25); overflow: hidden; }
       #prog i { display: block; height: 100%; width: 100%; background: var(--green); transform-origin: left center; }
-      .pop { position: absolute; left: 60px; width: 840px; text-align: center; font-weight: 800; font-size: 104px; line-height: 1.02; color: #FFD60A;
-        -webkit-text-stroke: 4px #0b0b0b; paint-order: stroke fill; text-shadow: 0 8px 24px rgba(0,0,0,.55); letter-spacing: -.01em; white-space: nowrap; }
+      .pop { position: absolute; left: 60px; width: 840px; text-align: center; font-weight: 800; font-size: 120px; line-height: 1.02; color: #fff;
+        text-shadow: 0 10px 40px rgba(0,0,0,.6); letter-spacing: -.03em; white-space: nowrap; }
       .pop em { font-style: normal; -webkit-text-stroke: 0; }
       #cta { position: absolute; left: 60px; right: 180px; top: 1190px; text-align: center; }
       #cta span { display: inline-block; background: #fff; color: var(--deep); font-weight: 800; font-size: 36px; padding: 14px 30px; border-radius: 999px; }
@@ -83,7 +83,7 @@
       put(`<div id="shade"></div>`);
       // Badge siri
       const badge = put(`<div id="badge"><i></i><b>${E.series} <span>#${E.episode}</span></b></div>`);
-      tl.fromTo(badge, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, 0);
+      tl.fromTo(badge, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, immediateRender: false }, E.badgeAt || 0);
       (E.hideBadge || []).forEach(([a, b]) => { tl.set(badge, { opacity: 0 }, a); if (b < D) tl.set(badge, { opacity: 1 }, b); });
 
       // Tajuk kinetik
@@ -94,17 +94,11 @@
           const ln = el(`<span class="tl"></span>`); box.appendChild(ln);
           line.forEach((tok) => {
             const s = el(`<span class="tk ${tok.k}">${tok.text}</span>`); ln.appendChild(s);
-            if (tok.k === "box") {
-              const w = s.getBoundingClientRect().width, n = tok.text.length;
-              tl.set(s, { opacity: 0 }, 0);
-              tl.fromTo(s, { opacity: 1, width: 0, paddingLeft: 0, paddingRight: 0 },
-                { width: w, paddingLeft: 18, paddingRight: 18, duration: Math.min(0.06 * n, 0.4), ease: `steps(${n})` }, tok.t);
-            } else {
-              tl.fromTo(s, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, tok.t);
-            }
+            tl.set(s, { opacity: 0 }, 0);
+            tl.fromTo(s, { opacity: 0, scale: 1.08, filter: "blur(16px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.52, ease: "power3.out", immediateRender: false }, tok.t);
           });
         });
-        if (g.end < D) tl.to(box, { opacity: 0, y: -20, duration: 0.15 }, g.end - 0.15);
+        if (g.end < D) tl.to(box, { opacity: 0, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, g.end - 0.3);
       });
 
       // Bracket fokus
@@ -137,6 +131,7 @@
 
       // Subtitle karaoke
       const subs = put(`<div id="subs"></div>`);
+      (E.hideSubs || []).forEach(([a, b]) => { tl.set(subs, { opacity: 0 }, a); if (b < D) tl.set(subs, { opacity: 1 }, b); });
       const groups = []; let cur = [];
       E.words.forEach((w, i) => {
         const prev = E.words[i - 1];
@@ -171,9 +166,8 @@
         // satu baris sahaja: kecilkan font kalau lebar > 840 (safe zone)
         const sw = n.scrollWidth; if (sw > 840) n.style.fontSize = Math.floor(104 * 840 / sw) + "px";
         tl.set(n, { opacity: 0 }, 0);
-        tl.fromTo(n, { opacity: 0, scale: 0.3, rotation: -6 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.2, ease: "back.out(3)" }, p.t);
-        tl.to(n, { rotation: 2, duration: 0.06, yoyo: true, repeat: 3 }, p.t + 0.2);
-        tl.to(n, { opacity: 0, scale: 1.15, duration: 0.12 }, p.end - 0.12);
+        tl.fromTo(n, { opacity: 0, scale: 1.08, filter: "blur(16px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.52, ease: "power3.out", immediateRender: false }, p.t);
+        tl.to(n, { opacity: 0, filter: "blur(12px)", duration: 0.3, ease: "power2.in" }, p.end - 0.3);
       });
       // CTA
       if (E.cta) {

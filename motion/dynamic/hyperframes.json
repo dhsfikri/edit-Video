@@ -8,5 +8,17 @@
   },
   "media": {
     "autoProxy": true
-  }
+  },
+  "registryItems": [
+    {
+      "name": "focus-blur-resolve",
+      "type": "hyperframes:component",
+      "target": "compositions/components/focus-blur-resolve.html"
+    },
+    {
+      "name": "zoom-through-transition",
+      "type": "hyperframes:component",
+      "target": "compositions/components/zoom-through-transition.html"
+    }
+  ]
 }

@@ -6,6 +6,20 @@
       "sourceType": "github",
       "skillPath": "skills/find-skills/SKILL.md",
       "computedHash": "7bc223e2aafbdbf6e50ea243ba6ef67fe432bb069ab439fea0390795dac0bf7f"
+    },
+    "hyperframes": {
+      "source": "heygen-com/hyperframes",
+      "commit": "78648113dbdac0f5daae75fed820509860267b41",
+      "sourceType": "github",
+      "skillPath": "skills/hyperframes/SKILL.md",
+      "computedHash": "6077cf87701bc6b45cb4ea5604deb368d934f9b418e477a90682a5f04b065cca"
+    },
+    "hyperframes-registry": {
+      "source": "heygen-com/hyperframes",
+      "commit": "78648113dbdac0f5daae75fed820509860267b41",
+      "sourceType": "github",
+      "skillPath": "skills/hyperframes-registry/SKILL.md",
+      "computedHash": "68c90542d8e4df21600949ef61da72fb7ab0c8c22cde3bfdc250e92fcc1d3696"
     }
   }
 }

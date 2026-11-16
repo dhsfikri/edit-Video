@@ -6,91 +6,68 @@ window.EDIT = {
  "progress": true,
  "hideBadge": [
   [
+   0,
+   2.85
+  ],
+  [
    10.88,
-   11.75
+   12.5
   ]
  ],
  "titles": [
   {
-   "start": 0,
-   "end": 2.62,
-   "lines": [
-    [
-     {
-      "t": 0.1,
-      "text": "buat dia teringat…",
-      "k": "script"
-     }
-    ],
-    [
-     {
-      "t": 0.3,
-      "text": "KAMPUNG",
-      "k": "bold"
-     }
-    ],
-    [
-     {
-      "t": 0.5,
-      "text": "TIME RAYA 🌙",
-      "k": "box"
-     }
-    ]
-   ]
-  },
-  {
-   "start": 2.75,
+   "start": 2.9,
    "end": 10.88,
    "lines": [
     [
      {
-      "t": 2.8,
+      "t": 2.95,
       "text": "nak orang",
       "k": "script"
      }
     ],
     [
      {
-      "t": 3.0,
+      "t": 3.1,
       "text": "PERCAYA",
       "k": "box"
      }
     ],
     [
      {
-      "t": 3.3,
+      "t": 3.4,
       "text": "&amp; terus",
-      "k": "script"
+      "k": "bold"
      },
      {
-      "t": 3.45,
-      "text": "BELI? 🛒",
+      "t": 3.55,
+      "text": "BELI?",
       "k": "bold"
      }
     ]
    ]
   },
   {
-   "start": 11.75,
+   "start": 12.5,
    "end": 13.75,
    "lines": [
     [
      {
-      "t": 11.8,
+      "t": 12.55,
       "text": "tip 1/2",
       "k": "script"
      }
     ],
     [
      {
-      "t": 11.9,
+      "t": 12.55,
       "text": "JANGAN",
       "k": "bold"
      }
     ],
     [
      {
-      "t": 12.05,
+      "t": 12.55,
       "text": "TUNJUK PANDAI",
       "k": "box"
      }
@@ -102,12 +79,12 @@ window.EDIT = {
   {
    "t": 6.93,
    "end": 8.85,
-   "text": "BELI 🛒"
+   "text": "Beli."
   },
   {
    "t": 9.22,
    "end": 10.85,
-   "text": "RAHSIA 🤫"
+   "text": "Rahsia."
   }
  ],
  "callouts": [],
@@ -347,5 +324,16 @@ window.EDIT = {
    "s": 16.36,
    "e": 17.26
   }
- ]
+ ],
+ "hideSubs": [
+  [
+   0,
+   2.7
+  ],
+  [
+   10.88,
+   12.5
+  ]
+ ],
+ "badgeAt": 2.9
 };
