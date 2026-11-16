@@ -21,6 +21,8 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 ## Editor & tools
 - **Claude yang edit** (bukan CapCut). FFmpeg (`pipeline/`) + HyperFrames (`motion/`) untuk tajuk, subtitle, B-roll, iklan; faster-whisper untuk transcribe.
 - Rakaman diterima melalui upload chat atau folder Google Drive Sir.
+- Pakej Python: `pip install -r pipeline/requirements.txt` (faster-whisper, yt-dlp — yt-dlp untuk muat turun video rujukan).
+- Skill tambahan (disalin dalam `.claude/skills/`, rekod dalam `skills-lock.json`): `heygen-com/hyperframes` (9 skill: hyperframes, registry, media-use, reverse-any-video, dll.) + `CloudAI-X/threejs-skills` (13 skill three.js untuk elemen 3D) + `greensock/gsap-skills` (8 skill GSAP rasmi: core, timeline, plugins, dll.) + `LottieFiles/motion-design-skill` (`motion-design`: timing, easing, choreography). + `Leonxlnx/cinetic` (filem motion premium dari code: arah, bina, skor, render, semak). + `jakubkrehel/skills@better-typography` (skala, jarak, ciri font, tanda baca). + `vercel-labs/skills@find-skills` (cari & install skill baru dari skills.sh). + `mattpocock/skills@grill-me` + `grilling` (soal siasat plan/brief pusingan demi pusingan; taip `/grill-me`). Kemas kini: `npx skills update -p`.
 - Hantar **draf** dulu untuk semakan, final hanya selepas approval.
 - Export: 1080x1920, fps ikut rakaman (30/50), H.264 ~15–20 Mbps, AAC, `+faststart` (`pipeline/compose.py`).
 
@@ -38,7 +40,7 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
   - `01 Intro` (1LAPSkDfYMTDljeh9k2dsTFtIVBeSuwwD) · `02 B-Roll` (1DI7CBy7abVmU4Kj0brD94chd5jXwTDDI)
   - `03 Outro` (19Zucgqv_279GQ27CzY7muqMQ3-tZElWy) · `04 Iklan 2s` (1ZFuMen20VBMqrRmI5WncmWC9TgFwLM9r)
 - Baca/senarai fail: Google Drive connector. **Download** fail besar: `https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t` (folder perlu "Anyone with the link").
-- **Upload** video ke Drive melalui connector TIDAK praktikal (kandungan mesti dihantar inline). Hantar fail kepada Sir (zip), Sir upload ke folder yang betul.
+- **Upload** ke Drive melalui connector: boleh guna rujukan fail (`sha256:<hash>:<laluan>`), tapi had **~3 MB setiap fail** (had permintaan 4.2 MB). Fail lebih besar (video draf/final): hantar kepada Sir, Sir upload ke folder yang betul. Folder output: `Folder Video/Edited/<projek>`.
 - Sumber asal semua aset (template HyperFrames) ada dalam repo `motion/` — boleh render semula bila-bila.
 
 ## Rujukan

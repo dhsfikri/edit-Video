@@ -1,0 +1,8 @@
+{
+  "name": "apple-morph-test",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "three": "0.186.0"
+  }
+}

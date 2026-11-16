@@ -1,0 +1,411 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--
+  Sampel gaya Apple versi CINEMATIC + 3D (three.js).
+  Rujukan gerak: Bart_VFX (morph, bounce, offset 0.1s, teks per perkataan, 60fps + motion blur).
+  Rujukan rupa: skill cinetic (lighting.md §1/§7, camera.md §8/§9/§13):
+    - satu cahaya kunci dari atas kiri; bayang jatuh ke bawah kanan, jarak ikut ketinggian (lift)
+    - bayang kontak rapat; tepi bevel menangkap cahaya (rim); cahaya hidup bergerak perlahan
+    - kamera sebenar: perspektif kanta panjang, depth of field, satu gerakan bertujuan setiap shot, mendarat
+    - objek naik bila bergerak, turun bila ditekan (bayang mengecil) → rasa fizikal
+    - bloom sebesar butang; tiada lantunan pada teks
+  Render: PAGE=cinematic.html node render.mjs <out.mp4> 60 6
+-->
+<style>
+  @font-face { font-family: "Mont"; font-weight: 600; src: url(montserrat-latin-600-normal.woff2); }
+  @font-face { font-family: "Mont"; font-weight: 800; src: url(montserrat-latin-800-normal.woff2); }
+  html, body { margin: 0; background: #000; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./node_modules/three/build/three.module.js", "three/addons/": "./node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<canvas id="out" width="1080" height="1920"></canvas>
+<script type="module">
+import * as THREE from "three";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { BokehPass } from "three/addons/postprocessing/BokehPass.js";
+import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+import { RectAreaLightUniformsLib } from "three/addons/lights/RectAreaLightUniformsLib.js";
+import { Reflector } from "three/addons/objects/Reflector.js";
+
+const W = 1080, H = 1920;
+const GREEN = "#25D366", YELLOW = "#FFD60A", BLACK = "#0B0B0B";
+// ---------------- PALET (?pal=v1|A|B|C) ----------------
+// v1 = brand kit asal (hijau banyak). A/B/C = cadangan kontra: hijau hanya untuk CTA akhir & ikon chat.
+const PALS = {
+  v1: { bg: 0x050706, wall: 0x3a463f, card: 0x101311, ink: "#F4F4F2", sub: "rgba(255,255,255,0.6)", line: "rgba(255,255,255,0.1)",
+        kicker: GREEN, accent: GREEN, chk: GREEN, chkInk: BLACK, btn: 0x25d366, btnInk: BLACK, cta: 0x25d366, ctaInk: BLACK,
+        kw: YELLOW, kwBg: null, rim: 0x25d366, rimI: 1.1, hemi: [0xdfe9e2, 0x0b0f0c, 0.25], key: 5.5e6, glow: 0.55 },
+  A: { bg: 0x050505, wall: 0x2e2e30, card: 0xf3f3f0, ink: "#0B0B0B", sub: "rgba(0,0,0,0.55)", line: "rgba(0,0,0,0.12)",
+        kicker: "#0B0B0B", accent: "#0B0B0B", chk: BLACK, chkInk: "#FFFFFF", btn: 0x0b0b0b, btnInk: "#FFFFFF", cta: 0x25d366, ctaInk: BLACK,
+        kw: BLACK, kwBg: YELLOW, rim: 0xffffff, rimI: 0.5, hemi: [0xffffff, 0x0b0b0b, 0.25], key: 5.0e6, glow: 0.25 },
+  B: { bg: 0xd9d9d7, wall: 0xe9e9e7, card: 0xffffff, ink: "#0B0B0B", sub: "rgba(0,0,0,0.5)", line: "rgba(0,0,0,0.1)",
+        kicker: "#0B0B0B", accent: "#0B0B0B", chk: BLACK, chkInk: "#FFFFFF", btn: 0x0b0b0b, btnInk: "#FFFFFF", cta: 0x25d366, ctaInk: BLACK,
+        kw: BLACK, kwBg: YELLOW, rim: 0xffffff, rimI: 0.25, hemi: [0xffffff, 0x9a9a98, 0.6], key: 2.6e6, glow: 0.2, vig: 0.22 },
+  C: { bg: 0x030303, wall: 0x1e1e20, card: 0x101011, ink: "#F4F4F2", sub: "rgba(255,255,255,0.6)", line: "rgba(255,255,255,0.12)",
+        kicker: YELLOW, accent: YELLOW, chk: YELLOW, chkInk: BLACK, btn: 0xffd60a, btnInk: BLACK, cta: 0x25d366, ctaInk: BLACK,
+        kw: "#F4F4F2", kwBg: null, rim: 0xfff2c4, rimI: 0.6, hemi: [0xffffff, 0x0b0b0b, 0.22], key: 5.5e6, glow: 0.3 },
+  // D = latar hijau gradient + tekstur digital (grid titik + garis halus), elemen kontra di atas
+  D1: { bg: 0x02140a, wall: 0xffffff, wallTex: true, card: 0xf3f3f0, ink: "#0B0B0B", sub: "rgba(0,0,0,0.55)", line: "rgba(0,0,0,0.12)",
+        kicker: "#0B0B0B", accent: "#0B0B0B", chk: BLACK, chkInk: "#FFFFFF", btn: 0x0b0b0b, btnInk: "#FFFFFF", cta: 0x0b0b0b, ctaInk: "#FFFFFF", icBg: "#FFFFFF", icFg: GREEN,
+        kw: BLACK, kwBg: YELLOW, rim: 0xffffff, rimI: 0.5, hemi: [0xffffff, 0x06200f, 0.3], key: 4.6e6, glow: 0.12, vig: 0.5 },
+  D2: { bg: 0x02140a, wall: 0xffffff, wallTex: true, card: 0x0d0f0e, ink: "#F4F4F2", sub: "rgba(255,255,255,0.6)", line: "rgba(255,255,255,0.12)",
+        kicker: YELLOW, accent: YELLOW, chk: YELLOW, chkInk: BLACK, btn: 0xffd60a, btnInk: BLACK, cta: 0xffd60a, ctaInk: BLACK, icBg: BLACK, icFg: YELLOW,
+        kw: "#F4F4F2", kwBg: null, rim: 0xffffff, rimI: 0.5, hemi: [0xffffff, 0x06200f, 0.3], key: 4.6e6, glow: 0.3, vig: 0.5 },
+};
+const PAL = PALS[new URLSearchParams(location.search).get("pal") || "v1"];
+const INK = PAL.ink, SUBC = PAL.sub;
+const GX = -60; // tengah safe zone (x 480 pada skrin) dalam koordinat dunia (1 unit = 1 px pada satah UI)
+
+// ---------------- spring & sifat berkunci ----------------
+function spring(dt, D = 0.7, zeta = 0.62) {
+  if (dt <= 0) return 0; const u = dt / D; if (u >= 2) return 1;
+  const w = 9, zw = zeta * w, wd = w * Math.sqrt(1 - zeta * zeta);
+  return 1 - Math.exp(-zw * u) * (Math.cos(wd * u) + (zw / wd) * Math.sin(wd * u));
+}
+const soft = (dt, D = 0.5) => spring(dt, D, 0.97);        // tanpa lajak: teks, kamera, cahaya
+const prop = (v0, keys, fn = spring) => (t) => { let v = v0, p = v0; for (const [tk, vk, D] of keys) { v += (vk - p) * fn(t - tk, D); p = vk; } return v; };
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ramp = (t, t0, d) => clamp((t - t0) / d);
+
+// ---------------- TIMELINE (sama cerita dengan sampel rata) ----------------
+const FW = prop(0, [[0.2, 150, 0.6], [1.0, 740, 0.75], [2.1, 760, 0.8], [4.15, 600, 0.7]]);
+const FH = prop(0, [[0.2, 150, 0.6], [2.1, 950, 0.85], [4.15, 120, 0.6]]);
+const BX = prop(0, [[1.0, 295, 0.75], [2.1, 0, 0.8]]);
+const BY = prop(0, [[2.12, -360, 0.6], [4.15, 0, 0.75]]);
+const BW = prop(0, [[0.28, 118, 0.6], [2.12, 664, 0.75], [4.15, 620, 0.7]]);
+const BH = prop(0, [[0.28, 118, 0.6], [4.15, 132, 0.7]]);
+const BS = prop(1, [[1.95, 0.9, 0.22], [2.08, 1, 0.5], [3.95, 0.92, 0.22], [4.08, 1, 0.5]]);
+// ketinggian dari dinding (z): naik bila bergerak, turun bila ditekan → bayang berubah
+const FL = prop(0, [[0.2, 70, 0.7], [1.0, 100, 0.4], [1.5, 70, 0.6], [2.1, 130, 0.5], [2.9, 90, 0.8], [4.15, 50, 0.6]]);
+const BL = prop(0, [[0.28, 30, 0.6], [1.0, 48, 0.4], [1.5, 30, 0.6], [1.92, 6, 0.18], [2.08, 34, 0.5], [3.92, 8, 0.18], [4.08, 40, 0.5]]);
+const ROLL = prop(0, [[2.1, -1.4, 0.5], [2.45, 0, 0.9], [4.15, 1.2, 0.5], [4.5, 0, 0.9]]);
+// kamera: dolly masuk (buka) → orbit 3D sekali masa kad muncul (mendarat menghadap) → push ke butang akhir
+const CZOOM = prop(0.94, [[0.0, 1.06, 1.6], [3.95, 1.24, 1.1]], soft);
+const CYAW = prop(9, [[0.0, 0, 1.6], [2.1, -13, 0.7], [2.75, 0, 1.0]], soft);
+const CPITCH = prop(-4, [[0.0, 0, 1.6], [2.1, 5, 0.7], [2.75, 0, 1.0]], soft);
+const CTY = prop(0, [[3.95, 0, 1.0]], soft);
+
+// ---------------- THREE ----------------
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.VSMShadowMap;
+renderer.toneMapping = THREE.NeutralToneMapping; renderer.toneMappingExposure = 1.0;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(PAL.bg);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.12;
+
+const FOV = 28, DIST = (H / 2) / Math.tan(THREE.MathUtils.degToRad(FOV / 2)); // satah z=0 ≈ 1 px per unit
+const camera = new THREE.PerspectiveCamera(FOV, W / H, 50, DIST * 3);
+camera.setViewOffset(W, H, 60, 0, W, H);
+
+// dinding latar (menerima bayang), warna dalam hue tanah brand
+const wall = new THREE.Mesh(new THREE.PlaneGeometry(9000, 12000),
+  new THREE.MeshStandardMaterial({ color: PAL.wall, roughness: 0.95, metalness: 0 }));
+wall.receiveShadow = true; scene.add(wall);
+if (PAL.wallTex) {
+  const tw = 1800, th = 2400, cv = document.createElement("canvas"); cv.width = tw; cv.height = th; const g = cv.getContext("2d");
+  // gradient hijau: gelap di bawah kanan → hijau brand lebih cerah di atas kiri (ikut arah cahaya kunci)
+  const lg = g.createLinearGradient(tw * 0.15, th * 0.1, tw * 0.85, th * 0.95);
+  lg.addColorStop(0, "#1fa85a"); lg.addColorStop(0.45, "#0d6a35"); lg.addColorStop(1, "#03230f");
+  g.fillStyle = lg; g.fillRect(0, 0, tw, th);
+  const rg = g.createRadialGradient(tw * 0.42, th * 0.42, 50, tw * 0.42, th * 0.42, tw * 0.75);
+  rg.addColorStop(0, "rgba(120,255,170,0.18)"); rg.addColorStop(1, "rgba(0,0,0,0)"); g.fillStyle = rg; g.fillRect(0, 0, tw, th);
+  // garis grid halus setiap 120px
+  g.strokeStyle = "rgba(200,255,220,0.07)"; g.lineWidth = 1.5;
+  for (let x = 0; x <= tw; x += 120) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, th); g.stroke(); }
+  for (let y = 0; y <= th; y += 120) { g.beginPath(); g.moveTo(0, y); g.lineTo(tw, y); g.stroke(); }
+  // grid titik (dot-matrix) setiap 24px, lebih terang dekat tengah
+  for (let y = 12; y < th; y += 24) for (let x = 12; x < tw; x += 24) {
+    const d = Math.hypot(x / tw - 0.42, y / th - 0.42); const a = 0.05 + 0.13 * Math.max(0, 1 - d * 1.6);
+    g.fillStyle = `rgba(210,255,225,${a.toFixed(3)})`; g.fillRect(x - 1.5, y - 1.5, 3, 3); }
+  // piksel "digital" rawak (deterministik)
+  let r = 77; const rnd = () => ((r = (r * 1664525 + 1013904223) >>> 0) / 4294967296);
+  for (let i = 0; i < 140; i++) { const x = Math.floor(rnd() * tw / 24) * 24, y = Math.floor(rnd() * th / 24) * 24;
+    g.fillStyle = `rgba(210,255,225,${(0.06 + rnd() * 0.12).toFixed(3)})`; g.fillRect(x, y, 24 * (1 + Math.floor(rnd() * 3)), 24); }
+  const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+  wall.geometry = new THREE.PlaneGeometry(tw * 2.2, th * 2.2);
+  wall.material.map = tex; wall.material.emissiveMap = tex; wall.material.emissive = new THREE.Color(0xffffff); wall.material.emissiveIntensity = 0.35;
+  wall.material.needsUpdate = true;
+}
+
+// cahaya kunci: spot dari atas kiri (azimuth 315, elevation ~34°) → kolam cahaya + bayang lembut
+const key = new THREE.SpotLight(0xfff6ea, PAL.key, 0, 0.62, 0.85, 2);
+key.position.set(-1500, 1700, 2600); key.target.position.set(GX, 0, 0);
+key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 14; key.shadow.blurSamples = 20;
+key.shadow.bias = -0.0004; key.shadow.camera.near = 1500; key.shadow.camera.far = 9000;
+scene.add(key, key.target);
+// cahaya kontak: hampir dari depan, bayang pendek & tajam rapat dengan objek
+const contact = new THREE.DirectionalLight(0xffffff, 0.5);
+contact.position.set(GX - 120, 260, 3000); contact.target.position.set(GX, 0, 0);
+contact.castShadow = true; contact.shadow.mapSize.set(1024, 1024); contact.shadow.radius = 4; contact.shadow.blurSamples = 12;
+Object.assign(contact.shadow.camera, { left: -1200, right: 1200, top: 1400, bottom: -1400, near: 1000, far: 5000 });
+contact.shadow.bias = -0.0003;
+scene.add(contact, contact.target);
+// cahaya rim hijau dari bawah kanan belakang (aksen spektral, satu warna)
+const rim = new THREE.DirectionalLight(PAL.rim, PAL.rimI); rim.position.set(900, -1400, 600); scene.add(rim);
+scene.add(new THREE.HemisphereLight(...PAL.hemi));
+
+// ================= DUNIA "STUDIO" (?world=studio) =================
+// Ikut cinetic lighting.md §8: latar ialah TEMPAT dengan cahaya kunci, bukan gradient di belakang kad.
+// Dinding LED gergasi jauh di belakang (tekstur digital, defocus dibakar sekali = depth of field kamera),
+// lantai berkilat yang memantul cahaya LED & menerima bayang, kabus atmosfera, sinar cahaya, rim hijau dari LED.
+const WORLD = new URLSearchParams(location.search).get("world");
+let worldUpdate = () => {};
+if (WORLD === "studio") {
+  wall.visible = false;
+  const FLOOR_Y = -600, LED_Z = -2700;
+  // --- tekstur LED: gradient hijau + grid piksel + panel data, kemudian dikaburkan (defocus dibakar) ---
+  function ledCanvas(w, h, draw, blurPx) {
+    const a = document.createElement("canvas"); a.width = w; a.height = h; draw(a.getContext("2d"), w, h);
+    if (!blurPx) return a;
+    const b = document.createElement("canvas"); b.width = w; b.height = h; const g = b.getContext("2d");
+    g.filter = `blur(${blurPx}px)`; g.drawImage(a, 0, 0); g.filter = "none";
+    // dither halus supaya gradient tidak berjalur
+    const id = g.getImageData(0, 0, w, h); let r = 5;
+    for (let i = 0; i < id.data.length; i += 4) { r = (r * 1664525 + 1013904223) >>> 0; const n = ((r >>> 24) / 255 - 0.5) * 3; id.data[i] += n; id.data[i + 1] += n; id.data[i + 2] += n; }
+    g.putImageData(id, 0, 0); return b;
+  }
+  const rnd = (() => { let r = 31; return () => ((r = (r * 1664525 + 1013904223) >>> 0) / 4294967296); })();
+  const base = ledCanvas(1200, 1600, (g, w, h) => {
+    const lg = g.createLinearGradient(w * 0.1, 0, w * 0.9, h);
+    lg.addColorStop(0, "#2be27a"); lg.addColorStop(0.35, "#11994a"); lg.addColorStop(0.75, "#05461f"); lg.addColorStop(1, "#021a0b");
+    g.fillStyle = lg; g.fillRect(0, 0, w, h);
+    const rg = g.createRadialGradient(w * 0.35, h * 0.3, 20, w * 0.35, h * 0.3, w * 0.8);
+    rg.addColorStop(0, "rgba(170,255,200,0.35)"); rg.addColorStop(1, "rgba(0,0,0,0)"); g.fillStyle = rg; g.fillRect(0, 0, w, h);
+    // panel LED: jahitan gelap antara modul
+    g.fillStyle = "rgba(0,0,0,0.35)"; for (let x = 0; x < w; x += 150) g.fillRect(x, 0, 3, h); for (let y = 0; y < h; y += 150) g.fillRect(0, y, w, 3);
+    // grid piksel
+    for (let y = 4; y < h; y += 10) for (let x = 4; x < w; x += 10) { g.fillStyle = `rgba(210,255,225,${0.05 + rnd() * 0.07})`; g.fillRect(x, y, 3, 3); }
+    // blok data / UI digital
+    for (let i = 0; i < 90; i++) { const x = Math.floor(rnd() * w / 30) * 30, y = Math.floor(rnd() * h / 30) * 30;
+      g.fillStyle = `rgba(200,255,220,${0.08 + rnd() * 0.22})`; g.fillRect(x, y, 30 * (1 + Math.floor(rnd() * 5)), 10 + Math.floor(rnd() * 3) * 10); }
+  }, 7);
+  const ledTex = new THREE.CanvasTexture(base); ledTex.colorSpace = THREE.SRGBColorSpace;
+  const led = new THREE.Mesh(new THREE.PlaneGeometry(6200, 8300), new THREE.MeshBasicMaterial({ map: ledTex, color: 0xb8c8bd }));
+  led.position.set(GX, 900, LED_Z); scene.add(led);
+  // lapisan aliran data (bergerak perlahan ke atas = cahaya hidup), dikaburkan juga
+  const flow = ledCanvas(1200, 600, (g, w, h) => {
+    g.clearRect(0, 0, w, h);
+    // panel "dashboard" lembut: kad, bar & titik, tersusun mendatar
+    for (let i = 0; i < 16; i++) { const x = rnd() * w, y = rnd() * h, cw = 120 + rnd() * 200, ch = 60 + rnd() * 90;
+      g.fillStyle = `rgba(220,255,230,${0.05 + rnd() * 0.08})`; g.beginPath(); g.roundRect(x, y, cw, ch, 14); g.fill();
+      for (let k = 0; k < 4; k++) { g.fillStyle = `rgba(230,255,235,${0.12 + rnd() * 0.18})`; g.fillRect(x + 14, y + 14 + k * 14, (cw - 28) * (0.3 + rnd() * 0.7), 6); } }
+  }, 6);
+  const flowTex = new THREE.CanvasTexture(flow); flowTex.colorSpace = THREE.SRGBColorSpace; flowTex.wrapS = flowTex.wrapT = THREE.RepeatWrapping; flowTex.repeat.set(2, 3);
+  const flowMesh = new THREE.Mesh(new THREE.PlaneGeometry(6200, 8300), new THREE.MeshBasicMaterial({ map: flowTex, transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending, depthWrite: false }));
+  flowMesh.position.set(GX, 900, LED_Z + 5); scene.add(flowMesh);
+  // --- lantai berkilat: memantul cahaya LED (environment), menerima bayang ---
+  const mirror = new Reflector(new THREE.PlaneGeometry(9000, 9000), { textureWidth: 540, textureHeight: 960, color: 0x777777 });
+  mirror.rotation.x = -Math.PI / 2; mirror.position.set(GX, FLOOR_Y - 1, LED_Z + 4500); scene.add(mirror);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000),
+    new THREE.MeshStandardMaterial({ color: 0x040605, roughness: 0.6, metalness: 0.0, transparent: true, opacity: 0.84 }));
+  floor.rotation.x = -Math.PI / 2; floor.position.set(GX, FLOOR_Y, LED_Z + 4500); floor.receiveShadow = true; scene.add(floor);
+  // environment dari dinding LED → pantulan hijau real pada lantai, bevel kad & butang
+  const envScene = new THREE.Scene(); envScene.background = new THREE.Color(0x010302);
+  const envLed = new THREE.Mesh(new THREE.PlaneGeometry(40, 30), new THREE.MeshBasicMaterial({ map: ledTex })); envLed.position.set(0, 4, -14); envScene.add(envLed);
+  const envTop = new THREE.Mesh(new THREE.PlaneGeometry(12, 6), new THREE.MeshBasicMaterial({ color: 0xfff3e6 })); envTop.position.set(-8, 14, 4); envTop.lookAt(0, 0, 0); envScene.add(envTop);
+  scene.environment = pmrem.fromScene(envScene, 0.02).texture; scene.environmentIntensity = 0.35;
+  // --- cahaya dari dinding LED (kawasan segi empat hijau) → rim di tepi belakang & cahaya di lantai ---
+  RectAreaLightUniformsLib.init();
+  const ledLight = new THREE.RectAreaLight(0x3cf08a, 1.3, 5200, 2600); ledLight.position.set(GX, 300, LED_Z + 200); ledLight.lookAt(GX, 0, 0); scene.add(ledLight);
+  // --- kabus atmosfera: yang jauh menjadi lembut & berwarna udara ---
+  scene.fog = new THREE.Fog(0x07170d, 4200, 9800);
+  scene.background = new THREE.Color(0x07170d);
+  // --- sinar cahaya dari atas kiri (volumetrik palsu, additive, sangat lembut) ---
+  const beamCv = document.createElement("canvas"); beamCv.width = 64; beamCv.height = 512; { const g = beamCv.getContext("2d");
+    const lg = g.createLinearGradient(0, 0, 0, 512); lg.addColorStop(0, "rgba(255,248,235,0.9)"); lg.addColorStop(1, "rgba(255,248,235,0)"); g.fillStyle = lg; g.fillRect(0, 0, 64, 512);
+    const sg = g.createLinearGradient(0, 0, 64, 0); sg.addColorStop(0, "rgba(0,0,0,1)"); sg.addColorStop(0.5, "rgba(0,0,0,0)"); sg.addColorStop(1, "rgba(0,0,0,1)");
+    g.globalCompositeOperation = "destination-out"; g.fillStyle = sg; g.fillRect(0, 0, 64, 512); }
+  const beamTex = new THREE.CanvasTexture(beamCv);
+  const beams = [[-900, 0.32, 900, 0.07], [-450, 0.26, 600, 0.05], [-1250, 0.4, 700, 0.045]].map(([x, rz, w, op]) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, 5200), new THREE.MeshBasicMaterial({ map: beamTex, transparent: true, opacity: op, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
+    m.position.set(GX + x, 1400, -900); m.rotation.z = rz; scene.add(m); return { m, op, rz }; });
+  key.color.set(0xfff4e8); key.intensity = PAL.key * 0.95;
+  rim.intensity = 0; // rim kini datang dari dinding LED
+  worldUpdate = (t) => {
+    flowTex.offset.x = t * 0.018; // panel digital mengalir perlahan (mendatar)
+    led.material.color.setScalar(0.72 + 0.04 * Math.sin(t * 1.1)); // dinding LED "bernafas"
+    beams.forEach((b, i) => { b.m.material.opacity = b.op * (0.85 + 0.15 * Math.sin(t * 0.7 + i * 2)); b.m.rotation.z = b.rz + 0.01 * Math.sin(t * 0.3 + i); });
+  };
+}
+
+// kumpulan UI
+const group = new THREE.Group(); group.position.set(GX, 0, 0); scene.add(group);
+const frameMat = new THREE.MeshPhysicalMaterial({ color: PAL.card, roughness: 0.7, metalness: 0.0, clearcoat: 0.25, clearcoatRoughness: 0.4 });
+const btnMat = new THREE.MeshPhysicalMaterial({ color: PAL.btn, roughness: 0.45, clearcoat: 0.4, clearcoatRoughness: 0.25, emissive: PAL.btn, emissiveIntensity: PAL.glow });
+const frameMesh = new THREE.Mesh(new THREE.BufferGeometry(), frameMat); frameMesh.castShadow = frameMesh.receiveShadow = true; group.add(frameMesh);
+const btnMesh = new THREE.Mesh(new THREE.BufferGeometry(), btnMat); btnMesh.castShadow = true; btnMesh.receiveShadow = true; group.add(btnMesh);
+const FT = 18, BT = 16; // ketebalan kad & butang
+
+function roundRect(w, h, r) {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2; r = Math.max(0.5, Math.min(r, w / 2, h / 2));
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r); s.lineTo(x + w, y + h - r);
+  s.quadraticCurveTo(x + w, y + h, x + w - r, y + h); s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y); return s;
+}
+function setSlab(mesh, w, h, r, depth) {
+  mesh.geometry.dispose();
+  if (w < 2 || h < 2) { mesh.visible = false; mesh.geometry = new THREE.BufferGeometry(); return; }
+  mesh.visible = true;
+  const bev = Math.min(5, w / 6, h / 6);
+  mesh.geometry = new THREE.ExtrudeGeometry(roundRect(w - bev * 2, h - bev * 2, Math.max(0.5, r - bev)),
+    { depth, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelSegments: 3, curveSegments: 14 });
+}
+
+// satah kandungan (teks dilukis pada canvas → tekstur, tidak menerima cahaya supaya tajam)
+const RES = 1.6;
+function contentPlane() {
+  const cv = document.createElement("canvas"); const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: tex, transparent: true, toneMapped: false, depthWrite: false }));
+  m.renderOrder = 2; group.add(m); return { cv, ctx: cv.getContext("2d"), tex, m };
+}
+const cardC = contentPlane(), btnC = contentPlane();
+function sizePlane(P, w, h) {
+  const cw = Math.max(2, Math.ceil(w * RES)), ch = Math.max(2, Math.ceil(h * RES));
+  if (P.cv.width !== cw || P.cv.height !== ch) { P.cv.width = cw; P.cv.height = ch; P.tex.dispose(); P.tex = new THREE.CanvasTexture(P.cv); P.tex.colorSpace = THREE.SRGBColorSpace; P.tex.anisotropy = 8; P.m.material.map = P.tex; P.m.material.needsUpdate = true; }
+  P.ctx.setTransform(RES, 0, 0, RES, 0, 0); P.ctx.clearRect(0, 0, w, h);
+  P.m.scale.set(w, h, 1);
+}
+function rrPath(c, x, y, w, h, r) { r = Math.max(0, Math.min(r, h / 2, w / 2)); c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+
+// teks: tanpa lajak (cinetic: tiada spring pada copy)
+function dropWords(c, text, x, y, t0, t, { size = 40, weight = 800, color = INK, stagger = 0.06, dir = -1, alpha = 1, center = false } = {}) {
+  c.font = `${weight} ${size}px Mont`; const ws = text.split(" "), sp = c.measureText(" ").width;
+  const total = ws.reduce((a, w) => a + c.measureText(w).width, 0) + sp * (ws.length - 1);
+  let cx = center ? x - total / 2 : x;
+  ws.forEach((w, i) => { const tw = t0 + i * stagger, p = soft(t - tw, 0.5), a = ramp(t, tw, 0.22) * alpha;
+    if (a > 0) { c.globalAlpha = a; c.fillStyle = color; c.fillText(w, cx, y + dir * size * 0.9 * (1 - p)); c.globalAlpha = 1; }
+    cx += c.measureText(w).width + sp; });
+}
+function slideChars(c, text, x, y, t0, t, { size = 40, weight = 800, color = INK, stagger = 0.018, alpha = 1 } = {}) {
+  c.font = `${weight} ${size}px Mont`; let cx = x;
+  for (let i = 0; i < text.length; i++) { const tw = t0 + i * stagger, p = soft(t - tw, 0.5), a = ramp(t, tw, 0.2) * alpha;
+    if (a > 0) { c.globalAlpha = a; c.fillStyle = color; c.fillText(text[i], cx + 60 * (1 - p), y); c.globalAlpha = 1; }
+    cx += c.measureText(text[i]).width; }
+}
+function check(c, x, y, p, alpha) {
+  if (p <= 0) return; c.globalAlpha = alpha;
+  c.fillStyle = PAL.chk; c.beginPath(); c.arc(x, y, 20 * clamp(p, 0, 1.2), 0, 7); c.fill();
+  const d = clamp((p - 0.3) / 0.7);
+  if (d > 0) { c.strokeStyle = PAL.chkInk; c.lineWidth = 5; c.lineCap = c.lineJoin = "round"; c.beginPath(); c.moveTo(x - 9, y + 1);
+    if (d < 0.4) c.lineTo(x - 9 + 6 * d / 0.4, y + 1 + 6 * d / 0.4); else { c.lineTo(x - 3, y + 7); c.lineTo(x - 3 + 13 * (d - 0.4) / 0.6, y + 7 - 15 * (d - 0.4) / 0.6); } c.stroke(); }
+  c.globalAlpha = 1;
+}
+
+function update(t) {
+  // ---- kad / pill ----
+  const fw = Math.max(0, FW(t)), fh = Math.max(0, FH(t));
+  const cardP = clamp((fh - 150) / 800), fr = Math.min(fh / 2, 72 + (1 - cardP) * 500);
+  const fl = FL(t);
+  setSlab(frameMesh, fw, fh, fr, FT);
+  frameMesh.position.z = fl; frameMesh.visible = fw > 2 && t < 4.75;
+  const top = fl + FT + 5 + 0.6;
+  // kandungan kad
+  sizePlane(cardC, Math.max(fw, 2), Math.max(fh, 2));
+  cardC.m.position.set(0, 0, top); cardC.m.visible = frameMesh.visible;
+  { const c = cardC.ctx; c.save(); rrPath(c, 0, 0, fw, fh, fr); c.clip();
+    const pillOut = 1 - ramp(t, 2.1, 0.14);
+    if (t > 1.1 && pillOut > 0) dropWords(c, "Staf Ada, Sistem Belum?", 52, fh / 2 + 15, 1.12, t, { size: 40, alpha: pillOut });
+    const cardOut = 1 - ramp(t, 4.12, 0.18);
+    if (t > 2.2 && cardOut > 0) {
+      const L = 58;
+      dropWords(c, "SETUP TEAM SALES A–Z", L, 96, 2.35, t, { size: 30, color: PAL.kicker, stagger: 0.04, alpha: cardOut });
+      dropWords(c, "Staf Ada,", L, 200, 2.45, t, { size: 84, alpha: cardOut });
+      dropWords(c, "Sistem Ada.", L, 292, 2.57, t, { size: 84, color: PAL.accent, alpha: cardOut });
+      c.globalAlpha = cardOut; c.fillStyle = PAL.line; c.fillRect(L, 342, (fw - 116) * clamp(soft(t - 2.75, 0.6)), 2); c.globalAlpha = 1;
+      ["Peranan team jelas", "Skrip & SOP closing", "Monitoring 30 hari"].forEach((r, i) => { const t0 = 2.85 + i * 0.13, y = 418 + i * 74;
+        check(c, L + 20, y - 13, spring(t - t0, 0.55), cardOut);
+        slideChars(c, r, L + 62, y, t0 + 0.06, t, { size: 38, weight: 600, alpha: cardOut }); });
+      if (PAL.kwBg) { const kp = soft(t - 3.3, 0.45); c.globalAlpha = cardOut; c.fillStyle = PAL.kwBg; c.font = "800 76px Mont";
+        rrPath(c, L - 14, 688 - 66, (c.measureText("PERCUMA").width + 40) * clamp(kp), 84, 12); c.fill(); c.globalAlpha = 1; }
+      slideChars(c, "PERCUMA", L + (PAL.kwBg ? 6 : 0), 688, 3.35, t, { size: 76, color: PAL.kw, stagger: 0.03, alpha: cardOut });
+      dropWords(c, "konsultasi 30 min", L, 736, 3.5, t, { size: 32, weight: 600, color: SUBC, stagger: 0.05, alpha: cardOut });
+    }
+    c.restore(); cardC.tex.needsUpdate = true; }
+
+  // ---- butang ----
+  const bw = Math.max(0, BW(t)), bh = Math.max(0, BH(t)), bs = BS(t);
+  const bz = fl + FT + 10 + BL(t);
+  setSlab(btnMesh, bw, bh, bh / 2, BT);
+  { const k = soft(t - 4.15, 0.45); const col = new THREE.Color(PAL.btn).lerp(new THREE.Color(PAL.cta), k);
+    btnMat.color.copy(col); btnMat.emissive.copy(col); btnMat.emissiveIntensity = PAL.glow + (0.55 - PAL.glow) * k; }
+  btnMesh.position.set(BX(t), BY(t), bz); btnMesh.scale.set(bs, bs, 1);
+  sizePlane(btnC, Math.max(bw, 2), Math.max(bh, 2));
+  btnC.m.position.set(BX(t), BY(t), bz + BT + 5 + 0.6); btnC.m.scale.multiply(new THREE.Vector3(bs, bs, 1)); btnC.m.visible = bw > 2;
+  { const c = btnC.ctx, cx = bw / 2, cy = bh / 2;
+    c.save(); rrPath(c, 0, 0, bw, bh, bh / 2); c.clip();
+    const as = clamp(BW(t - 0.1) / 118, 0, 1.2) * (1 - ramp(t, 2.1, 0.12)); // offset 0.1s
+    if (as > 0.01) { c.save(); c.translate(cx, cy); c.scale(as, as); c.strokeStyle = PAL.btnInk; c.lineWidth = 7; c.lineCap = c.lineJoin = "round";
+      c.beginPath(); c.moveTo(-8, -17); c.lineTo(10, 0); c.lineTo(-8, 17); c.stroke(); c.restore(); }
+    const bt = 1 - ramp(t, 4.12, 0.12);
+    if (t > 2.3 && bt > 0) dropWords(c, "Tempah sekarang", cx, cy + 14, 2.55, t, { size: 40, color: PAL.btnInk, center: true, alpha: bt });
+    if (t > 4.2) {
+      const ip = spring(t - 4.42, 0.55), ix = cx - 190 - 30;
+      c.save(); c.translate(ix, cy); c.scale(ip, ip); c.fillStyle = PAL.icBg || BLACK; c.beginPath(); c.arc(0, 0, 34, 0, 7); c.fill();
+      c.fillStyle = PAL.icFg || GREEN; rrPath(c, -17, -14, 34, 24, 8); c.fill(); c.beginPath(); c.moveTo(-10, 8); c.lineTo(-14, 18); c.lineTo(-1, 9); c.fill(); c.restore();
+      dropWords(c, "Konsultasi PERCUMA", ix + 54, cy + 14, 4.36, t, { size: 40, color: PAL.ctaInk, dir: 1 });
+    }
+    c.restore(); btnC.tex.needsUpdate = true; }
+
+  group.rotation.z = THREE.MathUtils.degToRad(ROLL(t));
+
+  // ---- cahaya hidup: kolam cahaya kunci bergerak perlahan (cahaya, bukan objek) ----
+  worldUpdate(t);
+  key.position.x = -1500 + 140 * Math.sin(t * 0.35); key.position.y = 1700 + 90 * Math.sin(t * 0.27 + 1);
+
+  // ---- kamera ----
+  const z = CZOOM(t), yaw = THREE.MathUtils.degToRad(CYAW(t)), pitch = THREE.MathUtils.degToRad(CPITCH(t) + (WORLD === "studio" ? 4 : 0));
+  const tgt = new THREE.Vector3(GX, CTY(t), 40);
+  const d = DIST / z;
+  camera.position.set(tgt.x + d * Math.sin(yaw) * Math.cos(pitch), tgt.y + d * Math.sin(pitch), tgt.z + d * Math.cos(yaw) * Math.cos(pitch));
+  camera.lookAt(tgt);
+  bokeh.focus.value = camera.position.distanceTo(new THREE.Vector3(GX, 0, fl + FT));
+}
+
+// ---------------- pasca-proses: DOF + bloom sebesar butang ----------------
+const composer = new EffectComposer(renderer);
+composer.setPixelRatio(1); composer.setSize(W, H);
+composer.addPass(new RenderPass(scene, camera));
+const bokehPass = new BokehPass(scene, camera, { focus: DIST, aperture: 0.00009, maxblur: 0.006 });
+const bokeh = bokehPass.uniforms; if (!new URLSearchParams(location.search).has('nobokeh')) composer.addPass(bokehPass);
+composer.addPass(new UnrealBloomPass(new THREE.Vector2(W / 2, H / 2), 0.28, 0.5, 1.0));
+composer.addPass(new OutputPass());
+
+// ---------------- komposit akhir: motion blur, vignette, grain ----------------
+const out = document.getElementById("out"), o = out.getContext("2d");
+const grain = document.createElement("canvas"); grain.width = grain.height = 256;
+{ const gx = grain.getContext("2d"), id = gx.createImageData(256, 256); let r = 9;
+  for (let i = 0; i < id.data.length; i += 4) { r = (r * 1664525 + 1013904223) >>> 0; const v = (r / 4294967296) * 255; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 255; }
+  gx.putImageData(id, 0, 0); }
+const SUB = Number(new URLSearchParams(location.search).get("sub") || 3), SHUTTER = 0.5 / 60;
+window.renderAt = (t) => {
+  for (let i = 0; i < SUB; i++) {
+    const ts = SUB > 1 ? t + (i / (SUB - 1) - 0.5) * SHUTTER : t;
+    update(ts); composer.render();
+    o.globalAlpha = 1 / (i + 1); o.drawImage(renderer.domElement, 0, 0);
+  }
+  o.globalAlpha = 1;
+  const v = o.createRadialGradient(W * 0.44, H * 0.48, H * 0.3, W * 0.44, H * 0.5, H * 0.78);
+  v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, `rgba(0,0,0,${PAL.vig ?? 0.6})`); o.fillStyle = v; o.fillRect(0, 0, W, H);
+  o.globalAlpha = 0.035; o.globalCompositeOperation = "overlay";
+  const f = Math.floor(t * 60); o.save(); o.translate(-((f * 73) % 256), -((f * 151) % 256));
+  o.fillStyle = o.createPattern(grain, "repeat"); o.fillRect(0, 0, W + 256, H + 256); o.restore();
+  o.globalAlpha = 1; o.globalCompositeOperation = "source-over";
+  return out.toDataURL("image/jpeg", 0.95);
+};
+await document.fonts.load("800 40px Mont"); await document.fonts.load("600 40px Mont");
+window.ready = true;
+</script>
+</body>
+</html>

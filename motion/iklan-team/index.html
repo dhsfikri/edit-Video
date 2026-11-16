@@ -1,0 +1,618 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--
+  Iklan 15s: Setup & Monitor Team Sales (company servis)
+  Brief: briefs/2026-11-16_IKLAN_setup-monitor-team-sales.md (v4)
+  Render: node render.mjs <out.mp4> 30 15   ·   still: node render.mjs <prefix> 30 15 1.5,4.2
+  Gaya gerakan: PREMIUM (skill motion-design) — 350–600ms, ease-out tanpa overshoot,
+  3 lapisan: utama (telefon/teks) · sokongan (bayang, kad) · latar (cahaya, partikel, grain).
+-->
+<style>
+  @font-face { font-family: "Mont"; font-weight: 600; src: url(montserrat-latin-600-normal.woff2); }
+  @font-face { font-family: "Mont"; font-weight: 800; src: url(montserrat-latin-800-normal.woff2); }
+  @font-face { font-family: "Caveat"; font-weight: 700; src: url(caveat-latin-700-normal.woff2); }
+  html, body { margin: 0; background: #0B0B0B; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "./node_modules/three/build/three.module.js",
+  "three/addons/": "./node_modules/three/examples/jsm/",
+  "gsap": "./node_modules/gsap/index.js"
+} }
+</script>
+</head>
+<body>
+<canvas id="out" width="1080" height="1920"></canvas>
+<script type="module">
+import * as THREE from "three";
+import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { gsap } from "gsap";
+
+const W = 1080, H = 1920, DUR = 15;
+const C = { green: "#25D366", dgreen: "#0B3D2E", black: "#0B0B0B", white: "#FFFFFF", yellow: "#FFD60A", red: "#FF5A5A" };
+const SAFE_L = 72, SAFE_CX = 480, PX_PER_UNIT = 128; // kamera z 28, fov 30 → 15 unit = 1920px
+
+// ============ STATE (semua dianimasi oleh GSAP, dibaca oleh fungsi lukis) ============
+const st = {
+  // telefon (unit dunia)
+  ph: { x: 0, y: -9, z: 0, rx: 0.5, ry: -1.1, rz: 0.15, s: 1.0 },
+  dim: 0,            // gelapkan telefon (staging)
+  sheen: -1,         // sapuan cahaya pada skrin (-1 → 2)
+  // teks atas
+  kicker: 0, h1: { 0: 0, 1: 0, 2: 0, 3: 0 }, h1out: 0,
+  h2: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }, h2out: 0,
+  badge: 0, chk: { 0: 0, 1: 0, 2: 0 }, chkDim: { 0: 0, 1: 0, 2: 0 }, listOut: 0,
+  // skrin
+  msg: { 0: 0, 1: 0, 2: 0 }, unread: 0, notif: { 0: 0, 1: 0, 2: 0, 3: 0 }, notifOut: 0,
+  sheet: 0, roles: { 0: 0, 1: 0, 2: 0, 3: 0 },
+  chatDim: 0, pin: 0, sysPin: 0, doc: 0, report: 0, bars: 0, scroll: 0, calm: 0,
+  // CTA
+  cta: 0, ctaLines: { 0: 0, 1: 0, 2: 0, 3: 0 }, slots: 0, pulse: 0,
+  fadeOut: 0,
+};
+
+// ============ TIMELINE (GSAP, di-seek ikut masa → deterministik) ============
+const E_IN = "power3.out", E_OUT = "power2.in", E_MOVE = "power2.inOut";
+const tl = gsap.timeline({ paused: true });
+
+// --- S1 HOOK 0–3s ---
+tl.to(st.ph, { y: -0.7, rx: -0.04, ry: 0.14, rz: 0, duration: 1.3, ease: "expo.out" }, 0.05)
+  .to(st, { kicker: 1, duration: 0.5, ease: E_IN }, 0.15)
+  .to(st.h1, { 0: 1, duration: 0.55, ease: E_IN }, 0.3)
+  .to(st.h1, { 1: 1, duration: 0.55, ease: E_IN }, 0.38)
+  .to(st.h1, { 2: 1, duration: 0.6, ease: E_IN }, 0.62)
+  .to(st.h1, { 3: 1, duration: 0.6, ease: E_IN }, 0.72)
+  .to(st.msg, { 0: 1, duration: 0.45, ease: E_IN }, 1.0)
+  .to(st.msg, { 1: 1, duration: 0.45, ease: E_IN }, 1.55)
+  .to(st.msg, { 2: 1, duration: 0.45, ease: E_IN }, 2.1);
+
+// --- S2 MASALAH 3–5.5s ---
+tl.to(st, { h1out: 1, duration: 0.35, ease: E_OUT }, 2.85)
+  .to(st.h2, { 0: 1, duration: 0.55, ease: E_IN }, 3.15)
+  .to(st.h2, { 1: 1, duration: 0.55, ease: E_IN }, 3.22)
+  .to(st.h2, { 2: 1, duration: 0.55, ease: E_IN }, 3.42)
+  .to(st.h2, { 3: 1, duration: 0.55, ease: E_IN }, 3.49)
+  .to(st.h2, { 4: 1, duration: 0.55, ease: E_IN }, 3.56)
+  .to(st.h2, { 5: 1, duration: 0.55, ease: E_IN }, 3.63)
+  .to(st, { dim: 0.45, duration: 0.5, ease: E_MOVE }, 3.0)
+  .to(st.ph, { z: -1.4, y: -0.95, ry: -0.08, duration: 2.4, ease: E_MOVE }, 3.0)
+  .to(st.notif, { 0: 1, duration: 0.5, ease: E_IN }, 3.15)
+  .to(st.notif, { 1: 1, duration: 0.5, ease: E_IN }, 3.6)
+  .to(st.notif, { 2: 1, duration: 0.5, ease: E_IN }, 4.05)
+  .to(st.notif, { 3: 1, duration: 0.5, ease: E_IN }, 4.5)
+  .to(st, { unread: 27, duration: 2.0, ease: "power1.inOut" }, 3.15);
+
+// --- S3 SOLUSI 1: susun peranan 5.5–7.5s ---
+tl.to(st, { h2out: 1, notifOut: 1, duration: 0.35, ease: E_OUT }, 5.3)
+  .to(st, { dim: 0, duration: 0.5, ease: E_MOVE }, 5.4)
+  .to(st.ph, { z: 0, y: -0.7, ry: 0.1, duration: 0.9, ease: E_MOVE }, 5.35)
+  .to(st, { sheen: 2, duration: 0.9, ease: "power1.inOut" }, 5.55)
+  .to(st, { badge: 1, duration: 0.55, ease: E_IN }, 5.55)
+  .to(st.chk, { 0: 1, duration: 0.55, ease: E_IN }, 5.8)
+  .to(st, { sheet: 1, unread: 0, duration: 0.6, ease: E_IN }, 5.7)
+  .to(st.roles, { 0: 1, duration: 0.45, ease: E_IN }, 6.05)
+  .to(st.roles, { 1: 1, duration: 0.45, ease: E_IN }, 6.2)
+  .to(st.roles, { 2: 1, duration: 0.45, ease: E_IN }, 6.35)
+  .to(st.roles, { 3: 1, duration: 0.45, ease: E_IN }, 6.5);
+
+// --- S4 SOLUSI 2: SOP 7.5–9.5s ---
+tl.to(st, { sheet: 0, duration: 0.4, ease: E_OUT }, 7.35)
+  .to(st.chkDim, { 0: 1, duration: 0.4, ease: E_MOVE }, 7.55)
+  .to(st.chk, { 1: 1, duration: 0.55, ease: E_IN }, 7.6)
+  .to(st, { chatDim: 1, duration: 0.4, ease: E_MOVE }, 7.5)
+  .to(st, { sysPin: 1, duration: 0.4, ease: E_IN }, 7.75)
+  .to(st, { doc: 1, duration: 0.55, ease: E_IN }, 7.95)
+  .to(st, { pin: 1, duration: 0.45, ease: E_IN }, 8.35)
+  .to(st.ph, { ry: -0.08, rx: 0.02, duration: 2.0, ease: E_MOVE }, 7.5);
+
+// --- S5 SOLUSI 3: monitoring 9.5–11.5s ---
+tl.to(st.chkDim, { 1: 1, duration: 0.4, ease: E_MOVE }, 9.55)
+  .to(st.chk, { 2: 1, duration: 0.55, ease: E_IN }, 9.6)
+  .to(st, { scroll: 1, duration: 0.6, ease: E_MOVE }, 9.5)
+  .to(st, { report: 1, duration: 0.6, ease: E_IN }, 9.75)
+  .to(st, { bars: 1, duration: 1.1, ease: "power2.out" }, 10.05)
+  .to(st.ph, { ry: 0.12, rx: -0.03, duration: 2.0, ease: E_MOVE }, 9.5);
+
+// --- S6 CTA 11.5–14.5s ---
+tl.to(st, { listOut: 1, duration: 0.4, ease: E_OUT }, 11.3)
+  .to(st.ph, { y: 2.25, z: -3.6, ry: -0.18, rx: 0.06, duration: 1.0, ease: E_MOVE }, 11.35)
+  .to(st, { calm: 1, duration: 0.8, ease: E_MOVE }, 11.5)
+  .to(st, { cta: 1, duration: 0.6, ease: E_IN }, 11.75)
+  .to(st.ctaLines, { 0: 1, duration: 0.55, ease: E_IN }, 11.9)
+  .to(st.ctaLines, { 1: 1, duration: 0.55, ease: E_IN }, 12.0)
+  .to(st.ctaLines, { 2: 1, duration: 0.55, ease: E_IN }, 12.3)
+  .to(st, { slots: 1, duration: 0.6, ease: E_IN }, 12.45)
+  .to(st.ctaLines, { 3: 1, duration: 0.55, ease: E_IN }, 12.7)
+  .to(st, { pulse: 3, duration: 1.8, ease: "none" }, 12.9);
+
+// --- S7 LOOP 14.5–15s ---
+tl.to(st, { fadeOut: 1, duration: 0.5, ease: "power1.in" }, 14.5);
+tl.set({}, {}, DUR);
+
+// ============ WEBGL: iPhone 3D ============
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H, false);
+renderer.setClearColor(0x000000, 0);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.6;
+const camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 100);
+camera.position.set(0, 0, 28);
+const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(4, 6, 8); scene.add(key);
+const rim = new THREE.DirectionalLight(0x25d366, 3.2); rim.position.set(-6, 2, -4); scene.add(rim);
+
+const PW = 3.4, PH = 7.02, PD = 0.3, CORNER = 0.56;
+const phone = new THREE.Group();
+const titanium = new THREE.MeshStandardMaterial({ color: 0x8c8a86, metalness: 1, roughness: 0.32 });
+phone.add(new THREE.Mesh(new RoundedBoxGeometry(PW, PH, PD, 8, CORNER), titanium));
+const glass = new THREE.Mesh(new RoundedBoxGeometry(PW - 0.07, PH - 0.07, 0.02, 6, CORNER - 0.04),
+  new THREE.MeshPhysicalMaterial({ color: 0x050505, roughness: 0.08, clearcoat: 1, clearcoatRoughness: 0.05 }));
+glass.position.z = PD / 2 + 0.002; phone.add(glass);
+const btn = (x, y, h) => { const b = new THREE.Mesh(new RoundedBoxGeometry(0.06, h, 0.16, 3, 0.03), titanium); b.position.set(x, y, 0); phone.add(b); };
+btn(-PW / 2 - 0.02, 2.15, 0.32); btn(-PW / 2 - 0.02, 1.45, 0.62); btn(-PW / 2 - 0.02, 0.7, 0.62); btn(PW / 2 + 0.02, 1.15, 0.95);
+
+const SCR_W = 460, SCR_H = 992;
+const scr = document.createElement("canvas"); scr.width = SCR_W * 2; scr.height = SCR_H * 2; // 2x untuk ketajaman
+const sc = scr.getContext("2d"); sc.scale(2, 2);
+const screenTex = new THREE.CanvasTexture(scr);
+screenTex.colorSpace = THREE.SRGBColorSpace; screenTex.anisotropy = 8;
+const SW = PW - 0.26, SH = PH - 0.26;
+const screenGeo = new RoundedBoxGeometry(SW, SH, 0.01, 6, CORNER - 0.13);
+{ const p = screenGeo.attributes.position, uv = screenGeo.attributes.uv;
+  for (let i = 0; i < p.count; i++) uv.setXY(i, p.getX(i) / SW + 0.5, p.getY(i) / SH + 0.5); }
+const screenMat = new THREE.MeshBasicMaterial({ map: screenTex, toneMapped: false, color: 0xffffff });
+const screenMesh = new THREE.Mesh(screenGeo, screenMat);
+screenMesh.position.z = PD / 2 + 0.014; phone.add(screenMesh);
+scene.add(phone);
+
+// ============ UTILITI LUKIS ============
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+function rr(c, x, y, w, h, r) { r = Math.min(r, h / 2, w / 2); c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function wrap(c, text, maxW) { const ws = text.split(" "), out = []; let l = ""; for (const w of ws) { const t = l ? l + " " + w : w; if (c.measureText(t).width > maxW && l) { out.push(l); l = w; } else l = t; } if (l) out.push(l); return out; }
+// RNG deterministik
+function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+
+// ============ SKRIN TELEFON ============
+const NAMES = { Aina: "#C2185B", Mira: "#E67E22", Danish: "#3F51B5", Hafiz: "#128C7E" };
+const MSGS = [
+  { who: "Aina", text: "Lead ni siapa pegang?", time: "10:02" },
+  { who: "Mira", text: "Saya ingat Hafiz dah reply", time: "10:03" },
+  { who: "Danish", text: "Quotation yang mana satu?", time: "10:03" },
+];
+const ROLES = [["Aina", "Follow up leads"], ["Hafiz", "Closer"], ["Mira", "Quotation"], ["Danish", "After sales"]];
+
+function statusBar(c) {
+  c.fillStyle = "#000"; rr(c, SCR_W / 2 - 62, 14, 124, 36, 18); c.fill();
+  c.fillStyle = "#1b1f2a"; c.beginPath(); c.arc(SCR_W / 2 + 40, 32, 8, 0, 7); c.fill();
+  c.fillStyle = "#FFF"; c.font = "800 24px Mont"; c.fillText("10:04", 40, 42);
+  const sx = SCR_W - 136; for (let i = 0; i < 4; i++) { const h = 6 + i * 4; rr(c, sx + i * 8, 42 - h, 5.5, h, 1.5); c.fill(); }
+  c.strokeStyle = "#FFF"; c.lineWidth = 3.4; c.lineCap = "round";
+  for (let i = 0; i < 3; i++) { c.beginPath(); c.arc(SCR_W - 86, 44, 5 + i * 6, Math.PI * 1.25, Math.PI * 1.75); c.stroke(); }
+  c.lineWidth = 2; c.strokeStyle = "rgba(255,255,255,0.55)"; rr(c, SCR_W - 66, 26, 38, 18, 5); c.stroke();
+  c.fillStyle = "#FFF"; rr(c, SCR_W - 63, 29, 26, 12, 3); c.fill();
+}
+
+function groupAvatar(c, x, y, r) {
+  c.fillStyle = C.green; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill();
+  c.fillStyle = C.black;
+  [[-0.38, 0.05, 0.2], [0.38, 0.05, 0.2], [0, -0.08, 0.25]].forEach(([dx, dy, rs]) => {
+    c.beginPath(); c.arc(x + dx * r, y + dy * r - rs * r * 0.9, rs * r * 0.75, 0, 7); c.fill();
+    c.beginPath(); c.ellipse(x + dx * r, y + dy * r + rs * r * 1.25, rs * r * 1.25, rs * r * 0.9, 0, Math.PI, 0); c.fill();
+  });
+}
+
+function header(c) {
+  c.fillStyle = C.black; c.fillRect(0, 0, SCR_W, 175);
+  statusBar(c);
+  c.fillStyle = "#FFF"; c.font = "600 40px Mont"; c.fillText("‹", 16, 137);
+  // kiraan chat belum dibalas (S2)
+  const u = Math.round(st.unread);
+  if (st.unread > 0.5) {
+    c.font = "800 18px Mont"; const tw = c.measureText(String(u)).width;
+    c.fillStyle = C.red; rr(c, 36, 108, tw + 18, 26, 13); c.fill();
+    c.fillStyle = "#FFF"; c.fillText(String(u), 45, 128);
+  }
+  const ax = st.unread > 0.5 ? 108 : 84;
+  groupAvatar(c, ax, 124, 29);
+  c.fillStyle = "#FFF"; c.font = "800 29px Mont"; c.fillText("Team Sales", ax + 44, 118);
+  c.fillStyle = "rgba(255,255,255,0.6)"; c.font = "600 18px Mont";
+  c.fillText(st.calm > 0.5 ? "4 ahli · semua aktif" : "Aina, Hafiz, Mira, Danish", ax + 44, 146);
+}
+
+function chatBg(c) {
+  c.fillStyle = "#EFE7DE"; c.fillRect(0, 175, SCR_W, SCR_H - 175);
+  c.fillStyle = "rgba(0,0,0,0.035)";
+  for (let y = 200; y < SCR_H; y += 56) for (let x = (y / 56) % 2 ? 18 : 46; x < SCR_W; x += 56) { c.beginPath(); c.arc(x, y, 2.6, 0, 7); c.fill(); }
+}
+
+function bubbleIn(c, m, y, p) {
+  if (p <= 0) return 0;
+  c.font = "600 26px Mont";
+  const lines = wrap(c, m.text, 300), lh = 34, pad = 18;
+  const tw = Math.max(c.measureText(m.who).width, ...lines.map((l) => c.measureText(l).width));
+  const bw = tw + pad * 2 + 10, bh = 30 + lines.length * lh + 30, x = 22;
+  c.save(); c.globalAlpha = p;
+  c.translate(0, (1 - p) * 18);
+  c.shadowColor = "rgba(0,0,0,0.10)"; c.shadowBlur = 6; c.shadowOffsetY = 2;
+  c.fillStyle = "#FFF"; rr(c, x, y, bw, bh, 20); c.fill(); c.shadowColor = "transparent";
+  c.fillStyle = NAMES[m.who]; c.font = "800 21px Mont"; c.fillText(m.who, x + pad, y + 28);
+  c.fillStyle = "#111B21"; c.font = "600 26px Mont"; lines.forEach((l, i) => c.fillText(l, x + pad, y + 30 + 26 + i * lh));
+  c.fillStyle = "#667781"; c.font = "600 17px Mont"; c.fillText(m.time, x + bw - pad - 44, y + bh - 12);
+  c.restore();
+  return bh;
+}
+
+function docBubble(c, y, p) {
+  if (p <= 0) return 0;
+  const bw = 330, bh = 178, x = SCR_W - 22 - bw;
+  c.save(); c.globalAlpha = p; c.translate(0, (1 - p) * 18);
+  c.shadowColor = "rgba(0,0,0,0.10)"; c.shadowBlur = 6; c.shadowOffsetY = 2;
+  c.fillStyle = "#D9FDD3"; rr(c, x, y, bw, bh, 20); c.fill(); c.shadowColor = "transparent";
+  c.fillStyle = "rgba(0,0,0,0.06)"; rr(c, x + 10, y + 10, bw - 20, 112, 14); c.fill();
+  // ikon dokumen
+  c.fillStyle = C.dgreen; rr(c, x + 24, y + 26, 54, 70, 8); c.fill();
+  c.fillStyle = C.green; for (let i = 0; i < 4; i++) rr(c, x + 34, y + 42 + i * 12, i === 3 ? 22 : 34, 5, 2.5), c.fill();
+  c.fillStyle = "#111B21"; c.font = "800 22px Mont"; c.fillText("SOP & Skrip", x + 94, y + 52); c.fillText("Closing WhatsApp", x + 94, y + 78);
+  c.fillStyle = "#667781"; c.font = "600 17px Mont"; c.fillText("PDF · 12 halaman", x + 94, y + 104);
+  c.fillStyle = "#111B21"; c.font = "600 21px Mont"; c.fillText("Wajib ikut mulai hari ni", x + 20, y + 152);
+  c.fillStyle = "#53BDEB"; c.font = "600 17px Mont"; c.fillText("✓✓", x + bw - 40, y + bh - 12);
+  c.restore();
+  return bh;
+}
+
+function sysPill(c, y, p, text) {
+  if (p <= 0) return 0;
+  c.save(); c.globalAlpha = p; c.font = "600 18px Mont";
+  const tw = c.measureText(text).width;
+  c.fillStyle = "rgba(255,255,255,0.92)"; rr(c, SCR_W / 2 - tw / 2 - 16, y, tw + 32, 34, 17); c.fill();
+  c.fillStyle = "#54656F"; c.fillText(text, SCR_W / 2 - tw / 2, y + 23);
+  c.restore();
+  return 34;
+}
+
+function reportCard(c, y, p) {
+  if (p <= 0) return 0;
+  const x = 22, bw = SCR_W - 44, bh = 336;
+  c.save(); c.globalAlpha = p; c.translate(0, (1 - p) * 24);
+  c.shadowColor = "rgba(0,0,0,0.14)"; c.shadowBlur = 10; c.shadowOffsetY = 3;
+  c.fillStyle = "#FFF"; rr(c, x, y, bw, bh, 22); c.fill(); c.shadowColor = "transparent";
+  c.fillStyle = C.dgreen; rr(c, x, y, bw, 62, 22); c.fill(); c.fillRect(x, y + 40, bw, 22);
+  c.fillStyle = "#FFF"; c.font = "800 22px Mont"; c.fillText("Laporan Mingguan", x + 18, y + 39);
+  c.fillStyle = C.green; c.font = "800 18px Mont"; c.fillText("Minggu 1/4", x + bw - 118, y + 38);
+  // lajur
+  const cols = ["Quote", "Temujanji", "Closing"], cx = [x + 186, x + 262, x + 352];
+  c.fillStyle = "#667781"; c.font = "600 15px Mont";
+  cols.forEach((t, i) => { const w = c.measureText(t).width; c.fillText(t, cx[i] - w / 2, y + 90); });
+  const data = [["Aina", 18, 9, 4], ["Hafiz", 12, 8, 5], ["Mira", 21, 7, 3], ["Danish", 9, 5, 2]];
+  const b = st.bars;
+  data.forEach((row, r) => {
+    const ry = y + 112 + r * 52;
+    c.fillStyle = r % 2 ? "#FFF" : "#F5F7F6"; c.fillRect(x + 8, ry - 4, bw - 16, 48);
+    c.fillStyle = NAMES[row[0]]; c.beginPath(); c.arc(x + 32, ry + 20, 14, 0, 7); c.fill();
+    c.fillStyle = "#FFF"; c.font = "800 13px Mont"; const ini = row[0][0]; c.fillText(ini, x + 32 - c.measureText(ini).width / 2, ry + 25);
+    c.fillStyle = "#111B21"; c.font = "800 19px Mont"; c.fillText(row[0], x + 54, ry + 27);
+    for (let k = 0; k < 3; k++) {
+      const v = Math.round(row[k + 1] * clamp(b * 1.15 - r * 0.05));
+      c.fillStyle = k === 2 ? "#0F9D58" : "#111B21"; c.font = "800 21px Mont";
+      const s = String(v), w = c.measureText(s).width; c.fillText(s, cx[k] - w / 2, ry + 28);
+    }
+  });
+  // bar ringkas jumlah closing
+  const tot = clamp(b) * 14;
+  c.fillStyle = "#667781"; c.font = "600 15px Mont"; c.fillText("Jumlah closing minggu ni", x + 18, y + bh - 20);
+  c.fillStyle = "#0F9D58"; c.font = "800 19px Mont"; c.fillText(String(Math.round(tot)), x + bw - 44, y + bh - 19);
+  c.restore();
+  return bh;
+}
+
+function rolesSheet(c, p) {
+  if (p <= 0) return;
+  c.save();
+  c.fillStyle = `rgba(0,0,0,${0.35 * p})`; c.fillRect(0, 175, SCR_W, SCR_H);
+  const sh = 560, y0 = SCR_H - sh * p + (1 - p) * 40;
+  c.shadowColor = "rgba(0,0,0,0.25)"; c.shadowBlur = 24;
+  c.fillStyle = "#FFF"; rr(c, 0, y0, SCR_W, sh + 40, 30); c.fill(); c.shadowColor = "transparent";
+  c.fillStyle = "#D0D4D6"; rr(c, SCR_W / 2 - 30, y0 + 12, 60, 6, 3); c.fill();
+  c.fillStyle = "#111B21"; c.font = "800 27px Mont"; c.fillText("Peranan Team", 28, y0 + 64);
+  c.fillStyle = "#667781"; c.font = "600 18px Mont"; c.fillText("Setiap lead ada tuan", 28, y0 + 92);
+  ROLES.forEach(([n, role], i) => {
+    const rp = st.roles[i], y = y0 + 128 + i * 96;
+    c.fillStyle = "#F0F2F5"; c.fillRect(28, y + 82, SCR_W - 56, 1);
+    c.fillStyle = NAMES[n]; c.beginPath(); c.arc(58, y + 40, 28, 0, 7); c.fill();
+    c.fillStyle = "#FFF"; c.font = "800 22px Mont"; c.fillText(n[0], 58 - c.measureText(n[0]).width / 2, y + 48);
+    c.fillStyle = "#111B21"; c.font = "800 24px Mont"; c.fillText(n, 100, y + 48);
+    if (rp > 0) {
+      c.save(); c.globalAlpha = rp; c.font = "800 18px Mont";
+      const tw = c.measureText(role).width, tx = SCR_W - 34 - tw - 30;
+      c.translate((1 - rp) * 24, 0);
+      c.fillStyle = "rgba(37,211,102,0.16)"; rr(c, tx, y + 22, tw + 30, 38, 19); c.fill();
+      c.fillStyle = "#0B7A3B"; c.fillText(role, tx + 15, y + 47);
+      c.restore();
+    }
+  });
+  c.restore();
+}
+
+function drawScreen() {
+  const c = sc;
+  c.save();
+  chatBg(c);
+  // kandungan chat (boleh skrol)
+  const scrollPx = st.scroll * 470;
+  c.save(); c.beginPath(); c.rect(0, 175, SCR_W, SCR_H); c.clip();
+  c.translate(0, -scrollPx);
+  let y = 200 + (st.pin > 0 ? 58 * st.pin : 0);
+  c.globalAlpha = 1 - 0.35 * st.chatDim;
+  sysPill(c, y, 1, "Hari ini"); y += 52;
+  MSGS.forEach((m, i) => { const h = bubbleIn(c, m, y, st.msg[i]); if (h) y += h + 12; });
+  c.globalAlpha = 1;
+  y += 8;
+  if (sysPill(c, y, st.sysPin, "Admin menyematkan mesej")) y += 52;
+  const dh = docBubble(c, y, st.doc); if (dh) y += dh + 16;
+  reportCard(c, y, st.report);
+  c.restore();
+  // bar mesej disematkan
+  if (st.pin > 0) {
+    c.save(); c.globalAlpha = st.pin;
+    c.fillStyle = "rgba(255,255,255,0.97)"; c.fillRect(0, 175, SCR_W, 58 * st.pin);
+    c.fillStyle = C.green; c.fillRect(0, 175, 5, 58 * st.pin);
+    c.fillStyle = "#111B21"; c.font = "800 19px Mont"; c.fillText("📌  SOP & Skrip Closing WhatsApp", 20, 175 + 37 * st.pin);
+    c.restore();
+  }
+  header(c);
+  rolesSheet(c, st.sheet);
+  // home indicator
+  c.fillStyle = "rgba(0,0,0,0.85)"; rr(c, SCR_W / 2 - 70, SCR_H - 22, 140, 8, 4); c.fill();
+  // sapuan cahaya kaca (lapisan sokongan)
+  if (st.sheen > -1 && st.sheen < 2) {
+    const sx = st.sheen * SCR_W;
+    const g = c.createLinearGradient(sx - 120, 0, sx + 120, SCR_H * 0.3);
+    g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(0.5, "rgba(255,255,255,0.22)"); g.addColorStop(1, "rgba(255,255,255,0)");
+    c.fillStyle = g; c.fillRect(0, 0, SCR_W, SCR_H);
+  }
+  c.restore();
+  screenTex.needsUpdate = true;
+  const d = 1 - st.dim; screenMat.color.setRGB(d, d, d);
+}
+
+// ============ KOMPOSIT 2D ============
+const out = document.getElementById("out");
+const o = out.getContext("2d");
+const arr = (ob, n) => Array.from({ length: n }, (_, i) => ob[i]);
+
+// partikel bokeh (lapisan latar)
+const R = rng(7);
+const BOKEH = Array.from({ length: 22 }, () => ({ x: R() * W, y: R() * H, r: 6 + R() * 26, a: 0.04 + R() * 0.1, sp: 8 + R() * 22, ph: R() * 6.28, z: R() }));
+// grain
+const grain = document.createElement("canvas"); grain.width = grain.height = 256;
+{ const g = grain.getContext("2d"), id = g.createImageData(256, 256), r2 = rng(3);
+  for (let i = 0; i < id.data.length; i += 4) { const v = r2() * 255; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 255; }
+  g.putImageData(id, 0, 0); }
+
+function phoneScreenY() { return 960 - (st.ph.y * PX_PER_UNIT) * (28 / (28 - st.ph.z)); }
+
+function drawBG(t) {
+  o.fillStyle = C.black; o.fillRect(0, 0, W, H);
+  // cahaya hijau yang bernafas & bergerak perlahan
+  const gy = phoneScreenY(), gx = SAFE_CX + Math.sin(t * 0.4) * 40;
+  const g = o.createRadialGradient(gx, gy, 30, gx, gy, 760 + Math.sin(t * 0.8) * 30);
+  const a = 0.26 + 0.05 * Math.sin(t * 0.9) + 0.06 * st.calm;
+  g.addColorStop(0, `rgba(37,211,102,${a})`); g.addColorStop(0.55, `rgba(11,61,46,${a * 0.6})`); g.addColorStop(1, "rgba(11,11,11,0)");
+  o.fillStyle = g; o.fillRect(0, 0, W, H);
+  // bokeh
+  for (const b of BOKEH) {
+    const y = (b.y - t * b.sp + H * 2) % (H + 100) - 50, x = b.x + Math.sin(t * 0.5 + b.ph) * 18;
+    const rg = o.createRadialGradient(x, y, 0, x, y, b.r);
+    rg.addColorStop(0, `rgba(160,255,200,${b.a})`); rg.addColorStop(1, "rgba(160,255,200,0)");
+    o.fillStyle = rg; o.beginPath(); o.arc(x, y, b.r, 0, 7); o.fill();
+  }
+  // bayang bawah telefon (lapisan sokongan)
+  const sy = gy + 470 * (28 / (28 - st.ph.z)) * st.ph.s;
+  const sg = o.createRadialGradient(SAFE_CX, sy, 10, SAFE_CX, sy, 300);
+  sg.addColorStop(0, "rgba(0,0,0,0.55)"); sg.addColorStop(1, "rgba(0,0,0,0)");
+  o.save(); o.translate(SAFE_CX, sy); o.scale(1, 0.18); o.translate(-SAFE_CX, -sy);
+  o.fillStyle = sg; o.beginPath(); o.arc(SAFE_CX, sy, 300, 0, 7); o.fill(); o.restore();
+}
+
+// teks perkataan-demi-perkataan, keluar dari bawah garisan (mask)
+function wordsLine(words, prog, x, y, size, colors, outP = 0) {
+  o.save();
+  o.font = `800 ${size}px Mont`; o.textBaseline = "alphabetic";
+  let cx = x;
+  const sp = o.measureText(" ").width;
+  words.forEach((w, i) => {
+    const p = prog[i] ?? 1, ww = o.measureText(w).width;
+    if (p > 0) {
+      o.save();
+      o.beginPath(); o.rect(cx - 6, y - size * 1.05 - outP * size, ww + 12, size * 1.35); o.clip();
+      const dy = (1 - p) * size * 1.1 - outP * size * 1.2;
+      o.globalAlpha = clamp(p * 1.4) * (1 - outP);
+      o.fillStyle = colors[i]; o.fillText(w, cx, y + dy);
+      o.restore();
+    }
+    cx += ww + sp;
+  });
+  o.restore();
+}
+
+function fitSize(text, base, maxW) { o.font = `800 ${base}px Mont`; const w = o.measureText(text).width; return Math.min(base, Math.floor(base * maxW / w)); }
+
+function drawTop() {
+  const MAXW = 900 - SAFE_L;
+  // S1
+  if (st.kicker > 0 && st.h1out < 1) {
+    o.save(); o.globalAlpha = st.kicker * (1 - st.h1out);
+    o.font = "700 54px Caveat"; o.fillStyle = C.green;
+    o.fillText("Untuk company servis", SAFE_L + (1 - st.kicker) * -20, 300 - st.h1out * 30);
+    o.restore();
+    const s1 = fitSize("Staf ada,", 104, MAXW), s2 = fitSize("sistem takde?", 104, MAXW), s = Math.min(s1, s2);
+    wordsLine(["Staf", "ada,"], arr(st.h1, 2), SAFE_L, 410, s, [C.white, C.white], st.h1out);
+    wordsLine(["sistem", "takde?"], [st.h1[2], st.h1[3]], SAFE_L, 410 + s * 1.08, s, [C.yellow, C.yellow], st.h1out);
+  }
+  // S2
+  if (st.h2[0] > 0 && st.h2out < 1) {
+    const s = Math.min(fitSize("Leads masuk,", 92, MAXW), fitSize("tiada siapa", 92, MAXW), fitSize("follow up", 92, MAXW));
+    wordsLine(["Leads", "masuk,"], [st.h2[0], st.h2[1]], SAFE_L, 330, s, [C.white, C.white], st.h2out);
+    wordsLine(["tiada", "siapa"], [st.h2[2], st.h2[3]], SAFE_L, 330 + s * 1.08, s, [C.white, C.white], st.h2out);
+    wordsLine(["follow", "up"], [st.h2[4], st.h2[5]], SAFE_L, 330 + s * 2.16, s, [C.white, C.white], st.h2out);
+    // garis merah halus di bawah "tiada siapa"
+    const ul = clamp((st.h2[5] - 0.3) / 0.7) * (1 - st.h2out);
+    if (ul > 0) { o.font = `800 ${s}px Mont`; const w = o.measureText("tiada siapa follow up").width;
+      o.fillStyle = C.red; rr(o, SAFE_L, 330 + s * 2.16 + 18, Math.min(w, o.measureText("follow up").width) * ul, 8, 4); o.fill(); }
+  }
+  // S3–S5: badge + checklist
+  if (st.badge > 0 && st.listOut < 1) {
+    o.save(); o.globalAlpha = st.badge * (1 - st.listOut);
+    o.translate(0, (1 - st.badge) * 16 - st.listOut * 20);
+    const txt = "SETUP TEAM SALES A–Z"; o.font = "800 38px Mont";
+    const bw = o.measureText(txt).width + 64, bx = SAFE_L, by = 246;
+    o.fillStyle = C.black; rr(o, bx, by, bw, 66, 33); o.fill();
+    o.strokeStyle = C.green; o.lineWidth = 3; rr(o, bx, by, bw, 66, 33); o.stroke();
+    o.fillStyle = C.green; o.beginPath(); o.arc(bx + 30, by + 33, 7, 0, 7); o.fill();
+    o.fillStyle = C.white; o.fillText(txt, bx + 48, by + 46);
+    // kilauan badge
+    const sx = bx + (st.sheen + 0.2) / 2.2 * (bw + 200) - 100;
+    if (st.sheen > -1 && st.sheen < 2) { o.save(); rr(o, bx, by, bw, 66, 33); o.clip();
+      const g = o.createLinearGradient(sx - 60, 0, sx + 60, 0); g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(0.5, "rgba(255,255,255,0.35)"); g.addColorStop(1, "rgba(255,255,255,0)");
+      o.fillStyle = g; o.fillRect(bx, by, bw, 66); o.restore(); }
+    o.restore();
+    const items = [["Susun peranan team", C.white], ["Skrip & SOP closing", C.white], ["Monitoring 30 hari + laporan", C.yellow]];
+    items.forEach(([t, col], i) => {
+      const p = st.chk[i]; if (p <= 0) return;
+      const y = 390 + i * 68, a = (1 - 0.45 * st.chkDim[i]) * (1 - st.listOut);
+      o.save(); o.globalAlpha = a * clamp(p * 1.5);
+      // bulatan + tanda ✓ dilukis
+      const cx = SAFE_L + 22, cy = y - 15;
+      o.fillStyle = C.green; o.beginPath(); o.arc(cx, cy, 22 * clamp(p * 1.6), 0, 7); o.fill();
+      const dp = clamp((p - 0.25) / 0.6);
+      if (dp > 0) { o.strokeStyle = C.black; o.lineWidth = 5; o.lineCap = "round"; o.lineJoin = "round";
+        o.beginPath(); o.moveTo(cx - 10, cy + 1);
+        if (dp < 0.4) o.lineTo(cx - 10 + 7 * dp / 0.4, cy + 1 + 7 * dp / 0.4);
+        else { o.lineTo(cx - 3, cy + 8); o.lineTo(cx - 3 + 14 * (dp - 0.4) / 0.6, cy + 8 - 16 * (dp - 0.4) / 0.6); }
+        o.stroke(); }
+      o.font = "800 44px Mont"; o.fillStyle = col;
+      o.save(); o.beginPath(); o.rect(SAFE_L + 56, y - 50, 900, 66); o.clip();
+      o.fillText(t, SAFE_L + 62 + (1 - p) * -24, y);
+      o.restore(); o.restore();
+    });
+  }
+}
+
+const NOTIFS = [
+  ["Puan Rina", "Boleh dapat quotation?"],
+  ["En. Faiz", "Bila boleh datang survey?"],
+  ["Kak Siti", "Harga servis berapa ya?"],
+  ["Encik Lim", "Hari Sabtu ada slot?"],
+];
+function drawNotifs() {
+  const n = st.notif; if (n[0] <= 0 || st.notifOut >= 1) return;
+  // terbaru di atas; yang lama turun & mengecil (gaya iOS)
+  const baseY = 610, cw = 780, chH = 122, x0 = SAFE_CX - cw / 2;
+  // slot berterusan: bila notifikasi baru masuk, yang lama turun perlahan ke belakang
+  const live = [0, 1, 2, 3].filter((i) => n[i] > 0);
+  const slotOf = (i) => { let s = 0; for (let j = i + 1; j < 4; j++) s += n[j]; return s; };
+  const drawList = live.slice().sort((a, b) => slotOf(b) - slotOf(a)); // paling belakang dulu
+  for (const i of drawList) {
+    const p = n[i], slot = slotOf(i); if (slot > 2.6) continue;
+    const s = 1 - slot * 0.035, y = baseY + slot * (chH + 18) + (1 - p) * -70, a = clamp(p * 1.6) * (1 - st.notifOut) * clamp(1 - slot * 0.12) * clamp(3 - slot);
+    o.save(); o.globalAlpha = a;
+    o.translate(0, -st.notifOut * 60);
+    o.translate(SAFE_CX, y + chH / 2); o.scale(s * (0.96 + 0.04 * p), s * (0.96 + 0.04 * p)); o.translate(-SAFE_CX, -(y + chH / 2));
+    o.shadowColor = "rgba(0,0,0,0.45)"; o.shadowBlur = 30; o.shadowOffsetY = 10;
+    o.fillStyle = "rgb(36,38,42)"; rr(o, x0, y, cw, chH, 30); o.fill(); o.shadowColor = "transparent";
+    o.strokeStyle = "rgba(255,255,255,0.08)"; o.lineWidth = 1.5; rr(o, x0, y, cw, chH, 30); o.stroke();
+    // ikon app generik (bukan logo sebenar)
+    o.fillStyle = C.green; rr(o, x0 + 24, y + 24, 70, 70, 18); o.fill();
+    o.fillStyle = "#FFF"; rr(o, x0 + 40, y + 42, 38, 28, 10); o.fill();
+    o.beginPath(); o.moveTo(x0 + 48, y + 68); o.lineTo(x0 + 44, y + 80); o.lineTo(x0 + 58, y + 69); o.fill();
+    o.fillStyle = "#FFF"; o.font = "800 30px Mont"; o.fillText(NOTIFS[i][0], x0 + 116, y + 52);
+    o.fillStyle = "rgba(255,255,255,0.78)"; o.font = "600 28px Mont"; o.fillText(NOTIFS[i][1], x0 + 116, y + 92);
+    o.fillStyle = "rgba(255,255,255,0.45)"; o.font = "600 22px Mont"; o.fillText("sekarang", x0 + cw - 120, y + 50);
+    o.restore();
+  }
+}
+
+function drawCTA() {
+  if (st.cta <= 0) return;
+  const p = st.cta, cw = 800, ch = 520, x0 = SAFE_CX - cw / 2, y0 = 900 + (1 - p) * 40;
+  o.save(); o.globalAlpha = clamp(p * 1.4) * (1 - st.fadeOut);
+  // kad kaca
+  o.shadowColor = "rgba(0,0,0,0.5)"; o.shadowBlur = 50; o.shadowOffsetY = 16;
+  o.fillStyle = "rgba(14,22,18,0.92)"; rr(o, x0, y0, cw, ch, 40); o.fill(); o.shadowColor = "transparent";
+  const bg = o.createLinearGradient(x0, y0, x0 + cw, y0 + ch);
+  bg.addColorStop(0, "rgba(37,211,102,0.85)"); bg.addColorStop(0.5, "rgba(37,211,102,0.15)"); bg.addColorStop(1, "rgba(37,211,102,0.6)");
+  o.strokeStyle = bg; o.lineWidth = 3; rr(o, x0, y0, cw, ch, 40); o.stroke();
+  const L = st.ctaLines, cx = x0 + 52;
+  const line = (prog, fn) => { if (prog <= 0) return; o.save(); o.globalAlpha *= clamp(prog * 1.4); o.translate(0, (1 - prog) * 22); fn(); o.restore(); };
+  line(L[0], () => { o.fillStyle = "rgba(255,255,255,0.75)"; o.font = "800 40px Mont"; o.fillText("Sesi konsultasi", cx, y0 + 92); });
+  line(L[1], () => { o.font = "800 92px Mont"; o.fillStyle = C.yellow; o.fillText("PERCUMA", cx, y0 + 192);
+    const w = o.measureText("PERCUMA").width; o.font = "800 50px Mont"; o.fillStyle = C.white; o.fillText("30 min", cx + w + 22, y0 + 190); });
+  line(L[2], () => {
+    o.font = "600 34px Mont"; o.fillStyle = "rgba(255,255,255,0.85)"; o.fillText("Hanya 5 slot sebulan", cx, y0 + 262);
+    const dx0 = cx + o.measureText("Hanya 5 slot sebulan").width + 38;
+    for (let i = 0; i < 5; i++) { const sp = clamp(st.slots * 5 - i); const dx = dx0 + i * 40;
+      o.strokeStyle = C.green; o.lineWidth = 3; o.beginPath(); o.arc(dx, y0 + 250, 14, 0, 7); o.stroke();
+      if (sp > 0) { o.fillStyle = C.green; o.beginPath(); o.arc(dx, y0 + 250, 9 * sp, 0, 7); o.fill(); } }
+  });
+  line(L[3], () => {
+    const bw = cw - 104, bh = 112, bx = cx, by = y0 + 312;
+    // denyut cincin
+    const ph = st.pulse % 1, pa = st.pulse > 0 ? (1 - ph) * 0.5 : 0;
+    if (pa > 0) { o.save(); o.strokeStyle = `rgba(37,211,102,${pa})`; o.lineWidth = 4; const e = ph * 22; rr(o, bx - e, by - e, bw + e * 2, bh + e * 2, 56 + e); o.stroke(); o.restore(); }
+    const breathe = 1 + Math.sin(st.pulse * Math.PI * 2) * 0.012;
+    o.translate(bx + bw / 2, by + bh / 2); o.scale(breathe, breathe); o.translate(-(bx + bw / 2), -(by + bh / 2));
+    o.fillStyle = C.green; rr(o, bx, by, bw, bh, 56); o.fill();
+    o.fillStyle = C.black; o.font = "800 44px Mont"; const t = "WhatsApp link di bio", tw = o.measureText(t).width;
+    o.fillText(t, bx + bw / 2 - tw / 2 + 20, by + 72);
+    // anak panah
+    o.strokeStyle = C.black; o.lineWidth = 6; o.lineCap = "round"; o.lineJoin = "round";
+    const ax = bx + bw / 2 - tw / 2 - 30, ay = by + bh / 2;
+    o.beginPath(); o.moveTo(ax - 14, ay); o.lineTo(ax + 12, ay); o.moveTo(ax + 2, ay - 11); o.lineTo(ax + 13, ay); o.lineTo(ax + 2, ay + 11); o.stroke();
+    o.fillStyle = "rgba(255,255,255,0.6)"; o.font = "600 30px Mont"; const hd = "@sirdharma_"; o.fillText(hd, bx + bw / 2 - o.measureText(hd).width / 2, by + bh + 52);
+  });
+  o.restore();
+}
+
+function finish(t) {
+  // vignette + grain (lapisan latar)
+  const v = o.createRadialGradient(W / 2, H / 2, H * 0.35, W / 2, H / 2, H * 0.75);
+  v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,0.55)");
+  o.fillStyle = v; o.fillRect(0, 0, W, H);
+  o.save(); o.globalAlpha = 0.035; o.globalCompositeOperation = "overlay";
+  const f = Math.floor(t * 30), ox = (f * 73) % 256, oy = (f * 151) % 256;
+  o.translate(-ox, -oy); o.fillStyle = o.createPattern(grain, "repeat"); o.fillRect(0, 0, W + 256, H + 256); o.restore();
+  if (st.fadeOut > 0) { o.fillStyle = `rgba(11,11,11,${st.fadeOut})`; o.fillRect(0, 0, W, H); }
+}
+
+window.renderAt = (t) => {
+  tl.seek(Math.min(t, DUR), false);
+  // telefon + gerakan ambient (terapung)
+  const P = st.ph;
+  phone.position.set(P.x, P.y + Math.sin(t * 1.3) * 0.06, P.z);
+  phone.rotation.set(P.rx + Math.sin(t * 0.9) * 0.015, P.ry + Math.sin(t * 0.7) * 0.03, P.rz);
+  phone.scale.setScalar(P.s);
+  drawScreen();
+  renderer.render(scene, camera);
+  drawBG(t);
+  o.save(); o.globalAlpha = 1; o.drawImage(renderer.domElement, SAFE_CX - W / 2, 0); o.restore();
+  drawNotifs();
+  drawTop();
+  drawCTA();
+  finish(t);
+  return out.toDataURL("image/jpeg", 0.95);
+};
+
+await document.fonts.load("800 40px Mont");
+await document.fonts.load("600 40px Mont");
+await document.fonts.load("700 40px Caveat");
+window.ready = true;
+</script>
+</body>
+</html>
