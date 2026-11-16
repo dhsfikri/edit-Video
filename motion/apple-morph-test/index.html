@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--
+  Sampel gaya "Apple motion" (rujukan: Bart_VFX, "Learn Apple Style Motion Graphics in 20 minutes").
+  Teknik: 1) MORPH satu bentuk → bentuk lain  2) bounce/spring (sedikit terlajak, mendarat lembut)
+          3) offset 0.1s anak vs induk  4) teks jatuh ikut perkataan / huruf masuk dari kanan,
+          laluan melengkung, "tekan butang" sebelum morph  5) 60fps + motion blur + putaran halus seluruh komposisi.
+  Render: node render.mjs <out.mp4> 60 6      Tema cerah: Q='?light=1' node render.mjs ...
+-->
+<style>
+  @font-face { font-family: "Mont"; font-weight: 600; src: url(montserrat-latin-600-normal.woff2); }
+  @font-face { font-family: "Mont"; font-weight: 800; src: url(montserrat-latin-800-normal.woff2); }
+  html, body { margin: 0; background: #0B0B0B; }
+</style>
+</head>
+<body>
+<canvas id="out" width="1080" height="1920"></canvas>
+<script type="module">
+const W = 1080, H = 1920, CX = 480, CY = 960; // tengah safe zone TikTok
+const LIGHT = new URLSearchParams(location.search).has("light");
+const T = LIGHT
+  ? { bg0: "#F2F2F2", bg1: "#E3E3E3", card: "#FFFFFF", ink: "#111111", sub: "#6B6B6B", shadow: "rgba(0,0,0,0.13)", line: "rgba(0,0,0,0.08)" }
+  : { bg0: "#18211C", bg1: "#0B0B0B", card: "#1A1D1B", ink: "#FFFFFF", sub: "rgba(255,255,255,0.6)", shadow: "rgba(0,0,0,0.55)", line: "rgba(255,255,255,0.1)" };
+const GREEN = "#25D366", YELLOW = "#FFD60A", BLACK = "#0B0B0B";
+
+// ---------------- SPRING (setara ekspresi bounce After Effects) ----------------
+// x(u) = 1 - e^(-ζωu)(cos ωd u + ζω/ωd sin ωd u): mula dari rehat, terlajak ~8%, mendarat lembut.
+function spring(dt, D = 0.7, zeta = 0.62) {
+  if (dt <= 0) return 0;
+  const u = dt / D; if (u >= 2) return 1;
+  const w = 9, zw = zeta * w, wd = w * Math.sqrt(1 - zeta * zeta);
+  return 1 - Math.exp(-zw * u) * (Math.cos(wd * u) + (zw / wd) * Math.sin(wd * u));
+}
+const soft = (dt, D = 0.5) => spring(dt, D, 0.95); // hampir tanpa lajak (untuk opacity, warna)
+// Sifat berkunci: setiap kunci menambah satu "spring" ke nilai sebelumnya (boleh bertindih → gerak semula jadi)
+function prop(v0, keys, fn = spring) {
+  return (t) => { let v = v0, prev = v0; for (const [tk, vk, D] of keys) { v += (vk - prev) * fn(t - tk, D); prev = vk; } return v; };
+}
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ramp = (t, t0, d) => clamp((t - t0) / d);
+function hex(c) { return [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16)); }
+function mix(a, b, p) { const A = hex(a), B = hex(b); p = clamp(p); return `rgb(${A.map((x, i) => Math.round(x + (B[i] - x) * p)).join(",")})`; }
+
+// ---------------- TIMELINE ----------------
+// Fasa: A titik muncul 0.2 · B tolak jadi pill 1.0 · C tekan 1.95 · D morph jadi kad 2.1 · E tekan 4.0 · F runtuh jadi butang 4.15
+const FW = prop(0, [[0.2, 150, 0.6], [1.0, 740, 0.75], [2.1, 760, 0.8], [4.15, 620, 0.7]]);
+const FH = prop(0, [[0.2, 150, 0.6], [2.1, 950, 0.85], [4.15, 132, 0.6]]);
+const FO = prop(1, [[4.3, 0, 0.35]], soft);
+const BX = prop(0, [[1.0, 295, 0.75], [2.1, 0, 0.8], [4.15, 0, 0.7]]);
+const BY = prop(0, [[2.12, 360, 0.6], [4.15, 0, 0.75]]);            // tempoh x ≠ y → laluan melengkung
+const BW = prop(0, [[0.28, 118, 0.6], [2.12, 664, 0.75], [4.15, 620, 0.7]]);
+const BH = prop(0, [[0.28, 118, 0.6], [4.15, 132, 0.7]]);
+const BS = prop(1, [[1.95, 0.86, 0.22], [2.08, 1, 0.5], [3.95, 0.9, 0.22], [4.08, 1, 0.5]]); // tekan butang
+const ROT = prop(0, [[2.1, -1.8, 0.5], [2.45, 0, 0.9], [4.15, 1.5, 0.5], [4.5, 0, 0.9]]);   // darjah
+const ZOOM = prop(1, [[0, 1.05, 6]], soft);
+
+// ---------------- LUKIS ----------------
+const out = document.getElementById("out"), o = out.getContext("2d");
+const scene = document.createElement("canvas"); scene.width = W; scene.height = H;
+const s = scene.getContext("2d");
+function rr(c, x, y, w, h, r) { r = Math.max(0, Math.min(r, h / 2, w / 2)); c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+
+// teks jatuh perkataan demi perkataan (dari atas, atau bawah bila dir=+1)
+function dropWords(c, text, x, y, t0, t, { size = 40, weight = 800, color = T.ink, stagger = 0.06, dir = -1, alpha = 1, center = false } = {}) {
+  c.font = `${weight} ${size}px Mont`;
+  const words = text.split(" "), sp = c.measureText(" ").width;
+  const total = words.reduce((a, w) => a + c.measureText(w).width, 0) + sp * (words.length - 1);
+  let cx = center ? x - total / 2 : x;
+  words.forEach((w, i) => {
+    const tw = t0 + i * stagger, p = spring(t - tw, 0.6), a = ramp(t, tw, 0.22) * alpha;
+    if (a > 0) { c.save(); c.globalAlpha = a; c.fillStyle = color; c.fillText(w, cx, y + dir * size * 1.1 * (1 - p)); c.restore(); }
+    cx += c.measureText(w).width + sp;
+  });
+}
+// huruf masuk dari kanan (untuk angka / harga)
+function slideChars(c, text, x, y, t0, t, { size = 40, weight = 800, color = T.ink, stagger = 0.018, alpha = 1 } = {}) {
+  c.font = `${weight} ${size}px Mont`;
+  let cx = x;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i], tw = t0 + i * stagger, p = spring(t - tw, 0.6), a = ramp(t, tw, 0.2) * alpha;
+    if (a > 0) { c.save(); c.globalAlpha = a; c.fillStyle = color; c.fillText(ch, cx + 70 * (1 - p), y); c.restore(); }
+    cx += c.measureText(ch).width;
+  }
+}
+function check(c, x, y, p, alpha) {
+  if (p <= 0) return;
+  c.save(); c.globalAlpha = alpha;
+  c.fillStyle = GREEN; c.beginPath(); c.arc(x, y, 20 * clamp(p, 0, 1.2), 0, 7); c.fill();
+  const d = clamp((p - 0.3) / 0.7);
+  if (d > 0) { c.strokeStyle = BLACK; c.lineWidth = 5; c.lineCap = c.lineJoin = "round"; c.beginPath(); c.moveTo(x - 9, y + 1);
+    if (d < 0.4) c.lineTo(x - 9 + 6 * d / 0.4, y + 1 + 6 * d / 0.4); else { c.lineTo(x - 3, y + 7); c.lineTo(x - 3 + 13 * (d - 0.4) / 0.6, y + 7 - 15 * (d - 0.4) / 0.6); } c.stroke(); }
+  c.restore();
+}
+
+function drawScene(t) {
+  const c = s;
+  // latar bersih + cahaya lembut bernafas (lapisan latar)
+  const g = c.createRadialGradient(CX, CY - 40, 50, CX, CY, 1150);
+  g.addColorStop(0, T.bg0); g.addColorStop(1, T.bg1);
+  c.fillStyle = g; c.fillRect(0, 0, W, H);
+  if (!LIGHT) { const a = 0.10 + 0.03 * Math.sin(t * 1.3);
+    const gg = c.createRadialGradient(CX, CY, 20, CX, CY, 700); gg.addColorStop(0, `rgba(37,211,102,${a})`); gg.addColorStop(1, "rgba(37,211,102,0)");
+    c.fillStyle = gg; c.fillRect(0, 0, W, H); }
+
+  c.save();
+  c.translate(CX, CY); c.rotate(ROT(t) * Math.PI / 180); const z = ZOOM(t); c.scale(z, z);
+
+  // ---- FRAME (bekas yang morph) ----
+  const fw = Math.max(0, FW(t)), fh = Math.max(0, FH(t)), fo = FO(t);
+  const cardP = clamp((fh - 150) / 800);                        // 0 = pill, 1 = kad
+  const fr = Math.min(fh / 2, 75 + (1 - cardP) * 500);           // bucu: pill → kad 75px
+  if (fw > 1 && fo > 0.01) {
+    c.save(); c.globalAlpha = fo;
+    c.shadowColor = T.shadow; c.shadowBlur = 70; c.shadowOffsetY = 26;
+    c.fillStyle = T.card; rr(c, -fw / 2, -fh / 2, fw, fh, fr); c.fill();
+    c.shadowColor = "transparent";
+    if (!LIGHT) { c.strokeStyle = "rgba(255,255,255,0.07)"; c.lineWidth = 2; rr(c, -fw / 2, -fh / 2, fw, fh, fr); c.stroke(); }
+    c.restore();
+  }
+
+  // ---- kandungan PILL (fasa B) ----
+  const pillOut = 1 - ramp(t, 2.1, 0.14);
+  if (t > 1.1 && pillOut > 0) {
+    c.save(); c.beginPath(); rr(c, -fw / 2, -fh / 2, fw, fh, fr); c.clip();
+    dropWords(c, "Staf ada, sistem takde?", -fw / 2 + 52, 15, 1.12, t, { size: 40, alpha: pillOut, color: T.ink });
+    c.restore();
+  }
+
+  // ---- kandungan KAD (fasa D) ----
+  const cardOut = 1 - ramp(t, 4.12, 0.18);
+  if (t > 2.2 && cardOut > 0) {
+    const top = -fh / 2, L = -fw / 2 + 58;
+    c.save(); c.beginPath(); rr(c, -fw / 2, -fh / 2, fw, fh, fr); c.clip();
+    dropWords(c, "SETUP TEAM SALES A–Z", L, top + 96, 2.35, t, { size: 30, color: GREEN, stagger: 0.04, alpha: cardOut });
+    dropWords(c, "Staf ada,", L, top + 200, 2.45, t, { size: 84, alpha: cardOut });
+    dropWords(c, "sistem ada.", L, top + 292, 2.57, t, { size: 84, color: GREEN, alpha: cardOut });
+    // garis pemisah tumbuh
+    const lp = spring(t - 2.75, 0.7);
+    c.save(); c.globalAlpha = cardOut; c.fillStyle = T.line; c.fillRect(L, top + 342, (fw - 116) * clamp(lp, 0, 1.05), 2); c.restore();
+    const rows = ["Peranan team jelas", "Skrip & SOP closing", "Monitoring 30 hari"];
+    rows.forEach((r, i) => { const t0 = 2.85 + i * 0.13, y = top + 418 + i * 74;
+      check(c, L + 20, y - 13, spring(t - t0, 0.55), cardOut);
+      slideChars(c, r, L + 62, y, t0 + 0.06, t, { size: 38, weight: 600, color: T.ink, alpha: cardOut }); });
+    slideChars(c, "PERCUMA", L, top + 718, 3.35, t, { size: 76, color: YELLOW, stagger: 0.03, alpha: cardOut });
+    dropWords(c, "konsultasi 30 min", L, top + 768, 3.5, t, { size: 32, weight: 600, color: T.sub, stagger: 0.05, alpha: cardOut });
+    c.restore();
+  }
+
+  // ---- BUTANG (morph: bulat → hujung pill → butang kad → butang akhir) ----
+  const bw = Math.max(0, BW(t)), bh = Math.max(0, BH(t)), bs = BS(t), bx = BX(t), by = BY(t);
+  if (bw > 1) {
+    c.save(); c.translate(bx, by); c.scale(bs, bs);
+    c.fillStyle = GREEN; rr(c, -bw / 2, -bh / 2, bw, bh, bh / 2); c.fill();
+    // anak panah: offset 0.1s (valueAtTime(time - 0.1))
+    const as = clamp(BW(t - 0.1) / 118, 0, 1.2) * (1 - ramp(t, 2.1, 0.12));
+    if (as > 0.01) { c.save(); c.scale(as, as); c.strokeStyle = BLACK; c.lineWidth = 7; c.lineCap = c.lineJoin = "round";
+      c.beginPath(); c.moveTo(-8, -17); c.lineTo(10, 0); c.lineTo(-8, 17); c.stroke(); c.restore(); }
+    c.save(); c.beginPath(); rr(c, -bw / 2, -bh / 2, bw, bh, bh / 2); c.clip();
+    const bt = 1 - ramp(t, 4.12, 0.12);
+    if (t > 2.3 && bt > 0) dropWords(c, "Tempah sekarang", 0, 14, 2.55, t, { size: 40, color: BLACK, center: true, alpha: bt });
+    if (t > 4.2) {
+      // ikon chat generik masuk dengan offset, teks naik dari bawah
+      const ip = spring(t - 4.42, 0.55);
+      const tw = 380, ix = -tw / 2 - 30;
+      c.save(); c.translate(ix, 0); c.scale(ip, ip); c.fillStyle = BLACK; c.beginPath(); c.arc(0, 0, 34, 0, 7); c.fill();
+      c.fillStyle = GREEN; rr(c, -17, -14, 34, 24, 8); c.fill(); c.beginPath(); c.moveTo(-10, 8); c.lineTo(-14, 18); c.lineTo(-1, 9); c.fill(); c.restore();
+      dropWords(c, "Konsultasi PERCUMA", ix + 54, 14, 4.36, t, { size: 40, color: BLACK, dir: 1 });
+    }
+    c.restore();
+    c.restore();
+  }
+  c.restore();
+}
+
+// grain halus
+const grain = document.createElement("canvas"); grain.width = grain.height = 256;
+{ const gx = grain.getContext("2d"), id = gx.createImageData(256, 256); let r = 9;
+  for (let i = 0; i < id.data.length; i += 4) { r = (r * 1664525 + 1013904223) >>> 0; const v = (r / 4294967296) * 255; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 255; }
+  gx.putImageData(id, 0, 0); }
+
+// motion blur: purata 8 sub-frame dalam shutter 180° (1/120s pada 60fps)
+const SUB = 8, SHUTTER = 0.5 / 60;
+window.renderAt = (t) => {
+  for (let i = 0; i < SUB; i++) {
+    drawScene(t + (i / (SUB - 1) - 0.5) * SHUTTER);
+    o.globalAlpha = 1 / (i + 1); o.drawImage(scene, 0, 0);
+  }
+  o.globalAlpha = 0.03; o.globalCompositeOperation = "overlay";
+  const f = Math.floor(t * 60); o.save(); o.translate(-((f * 73) % 256), -((f * 151) % 256));
+  o.fillStyle = o.createPattern(grain, "repeat"); o.fillRect(0, 0, W + 256, H + 256); o.restore();
+  o.globalAlpha = 1; o.globalCompositeOperation = "source-over";
+  return out.toDataURL("image/jpeg", 0.95);
+};
+await document.fonts.load("800 40px Mont"); await document.fonts.load("600 40px Mont");
+window.ready = true;
+</script>
+</body>
+</html>
