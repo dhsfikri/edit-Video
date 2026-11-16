@@ -57,3 +57,14 @@
 1. Nak guna **"kau"** atau **"awak"**? (draf guna "kau", lebih padu untuk hook)
 2. Nak masukkan **muka Sir** (klip pendek) dalam babak 7? Kalau ya, hantar rakaman ±3s
 3. Nama di logo: "DHARMA · Sales Guru" ok?
+
+---
+## Draf v2 (2026-11-16): tambah potret studio Sir
+Sumber: Drive `Website Sales - Testimoni / 05 Potret Sir Dharma (Studio 2024)`
+| Babak | Potret | Kenapa |
+|---|---|---|
+| 1 Hook | IMG_0244 (tunjuk ke kamera) → `p_tunjuk.jpg` | "KAU TAK PERLU…" terus tunjuk penonton |
+| 2 Faham | IMG_0247 (isyarat OK di mata) → `p_ok.jpg` | Ganti shot "mata" dalam rujukan; label YAKIN/PERCAYA/SEGERA sekeliling |
+| 3 Senyap | IMG_0248 (isyarat diam) → `p_senyap.jpg` | Masuk tepat bila keluar "TERUS SENYAP?" (selepas mockup chat) |
+| 7 Logo | IMG_0239 (tangan di dada) → `p_dada.jpg` | Wajah Sir di atas nama DHARMA |
+Gelembung chat babak 1 dibuang (diganti potret, lebih bersih macam rujukan).

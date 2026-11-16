@@ -22,6 +22,11 @@
       .grain { position:absolute; inset:0; opacity:.06; mix-blend-mode:overlay;
         background-image: repeating-radial-gradient(circle at 17% 32%, #fff 0 1px, transparent 1px 3px),
                           repeating-radial-gradient(circle at 73% 61%, #000 0 1px, transparent 1px 4px); }
+      .photo { position:absolute; left:0; width:1080px; height:auto; }
+      #s1 .photo { top:760px; -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 22%); }
+      #s2 .photo { top:330px; -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 12%, #000 48%, transparent 66%); }
+      #s3 .photo { top:700px; opacity:0; -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 18%); }
+      #s7 .photo { top:150px; -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 10%, #000 40%, transparent 58%); filter:brightness(.8); }
       .vignette { position:absolute; inset:0; background:radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0,0,0,.65) 100%); }
 
       /* ---------- S1 hook ---------- */
@@ -37,18 +42,19 @@
       .bub small { display:block; font-size:22px; color:#8fa397; margin-top:6px; text-align:right; }
 
       /* ---------- S2 faham ---------- */
-      #s2 .glow { left:200px; top:540px; width:560px; height:560px; background:radial-gradient(closest-side, rgba(37,211,102,.45), transparent); }
+      #s2 .glow { left:150px; top:300px; width:760px; height:760px; background:radial-gradient(closest-side, rgba(37,211,102,.45), transparent); }
       #s2 .core { left:330px; top:670px; width:300px; height:300px; border-radius:50%;
                   background:radial-gradient(circle at 38% 35%, #3ff08a, #1aa652 55%, #0b3d2e 100%);
                   box-shadow:0 0 80px rgba(37,211,102,.55), inset 0 -20px 40px rgba(0,0,0,.35); }
       #s2 .icon { left:400px; top:755px; width:160px; height:118px; border-radius:40px; background:var(--white); }
       #s2 .icon:after { content:""; position:absolute; left:26px; bottom:-26px; border:16px solid transparent; border-top:24px solid var(--white); border-left:10px solid var(--white); }
       #s2 .icon i { position:absolute; top:48px; width:22px; height:22px; border-radius:50%; background:var(--green-d); }
-      #s2 .ring { left:180px; top:520px; width:600px; height:600px; border-radius:50%; border:2px dashed rgba(255,255,255,.18); }
-      #s2 .lab { font-weight:600; font-size:30px; letter-spacing:.32em; color:#9fb8a8; white-space:nowrap; }
+      #s2 .ring { left:230px; top:380px; width:600px; height:600px; border-radius:50%; border:2px dashed rgba(255,255,255,.18); }
+      #s2 .lab { font-weight:800; font-size:28px; letter-spacing:.25em; color:var(--green); white-space:nowrap; padding:10px 18px; border-radius:999px; background:rgba(11,11,11,.82); border:2px solid var(--green); }
       #s2 .f1 { left:0; width:960px; text-align:center; top:1150px; font-size:170px; }
+      #s2 .f1, #s2 .f2 { text-shadow:0 4px 24px rgba(0,0,0,.8); }
       #s2 .f2 { left:0; width:960px; text-align:center; top:1320px; font-weight:600; font-size:50px; color:#d9e3dc; }
-      #s2 .f2 b { color:var(--green); font-weight:800; }
+      #s2 .f2 b { color:var(--green); font-weight:800; margin-left:12px; }
 
       /* ---------- S3 seen ---------- */
       #s3 .flash { position:absolute; inset:0; background:#fbf7ec; }
@@ -104,15 +110,16 @@
       #s6 .tdot { left:560px; top:1270px; width:30px; height:30px; margin:-15px 0 0 -15px; border-radius:50%; background:var(--green); box-shadow:0 0 30px var(--green); }
 
       /* ---------- S7 logo ---------- */
-      #s7 .glow { left:130px; top:560px; width:700px; height:700px; background:radial-gradient(closest-side, rgba(37,211,102,.25), transparent); }
-      #s7 .name { left:0; width:960px; text-align:center; top:760px; font-weight:800; font-size:150px; letter-spacing:.06em; }
+      #s7 .glow { left:130px; top:750px; width:700px; height:700px; background:radial-gradient(closest-side, rgba(37,211,102,.25), transparent); }
+      #s7 .name, #s7 .tag { text-shadow:0 6px 30px rgba(0,0,0,.85); }
+      #s7 .name { left:0; width:960px; text-align:center; top:900px; font-weight:800; font-size:150px; letter-spacing:.06em; }
       #s7 .name span { display:inline-block; }
-      #s7 .ul { left:330px; top:950px; width:300px; height:6px; background:var(--green); transform-origin:center; }
-      #s7 .tag { left:0; width:960px; text-align:center; top:990px; font-weight:600; font-size:38px; letter-spacing:.55em; color:var(--green); }
-      #s7 .handle { left:0; width:960px; text-align:center; top:1110px; }
+      #s7 .ul { left:330px; top:1090px; width:300px; height:6px; background:var(--green); transform-origin:center; }
+      #s7 .tag { left:0; width:960px; text-align:center; top:1125px; font-weight:600; font-size:38px; letter-spacing:.55em; color:var(--green); }
+      #s7 .handle { left:0; width:960px; text-align:center; top:1225px; }
       #s7 .handle span { display:inline-block; padding:14px 34px; border-radius:999px; border:3px solid var(--green); background:rgba(11,11,11,.8); font-weight:800; font-size:40px; }
       #s7 .handle b { color:var(--green); }
-      #s7 .series { left:0; width:960px; text-align:center; top:1250px; font-weight:600; font-size:25px; letter-spacing:.05em; color:#9fb8a8; }
+      #s7 .series { left:0; width:960px; text-align:center; top:1350px; font-weight:600; font-size:25px; letter-spacing:.05em; color:#9fb8a8; }
     </style>
   </head>
   <body>
@@ -121,7 +128,7 @@
       <!-- S1: HOOK -->
       <div id="s1" class="scene clip" data-start="0" data-duration="3.0" data-track-index="0">
         <div class="glow"></div>
-        <div id="bubs"></div>
+        <img class="photo" src="assets/p_tunjuk.jpg" alt="" />
         <div class="abs anton l1"><span class="w">KAU</span> <span class="w">TAK</span> <span class="w">PERLU</span></div>
         <div class="abs hand l2">lebih ramai</div>
         <div class="abs box"></div>
@@ -132,12 +139,11 @@
       <!-- S2: FAHAM -->
       <div id="s2" class="scene clip" data-start="3.0" data-duration="2.6" data-track-index="0">
         <div class="glow"></div>
+        <img class="photo" src="assets/p_ok.jpg" alt="" />
         <div class="abs ring"></div>
-        <div class="abs core"></div>
-        <div class="abs icon"><i style="left:34px"></i><i style="left:69px"></i><i style="left:104px"></i></div>
-        <div class="abs lab" style="left:150px;top:560px">YAKIN</div>
-        <div class="abs lab" style="left:660px;top:600px">PERCAYA</div>
-        <div class="abs lab" style="left:170px;top:1080px">SEGERA</div>
+        <div class="abs lab" style="left:110px;top:430px">YAKIN</div>
+        <div class="abs lab" style="left:640px;top:470px">PERCAYA</div>
+        <div class="abs lab" style="left:120px;top:960px">SEGERA</div>
         <div class="abs hand f1">Faham</div>
         <div class="abs f2"><span class="w">cara</span> <span class="w">customer</span> <b class="w">berfikir</b></div>
         <div class="grain"></div><div class="vignette"></div>
@@ -148,6 +154,7 @@
         <div class="abs anton l1"><span class="w">KENAPA</span> <span class="w">DIA</span></div>
         <div class="abs hand l2">seen...</div>
         <div class="abs anton kw">TERUS SENYAP?</div>
+        <img class="photo" src="assets/p_senyap.jpg" alt="" />
         <div class="abs card">
           <div class="bar"><div class="av"></div><div class="nm">Customer</div><div class="st">online</div></div>
           <div class="bub in">Berapa harga? <small>9:40</small></div>
@@ -205,6 +212,7 @@
 
       <!-- S7: LOGO -->
       <div id="s7" class="scene clip" data-start="17.6" data-duration="3.4" data-track-index="0">
+        <img class="photo" src="assets/p_dada.jpg" alt="" />
         <div class="glow"></div>
         <div class="abs name"></div>
         <div class="abs ul"></div>
@@ -222,15 +230,8 @@
       const tl = gsap.timeline({ paused: true });
 
       /* ---------- S1 HOOK (0–3.0) ---------- */
-      const bubTxt = ["Berapa harga?", "Masih ada?", "PM harga", "Boleh COD?", "Nak tanya sikit", "Harga berapa ya?", "Info pls"];
-      const bubPos = [[90,1010],[470,1080],[150,1180],[520,1250],[100,1330],[430,920],[600,1360]];
-      bubTxt.forEach((t, i) => {
-        const b = document.createElement("div"); b.className = "bub"; b.innerHTML = t + "<small>✓✓</small>";
-        b.style.left = bubPos[i][0] + "px"; b.style.top = bubPos[i][1] + "px"; b.style.opacity = 0;
-        $("#bubs").appendChild(b);
-        tl.fromTo(b, { y: 160, opacity: 0, scale: 0.85 }, { y: 0, opacity: 0.55 + 0.45 * rnd(), scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 0.15 + i * 0.12);
-        tl.to(b, { y: -40 - 40 * rnd(), duration: 2.2, ease: "none" }, 0.65 + i * 0.12);
-      });
+      tl.fromTo("#s1 .photo", { opacity: 0, scale: 1.12, y: 60 }, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.05);
+      tl.to("#s1 .photo", { scale: 1.05, duration: 2.1, ease: "none" }, 0.65);
       tl.fromTo("#s1 .l1 .w", { y: -90, opacity: 0, scale: 1.4 }, { y: 0, opacity: 1, scale: 1, duration: 0.32, stagger: 0.14, ease: "power4.out" }, 0.0);
       tl.fromTo("#s1 .l2", { clipPath: "inset(0 100% 0 0)", opacity: 1 }, { clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "power2.out" }, 0.5);
       const hookTyped = "LEAD UNTUK CLOSING";
@@ -239,13 +240,13 @@
       const st1 = { n: 0 };
       tl.to(st1, { n: hookTyped.length, duration: 0.7, ease: "none", onUpdate: () => { const k = Math.round(st1.n); s1t.textContent = hookTyped.slice(0, k); s1g.textContent = hookTyped.slice(k); } }, 1.1);
       tl.set("#s1 .caret", { opacity: 0 }, 1.95); tl.set("#s1 .caret", { opacity: 1 }, 2.15); tl.set("#s1 .caret", { opacity: 0 }, 2.35);
-      tl.to(["#s1 .l1", "#s1 .l2", "#s1 .box", "#s1 .typed", "#bubs"], { scale: 1.08, opacity: 0, filter: "blur(14px)", duration: 0.28, ease: "power2.in" }, 2.72);
+      tl.to(["#s1 .l1", "#s1 .l2", "#s1 .box", "#s1 .typed", "#s1 .photo"], { scale: 1.08, opacity: 0, filter: "blur(14px)", duration: 0.28, ease: "power2.in" }, 2.72);
 
       /* ---------- S2 FAHAM (3.0–5.6) ---------- */
       const T2 = 3.0;
-      tl.fromTo("#s2 .core, #s2 .icon", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }, T2);
+      tl.fromTo("#s2 .photo", { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1.0, duration: 0.6, ease: "power3.out" }, T2);
+      tl.to("#s2 .photo", { scale: 1.04, duration: 2.0, ease: "none" }, T2 + 0.6);
       tl.fromTo("#s2 .glow", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "power2.out" }, T2);
-      tl.to("#s2 .icon i", { y: -10, duration: 0.25, stagger: 0.1, yoyo: true, repeat: 5, ease: "sine.inOut" }, T2 + 0.4);
       tl.fromTo("#s2 .ring", { scale: 0.7, opacity: 0, rotation: -40 }, { scale: 1, opacity: 1, rotation: 20, duration: 2.4, ease: "power2.out" }, T2 + 0.1);
       tl.fromTo("#s2 .lab", { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.5, stagger: 0.2, ease: "power2.out" }, T2 + 0.5);
       tl.fromTo("#s2 .f1", { opacity: 0, y: 40, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, T2 + 0.35);
@@ -268,8 +269,9 @@
       tl.set("#s3 .card .st", { textContent: "last seen 9:41" }, T3 + 1.85);
       tl.fromTo("#s3 .kw", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power4.out" }, T3 + 1.6);
       tl.to("#s3 .kw", { x: "+=10", duration: 0.05, yoyo: true, repeat: 5 }, T3 + 1.95);
-      tl.to("#s3 .card", { opacity: 0.35, filter: "grayscale(1)", duration: 0.3 }, T3 + 2.0);
-      tl.to(["#s3 .l1", "#s3 .l2", "#s3 .kw", "#s3 .card"], { opacity: 0, y: -40, duration: 0.2, ease: "power2.in" }, T3 + 2.4);
+      tl.to("#s3 .card", { opacity: 0, y: 60, duration: 0.25, ease: "power2.in" }, T3 + 1.6);
+      tl.fromTo("#s3 .photo", { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1.02, duration: 0.45, ease: "power3.out" }, T3 + 1.7);
+      tl.to(["#s3 .l1", "#s3 .l2", "#s3 .kw", "#s3 .photo"], { opacity: 0, y: -40, duration: 0.2, ease: "power2.in" }, T3 + 2.4);
 
       /* ---------- S4 TUKAR → CLOSING (8.2–11.5) ---------- */
       const T4 = 8.2, cx = 480, cy = 1000;
@@ -334,6 +336,8 @@
       /* ---------- S7 LOGO (17.6–21.0) ---------- */
       const T7 = 17.6;
       $("#s7 .name").innerHTML = "DHARMA".split("").map((c) => `<span>${c}</span>`).join("");
+      tl.fromTo("#s7 .photo", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, T7);
+      tl.to("#s7 .photo", { scale: 1.04, duration: 3.0, ease: "none" }, T7 + 0.4);
       tl.fromTo("#s7 .glow", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" }, T7);
       tl.fromTo("#s7 .name span", { opacity: 0, y: 30, filter: "blur(12px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, stagger: 0.08, ease: "power3.out" }, T7 + 0.1);
       tl.fromTo("#s7 .ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, T7 + 0.75);
