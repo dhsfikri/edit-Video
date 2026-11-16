@@ -5,8 +5,9 @@ description: Buat thumbnail TikTok gaya COVER (standard brand kit Sir Dharma) da
 
 # Skill: Thumbnail Cover + Caption — Sir Dharma
 
-**Versi:** 1.0 (2026-11-04)
+**Versi:** 1.1 (2026-11-16)
 **Changelog:**
+- 1.1 — Contoh config guna siri baru `ALL ABOUT CLOSING`.
 - 1.0 — Gaya cover diluluskan Sir (band hijau gelap, headline Anton penuh lebar, 1 keyword kuning, muka besar, 1 callout).
 
 > Rujukan: `BRANDKIT.md` §6. Brief konsep ringkas kepada Sir dulu (teks headline, frame, callout) — tunggu approval.
@@ -27,7 +28,7 @@ ffmpeg -v error -y $(for t in $T; do echo -i c_$t.png; done) -filter_complex hst
 ### 2. Config `projects/<ID>/thumb.json`
 ```json
 {"photo":"frames/<ID>.png","fx":560,"fy":1080,"scale":1.25,"faceY":1290,
- "series":"AYAT CLOSING","episode":"02","kicker":"kenapa orang",
+ "series":"ALL ABOUT CLOSING","episode":"02","kicker":"kenapa orang",
  "line1":"TAK DENGAR","line2":"CAKAP [AWAK?]",
  "callout":{"kind":"no","text":"tak minta order"}}
 ```

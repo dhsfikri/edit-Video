@@ -5,8 +5,9 @@ description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah samp
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.0 (2026-11-04)
+**Versi:** 1.1 (2026-11-16)
 **Changelog:**
+- 1.1 — Siri closing ditukar nama: `AYAT CLOSING` → `ALL ABOUT CLOSING` (episod bersambung #02).
 - 1.0 — Versi pertama, dari pengalaman C0029 (TIPS JUALAN #01) & C0296 (AYAT CLOSING #01).
 
 > Sebelum mula: baca `CLAUDE.md` dan `BRANDKIT.md`. Komunikasi dengan Sir dalam Bahasa Melayu santai tapi teliti.
@@ -64,7 +65,7 @@ Simpan JSON `{"segments":[{start,end,text,words:[{w,s,e}]}]}`. Cetak word timest
 **Salah dengar biasa:** "say"→**sale**, "dedisyen"→**decision**, "bayar bayaran"→**buat payment**, "geng-geng dof"/"bukan kesian" (tak jelas → tanya Sir/buang). Ayat tak jelas → transcribe semula snippet itu sahaja (temperature 0 & 0.4) dan **tanya Sir** dalam brief.
 
 ## 4. Brief → tunggu approval
-`briefs/<YYYY-MM-DD>_<ID>_<slug>.md`: spec, objektif, siri (`AYAT CLOSING` = closing/WhatsApp, `TIPS JUALAN` = jualan umum/TikTok Shop), struktur timeline (sumber → ayat → grafik), ayat dibuang, B-roll, soalan untuk Sir (privasi peserta, ayat tak jelas, iklan ya/tidak).
+`briefs/<YYYY-MM-DD>_<ID>_<slug>.md`: spec, objektif, siri (`ALL ABOUT CLOSING` = closing/WhatsApp (dulu `AYAT CLOSING`), `TIPS JUALAN` = jualan umum/TikTok Shop), struktur timeline (sumber → ayat → grafik), ayat dibuang, B-roll, soalan untuk Sir (privasi peserta, ayat tak jelas, iklan ya/tidak).
 **Hook mesti di depan** (soalan/masalah). Buang pembukaan lambat ("Alhamdulillah…", "Faham? Dan satu lagi…", "So…").
 
 ## 5. Potong A-roll — `pipeline/cut.py`

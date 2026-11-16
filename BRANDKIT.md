@@ -31,7 +31,10 @@
 | **Caveat 700** | Tulisan tangan (kicker kecil atas headline) | `@fontsource/caveat` |
 
 ## 4. Siri (badge)
-`AYAT CLOSING #NN` · `TIPS JUALAN #NN` · `BEDAH CHAT #NN` · `OBJECTION KILLER #NN`
+`ALL ABOUT CLOSING #NN` · `TIPS JUALAN #NN` · `BEDAH CHAT #NN` · `OBJECTION KILLER #NN`
+
+> Siri closing/WhatsApp ditukar nama dari `AYAT CLOSING` kepada **`ALL ABOUT CLOSING`** (arahan Sir, 2026-11-16). Video yang dah diupload (AYAT CLOSING #01) kekal. Nombor episod bersambung: video closing seterusnya = **ALL ABOUT CLOSING #02**.
+
 Pil hitam, border hijau, titik hijau, nombor hijau.
 
 ---

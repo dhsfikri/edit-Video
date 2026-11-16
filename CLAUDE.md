@@ -25,7 +25,7 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 - Export: 1080x1920, fps ikut rakaman (30/50), H.264 ~15–20 Mbps, AAC, `+faststart` (`pipeline/compose.py`).
 
 ## Identiti jenama (tetap)
-- Siri: "AYAT CLOSING #NN" (konsep lain: "BEDAH CHAT #NN", "OBJECTION KILLER #NN")
+- Siri: "ALL ABOUT CLOSING #NN" (dulu "AYAT CLOSING"; tukar 2026-11-16) (konsep lain: "BEDAH CHAT #NN", "OBJECTION KILLER #NN")
 - TikTok: @sirdharma_
 - Warna: hijau #25D366, hitam #0B0B0B, putih, keyword kuning #FFD60A
 - Font: Montserrat ExtraBold/SemiBold (video), Anton (headline thumbnail), Caveat (tulisan tangan)
