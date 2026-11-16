@@ -1,0 +1,151 @@
+<!doctype html>
+<!--
+  GAYA DYNAMIC v1 — lapisan motion (1080x1920, LEGAP). Video Sir digerakkan sebagai "kamera":
+  kad condong, whip-pan, shake, kad TIP skrin penuh, sticker/ilustrasi ikut perkataan, belon cakap.
+  Teks (tajuk, subtitle, pop, progress) ditindih kemudian dengan motion/overlay-dyn.
+  Koreografi per video: scene.js (window.SCENE = function(tl, api){...}). Salin dari projects/<ID>/scene.js.
+  Video: assets/base.mp4 (dari base.mov, tanpa audio). Durasi: tukar data-duration ikut base.
+  Easing (satu set): masuk expo.out .25–.35s · keluar power2.in .15–.2s · tekan back.out(2.2) · whip .19s in / .3s out
+-->
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 600; src: url("assets/montserrat-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("assets/caveat-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
+      :root { --green: #25d366; --deep: #0b3d2e; --ink: #0b0b0b; --yellow: #ffd60a; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #06180f; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
+      .L { position: absolute; inset: 0; }
+      /* Latar ilustrasi kampung (malam raya) */
+      #kampung { background: linear-gradient(#1b1340 0%, #4a2a6b 38%, #c8553d 72%, #f2a541 100%); }
+      #kampung svg { position: absolute; left: 0; bottom: 0; width: 1080px; height: 1920px; }
+      #darkbg { background: radial-gradient(80% 60% at 50% 45%, #0b2e1f, #06180f); }
+      /* Kamera = video Sir */
+      #cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; transform-origin: 50% 45%; }
+      #cam video { width: 100%; height: 100%; object-fit: cover; display: block; }
+      #camborder { position: absolute; inset: 0; border: 0 solid #fff; border-radius: inherit; pointer-events: none; }
+      #vig { background: radial-gradient(70% 55% at 50% 42%, rgba(0,0,0,0) 40%, rgba(0,0,0,.65) 100%); opacity: 0; }
+      #leak { background: radial-gradient(60% 45% at 85% 20%, rgba(255,170,60,.95), rgba(255,90,40,.45) 40%, rgba(0,0,0,0) 70%); mix-blend-mode: screen; opacity: 0; }
+      #flash { background: #fff; opacity: 0; }
+      .stk { position: absolute; font-size: 150px; line-height: 1; filter: drop-shadow(0 12px 24px rgba(0,0,0,.5)); }
+      .pill { position: absolute; background: #fff; color: var(--deep); font-weight: 800; font-size: 40px; padding: 12px 26px; border-radius: 999px;
+        white-space: nowrap; box-shadow: 0 12px 30px rgba(0,0,0,.4); }
+      .pill.y { background: var(--yellow); color: var(--ink); }
+      /* Kad TIP */
+      #tip { background: var(--green); clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); }
+      #tip .stripe { position: absolute; left: -200px; width: 1500px; height: 70px; background: rgba(11,11,11,.08); transform: rotate(-12deg); }
+      #tip .lbl { position: absolute; left: 60px; top: 560px; font-weight: 800; font-size: 110px; color: var(--ink); letter-spacing: .04em; }
+      #tip .num { position: absolute; left: 60px; top: 640px; font-weight: 800; font-size: 520px; line-height: .9; color: #fff; -webkit-text-stroke: 14px var(--ink); paint-order: stroke fill; }
+      #tip .sub { position: absolute; left: 60px; top: 1100px; background: var(--ink); color: #fff; font-weight: 800; font-size: 50px; padding: 10px 28px; border-radius: 14px; white-space: nowrap; }
+      /* Belon cakap */
+      .bub { position: absolute; background: #fff; color: var(--ink); font-weight: 800; font-size: 38px; padding: 16px 26px; border-radius: 36px; white-space: nowrap;
+        box-shadow: 0 10px 26px rgba(0,0,0,.35); }
+      .bub::after { content: ""; position: absolute; bottom: -18px; width: 0; height: 0; border: 14px solid transparent; border-top: 20px solid #fff; }
+      .bub.l::after { right: 40px; } .bub.r::after { left: 40px; }
+    </style>
+    <script src="scene.js"></script>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="17.3" data-width="1080" data-height="1920">
+      <div id="darkbg" class="L"></div>
+      <div id="kampung" class="L">
+        <svg viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMax slice">
+          <circle cx="840" cy="360" r="70" fill="#fff6d8" /><circle cx="872" cy="340" r="66" fill="#3a2260" />
+          <g fill="#fff" opacity=".8"><circle cx="140" cy="300" r="3"/><circle cx="300" cy="420" r="2"/><circle cx="620" cy="260" r="3"/><circle cx="980" cy="560" r="2"/><circle cx="480" cy="520" r="2"/></g>
+          <!-- pokok kelapa -->
+          <g fill="#1a0f1f"><rect x="90" y="1060" width="22" height="560" transform="rotate(6 100 1600)"/>
+            <path d="M100 1060 q-140 -20 -200 90 q110 -60 200 -90 q-60 -120 -180 -110 q130 20 180 110 q40 -130 170 -150 q-110 60 -170 150 q150 -40 220 60 q-120 -30 -220 -60z"/></g>
+          <!-- rumah kampung atas tiang -->
+          <g fill="#1a0f1f">
+            <rect x="560" y="1290" width="400" height="220" />
+            <polygon points="520,1300 760,1120 1000,1300" />
+            <rect x="590" y="1510" width="18" height="140"/><rect x="740" y="1510" width="18" height="140"/><rect x="910" y="1510" width="18" height="140"/>
+          </g>
+          <g fill="#ffcf6b"><rect x="610" y="1350" width="70" height="90" rx="6"/><rect x="840" y="1350" width="70" height="90" rx="6"/></g>
+          <rect x="0" y="1640" width="1080" height="280" fill="#120a17"/>
+          <!-- pelita -->
+          <g id="pelita" fill="#ffb347">
+            <g><rect x="250" y="1560" width="8" height="90" fill="#2b1a24"/><ellipse class="fl" cx="254" cy="1548" rx="12" ry="22"/></g>
+            <g><rect x="400" y="1580" width="8" height="70" fill="#2b1a24"/><ellipse class="fl" cx="404" cy="1568" rx="12" ry="22"/></g>
+            <g><rect x="1010" y="1570" width="8" height="80" fill="#2b1a24"/><ellipse class="fl" cx="1014" cy="1558" rx="12" ry="22"/></g>
+          </g>
+        </svg>
+      </div>
+      <div id="cam"><video id="base" src="assets/base.mp4" class="clip" data-start="0" data-duration="17.3" data-track-index="0" muted playsinline></video><div id="camborder"></div></div>
+      <div id="vig" class="L"></div>
+      <div id="fx"></div>
+      <div id="tip" class="L"><div class="stripe" style="top:300px"></div><div class="stripe" style="top:1500px"></div>
+        <div class="lbl">TIP</div><div class="num">1</div><div class="sub">JANGAN TUNJUK PANDAI</div></div>
+      <div id="leak" class="L"></div>
+      <div id="flash" class="L"></div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const $ = (s) => document.querySelector(s);
+      const fx = $("#fx");
+      const el = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstChild; };
+      const api = {
+        // sticker emoji / pil teks: masuk back.out, keluar power2.in
+        sticker(t, end, html, x, y, opt = {}) {
+          const n = el(`<div class="${opt.cls || "stk"}">${html}</div>`); fx.appendChild(n);
+          n.style.left = x + "px"; n.style.top = y + "px"; if (opt.size) n.style.fontSize = opt.size + "px";
+          tl.set(n, { opacity: 0 }, 0);
+          const from = opt.from || { scale: 0, rotation: -25 };
+          tl.fromTo(n, { opacity: 1, ...from }, { scale: 1, rotation: opt.rot || 0, x: 0, y: 0, duration: 0.3, ease: "back.out(2.2)" }, t);
+          if (opt.bob) tl.to(n, { y: -14, duration: 0.5, yoyo: true, repeat: Math.max(1, Math.floor((end - t) / 0.5) - 1), ease: "sine.inOut" }, t + 0.3);
+          tl.to(n, { opacity: 0, scale: 0.6, duration: 0.15, ease: "power2.in" }, end - 0.15);
+          return n;
+        },
+        pill(t, end, text, x, y, opt = {}) { return api.sticker(t, end, text, x, y, { ...opt, cls: "pill " + (opt.y ? "y" : "") }); },
+        shake(t, dur = 0.3, amp = 14) {
+          const n = Math.round(dur / 0.04);
+          for (let i = 0; i < n; i++) tl.to("#cam", { x: `+=${(i % 2 ? -1 : 1) * amp * (1 - i / n)}`, y: `+=${(i % 3 - 1) * amp * 0.6 * (1 - i / n)}`, duration: 0.04, ease: "none" }, t + i * 0.04);
+          tl.to("#cam", { x: 0, y: 0, duration: 0.04 }, t + n * 0.04);
+        },
+        leak(t) { tl.fromTo("#leak", { opacity: 0 }, { opacity: 0.85, duration: 0.12, yoyo: true, repeat: 1, ease: "sine.inOut" }, t); },
+        flash(t) { tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.9, duration: 0.06, yoyo: true, repeat: 1 }, t); },
+        // whip-pan pada titik potong `at`: keluar ke kiri, masuk dari kanan dengan blur
+        whip(at, onSwap) {
+          tl.to("#cam", { x: -1150, filter: "blur(28px)", duration: 0.19, ease: "power2.in" }, at - 0.19);
+          if (onSwap) onSwap(at);
+          tl.fromTo("#cam", { x: 1150, filter: "blur(28px)" }, { x: 0, filter: "blur(0px)", duration: 0.3, ease: "expo.out", immediateRender: false }, at);
+        },
+        card(t, s = 0.64, rot = -5, y = -40, dur = 0) {
+          const o = { scale: s, rotation: rot, y, borderRadius: 48 };
+          dur ? tl.to("#cam", { ...o, duration: dur, ease: "expo.out" }, t) : tl.set("#cam", o, t);
+          tl.set("#camborder", { borderWidth: 12 }, t);
+        },
+        full(t) { tl.set("#cam", { scale: 1, rotation: 0, y: 0, borderRadius: 0 }, t); tl.set("#camborder", { borderWidth: 0 }, t); },
+        tipCard(t, end) {
+          tl.set("#tip", { clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)" }, 0);
+          tl.to("#tip", { clipPath: "polygon(0% 0, 100% 0, 100% 100%, -20% 100%)", duration: 0.22, ease: "expo.out" }, t);
+          tl.fromTo("#tip .num", { scale: 3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "power4.in" }, t + 0.08);
+          tl.fromTo("#tip .lbl", { x: -200, opacity: 0 }, { x: 0, opacity: 1, duration: 0.25, ease: "expo.out" }, t + 0.05);
+          tl.fromTo("#tip .sub", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "expo.out" }, t + 0.25);
+          tl.to("#tip .num", { x: 8, duration: 0.04, yoyo: true, repeat: 3 }, t + 0.33);
+          tl.to("#tip", { clipPath: "polygon(0% 0, 0% 0, -20% 100%, -20% 100%)", duration: 0.18, ease: "power2.in" }, end - 0.18);
+        },
+        bubbles(t, end, list) {
+          list.forEach(([text, x, y, side], i) => {
+            const n = el(`<div class="bub ${side}">${text}</div>`); fx.appendChild(n);
+            n.style.left = x + "px"; n.style.top = y + "px";
+            tl.set(n, { opacity: 0 }, 0);
+            tl.fromTo(n, { opacity: 1, scale: 0, x: 540 - x - 120, y: 760 - y }, { scale: 1, x: 0, y: 0, duration: 0.28, ease: "back.out(2)" }, t + i * 0.07);
+            tl.to(n, { rotation: i % 2 ? 4 : -4, duration: 0.08, yoyo: true, repeat: 5 }, t + 0.5 + i * 0.03);
+            tl.to(n, { opacity: 0, scale: 0.7, duration: 0.15, ease: "power2.in" }, end - 0.15);
+          });
+        },
+      };
+      window.SCENE(tl, api);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

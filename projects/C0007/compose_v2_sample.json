@@ -1,0 +1,108 @@
+{
+ "base": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0007v2/dynbase.mov",
+ "out": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0007v2/C0007_sampel_dynamic.mp4",
+ "fps": 30,
+ "overlay": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0007v2/overlay.mov",
+ "sfx": [
+  {
+   "src": "/home/user/edit-Video/motion/intro/assets/signature.wav",
+   "at": 0.03,
+   "vol": 0.4
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 0.0,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 2.48,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 10.84,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 11.58,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 0.55,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 1.19,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 1.3,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 1.8,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 6.93,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 9.22,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 10.98,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 14.12,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 14.4,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 16.18,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 16.25,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 16.32,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 16.39,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 16.46,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 16.53,
+   "vol": 0.3
+  }
+ ]
+}

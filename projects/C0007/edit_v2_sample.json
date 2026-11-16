@@ -1,0 +1,69 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/raw-060224/C0007.MP4",
+ "transcript": "projects/C0007/transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0007v2",
+ "rotate": "cw",
+ "fps": 30,
+ "color": "eq=brightness=0.01:contrast=1.07:saturation=0.95:gamma=1.02",
+ "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+ "corrections": {
+  "rasa": "rahsia",
+  "temp": "time",
+  "dinding": "dendeng"
+ },
+ "segments": [
+  {
+   "note": "COLD OPEN teringat dendeng kampung time raya",
+   "start": 47.325,
+   "end": 50.015,
+   "zoom": 1.2,
+   "zoom_to": 1.24,
+   "cy": 0.41
+  },
+  {
+   "note": "hook a: nak orang senang percaya kita",
+   "start": 1.695,
+   "end": 4.605,
+   "zoom": 1.2,
+   "zoom_to": 1.28,
+   "cy": 0.41
+  },
+  {
+   "note": "hook b: bila percaya membeli (punch)",
+   "start": 4.555,
+   "end": 7.805,
+   "zoom": 1.42,
+   "zoom_to": 1.36,
+   "cy": 0.41
+  },
+  {
+   "note": "tonton sampai habis",
+   "start": 8.56,
+   "end": 10.565,
+   "zoom": 1.15,
+   "cy": 0.41
+  },
+  {
+   "note": "yang pertama (kad TIP 1)",
+   "start": 13.66,
+   "end": 14.445,
+   "zoom": 1.2,
+   "cy": 0.41
+  },
+  {
+   "note": "TIP1 jangan tunjuk pandai (punch)",
+   "start": 18.815,
+   "end": 20.88,
+   "zoom": 1.45,
+   "zoom_to": 1.4,
+   "cy": 0.41
+  },
+  {
+   "note": "tunjuk pandai -> banyak bercakap (belon)",
+   "start": 22.88,
+   "end": 26.41,
+   "zoom": 1.12,
+   "cy": 0.41
+  }
+ ]
+}
