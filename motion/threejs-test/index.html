@@ -50,32 +50,46 @@ rim.position.set(-6, 2, -4);
 scene.add(rim);
 
 // Telefon
-const PW = 3.4, PH = 7.0, PD = 0.36;
+// Gaya iPhone moden (tanpa logo): bingkai titanium, kaca depan hitam, butang sisi
+const PW = 3.4, PH = 7.02, PD = 0.3, CORNER = 0.56;
 const phone = new THREE.Group();
-const body = new THREE.Mesh(
-  new RoundedBoxGeometry(PW, PH, PD, 6, 0.42),
-  new THREE.MeshStandardMaterial({ color: 0x1a1c20, metalness: 0.85, roughness: 0.28 }),
-);
+const titanium = new THREE.MeshStandardMaterial({ color: 0x8c8a86, metalness: 1, roughness: 0.32 });
+const body = new THREE.Mesh(new RoundedBoxGeometry(PW, PH, PD, 8, CORNER), titanium);
 phone.add(body);
+const glass = new THREE.Mesh(
+  new RoundedBoxGeometry(PW - 0.07, PH - 0.07, 0.02, 6, CORNER - 0.04),
+  new THREE.MeshPhysicalMaterial({ color: 0x050505, metalness: 0, roughness: 0.08, clearcoat: 1, clearcoatRoughness: 0.05 }),
+);
+glass.position.z = PD / 2 + 0.002;
+phone.add(glass);
+const btn = (x, y, h) => {
+  const b = new THREE.Mesh(new RoundedBoxGeometry(0.06, h, 0.16, 3, 0.03), titanium);
+  b.position.set(x, y, 0); phone.add(b);
+};
+btn(-PW / 2 - 0.02, 2.15, 0.32); // butang Action
+btn(-PW / 2 - 0.02, 1.45, 0.62); // volume +
+btn(-PW / 2 - 0.02, 0.7, 0.62);  // volume -
+btn(PW / 2 + 0.02, 1.15, 0.95);  // butang kuasa
 
 // Skrin (canvas texture)
-const SCR_W = 460, SCR_H = 981;
+const SCR_W = 460, SCR_H = 992;
 const scr = document.createElement("canvas");
 scr.width = SCR_W; scr.height = SCR_H;
 const sctx = scr.getContext("2d");
 const screenTex = new THREE.CanvasTexture(scr);
 screenTex.colorSpace = THREE.SRGBColorSpace;
 screenTex.anisotropy = 8;
-const screenGeo = new RoundedBoxGeometry(PW - 0.22, PH - 0.22, 0.02, 4, 0.32);
+const SW = PW - 0.26, SH = PH - 0.26;
+const screenGeo = new RoundedBoxGeometry(SW, SH, 0.01, 6, CORNER - 0.13);
 // UV kotak: guna planar UV dari posisi supaya tekstur penuh di muka depan
 {
   const pos = screenGeo.attributes.position, uv = screenGeo.attributes.uv;
   for (let i = 0; i < pos.count; i++) {
-    uv.setXY(i, pos.getX(i) / (PW - 0.22) + 0.5, pos.getY(i) / (PH - 0.22) + 0.5);
+    uv.setXY(i, pos.getX(i) / SW + 0.5, pos.getY(i) / SH + 0.5);
   }
 }
 const screen = new THREE.Mesh(screenGeo, new THREE.MeshBasicMaterial({ map: screenTex, toneMapped: false }));
-screen.position.z = PD / 2 + 0.005;
+screen.position.z = PD / 2 + 0.014;
 phone.add(screen);
 scene.add(phone);
 
@@ -136,15 +150,17 @@ function drawScreen(t) {
   c.fillStyle = "rgba(0,0,0,0.035)";
   for (let y = 150; y < SCR_H; y += 60) for (let x = (y / 60) % 2 ? 20 : 50; x < SCR_W; x += 60) { c.beginPath(); c.arc(x, y, 3, 0, 7); c.fill(); }
   // header
-  c.fillStyle = BLACK; c.fillRect(0, 0, SCR_W, 140);
-  c.fillStyle = GREEN; c.beginPath(); c.arc(70, 100, 34, 0, 7); c.fill();
-  c.fillStyle = BLACK; c.font = "800 30px Mont"; c.textAlign = "center"; c.fillText("CA", 70, 111); c.textAlign = "left";
-  c.fillStyle = "#FFFFFF"; c.font = "800 32px Mont"; c.fillText("Cik Aina", 122, 94);
-  c.fillStyle = GREEN; c.font = "600 22px Mont";
+  c.fillStyle = BLACK; c.fillRect(0, 0, SCR_W, 175);
+  statusBar(c);
+  c.fillStyle = "#FFFFFF"; c.font = "600 40px Mont"; c.fillText("‹", 18, 136);
+  c.fillStyle = GREEN; c.beginPath(); c.arc(84, 124, 30, 0, 7); c.fill();
+  c.fillStyle = BLACK; c.font = "800 26px Mont"; c.textAlign = "center"; c.fillText("CA", 84, 134); c.textAlign = "left";
+  c.fillStyle = "#FFFFFF"; c.font = "800 30px Mont"; c.fillText("Cik Aina", 128, 118);
+  c.fillStyle = GREEN; c.font = "600 20px Mont";
   const typing = t > 1.55 && t < 2.15;
-  c.fillText(typing ? "sedang menaip..." : "dalam talian", 122, 126);
+  c.fillText(typing ? "sedang menaip..." : "dalam talian", 128, 146);
 
-  let y = 175;
+  let y = 200;
   y += bubble(c, "Harga ok, tapi nanti saya fikir dulu ya", "in", y, prog(t, 0.95, 1.3), "9:41") + 18;
   if (typing) {
     // titik menaip (bubble keluar)
@@ -156,7 +172,27 @@ function drawScreen(t) {
     }
   }
   bubble(c, "Boleh! Kalau saya bagi bonus khas untuk hari ni, Cik nak ambil sekarang?", "out", y, prog(t, 2.15, 2.5), "9:42");
+  // home indicator
+  c.fillStyle = "rgba(0,0,0,0.85)"; rr(c, SCR_W / 2 - 70, SCR_H - 22, 140, 8, 4); c.fill();
   screenTex.needsUpdate = true;
+}
+
+function statusBar(c) {
+  // Dynamic Island
+  c.fillStyle = "#000"; rr(c, SCR_W / 2 - 62, 14, 124, 36, 18); c.fill();
+  c.fillStyle = "#1b1f2a"; c.beginPath(); c.arc(SCR_W / 2 + 40, 32, 8, 0, 7); c.fill();
+  // masa
+  c.fillStyle = "#FFFFFF"; c.font = "800 24px Mont"; c.fillText("9:41", 48, 42);
+  // isyarat (4 bar)
+  const sx = SCR_W - 136;
+  for (let i = 0; i < 4; i++) { const h = 6 + i * 4; rr(c, sx + i * 8, 42 - h, 5.5, h, 1.5); c.fill(); }
+  // wifi
+  c.strokeStyle = "#FFFFFF"; c.lineWidth = 3.4; c.lineCap = "round";
+  for (let i = 0; i < 3; i++) { c.beginPath(); c.arc(SCR_W - 86, 44, 5 + i * 6, Math.PI * 1.25, Math.PI * 1.75); c.stroke(); }
+  // bateri
+  c.lineWidth = 2; c.strokeStyle = "rgba(255,255,255,0.55)"; rr(c, SCR_W - 66, 26, 38, 18, 5); c.stroke();
+  c.fillStyle = "#FFFFFF"; rr(c, SCR_W - 63, 29, 28, 12, 3); c.fill();
+  c.fillStyle = "rgba(255,255,255,0.55)"; rr(c, SCR_W - 26, 31, 3, 8, 1.5); c.fill();
 }
 
 // ---------- Komposit 2D ----------
