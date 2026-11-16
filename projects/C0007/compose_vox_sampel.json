@@ -20,26 +20,6 @@
   },
   {
    "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
-   "at": 4.3,
-   "vol": 0.5
-  },
-  {
-   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
-   "at": 6.6,
-   "vol": 0.5
-  },
-  {
-   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
-   "at": 8.0,
-   "vol": 0.5
-  },
-  {
-   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
-   "at": 8.36,
-   "vol": 0.5
-  },
-  {
-   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
    "at": 9.0,
    "vol": 0.5
   },
@@ -72,6 +52,26 @@
    "src": "/home/user/edit-Video/motion/sfx/kertas_koyak.wav",
    "at": 8.78,
    "vol": 0.55
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 4.3,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 6.6,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 7.8,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 8.2,
+   "vol": 0.25
   }
  ]
 }

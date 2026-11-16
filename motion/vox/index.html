@@ -34,6 +34,8 @@
       .tp .pp { background: #fbf8f1; padding: 18px 18px 64px; }
       .tp .img { background-size: cover; background-position: center; }
       .tp .cap { position: absolute; left: 30px; bottom: 16px; font-family: "Caveat"; font-weight: 700; font-size: 44px; color: #333; }
+.prop { position: absolute; filter: drop-shadow(0 18px 22px rgba(40,25,5,.38)); }
+      .prop img { width: 100%; display: block; }
       .tape { position: absolute; width: 180px; height: 60px; background: rgba(240,228,190,.88); box-shadow: 0 2px 6px rgba(0,0,0,.12); transform-origin: left center; }
       .strip { position: absolute; background: #fbf8f1; padding: 16px 28px; font-weight: 800; font-size: 70px; color: #1a1a1a; letter-spacing: -.02em;
         box-shadow: 0 10px 22px rgba(0,0,0,.28); white-space: nowrap; }
@@ -111,6 +113,20 @@
           tl.to(tape, { scaleX: 1, duration: 0.18, ease: "power2.out" }, t + 0.3);
           tl.fromTo(im, { scale: 1 }, { scale: 1.07, duration: Math.max(0.5, end - t), ease: "none", immediateRender: false }, t);
           out(n, end); return n;
+        },
+        // PROP potong (tiada bingkai): masuk dari tepi macam diletak tangan, goyang halus macam dipegang, keluar diangkat
+        prop(t, end, img, x, y, w, rot = 0, from = "bottom", exit = "back") {
+          const n = put(`<div class="prop" style="left:${x}px;top:${y}px;width:${w}px"><img src="assets/${img}"></div>`);
+          const off = { bottom: { y: 900, x: 0 }, right: { x: 900, y: 120 }, left: { x: -900, y: 120 }, top: { y: -900, x: 0 } }[from];
+          tl.set(n, { opacity: 0 }, 0);
+          tl.fromTo(n, { opacity: 1, x: off.x, y: off.y, rotation: rot + (off.x < 0 ? -14 : 14) }, { x: 0, y: 0, rotation: rot, duration: 0.5, ease: "power3.out", immediateRender: false }, t);
+          const hold = end - t - 0.8;
+          if (hold > 0.4) tl.to(n, { rotation: rot + 1.4, y: -8, duration: hold / 2, ease: "sine.inOut", yoyo: true, repeat: 1 }, t + 0.5);
+          if (end < D) {
+            if (exit === "up" || exit === "down") tl.to(n, { y: exit === "up" ? -1100 : 1150, rotation: rot + (exit === "up" ? -3 : 3), duration: 0.45, ease: "power2.in" }, end + 0.03); // ikut koyakan kertas
+            else tl.to(n, { y: off.y > 0 ? 900 : -900, x: off.x, rotation: rot - 10, duration: 0.3, ease: "power2.in" }, end - 0.3);
+          }
+          return n;
         },
         // kertas turun menutup skrin (tepi bawah koyak) → babak kertas
         tearIn(t, endOut) {

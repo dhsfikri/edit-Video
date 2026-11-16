@@ -15,12 +15,12 @@ window.VOX = {
     // 3) 2.93–6.2 "bila percaya, BELI" (highlight pada "membeli" 4.24) + gambar dendeng koyak
     const s2 = api.strip(2.95, 6.05, '<span class="lt">bila percaya, </span><hl>BELI</hl>', 80, 290, 1);
     api.hl(s2, 4.2);
-    api.photo(4.3, 6.05, "dendeng_goreng.jpg", 470, 940, 360, 280, 5, "dendeng");
+    api.prop(4.3, 6.05, "dendeng.png", 380, 960, 500, 6, "right");
     // 4) 6.21–8.9 KOLAJ atas kertas (suara Sir): kertas turun, gambar ditampal ikut perkataan
     api.tearIn(6.0, 8.78);
-    api.photo(6.6, 8.8, "dendeng_goreng.jpg", 90, 420, 740, 520, -3, "dendeng");
-    api.photo(8.0, 8.8, "rumah_semanggol.jpg", 130, 760, 720, 430, 4, "kampung");
-    api.photo(8.36, 8.8, "ketupat_palas.jpg", 520, 1010, 320, 200, -7, "time raya");
+    api.prop(6.6, 8.78, "dendeng.png", 110, 420, 740, -4, "left", "up");
+    api.prop(7.8, 8.78, "rumah_kampung.png", 160, 760, 720, 2, "right", "down");
+    api.prop(8.2, 8.78, "ketupat.png", 540, 1000, 340, -6, "bottom", "down");
     const s3 = api.strip(6.5, 8.8, '<span class="lt">teringat </span><hl>kampung</hl>', 80, 290, -1);
     api.hl(s3, 8.0);
     // 5) 8.9–10.97 kertas terkoyak → Sir; "nak tahu RAHSIA?" + nota + anak panah
