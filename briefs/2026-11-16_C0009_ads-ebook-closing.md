@@ -80,5 +80,10 @@ Sasaran v2: **visual berubah setiap 1.5–3s (±18 kali)**, ikut reference danus
 - **SFX:** whoosh setiap tukar layout, pop setiap kinetic word
 - ⚠️ Ini **ubah peraturan Gaya v2** ("tiada punch-in besar") — untuk ads / video dynamic sahaja, atau semua video lepas ni?
 
+## Status sambungan (2026-11-16, berhenti ±4 petang — sambung 6.30 petang)
+- ✅ **Klip ujian v2 0–7.9s DILULUSKAN Sir** ("much better untuk ads"). Gaya ni = standard ads: motion graphic sahaja (TIADA footage stok/tangan), kinetic `pops`, punch-in `keys`, babak `phone`/`grid` dalam `motion/kad/`.
+- Fail: `projects/C0009/edit_v2.json` (A-roll 41.77s, hujung Assalamualaikum), `projects/C0009/data_v2_ujian.js` (overlay 0–7.85s).
+- **Seterusnya:** babak 3 (kaunter 1→2→3 BUKU + punch-in buku, 7.85–11.7s) → babak 4 (garis masa 2020→2026 MASIH RELEVAN, 11.7–18.2s) → babak 5 (kad ebook/bonus, render semula pada masa v2) → babak 6 (LEBIH MUDAH, team, TIRU SAHAJA, butang LEARN MORE besar atas rakaman sebenar 39.1–41.8s) → draf penuh v2 → QC → hantar.
+
 ## Revisi
 - **Draf v1 (40.3s)** — 2026-11-16. A-roll 39.25s (6 potongan) + tahan 1s. Babak kad baru `motion/kad/` (ISI 3 E-BOOK 18.25–25.8s, BONUS 25.8–32.3s). Subtitle pil gelap (`subPill`), 3 perkataan/≤22 huruf sebaris. "kata BQP" & "under" tiada dalam subtitle; "setiru" → "just tiru". Buku dalam kad = generik "Learning Lab Vol.1–3" (bukan cover sebenar). QC: safe zone lulus, -14.0 LUFS, peak -2.9 dB.
