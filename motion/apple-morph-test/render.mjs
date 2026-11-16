@@ -26,7 +26,7 @@ const browser = await chromium.launch({ args: ["--use-angle=swiftshader", "--ena
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
 page.on("console", (m) => console.log("[page]", m.text()));
 page.on("pageerror", (e) => console.log("[pageerror]", e.message));
-await page.goto(`http://127.0.0.1:${port}/index.html${process.env.Q || ""}`);
+await page.goto(`http://127.0.0.1:${port}/${process.env.PAGE || "index.html"}${process.env.Q || ""}`);
 await page.waitForFunction(() => window.ready === true, null, { timeout: 30000 });
 
 const decode = (u) => Buffer.from(u.split(",")[1], "base64");

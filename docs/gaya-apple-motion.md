@@ -22,3 +22,17 @@
 ## Nota percanggahan
 Skill `motion-design` (personaliti *Premium*) sarankan 0% lajak. Rujukan Apple ini **guna bounce kecil (~5–10%)**.
 Untuk kerja gaya Apple, ikut rujukan ini.
+
+## Versi CINEMATIC + 3D (`motion/apple-morph-test/cinematic.html`)
+Ikut skill `cinetic` (lighting.md §1/§7, camera.md §8/§9/§13) + `threejs-lighting` / `threejs-postprocessing`:
+
+| Elemen | Nilai yang dipakai |
+|---|---|
+| Cahaya kunci | SpotLight dari atas kiri (azimuth ~315°, elevation ~34°), kolam cahaya bergerak perlahan (cahaya hidup, bukan objek) |
+| Bayang | VSM lembut (radius 14) + cahaya "kontak" hampir dari depan untuk bayang pendek & tajam rapat dengan objek; bayang dalam hue dinding (hijau gelap), bukan hitam |
+| Ketinggian (lift) | Objek naik bila bergerak (bayang memanjang & lembut), turun bila ditekan (bayang mengecil) |
+| Bahan | Slab extrude dengan bevel (tepi menangkap cahaya = rim); butang emissive ringan; teks pada satah tanpa cahaya (sentiasa tajam) |
+| Kamera | Kanta panjang (FOV 28°); dolly masuk semasa buka → satu orbit 3D (yaw −13°) masa kad muncul, mendarat menghadap → push ke butang akhir. Tiada terapung antara gerakan |
+| Kemasan | NeutralToneMapping (warna brand kekal), bloom hanya > 1.0 (butang sahaja, tiada halo pada teks), vignette, grain, motion blur 2 sub-frame |
+| Teks | Tanpa lajak (cinetic: tiada spring pada copy); bentuk & butang guna spring |
+| Kos render | ~1.6 s/sub-frame tanpa DOF (Bokeh ~2× lebih lambat; ditinggalkan kerana semua elemen dalam satu satah fokus) |
