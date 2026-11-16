@@ -5,7 +5,9 @@ Setiap aset yang diambil disimpan dalam library/<kategori>/ dan direkod (sumber,
 video yang guna). Semua video ambil aset dari sini, jadi aset yang sama boleh diguna semula.
 
 Guna:
-  python3 -I pipeline/aset.py cari "customer phone" [--n 10]             # Openverse (tanpa key, default)
+  python3 -I pipeline/aset.py cari "customer phone" [--n 10] [--video]   # Pixabay (default bila PIXABAY_API_KEY ada)
+  python3 -I pipeline/aset.py ambil px:<pixabay_id> --kategori suasana --tag "phone" [--video]
+  python3 -I pipeline/aset.py cari "customer phone" --sumber openverse    # Openverse (tanpa key)
   python3 -I pipeline/aset.py cari "customer phone" --sumber pexels [--video]  # Pexels (perlu key)
   python3 -I pipeline/aset.py ambil ov:<openverse_id> --kategori suasana --tag "phone"
   python3 -I pipeline/aset.py ambil <pexels_id> --kategori suasana --tag "phone,customer" [--video]
@@ -14,6 +16,7 @@ Guna:
   python3 -I pipeline/aset.py guna <aset_id> <projek_id>                 # tandakan aset diguna dalam video
   python3 -I pipeline/aset.py senarai [--tag phone]
 
+Key Pixabay: env PIXABAY_API_KEY (Sir isi dalam tetapan environment).
 Key Pexels: network secret untuk api.pexels.com (proxy suntik header), ATAU env PEXELS_API_KEY.
 """
 import argparse, datetime, json, os, re, subprocess, sys, tarfile, tempfile, urllib.parse, urllib.request
@@ -84,7 +87,33 @@ def openverse(path, **q):
     return json.load(urllib.request.urlopen(req, timeout=30))
 
 
+PX_LESEN = "Pixabay Content License (percuma, komersial OK, tiada kredit wajib)"
+
+
+def pixabay(video=False, **q):
+    key = os.environ.get("PIXABAY_API_KEY")
+    if not key:
+        sys.exit("✗ PIXABAY_API_KEY belum disetkan (tetapan environment → environment variables).")
+    url = f"https://pixabay.com/api/{'videos/' if video else ''}?" + urllib.parse.urlencode(dict(key=key, safesearch="true", **q))
+    req = urllib.request.Request(url, headers={"User-Agent": "edit-video-library/1.0"})
+    try:
+        return json.load(urllib.request.urlopen(req, timeout=30))
+    except urllib.error.HTTPError as e:
+        sys.exit(f"✗ Pixabay {e.code}: {e.read()[:200].decode(errors='replace')}")
+
+
 def cmd_cari(a):
+    if a.sumber == "pixabay":
+        q = dict(q=a.q, per_page=max(3, a.n))
+        if a.video:
+            for h in pixabay(True, **q)["hits"]:
+                v = h["videos"]["large"] if h["videos"]["large"]["url"] else h["videos"]["medium"]
+                print(f"px:{h['id']}  {h['duration']:>3}s  {v['width']}x{v['height']}  {h['tags'][:50]}  {h['pageURL']}")
+        else:
+            q.update(image_type="photo", orientation="vertical" if a.orientasi == "portrait" else "all")
+            for h in pixabay(**q)["hits"]:
+                print(f"px:{h['id']}  {h['imageWidth']}x{h['imageHeight']}  {h['tags'][:50]}  {h['pageURL']}")
+        return
     if a.sumber == "openverse":
         q = dict(q=a.q, license=OV_LESEN, page_size=a.n, mature="false")
         if a.orientasi == "portrait":
@@ -106,7 +135,25 @@ def cmd_cari(a):
 def cmd_ambil(a):
     k = load()
     tags = [t.strip() for t in a.tag.split(",") if t.strip()]
-    if a.id.startswith("ov:"):
+    if a.id.startswith("px:"):
+        pid = a.id[3:]
+        hits = pixabay(a.video, id=pid)["hits"]
+        if not hits:
+            sys.exit(f"✗ Pixabay id {pid} tiada")
+        h = hits[0]
+        if a.video:
+            v = h["videos"]["large"] if h["videos"]["large"]["url"] else h["videos"]["medium"]
+            dest = LIB / a.kategori / f"px-v{pid}.mp4"
+            download(v["url"], dest)
+            rec = dict(id=f"px-v{pid}", jenis="video", dimensi=f"{v['width']}x{v['height']}", durasi=h["duration"])
+        else:
+            dest = LIB / a.kategori / f"px-{pid}.jpg"
+            download(h["largeImageURL"], dest)
+            shrink(dest)
+            rec = dict(id=f"px-{pid}", jenis="gambar", alt=h["tags"])
+        rec.update(fail=str(dest.relative_to(ROOT)), sumber="Pixabay", url=h["pageURL"], kredit=h["user"],
+                   lesen=PX_LESEN, kredit_wajib=False)
+    elif a.id.startswith("ov:"):
         r = openverse(f"images/{a.id[3:]}/")
         if r["license"] not in OV_LESEN.split(","):
             sys.exit(f"✗ lesen {r['license']} tak dibenarkan (hanya {OV_LESEN})")
@@ -202,7 +249,8 @@ def main():
     s = ap.add_subparsers(dest="cmd", required=True)
     p = s.add_parser("cari"); p.add_argument("q"); p.add_argument("--n", type=int, default=10)
     p.add_argument("--video", action="store_true"); p.add_argument("--orientasi", default="portrait")
-    p.add_argument("--sumber", choices=["openverse", "pexels"], default="openverse")
+    p.add_argument("--sumber", choices=["pixabay", "openverse", "pexels"],
+                   default="pixabay" if os.environ.get("PIXABAY_API_KEY") else "openverse")
     p = s.add_parser("ambil"); p.add_argument("id"); p.add_argument("--kategori", required=True)
     p.add_argument("--tag", default=""); p.add_argument("--video", action="store_true")
     p = s.add_parser("ikon"); p.add_argument("nama", nargs="+"); p.add_argument("--warna")
