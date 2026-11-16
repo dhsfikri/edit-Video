@@ -8,6 +8,8 @@
 | `reverse-any-video` | analisis video reference | ✅ ada (ciri "reverse" penuh = HyperFrames Pro) |
 | `rembg` (pip) | buang latar gambar → prop | ⚠️ dipasang dalam sesi ini sahaja — perlu masuk setup script environment |
 | `yt-dlp`, `opencv`, `faster-whisper` (pip) | download reference, kesan muka, transcribe | ⚠️ sama — perlu setup script |
+| `vox` (melvynx) | teknik kolaj Vox: halftone, sempadan gunting, stop-motion, push-in | ✅ ada — jana lapisan guna Codex TIDAK boleh di cloud; guna gambar domain awam |
+| `cinematic-camera` (liamrjohnston) | kamera 'satu dunia', keyframe fokus + zoom | ✅ ada — asal Remotion, prinsip dipakai dalam HyperFrames |
 | Playwright + Chromium | storyboard / mockup | ✅ pra-pasang |
 
 ## Blok registry HyperFrames yang dipakai

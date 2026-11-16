@@ -1,6 +1,13 @@
 {
   "version": 2,
   "skills": {
+    "cinematic-camera": {
+      "source": "liamrjohnston/remotion-motion-graphics-skill",
+      "commit": "b860c7921f2220b9e2a84e815ba0ae7b10858f08",
+      "sourceType": "github",
+      "skillPath": "skills/cinematic-camera/SKILL.md",
+      "computedHash": "ba5ce59874c845e380a89cc750693f0ea3d8cefa915614d93b6ef0e63816b74d"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
@@ -27,6 +34,13 @@
       "sourceType": "github",
       "skillPath": "skills/reverse-any-video/SKILL.md",
       "computedHash": "782fcf46450fc859611c2466f744df02bc890b3f88459f8489031b0752d8731b"
+    },
+    "vox": {
+      "source": "melvynx/video-agent-skills",
+      "commit": "f4542923f7f796a1fa0e544cbfc1109d5eec87d8",
+      "sourceType": "github",
+      "skillPath": "skills/vox/SKILL.md",
+      "computedHash": "84485ad3b56dc64e321c877d734520d4072a101e36667cd7d215929e6e837997"
     }
   }
 }
