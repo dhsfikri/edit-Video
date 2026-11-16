@@ -1,6 +1,13 @@
 {
   "version": 2,
   "skills": {
+    "better-typography": {
+      "source": "jakubkrehel/skills",
+      "sourceType": "github",
+      "skillPath": "skills/better-typography/SKILL.md",
+      "computedHash": "85b6c26d65e0bcf11fb97f03ec91c057d5adc5d87bdffdee2eb14e0fac59c0a8",
+      "installMode": "copy"
+    },
     "cinetic": {
       "source": "Leonxlnx/cinetic",
       "sourceType": "github",
