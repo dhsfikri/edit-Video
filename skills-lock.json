@@ -20,6 +20,13 @@
       "sourceType": "github",
       "skillPath": "skills/hyperframes-registry/SKILL.md",
       "computedHash": "68c90542d8e4df21600949ef61da72fb7ab0c8c22cde3bfdc250e92fcc1d3696"
+    },
+    "reverse-any-video": {
+      "source": "heygen-com/hyperframes",
+      "commit": "5d5e2c062a4876e590f8d5a9fe59833d7b1e3684",
+      "sourceType": "github",
+      "skillPath": "skills/reverse-any-video/SKILL.md",
+      "computedHash": "782fcf46450fc859611c2466f744df02bc890b3f88459f8489031b0752d8731b"
     }
   }
 }
