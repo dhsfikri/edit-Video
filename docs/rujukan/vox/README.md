@@ -11,3 +11,18 @@ Tiada video rujukan dari Sir lagi (berdasarkan gaya umum video explainer Vox). J
 | Anotasi tangan merah | bulatan, anak panah, nota Caveat merah (registry: `hw-underline`, `hw-arrow`, `hw-box-label`) |
 | Gerakan | Ken Burns perlahan pada gambar, kertas masuk dengan sedikit pusingan, transition kertas koyak |
 Storyboard: `briefs/2026-11-16_C0007_storyboard-intro-VOX.png`
+
+## Keputusan Sir (2026-11-16, sesi grill) — WAJIB ikut
+| Perkara | Keputusan |
+|---|---|
+| Skop | **C0007 dulu (pilot)**; C0008 selepas Sir semak |
+| Paper tear | **Gambar + transition** sahaja. Video Sir **bersih penuh skrin** |
+| Muka vs kolaj | **Muka ~60% / kolaj ~40%** — kolaj muncul pada poin penting |
+| Subtitle | **Karaoke biasa** (putih, perkataan aktif hijau) |
+| Tajuk | **Jalur kertas krim + highlighter kuning** |
+| Coretan tangan | **Merah** |
+| Grain / bingkai pada video Sir | **Tiada** |
+| Chat B-roll | **Keratan chat atas kertas** + pita + tanda merah (generik, tiada emoji) |
+| Gambar | **Stok berlesen + `aset/gambar/`** (catat lesen dalam `LESEN.md`) |
+| Intro | **Soalan dulu**: "Nak orang percaya?" → "bila percaya, beli" → "teringat dendeng kampung time raya" |
+| Muzik | Tiada dalam fail — Sir tambah dari TikTok Commercial Music Library |
