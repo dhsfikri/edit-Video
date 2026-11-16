@@ -89,6 +89,66 @@
    ],
    "tarikh": "2026-11-16",
    "digunakan": []
+  },
+  {
+   "id": "px-v2294",
+   "jenis": "video",
+   "dimensi": "1920x1080",
+   "durasi": 14,
+   "fail": "library/b-roll/px-v2294.mp4",
+   "sumber": "Pixabay",
+   "url": "https://pixabay.com/videos/id-2294/",
+   "kredit": "Coverr-Free-Footage",
+   "lesen": "Pixabay Content License (percuma, komersial OK, tiada kredit wajib)",
+   "kredit_wajib": false,
+   "kategori": "b-roll",
+   "tag": [
+    "phone",
+    "scroll",
+    "iklan"
+   ],
+   "tarikh": "2026-11-16",
+   "digunakan": []
+  },
+  {
+   "id": "px-v38084",
+   "jenis": "video",
+   "dimensi": "1920x1080",
+   "durasi": 8,
+   "fail": "library/b-roll/px-v38084.mp4",
+   "sumber": "Pixabay",
+   "url": "https://pixabay.com/videos/id-38084/",
+   "kredit": "mephala1980",
+   "lesen": "Pixabay Content License (percuma, komersial OK, tiada kredit wajib)",
+   "kredit_wajib": false,
+   "kategori": "b-roll",
+   "tag": [
+    "phone",
+    "woman",
+    "iklan"
+   ],
+   "tarikh": "2026-11-16",
+   "digunakan": []
+  },
+  {
+   "id": "px-v88686",
+   "jenis": "video",
+   "dimensi": "1920x1080",
+   "durasi": 5,
+   "fail": "library/b-roll/px-v88686.mp4",
+   "sumber": "Pixabay",
+   "url": "https://pixabay.com/videos/id-88686/",
+   "kredit": "Firmbee",
+   "lesen": "Pixabay Content License (percuma, komersial OK, tiada kredit wajib)",
+   "kredit_wajib": false,
+   "kategori": "b-roll",
+   "tag": [
+    "phone",
+    "scroll",
+    "iklan"
+   ],
+   "tarikh": "2026-11-16",
+   "digunakan": []
   }
  ]
 }

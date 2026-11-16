@@ -60,6 +60,12 @@
       .sw.on { background: var(--green); color: var(--ink); text-shadow: none; }
       .gi { display: inline-block; } .pill .gi { background: rgba(11,11,11,.72); border-radius: 18px; padding: 8px 10px; }
 
+      /* pops: kinetic typography besar (gaya dynamic/ads) */
+      .pop { position: absolute; left: 60px; width: 840px; text-align: center; font-weight: 800; line-height: 1; white-space: nowrap; color: #fff;
+        text-shadow: 0 0 2px #0b0b0b, 0 6px 0 #0b0b0b, 0 10px 24px rgba(0,0,0,.65); letter-spacing: -.01em; }
+      .pop.y { color: #ffd60a; } .pop.g { color: #25d366; }
+      .pop span { display: inline-block; background: rgba(11,11,11,.0); padding: 0 12px; border-radius: 14px; }
+      .pop.box span { background: #0b0b0b; text-shadow: none; padding: 6px 26px 12px; }
       #cta { position: absolute; left: 60px; right: 180px; top: 1190px; text-align: center; }
       #cta span { display: inline-block; background: #fff; color: var(--deep); font-weight: 800; font-size: 36px; padding: 14px 30px; border-radius: 999px; }
     </style>
@@ -158,6 +164,20 @@
         const showAt = Math.max(g[0].s - 0.05, 0);
         // pastikan sembunyi SELEPAS muncul (masa perkataan Whisper kadang bertindih → kumpulan tertinggal)
         tl.set(node, { opacity: 0 }, Math.max(nxt ? nxt[0].s - 0.05 : Math.min(g[g.length - 1].e + 0.4, D), showAt + 0.13));
+      });
+
+      // Kinetic typography: E.pops [{t, end, text, y, size, c:"w"|"y"|"g", box, rot}]
+      (E.pops || []).forEach((p) => {
+        const n = put(`<div class="pop ${p.c || "w"}${p.box ? " box" : ""}"><span>${p.text}</span></div>`);
+        n.style.top = (p.y || 820) + "px"; n.style.fontSize = (p.size || 120) + "px";
+        const sp = n.firstChild, wN = sp.getBoundingClientRect().width;
+        if (wN > 840) n.style.fontSize = Math.floor((p.size || 120) * 840 / wN) + "px"; // muat safe zone
+        tl.set(n, { opacity: 0 }, 0);
+        tl.fromTo(sp, { scale: 2.3, rotation: (p.rot || 0) * 3, filter: "blur(14px)", opacity: 0 },
+          { scale: 1, rotation: p.rot || 0, filter: "blur(0px)", opacity: 1, duration: 0.2, ease: "back.out(1.6)" }, p.t);
+        tl.set(n, { opacity: 1 }, p.t);
+        tl.to(sp, { scale: 1.06, duration: 0.08, yoyo: true, repeat: 1 }, p.t + 0.2);
+        if (p.end < D) tl.to(n, { opacity: 0, scale: 0.85, y: -30, filter: "blur(8px)", duration: 0.12 }, p.end - 0.12);
       });
 
       // CTA
