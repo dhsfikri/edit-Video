@@ -9,3 +9,7 @@ motion/*/.hyperframes/video-state.json
 
 # Fail kerja besar (rakaman, render) untuk EffectCraft — tidak masuk git
 _kerja/
+
+# Video final / banding (besar) — hantar kepada Sir, tidak masuk git
+projects/*/*_final*.mp4
+projects/*/*_banding*.mp4

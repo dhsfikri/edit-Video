@@ -84,7 +84,7 @@ total += ins["dur"] if ins else 0
 
 cmd = ["ffmpeg", "-v", "error", "-stats", "-y", *inputs, "-filter_complex", ";".join(fc),
        "-map", "[vout]", "-map", "[aout]", "-t", f"{total:.3f}", "-r", str(fps),
-       "-c:v", "libx264", "-preset", "slow", "-profile:v", "high", "-crf", "16", "-maxrate", "20M", "-bufsize", "30M",
+       "-c:v", "libx264", "-preset", "slow", "-profile:v", "high", "-crf", str(c.get("crf", 16)), "-maxrate", "20M", "-bufsize", "30M",
        "-g", str(int(round(float(fps) * 2))), "-pix_fmt", "yuv420p", "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
        "-c:a", "aac", "-b:a", "320k", "-ar", "48000", "-movflags", "+faststart", c["out"]]
 subprocess.run(cmd, check=True)
