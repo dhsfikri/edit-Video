@@ -8,8 +8,10 @@ Cara tarik: `accounts_get_follower_stats` (follower), `analytics_get_analytics` 
 ## Matlamat (isi bersama Sir)
 | Tempoh | Follower | Purata views | Lain-lain |
 |---|---|---|---|
-| 30 hari | ? | ? | ? |
-| 90 hari | ? | ? | ? |
+| 30 hari (17 Nov → 17 Dis 2026) | **1,000** | (dipantau) | **1 video sehari = 30 video** |
+| 90 hari | (tetap selepas 30 hari) | | |
+
+**Kiraan sasaran:** ~33 follower sehari. Semak setiap Isnin: Minggu 1 ≥ 150 · Minggu 2 ≥ 400 · Minggu 3 ≥ 700 · Minggu 4 ≥ 1,000. Kalau ketinggalan → ubah hook/format, bukan tambah kuantiti.
 
 ## Rekod mingguan (setiap Isnin)
 | Minggu | Tarikh | Follower | Video dipost | Jumlah views | Purata views | Video terbaik | Pelajaran / tindakan |
