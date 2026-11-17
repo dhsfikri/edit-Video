@@ -47,6 +47,7 @@ Prototaip: `motion/effectcraft/proto_split.ecproj` (render contoh `_kerja/proto_
 | Folder kerja EffectCraft | `_kerja/` (diabaikan git) | ✅ |
 | Prototaip split + kad 3D flip + render | `motion/effectcraft/proto_split.ecproj` | ✅ diuji (4s render ~20s CPU) |
 | Skill: director, motion, cinematic-camera, hyperframes(+registry), reverse-any-video, tiktok-edit | `.claude/skills/` | ✅ |
+| Skill 3D/cinematic: **title-sequence-3d** (pembuka 3D 8–15s, Three.js, 1080x1920), **threejs-fundamentals**, **threejs-animation** — render melalui HyperFrames (runtime three.js) atau EffectCraft (kamera/cahaya 3D) | `.claude/skills/` | ✅ dipasang 2026-11-17, belum diuji pada video |
 
 ## Belum / perlu keputusan Sir
 Lihat bahagian "Soalan" dalam mesej sesi 2026-11-17: warna aksen, maskot, logo/ikon kad, video pertama.
