@@ -6,3 +6,6 @@ motion/thumbnail/frame.png
 
 # Fail keadaan dalaman HyperFrames (berubah setiap render)
 motion/*/.hyperframes/video-state.json
+
+# Fail kerja besar (rakaman, render) untuk EffectCraft — tidak masuk git
+_kerja/
