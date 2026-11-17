@@ -5,6 +5,11 @@
 - **`tiktok-thumbnail`** (`.claude/skills/tiktok-thumbnail/SKILL.md`) — thumbnail cover + caption.
 - Skill boleh dikemas kini: naikkan nombor versi + changelog. Perubahan besar (gaya/urutan/peraturan) → brief Sir dulu; pembetulan teknikal kecil → terus kemas kini & maklumkan.
 
+## WAJIB: Log video (`LOG-VIDEO.md`)
+- **Awal setiap sesi:** senarai video dalam Drive `Raw` (termasuk subfolder) → banding dengan `LOG-VIDEO.md` → tambah video baru. Jangan edit video yang sudah ✅/⛔.
+- **Selepas setiap langkah** (transkrip, brief, draf, final) → kemas kini baris video itu + commit.
+- **Kunci = ID fail Drive** (nama kamera berulang, contoh dua `C0060`).
+
 ## WAJIB: Skill `director` dulu (reference → aset → storyboard visual), kemudian plan & brief
 
 ## WAJIB: Plan & brief dulu sebelum edit
@@ -64,3 +69,4 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 - **2026-11-16 — GAYA PYNK (gaya edit baru, BUKAN upgrade gaya sedia ada)** — rujukan `docs/rujukan/pynk-vox-director/`. Sir mahu SEMUA elemen: B-roll Vox beranimasi, belah skrin + UI terapung, demo skrin + butang morph, caption monospace + logo penutup glitch + CTA komen. Keputusan: B-roll = **HyperFrames kolaj 2.5D** (bukan AI video); aset vintaj = **domain awam**; demo skrin = **mockup chat generik**; UI terapung = **ikut topik video**; logo = **fail dari Sir** (Drive `Aset/03 Outro`). Langkah sekarang: **bina template `motion/pynk/` + pustaka aset dulu**, belum guna pada video.
 - **2026-11-17 — GAYA SPLIT KAD (rujukan @nicksaraevdaily)** — analisis `docs/rujukan/split-kad-nick/`, workflow `docs/split-kad/WORKFLOW.md`. Sir minta guna skill berkaitan + **EffectCraft** (komposit utama: split, bingkai matte, kad 3D, render). Kad UI berteks = HyperFrames → .mov telus → import EffectCraft. EffectCraft hanya baca fail dalam repo → letak media dalam `_kerja/` (diabaikan git). Font: `aset/fonts/` (Instrument Serif + Inter).
 - **2026-11-17 — Font baru:** Poppins (tebal + Light untuk teks kurus) + Kalam (tulisan tangan). Montserrat/Caveat = lama. **Colour grading: KEKAL ASAL** — Sir lebih suka rakaman asal tanpa filter (pilihan dicuba: `docs/split-kad/pilihan_grading.png`). Jangan tambah grade/filter kecuali Sir minta.
+- **2026-11-17 — B-ROLL VIDEO SIR = POP-OUT:** bila B-roll guna rakaman Sir sendiri (bukan stok), guna kesan pop-out yang sama (kepala/badan terkeluar dari bingkai) — resipi `docs/split-kad/WORKFLOW.md` §Resipi POP-OUT.

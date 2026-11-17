@@ -34,6 +34,7 @@ Rujukan analisis: `docs/rujukan/split-kad-nick/README.md` · Prototaip: `motion/
 2. EffectCraft (dari bawah ke atas): latar → bingkai aksen (bulat) → video asal **track matte** bentuk bulat → `sir_cutout.mov` (transform SAMA dengan video asal) **track matte** segi empat yang lebar = dalam bingkai, tinggi dari ~400px atas bingkai hingga bawah bingkai.
 3. Letak video supaya kepala melepasi garis atas bingkai ~120–180px; susun kad/caption di atas ruang kepala.
 Prototaip: `motion/effectcraft/proto_split.ecproj` (render contoh `_kerja/proto_popout.mp4`).
+4. **Berlaku juga untuk B-ROLL yang guna rakaman Sir** (keputusan Sir 2026-11-17): setiap klip Sir dalam babak B-roll/kad juga dipotong latar dan pop-out dari bingkainya.
 
 ## Sumber yang sudah disediakan
 | Sumber | Tempat | Status |
