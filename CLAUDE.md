@@ -43,7 +43,7 @@ Setiap kali nak mula edit video baru (atau ubah besar pada video sedia ada):
 
 ## Identiti jenama (tetap)
 - Siri: "AYAT CLOSING #NN" (konsep lain: "BEDAH CHAT #NN", "OBJECTION KILLER #NN")
-- TikTok: @sirdharma_
+- TikTok: @sirdharma_ (utama) · @adabclosing (akaun kedua, logo `aset/logo-adabclosing/adabclosing_profil.png`)
 - Warna: hijau #25D366, hitam #0B0B0B, putih, keyword kuning #FFD60A
 - Font: **Poppins** Bold/ExtraBold + Light (video), **Kalam** (tulisan tangan), Anton (headline thumbnail) — dikemas kini 2026-11-17 (BRANDKIT §3)
 - Intro: badge siri + tajuk hook + bunyi signature, TANPA intro berasingan (Sir bercakap dari saat 0)

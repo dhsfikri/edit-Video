@@ -9,7 +9,9 @@
 | Item | Nilai |
 |---|---|
 | Nama | Dharma \| Sales Guru |
-| TikTok | **@sirdharma_** |
+| TikTok | **@sirdharma_** (akaun utama) |
+| TikTok (akaun kedua, 2026-11-17) | **@adabclosing** — nama paparan "Adab Closing"; closing WhatsApp beradab, tanpa paksa. Bio tag akaun utama |
+| Logo @adabclosing | Gaya sticker hijau brand (pilihan Sir): `aset/logo-adabclosing/adabclosing_profil.png` (profil) · `adabclosing_telus_2160.png` (latar telus, untuk penutup video/thumbnail). Sumber: `sticker.html?p=brand` |
 | Niche | Sales closing (WhatsApp), tips jualan, team sales |
 | Servis | Setup team sales A–Z + monitoring 30 hari · Personal coaching (link di bio) |
 
