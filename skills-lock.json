@@ -1,6 +1,13 @@
 {
   "version": 2,
   "skills": {
+    "animation-principles": {
+      "source": "iart-ai/motion-design-skills",
+      "commit": "b85e50c4cef5ff17aa2187a10d49d2dae9226c74",
+      "sourceType": "github",
+      "skillPath": "skills/animation-principles/SKILL.md",
+      "computedHash": "429233e8c4a429b072130b231afb072eace2f5f5e9d6d7c7566ed8c2bd4aec83"
+    },
     "cinematic-camera": {
       "source": "liamrjohnston/remotion-motion-graphics-skill",
       "commit": "b860c7921f2220b9e2a84e815ba0ae7b10858f08",
@@ -34,6 +41,13 @@
       "sourceType": "github",
       "skillPath": "skills/karpathy-guidelines/SKILL.md",
       "computedHash": "e64131803b0a34b8c39afc11338a74f8305cf8f69f750620bdf6cb38f6865c52"
+    },
+    "motion-art-direction": {
+      "source": "iart-ai/motion-design-skills",
+      "commit": "b85e50c4cef5ff17aa2187a10d49d2dae9226c74",
+      "sourceType": "github",
+      "skillPath": "skills/motion-art-direction/SKILL.md",
+      "computedHash": "4a43cd9cd57b01e77e3c76e63a4722b3c8a74277aae1d9d471a93e7fea8a7038"
     },
     "reverse-any-video": {
       "source": "heygen-com/hyperframes",
