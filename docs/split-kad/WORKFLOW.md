@@ -28,6 +28,13 @@ Rujukan analisis: `docs/rujukan/split-kad-nick/README.md` · Prototaip: `motion/
 6. **Render** EffectCraft H.264 → `pipeline/compose.py` untuk audio akhir (-14 LUFS) + SFX.
 7. **QC** safe zone + semak frame → draf kepada Sir.
 
+## Resipi: kesan POP-OUT (kepala Sir terkeluar dari bingkai) — keputusan Sir 2026-11-17
+1. Potong latar video Sir: `npx hyperframes remove-background _kerja/<ID>/base.mp4 -o _kerja/<ID>/sir_cutout.mov` (model `u2net_human_seg`, khas orang; ~0.6s/frame CPU → 30s video ≈ 9 min). Hasil: ProRes 4444 dengan alpha.
+   - **Object Matte EffectCraft TIDAK jalan dalam sesi CPU ini** (keluar lapisan kosong) — jangan guna.
+2. EffectCraft (dari bawah ke atas): latar → bingkai aksen (bulat) → video asal **track matte** bentuk bulat → `sir_cutout.mov` (transform SAMA dengan video asal) **track matte** segi empat yang lebar = dalam bingkai, tinggi dari ~400px atas bingkai hingga bawah bingkai.
+3. Letak video supaya kepala melepasi garis atas bingkai ~120–180px; susun kad/caption di atas ruang kepala.
+Prototaip: `motion/effectcraft/proto_split.ecproj` (render contoh `_kerja/proto_popout.mp4`).
+
 ## Sumber yang sudah disediakan
 | Sumber | Tempat | Status |
 |---|---|---|
