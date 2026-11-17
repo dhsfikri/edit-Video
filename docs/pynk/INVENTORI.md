@@ -25,3 +25,4 @@
 | Logo Sir (PNG/SVG telus) | **Sir** → Drive `Aset/03 Outro` | `aset/logo/` | ❌ tunggu Sir |
 | Font monospace caption | JetBrains Mono / IBM Plex Mono (OFL) | `motion/pynk/assets/` | ⏳ |
 | SFX (klik, whoosh, kertas, glitch) | dijana sendiri | `motion/sfx/` | ✅ sebahagian |
+| Pixabay (gambar + video stok, Pixabay Content License) | `pipeline/cari_pixabay.py` → `aset/pixabay/` + `LESEN.md` | ⚠️ skrip sedia; `PIXABAY_API_KEY` dalam environment TIDAK sah — Sir kemas kini dalam tetapan environment |
