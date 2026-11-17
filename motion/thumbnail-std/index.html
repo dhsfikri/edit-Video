@@ -2,6 +2,7 @@
 <!--
   THUMBNAIL STANDARD — Sir Dharma (TikTok 1080x1920). Lihat BRANDKIT.md bahagian "Thumbnail".
   GAYA COVER: setiap baris headline dibesarkan sampai penuh lebar.
+  Font: Anton (headline) + Kalam (kicker) + Poppins (callout) — BRANDKIT §3 (2026-11-17). Tiada siri → series "" (badge disorok).
   Zon (grid profil potong 3:4 = y 240–1680; views "▷ 123" di bawah kiri):
     Badge siri  : y 300          Headline : y 390–1100 (kicker + 2 baris, penuh lebar)
     Muka        : pusat ~y 1250  Callout  : kanan, y 1320–1440
@@ -11,10 +12,10 @@
 <html><head><meta charset="utf-8">
 <style>
   @font-face { font-family: "Anton"; src: url("anton-latin-400-normal.woff2"); }
-  @font-face { font-family: "Montserrat"; font-weight: 800; src: url("montserrat-latin-800-normal.woff2"); }
-  @font-face { font-family: "Caveat"; font-weight: 700; src: url("caveat-latin-700-normal.woff2"); }
+  @font-face { font-family: "Poppins"; font-weight: 800; src: url("poppins-latin-800-normal.woff2"); }
+  @font-face { font-family: "Kalam"; font-weight: 700; src: url("kalam-latin-700-normal.woff2"); }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { width: 1080px; height: 1920px; overflow: hidden; background: #06180f; font-family: "Montserrat", "Noto Color Emoji", sans-serif; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #06180f; font-family: "Poppins", sans-serif; }
   #photo { position: absolute; left: 0; top: 0; transform-origin: 0 0; filter: saturate(.95) contrast(1.06); }
   #shade { position: absolute; inset: 0; background:
      linear-gradient(to bottom, rgba(8,32,21,.97) 0, rgba(8,32,21,.92) 760px, rgba(8,32,21,.0) 1180px),
@@ -25,7 +26,7 @@
   #badge i { width: 18px; height: 18px; border-radius: 50%; background: #25d366; }
   #badge b { color: #fff; font-size: 38px; letter-spacing: .08em; } #badge b span { color: #25d366; }
   #head { position: absolute; left: 60px; right: 60px; top: 390px; }
-  #kicker { display: block; font-family: "Caveat", cursive; font-weight: 700; font-size: 96px; color: #fff; line-height: .95; margin-bottom: 6px; }
+  #kicker { display: block; font-family: "Kalam", cursive; font-weight: 700; font-size: 90px; color: #fff; line-height: .95; margin-bottom: 6px; }
   .ln { display: block; width: fit-content; font-family: "Anton", sans-serif; color: #fff; font-size: 240px; line-height: .98; text-transform: uppercase; white-space: nowrap; letter-spacing: 1px; }
   .kw { display: inline-block; background: #ffd60a; color: #0b0b0b; padding: 0 24px; border-radius: 16px; transform: rotate(-2deg); margin-top: 6px; }
   #co { position: absolute; right: 70px; top: 1320px; display: flex; align-items: center; gap: 14px; color: #fff;
@@ -43,8 +44,8 @@
 <script>
   window.render = (c) => new Promise(async (ok) => {
     const $ = (s) => document.querySelector(s);
-    await Promise.all(['300px "Anton"', '700 96px "Caveat"', '800 40px "Montserrat"'].map((f) => document.fonts.load(f)));
-    $("#badge b").innerHTML = `${c.series} <span>#${c.episode}</span>`;
+    await Promise.all(['300px "Anton"', '700 90px "Kalam"', '800 40px "Poppins"'].map((f) => document.fonts.load(f)));
+    if (c.series) $("#badge b").innerHTML = `${c.series} <span>#${c.episode}</span>`; else $("#badge").style.display = "none";
     $("#kicker").textContent = c.kicker || ""; if (!c.kicker) $("#kicker").style.display = "none";
     const rich = (s) => s.replace(/\[([^\]]+)\]/g, '<span class="kw">$1</span>');
     $("#l1").innerHTML = rich(c.line1); $("#l2").innerHTML = rich(c.line2 || ""); if (!c.line2) $("#l2").style.display = "none";
@@ -61,8 +62,9 @@
       const s = c.scale || 1, fy = c.faceY || 1160;
       img.style.width = img.naturalWidth + "px";
       let x = 540 - c.fx * s, y = fy - c.fy * s;
-      x = Math.min(0, Math.max(1080 - img.naturalWidth * s, x)); y = Math.min(0, Math.max(1920 - img.naturalHeight * s, y));
+      x = Math.min(0, Math.max(1080 - img.naturalWidth * s, x)); y = Math.min(c.freeY ? 760 : 0, Math.max(1920 - img.naturalHeight * s, y)); // freeY: muka tinggi dalam rakaman → turunkan gambar (atas ditutup band gelap)
       img.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+      if (c.freeY && y > 0) { const m = `linear-gradient(to bottom, transparent 0, #000 ${Math.round(320 / s)}px)`; img.style.webkitMaskImage = m; img.style.maskImage = m; }
       document.fonts.ready.then(() => setTimeout(ok, 100));
     };
     img.src = c.photo;
