@@ -1,0 +1,58 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:A;src:url(anton-latin-400-normal.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1080px;overflow:hidden;background:#020a06}
+#s{position:absolute;inset:0;overflow:hidden;
+ background:radial-gradient(60% 45% at 50% 30%,#0f5a32 0%,#07301b 38%,#031409 70%,#010603 100%)}
+.beam{position:absolute;left:50%;top:-200px;width:900px;height:1200px;transform:translateX(-50%);
+ background:conic-gradient(from 180deg at 50% 0%,transparent 160deg,rgba(150,255,190,.16) 170deg,rgba(225,255,235,.34) 180deg,rgba(150,255,190,.16) 190deg,transparent 200deg);filter:blur(18px)}
+.floor{position:absolute;left:-10%;right:-10%;top:735px;height:420px;
+ background:radial-gradient(55% 60% at 50% 0%,rgba(37,211,102,.22),rgba(0,0,0,0) 70%),linear-gradient(#03120a,#000);transform:perspective(600px) rotateX(55deg);transform-origin:top}
+.stage{position:absolute;left:0;right:0;top:0;height:1080px;perspective:1400px}
+.grp{position:absolute;left:50%;top:215px;transform:translateX(-50%) rotateX(14deg) rotateY(-10deg) scale(1.12);transform-style:preserve-3d;filter:drop-shadow(0 0 22px rgba(37,211,102,.28))}
+.adab{position:relative;font-family:A;font-size:300px;line-height:1;letter-spacing:8px;text-align:center;
+ color:transparent;background:linear-gradient(175deg,#ffffff 0%,#f2f7f4 38%,#b9c9c0 55%,#eef4f0 70%,#9fb3a8 100%);-webkit-background-clip:text;background-clip:text}
+.ext{position:absolute;inset:0;font-family:A;font-size:300px;line-height:1;letter-spacing:8px;text-align:center;color:#1c3b2b;z-index:-1}
+.plate{position:relative;margin:26px auto 0;width:max-content;transform:rotate(-3deg);transform-style:preserve-3d}
+.pf{position:relative;padding:8px 44px 4px;border-radius:24px;font-family:A;font-size:182px;line-height:1.05;letter-spacing:6px;color:#111;
+ background:linear-gradient(170deg,#fff3a6 0%,#FFE14D 22%,#FFD60A 55%,#e0b400 100%);
+ box-shadow:inset 0 6px 0 rgba(255,255,255,.55),inset 0 -8px 14px rgba(120,80,0,.35)}
+.pf span{background:linear-gradient(#2a2a2a,#000);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 rgba(255,240,170,.6))}
+.pd{position:absolute;inset:0;border-radius:24px;background:#8a6a00;z-index:-1}
+.glow{position:absolute;left:50%;top:330px;width:900px;height:520px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(37,211,102,.55),rgba(37,211,102,0));filter:blur(40px)}
+.bub{position:absolute;left:50%;top:70px;transform:translateX(-50%) rotate(-6deg);filter:drop-shadow(0 14px 18px rgba(0,0,0,.6)) drop-shadow(0 0 30px rgba(37,211,102,.6))}
+.dust{position:absolute;border-radius:50%;background:rgba(200,255,220,.55);filter:blur(1px)}
+.bok{position:absolute;border-radius:50%;background:radial-gradient(rgba(120,255,170,.18),rgba(120,255,170,0) 70%)}
+.vig{position:absolute;inset:0;background:radial-gradient(75% 75% at 50% 45%,transparent 55%,rgba(0,0,0,.75) 100%)}
+.grain{position:absolute;inset:0;opacity:.10;mix-blend-mode:overlay}
+.refl{position:absolute;left:50%;top:742px;transform:translateX(-50%) scaleY(-1) rotate(3deg);opacity:.16;filter:blur(5px);
+ -webkit-mask-image:linear-gradient(to top,rgba(0,0,0,.9),transparent 55%);mask-image:linear-gradient(to top,rgba(0,0,0,.9),transparent 55%)}
+</style></head><body><div id="s">
+<div class="beam"></div><div class="floor"></div><div class="glow"></div>
+<div id="fx"></div>
+<div class="stage"><div class="grp" id="grp">
+ <div style="position:relative"><div class="ext" id="ext">ADAB</div><div class="adab">ADAB</div></div>
+ <div class="plate"><div class="pd" id="pd"></div><div class="pf"><span>CLOSING</span></div></div>
+</div></div>
+<div class="refl" id="refl"></div>
+<svg class="bub" width="170" height="135" viewBox="0 0 170 135"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7dffb0"/><stop offset=".45" stop-color="#25D366"/><stop offset="1" stop-color="#0d8a3e"/></linearGradient></defs>
+ <path d="M85 8 C 136 8 162 34 162 62 C 162 92 136 116 85 116 C 75 116 66 115 57 112 L 22 130 L 32 100 C 15 89 8 76 8 62 C 8 34 34 8 85 8 Z" fill="url(#g)"/>
+ <ellipse cx="70" cy="34" rx="44" ry="12" fill="rgba(255,255,255,.45)"/>
+ <g fill="none" stroke="#06331b" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M52 64 L 68 80 L 100 48"/><path d="M88 74 L 94 80 L 126 48"/></g></svg>
+<svg class="grain" width="1080" height="1080"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+<div class="vig"></div></div>
+<script>
+// ketebalan 3D: susun bayang berlapis (ekstrusi) + bayang jatuh
+const ext=document.getElementById('ext');let sh=[];
+for(let i=1;i<=22;i++){const c=Math.round(20+i*0.6);sh.push(`${i*0.6}px ${i}px 0 rgb(${c-6},${c+22},${c+8})`)}
+sh.push('14px 40px 40px rgba(0,0,0,.75)');ext.style.textShadow=sh.join(',');
+const pd=document.getElementById('pd');let bs=[];
+for(let i=1;i<=18;i++){bs.push(`${i*0.5}px ${i}px 0 rgb(${150-i*3},${112-i*3},0)`)}
+bs.push('10px 34px 40px rgba(0,0,0,.7)');pd.style.boxShadow=bs.join(',');
+// pantulan lantai
+document.getElementById('refl').innerHTML=document.getElementById('grp').outerHTML.replace('id="grp"','');
+// habuk & bokeh (tetap, berbiji tetap)
+let seed=7;const r=()=>(seed=(seed*16807)%2147483647)/2147483647;const fx=document.getElementById('fx');
+for(let i=0;i<70;i++){const d=document.createElement('div');d.className='dust';const z=1+r()*3;Object.assign(d.style,{left:r()*1080+'px',top:r()*760+'px',width:z+'px',height:z+'px',opacity:.2+r()*.6});fx.appendChild(d)}
+for(let i=0;i<5;i++){const d=document.createElement('div');d.className='bok';const z=60+r()*140;Object.assign(d.style,{left:r()*1080-60+'px',top:r()*1080-60+'px',width:z+'px',height:z+'px',filter:`blur(${4+r()*8}px)`});fx.appendChild(d)}
+</script></body></html>
