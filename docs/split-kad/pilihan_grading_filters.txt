@@ -1,0 +1,5 @@
+1_Asal=null
+2_Bersih_Cerah=eq=brightness=0.03:contrast=1.06:saturation=1.08,curves=master='0/0.02 0.5/0.54 1/0.98',colortemperature=temperature=6200
+3_Hangat_Premium=colortemperature=temperature=5200:mix=0.6,eq=contrast=1.08:saturation=0.95,curves=r='0/0.03 0.5/0.53 1/1':b='0/0.02 0.5/0.46 1/0.95',vignette=PI/5
+4_Sinematik_TealOren=colorbalance=rs=-0.08:gs=0.02:bs=0.10:rh=0.08:gh=0.02:bh=-0.08,eq=contrast=1.12:saturation=0.95,curves=master='0/0.03 0.25/0.22 0.75/0.8 1/0.97',vignette=PI/4.5
+5_Moody_Matte=eq=contrast=1.15:brightness=-0.03:saturation=0.8,curves=master='0/0.08 0.5/0.48 1/0.92',colortemperature=temperature=7000:mix=0.4,vignette=PI/4
