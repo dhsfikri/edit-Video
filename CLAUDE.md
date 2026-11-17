@@ -5,6 +5,16 @@
 - **`tiktok-thumbnail`** (`.claude/skills/tiktok-thumbnail/SKILL.md`) — thumbnail cover + caption.
 - Skill boleh dikemas kini: naikkan nombor versi + changelog. Perubahan besar (gaya/urutan/peraturan) → brief Sir dulu; pembetulan teknikal kecil → terus kemas kini & maklumkan.
 
+## FLOW KERJA RASMI (Sir, 2026-11-17) — ikut setiap video
+1. **Sir upload raw** ke Drive `Raw` → saya log dalam `LOG-VIDEO.md` (kunci ID Drive).
+2. **Analisis**: transkrip, spec rakaman, potensi hook, `riset-trend`.
+3. **Cadangan** (tunggu Sir pilih): **2 pilihan gaya + 1 ditanda Cadangan**, setiap satu dengan storyboard visual (`director`) + **3 pilihan hook** (`hook-lab`) + plan animasi/edit.
+4. **Reference dari Sir didahulukan**: sebelum guna, **klon ujian 5–10s hampir 100% sama** (susun atur, masa, gerakan, warna) guna aset kita → tunjuk sebelah-menyebelah dengan asal → Sir kata "dah sama" → baru adaptasi ke video Sir. Simpan analisis dalam `docs/rujukan/<nama>/`.
+5. **Semakan**: plan → **sampel 10s** (hook + gaya; WAJIB untuk gaya/reference baru, boleh langkau untuk gaya yang Sir dah lulus) → draf penuh → final.
+6. **Aset**: setiap aset baru (prop, grafik VectorCraft, template EffectCraft/HyperFrames, SFX, LUT) disimpan dalam repo (`aset/`, `motion/`, `motion/effectcraft/`) + rekod lesen. Zip mingguan untuk Sir upload ke Drive `Aset` (sandaran).
+7. **Alat**: guna penuh **HyperFrames** (kad UI, caption, blok registry, 3D three.js), **VectorCraft** (grafik vektor, ikon, logo), **EffectCraft** (komposit, pop-out, 3D, tracking, render). Rujuk `docs/alat/UJIAN-EFFECTCRAFT-VECTORCRAFT.md` untuk ciri yang sah jalan.
+8. **Rentak lalai: LAJU** — potongan rapat, perubahan visual setiap 1–3s, buang jeda/filler. Akan dilaras ikut report analitik Sir (bila diberi → simpan dalam `docs/analitik/`).
+
 ## WAJIB: Log video (`LOG-VIDEO.md`)
 - **Awal setiap sesi:** senarai video dalam Drive `Raw` (termasuk subfolder) → banding dengan `LOG-VIDEO.md` → tambah video baru. Jangan edit video yang sudah ✅/⛔.
 - **Selepas setiap langkah** (transkrip, brief, draf, final) → kemas kini baris video itu + commit.
