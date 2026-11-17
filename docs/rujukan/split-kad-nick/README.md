@@ -1,6 +1,7 @@
 # Rujukan: "Split-screen kad explainer" — @nicksaraevdaily (dari Sir, 2026-11-17)
 
 **Link:** https://vt.tiktok.com/ZSpGdHYkT/ · 20s · 1080x1920 · 30fps · potongan keras: 4.5, 7.9, 11.1, 12.8, 14.5, 15.6, 18.1s
+**Link kedua (2026-11-17):** https://vt.tiktok.com/ZSpnvwKK3/ — repost oleh @ayahitoo_, **video yang sama** (20s, frame identik). Sir minta gaya ini masuk pilihan gaya @adabclosing.
 **Frame:** `f_<saat>.jpg`, helaian 3fps `sheet_3fps.jpg`. Video asal tidak disimpan (hak cipta creator).
 
 ## Susun atur (3 mod, bertukar ikut ayat)
