@@ -13,7 +13,7 @@
 | C0007 | `Raw/060224` | `1CNAAfLg9k3PltBtlpwCUp-iqwUuw5KgN` | 🟠 Pilot gaya (belum draf penuh) | TIPS JUALAN #02 — percaya → beli (dendeng kampung) | Dicuba: Dynamic ✗, Apple ✗, **Vox** (sampel babak 1–5 v3 OK Sir), **Split Kad** (prototaip + pop-out) | `projects/C0007/`, `briefs/2026-11-16_*` | Gaya akhir belum muktamad: Vox vs Split Kad. Prop dendeng/rumah/ketupat siap |
 | C0008 | `Raw/060224` | `1yjSyIw5ZrkttS6xl8VvWuX8YU3aNXPG0` | 🔵 Transkrip + brief v1 approved | TIPS JUALAN #03 — jangan banding diri (Khairul Aming) | ikut C0007 | `projects/C0008/transcript.json`, `briefs/2026-11-16_060224_*` | Tunggu gaya C0007 muktamad |
 | C0009 | `Raw/060224` | `1hiGVxjxic7HoZ-9a5FNAu2ir9vJ3BAnL` | ⛔ Sir buat sendiri | Iklan e-book | — | `projects/C0009/transcript.json` | Draf Sir: Drive `08 Video Ads/C0009_draf_v1.mp4` |
-| C0060 | `Raw/131221` | `1r-_ypjBApdinLiQYcI_ksLrCn-5xzUUz` | 🔵 Storyboard PYNK (tunggu Sir) | Tanpa label siri — penat buat konten? komen akaun, kita support | PYNK, hook 2 (tengah cerita) | `projects/C0060_131221/` | 55s, 4K landscape tegak 29.97fps. Topik komuniti kreator. Storyboard 9 frame siap. Seterusnya: klon ujian PYNK 5–10s → sampel 10s |
+| C0060 | `Raw/131221` | `1r-_ypjBApdinLiQYcI_ksLrCn-5xzUUz` | 🟠 Draf v1 (tunggu semakan Sir) | Tanpa label siri — penat buat konten? komen akaun, kita support | PYNK, hook 2 (tengah cerita) | `projects/C0060_131221/` | 55s, 4K landscape tegak 29.97fps. Topik komuniti kreator. Draf v1 39.3s siap (pop-out frame 3/6/9, QC safe zone lulus). Logo = placeholder teks. Muzik: Sir tambah masa posting |
 
 ## Belum disentuh (⬜)
 | Kod | Folder Raw | ID Drive | Diupload ke Drive | Catatan |
@@ -40,3 +40,4 @@
 ## Sejarah ringkas
 - 2026-11-17: Log dicipta. Drive disemak: 5 rakaman baru dalam `Raw/131221`.
 - 2026-11-17: C0060 (`Raw/131221`) — transkrip + analisis siap.
+- 2026-11-17: C0060 (`Raw/131221`) — draf v1 PYNK siap (template `motion/pynk/`).
