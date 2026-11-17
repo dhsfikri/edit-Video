@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:GR;src:url(Grandstander.ttf);font-weight:100 900}
+*{margin:0;padding:0}body{width:1080px;height:1080px;overflow:hidden}
+text{font-family:GR;font-weight:900}
+</style></head><body>
+<svg id="svg" width="1080" height="1080" viewBox="0 0 1080 1080"></svg>
+<script>
+const P={ // palet: ?p=ref (ikut rujukan) | brand (hijau Sir)
+ ref:{bg:"#F5534F",out:"#1E4FD6",rim:"#F4F1EA",fill:"#F4F1EA",tag:"#FFC928",tagD:"#D99A10",tagTx:"#F5534F",icon:"#1E4FD6",tick:"#F4F1EA"},
+ brand:{bg:"#25D366",out:"#0B0B0B",rim:"#FFFFFF",fill:"#FFFFFF",tag:"#FFD60A",tagD:"#C9A300",tagTx:"#0B0B0B",icon:"#0B0B0B",tick:"#25D366"},
+ dark:{bg:"#0B0B0B",out:"#25D366",rim:"#FFFFFF",fill:"#FFFFFF",tag:"#FFD60A",tagD:"#C9A300",tagTx:"#0B0B0B",icon:"#25D366",tick:"#0B0B0B"}}[new URLSearchParams(location.search).get("p")||"ref"];
+const svg=document.getElementById("svg"),NS="http://www.w3.org/2000/svg";
+const mk=(t,a,par=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);par.appendChild(e);return e};
+mk("rect",{width:1080,height:1080,fill:P.bg});
+// perkataan besar melantun: setiap huruf naik/turun & condong sikit
+function bouncy(word,x,y,size,rots,dys,layers){
+  const g=mk("g",{});
+  layers.forEach(([stroke,sw,fill])=>{
+    const t=mk("text",{x,y,"font-size":size,"text-anchor":"middle",fill,stroke,"stroke-width":sw,"stroke-linejoin":"round","paint-order":"stroke","letter-spacing":-6},g);
+    [...word].forEach((ch,i)=>{const s=mk("tspan",{rotate:rots[i]||0,dy:(dys[i]||0)},t);s.textContent=ch;});
+  });return g;
+}
+// ikon gelembung chat kecil (ganti "THE") + tick (ganti ©)
+const bub=mk("g",{transform:"translate(300 240) rotate(-10)"});
+mk("path",{d:"M75 8 C 122 8 144 32 144 58 C 144 86 122 108 75 108 C 66 108 58 107 50 104 L 18 122 L 28 94 C 13 84 6 72 6 58 C 6 32 30 8 75 8 Z",fill:P.icon,stroke:P.rim,"stroke-width":16,"stroke-linejoin":"round","paint-order":"stroke"},bub);
+mk("path",{d:"M44 60 L 60 76 L 90 44 M 80 70 L 86 76 L 116 44",fill:"none",stroke:P.tick,"stroke-width":11,"stroke-linecap":"round","stroke-linejoin":"round"},bub);
+// "Adab" besar
+bouncy("Adab",540,620,340,[-8,6,-6,8],[0,-26,30,-24],[[P.rim,96,P.rim],[P.out,62,P.out],["none",0,P.fill]]);
+// tag 3D "CLOSING"
+const tg=mk("g",{transform:"translate(610 668) rotate(-4)"});
+mk("path",{d:"M-200 -4 L 216 -4 L 230 12 L 230 98 L -186 98 L -200 82 Z",fill:P.tagD},tg);
+mk("rect",{x:-214,y:-18,width:430,height:100,rx:10,fill:P.tag,stroke:P.rim,"stroke-width":10,"paint-order":"stroke"},tg);
+mk("text",{x:2,y:60,"font-size":84,"text-anchor":"middle",fill:P.tagTx,"letter-spacing":6},tg).textContent="CLOSING";
+</script></body></html>
