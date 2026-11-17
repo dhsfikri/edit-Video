@@ -28,6 +28,13 @@
       "skillPath": "skills/hyperframes-registry/SKILL.md",
       "computedHash": "68c90542d8e4df21600949ef61da72fb7ab0c8c22cde3bfdc250e92fcc1d3696"
     },
+    "karpathy-guidelines": {
+      "source": "szkocot/andrej-karpathy-skills",
+      "commit": "64723a49ea6117894304eb491f0d32a60570bf45",
+      "sourceType": "github",
+      "skillPath": "skills/karpathy-guidelines/SKILL.md",
+      "computedHash": "e64131803b0a34b8c39afc11338a74f8305cf8f69f750620bdf6cb38f6865c52"
+    },
     "reverse-any-video": {
       "source": "heygen-com/hyperframes",
       "commit": "5d5e2c062a4876e590f8d5a9fe59833d7b1e3684",
