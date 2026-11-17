@@ -10,3 +10,4 @@ Semua CC0: bebas guna komersial, tiada kredit wajib. `prop/` = latar dibuang + s
 | `orang_ramai.jpg` | At the Opera Ball: Long live the smartly dressed crowd! | Honoré Daumier (French, 1808–1879) | 1868, printed 1920 | CC0 (Cleveland Museum of Art Open Access) | https://clevelandart.org/art/1921.1501 |
 | `bersulang.jpg` | Gentlemen.... here goes a 43rd toast.... to the Temperance Society | Honoré Daumier (French, 1808–1879) | 1844 | CC0 (Cleveland Museum of Art Open Access) | https://clevelandart.org/art/1925.14 |
 | `orang_ramai_malam.jpg` | The Crowd | George Bellows (American, 1882–1925) | 1923 | CC0 (Cleveland Museum of Art Open Access) | https://clevelandart.org/art/1936.594 |
+| `petani_letih.jpg` | The Weary Plowman | Samuel Palmer (British, 1805–1881) | 1858 | CC0 (Cleveland Museum of Art Open Access) | https://clevelandart.org/art/1966.190 |

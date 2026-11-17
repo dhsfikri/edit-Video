@@ -9,6 +9,7 @@ edit.json:
   "transcript": "/path/raw_transcript.json",   # output faster-whisper (word timestamps)
   "workdir": "/path/out",
   "rotate": "cw",                               # cw | ccw | none
+  "precrop": "crop=1215:2160:1620:0",           # pilihan: crop rakaman landscape 4K ke 9:16 SEBELUM zoom
   "fps": 50,
   "color": "eq=brightness=0.03:contrast=1.06:saturation=1.08:gamma=1.08",
   "corrections": {"say": "sale"},
@@ -72,6 +73,8 @@ for s in cfg["segments"]:
 
 rot = {"cw": "transpose=1,", "ccw": "transpose=2,", "none": ""}[cfg.get("rotate", "none")]
 color = cfg.get("color", "null")
+pre = cfg.get("precrop", "")
+pre = pre + "," if pre else ""
 
 parts, labels = [], []
 for i, s in enumerate(segs):
@@ -85,7 +88,7 @@ for i, s in enumerate(segs):
         f"crop={W}:{H}:x='(iw-{W})/2':y='(ih-{H})*{cy}'"
     )
     vf = (
-        f"[0:v]trim={s['start']}:{s['end']},setpts=PTS-STARTPTS,{rot}fps={fps},"
+        f"[0:v]trim={s['start']}:{s['end']},setpts=PTS-STARTPTS,{pre}{rot}fps={fps},"
         f"{zoom},setsar=1,{color}[v{i}]"
     )
     af = (

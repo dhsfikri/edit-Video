@@ -1,0 +1,177 @@
+<!doctype html>
+<!--
+  GAYA PYNK — komposisi penuh LEGAP 1080x1920 (rujukan: docs/rujukan/pynk-vox-director/).
+  Lapisan: #back (UI di belakang kad Sir) → #frame (bingkai hijau) → #camClip (video Sir) → #cutClip (pop-out)
+           → #fx (babak penuh: kolaj Vox, demo skrin, ikon) → #top (UI terapung) → #caps (caption monospace).
+  Koreografi per video: scene.js (salin dari projects/<ID>/scene_pynk.js):
+    window.PYNK = { duration, words:[{w,s,e}], cutouts:[{id,src,start,dur}], hideCaps:[[a,b]], scene(tl, api) }
+  API utama: cam (zoom/potong), card (Sir masuk kad + POP-OUT), full (balik penuh skrin), panel (babak penuh),
+             counter (kaunter nombor), draw (garis SVG dilukis), cursor, type, glitch.
+  Easing: masuk power3.out .35–.5s · keluar power2.in .2–.3s · tiada lantunan (vibe premium).
+  Video: assets/base.mp4 (A-roll siap potong). Cutout: npx hyperframes remove-background clip.mp4 -o assets/cut_x.webm --quality best
+-->
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Poppins"; font-weight: 800; src: url("assets/poppins-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Poppins"; font-weight: 600; src: url("assets/poppins-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Poppins"; font-weight: 400; src: url("assets/poppins-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Mono"; src: url("assets/JetBrainsMono-Medium.ttf"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B0B0B; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Poppins", sans-serif; background: #0B0B0B; }
+      .L { position: absolute; inset: 0; }
+      .wrap { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+      .wrap video { width: 1080px; height: 1920px; display: block; }
+      #frame { position: absolute; background: #25D366; opacity: 0; }
+      .cutw { position: absolute; inset: 0; opacity: 0; }
+      .card { position: absolute; background: #fff; border-radius: 34px; box-shadow: 0 30px 60px rgba(0,0,0,.35); }
+      .paper { background: #efe7d6; background-image: radial-gradient(rgba(0,0,0,.06) 1px, transparent 1px); background-size: 6px 6px; }
+      .gridp { background-color: #f3eee2; background-image: linear-gradient(rgba(37,99,235,.18) 2px, transparent 2px), linear-gradient(90deg, rgba(37,99,235,.18) 2px, transparent 2px); background-size: 90px 90px; }
+      .cut { filter: drop-shadow(8px 0 0 #fff) drop-shadow(-8px 0 0 #fff) drop-shadow(0 8px 0 #fff) drop-shadow(0 -8px 0 #fff) drop-shadow(0 20px 20px rgba(0,0,0,.4)); }
+      .mono { font-family: "Mono", monospace; }
+      .pill { position: absolute; background: #fff; color: #0B0B0B; border-radius: 60px; padding: 18px 40px; font-weight: 600; font-size: 46px; box-shadow: 0 20px 40px rgba(0,0,0,.35); white-space: nowrap; }
+      #caps { position: absolute; left: 0; right: 0; top: 1290px; height: 90px; }
+      .cg { position: absolute; left: 50%; top: 0; transform: translateX(-50%); background: #0B0B0B; color: #fff; font-family: "Mono"; font-size: 50px; padding: 10px 24px; border-radius: 8px; white-space: nowrap; opacity: 0; }
+      #caps.light .cg { background: #fff; color: #0B0B0B; }
+    </style>
+    <script src="scene.js"></script>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="39.3" data-width="1080" data-height="1920">
+      <div id="back" class="L"></div>
+      <div id="frame"></div>
+      <div id="camClip" class="L"><div id="camWrap" class="wrap"><video id="base" src="assets/base.mp4" class="clip" data-start="0" data-duration="39.3" data-track-index="0" muted playsinline></video></div></div>
+      <div id="cutClip" class="L"><div id="cutWrap" class="wrap">
+        <!-- POP-OUT: video cutout MESTI ditulis statik di sini (HyperFrames tak kesan <video> yang dicipta oleh skrip). id = cw_<id dalam scene.js> -->
+        <div class="cutw" id="cw_p3"><video class="clip" src="assets/cut_p3.webm" data-start="9.0" data-duration="2.65" data-track-index="1" muted playsinline></video></div>
+        <div class="cutw" id="cw_p6"><video class="clip" src="assets/cut_p6.webm" data-start="20.5" data-duration="5.25" data-track-index="2" muted playsinline></video></div>
+        <div class="cutw" id="cw_p9"><video class="clip" src="assets/cut_p9.webm" data-start="36.4" data-duration="2.8" data-track-index="3" muted playsinline></video></div>
+      </div></div>
+      <div id="fx" class="L"></div>
+      <div id="top" class="L"></div>
+      <div id="caps"></div>
+    </div>
+    <script>
+      const P = window.PYNK, D = P.duration;
+      const tl = gsap.timeline({ paused: true });
+      const $ = (s, r = document) => r.querySelector(s);
+      const el = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstChild; };
+      const put = (h, layer = "#top") => (typeof layer === "string" ? $(layer) : layer).appendChild(el(h));
+      $("#root").dataset.duration = D; $("#base").dataset.duration = D;
+      const R = (x, y, w, h) => ({ x, y, w, h });
+      const inset = (r, rad, openTop = false) => `inset(${openTop ? 0 : r.y}px ${1080 - r.x - r.w}px ${1920 - r.y - r.h}px ${r.x}px round ${openTop ? 0 : rad}px)`;
+      const FULL = R(0, 0, 1080, 1920);
+      tl.set("#camClip", { clipPath: inset(FULL, 0) }, 0);
+      tl.set("#cutClip", { clipPath: inset(FULL, 0, true) }, 0);
+      tl.set(["#camWrap", "#cutWrap"], { x: 0, y: 0, scale: 1 }, 0);
+
+      const api = {
+        R,
+        // potongan zoom (jump cut) dalam mod penuh: z = skala, fx/fy = titik tumpu (muka)
+        cam(t, z = 1, fx = 400, fy = 520) {
+          tl.set(["#camWrap"], { x: fx - fx * z, y: fy - fy * z, scale: z }, t);
+        },
+        // Sir masuk KAD (morph) + POP-OUT kepala keluar dari bingkai. r = kad; s = skala video; hx,hy = titik video yg diletak di (r.x+r.w/2, r.y+off)
+        card(t, r, { s = 0.8, headX = 390, headTop = 250, out = 150, rad = 40, border = 16, cut, dur = 0.5 } = {}) {
+          const x = Math.min(r.x, Math.max(r.x + r.w - 1080 * s, r.x + r.w / 2 - headX * s)), y = r.y - out - headTop * s;
+          const fr = R(r.x - border, r.y - border, r.w + border * 2, r.h + border * 2);
+          tl.to("#camClip", { clipPath: inset(r, rad), duration: dur, ease: "power3.inOut" }, t);
+          tl.to(["#camWrap", "#cutWrap"], { x, y, scale: s, duration: dur, ease: "power3.inOut" }, t);
+          tl.set("#cutClip", { clipPath: inset(r, rad, true) }, t);
+          tl.set("#frame", { left: fr.x, top: fr.y, width: fr.w, height: fr.h, borderRadius: rad + border, opacity: 0, scale: 0.96 }, t);
+          tl.to("#frame", { opacity: 1, scale: 1, duration: dur, ease: "power3.out" }, t + 0.1);
+          if (cut) { tl.set("#cw_" + cut, { opacity: 0 }, 0); tl.set("#cw_" + cut, { opacity: 1 }, t + dur * 0.6); }
+          return { x, y, s };
+        },
+        // balik penuh skrin
+        full(t, { z = 1, cut, dur = 0.4 } = {}) {
+          if (cut) tl.set("#cw_" + cut, { opacity: 0 }, t);
+          tl.to("#frame", { opacity: 0, duration: 0.2, ease: "power2.in" }, t);
+          tl.to("#camClip", { clipPath: inset(FULL, 0), duration: dur, ease: "power3.inOut" }, t);
+          tl.to(["#camWrap", "#cutWrap"], { x: 400 - 400 * z, y: 520 - 520 * z, scale: z, duration: dur, ease: "power3.inOut" }, t);
+        },
+        // babak penuh skrin (menutup Sir). html dalam #fx; masuk = potong keras + settle skala
+        panel(t, end, html, cls = "") {
+          const n = put(`<div class="L ${cls}">${html}</div>`, "#fx");
+          tl.set(n, { opacity: 0 }, 0);
+          tl.set(n, { opacity: 1 }, t);
+          tl.fromTo(n, { scale: 1.06 }, { scale: 1, duration: 0.5, ease: "power3.out", immediateRender: false }, t);
+          if (end < D) tl.set(n, { opacity: 0 }, end);
+          return n;
+        },
+        // elemen terapung: masuk dari (dx,dy) + pudar
+        pop(t, end, node, { dx = 0, dy = 40, sc = 0.9, layer } = {}) {
+          tl.set(node, { opacity: 0 }, 0);
+          tl.fromTo(node, { opacity: 0, x: dx, y: dy, scale: sc }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.4, ease: "power3.out", immediateRender: false }, t);
+          if (end < D) tl.to(node, { opacity: 0, y: -20, duration: 0.22, ease: "power2.in" }, end - 0.22);
+          return node;
+        },
+        // kaunter nombor: senarai [masa, nilai]; nilai berpusing antara titik
+        counter(node, keys, fmt = (v) => Math.round(v).toLocaleString("en-US")) {
+          const o = { v: keys[0][1] };
+          tl.set(o, { v: keys[0][1], onUpdate: () => (node.textContent = fmt(o.v)) }, 0);
+          node.textContent = fmt(keys[0][1]);
+          for (let i = 1; i < keys.length; i++) {
+            const [t0] = keys[i - 1], [t1, v] = keys[i];
+            tl.to(o, { v, duration: t1 - t0, ease: keys[i][2] || "power2.out", onUpdate: () => (node.textContent = fmt(o.v)) }, t0);
+          }
+        },
+        // lukis semua path dalam svg
+        draw(svg, t, dur = 0.5) {
+          svg.querySelectorAll("path,polyline").forEach((p) => {
+            const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L;
+            tl.to(p, { strokeDashoffset: 0, duration: dur, ease: "power1.inOut" }, t);
+          });
+        },
+        // kursor: senarai [masa, x, y, klik?]
+        cursor(layer, pts) {
+          const n = put(`<svg style="position:absolute;left:0;top:0" width="84" height="112" viewBox="0 0 30 40"><path d="M2 2 L2 32 L10 25 L15 37 L20 35 L15 23 L26 23 Z" fill="#fff" stroke="#000" stroke-width="2"/></svg>`, layer);
+          tl.set(n, { x: pts[0][1], y: pts[0][2] }, 0);
+          for (let i = 1; i < pts.length; i++) {
+            const [t, x, y, click] = pts[i];
+            tl.to(n, { x, y, duration: Math.min(0.6, t - pts[i - 1][0]), ease: "power2.inOut" }, Math.max(pts[i - 1][0], t - 0.6));
+            if (click) tl.to(n, { scale: 0.82, duration: 0.07, yoyo: true, repeat: 1, transformOrigin: "0 0" }, t);
+          }
+          return n;
+        },
+        // taip teks huruf demi huruf ke dalam node (mula t, setiap huruf dt)
+        type(node, text, t, dt = 0.07, caret = '<span style="color:#25D366">|</span>') {
+          for (let i = 0; i <= text.length; i++) tl.set(node, { innerHTML: text.slice(0, i) + caret }, t + i * dt);
+          tl.set(node, { innerHTML: "" }, 0);
+        },
+        // glitch RGB pada teks
+        glitch(node, t, dur = 0.5) {
+          const steps = Math.round(dur / 0.04);
+          for (let i = 0; i < steps; i++) {
+            const a = ((i * 37) % 11) - 5, b = ((i * 53) % 9) - 4;
+            tl.set(node, { x: a * 2, textShadow: `${a * 3}px 0 0 rgba(37,211,102,.9), ${-b * 3}px 0 0 rgba(229,50,45,.8)`, clipPath: i % 3 ? "inset(0 0 0 0)" : `inset(${(i * 13) % 50}% 0 ${(i * 7) % 40}% 0)` }, t + i * 0.04);
+          }
+          tl.set(node, { x: 0, textShadow: "-6px 0 0 rgba(37,211,102,.85), 6px 0 0 rgba(229,50,45,.7)", clipPath: "inset(0 0 0 0)" }, t + dur);
+        },
+      };
+      P.scene(tl, api);
+
+      // Caption monospace (ala PYNK): 1–2 perkataan, kotak kecil
+      const caps = $("#caps"), W = P.words, groups = []; let cur = [];
+      W.forEach((w, i) => { const p = W[i - 1];
+        if (cur.length && (cur.length >= 2 || (p && (w.s - p.e > 0.25 || /[.,?!]$/.test(p.w))))) { groups.push(cur); cur = []; } cur.push(w); });
+      if (cur.length) groups.push(cur);
+      const hidden = (t) => (P.hideCaps || []).some(([a, b]) => t >= a && t < b);
+      groups.forEach((g, gi) => {
+        const t0 = Math.max(g[0].s - 0.03, 0), nx = groups[gi + 1], t1 = nx ? nx[0].s - 0.03 : Math.min(g[g.length - 1].e + 0.3, D);
+        if (hidden(t0)) return;
+        const n = el(`<div class="cg">${g.map((w) => w.w.replace(/[.,]$/, "")).join(" ")}</div>`); caps.appendChild(n);
+        tl.set(n, { opacity: 1 }, t0); tl.set(n, { opacity: 0 }, t1);
+      });
+      (P.lightCaps || []).forEach(([a, b]) => { tl.set(caps, { className: "light" }, a); tl.set(caps, { className: "" }, b); });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

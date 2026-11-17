@@ -1,0 +1,184 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/raw-C0060b/C0060_v.mov",
+ "transcript": "projects/C0060_131221/transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0060w",
+ "rotate": "none",
+ "fps": 30,
+ "color": "null",
+ "corrections": {
+  "seraga": "struggle",
+  "akun": "akaun",
+  "bagian": "bahagian",
+  "kan,": "kan,"
+ },
+ "segments": [
+  {
+   "note": "hook: kita dah buat konten, dah semangat tapi view tak berapa nak ngam",
+   "start": 12.74,
+   "end": 15.84,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "penat: siapa kat sini",
+   "start": 3.32,
+   "end": 4.2,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "penat: yang ada rasa macam dah penat buat konten ataupun tak tahu nak buat konten apa",
+   "start": 4.62,
+   "end": 9.54,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "tak semangat: rasa dah tak semangat buat konten",
+   "start": 9.5,
+   "end": 11.34,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "betul tak: ngam Betul",
+   "start": 15.62,
+   "end": 16.36,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "fasa biasa: So don't worry, itu adalah",
+   "start": 16.66,
+   "end": 18.14,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "fasa biasa: fasa perasaan",
+   "start": 18.28,
+   "end": 19.5,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "fasa biasa: yang biasa dan pasti kita akan lalui",
+   "start": 19.78,
+   "end": 21.54,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "struggle: tu siapa -siapa yang sedang seraga sekarang, tolong hadirkan diri anda untuk kami sama -sama bantu",
+   "start": 22.6,
+   "end": 26.98,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "follow each other: Mungkin",
+   "start": 27.54,
+   "end": 28.38,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "follow each other: follow each other ke",
+   "start": 28.7,
+   "end": 29.92,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "kita support: macam kita support",
+   "start": 32.7,
+   "end": 33.68,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "komen positif: Bagi komen",
+   "start": 33.86,
+   "end": 34.92,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "komen positif: positif",
+   "start": 35.2,
+   "end": 36.34,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "komen akaun: So tolong komen",
+   "start": 37.78,
+   "end": 39.28,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "komen akaun: akun anda di bawah di bagian chat untuk kami sama -sama",
+   "start": 39.86,
+   "end": 42.64,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "follow engage: And follow",
+   "start": 42.88,
+   "end": 43.76,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "follow engage: and engage",
+   "start": 43.98,
+   "end": 45.14,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "follow engage: beri komen",
+   "start": 45.42,
+   "end": 46.3,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "grow: So insyaAllah,",
+   "start": 46.6,
+   "end": 47.24,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "grow: mana tahu",
+   "start": 47.66,
+   "end": 48.36,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "grow: video dan akun anda grow dengan lebih video lepas",
+   "start": 49.08,
+   "end": 51.4,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "salam: Okay?",
+   "start": 51.78,
+   "end": 52.14,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "salam: Assalamualaikum",
+   "start": 52.58,
+   "end": 53.4,
+   "zoom": 1.0,
+   "cy": 0.0
+  }
+ ]
+}

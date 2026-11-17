@@ -5,3 +5,6 @@
 - kertas_koyak.wav: transition kertas koyak (Gaya Vox)
 - kertas_tampal.wav: gambar/jalur kertas ditampal
 - pen.wav: coretan tangan dilukis
+- klik.wav: klik kursor / butang (Gaya PYNK)
+- taip.wav: ketukan menaip (Gaya PYNK)
+- glitch.wav: logo glitch (Gaya PYNK)
