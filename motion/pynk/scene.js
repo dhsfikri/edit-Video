@@ -42,14 +42,14 @@ window.PYNK = {
     tl.fromTo(p2.querySelector("#tanya"), { opacity: 0, scale: 0.4, rotation: -20 }, { opacity: 1, scale: 1, rotation: 6, duration: 0.4, ease: "power3.out", immediateRender: false }, 7.6);
 
     // ---------- 3) 9.03–11.61: BELAH SKRIN — graf mendatar + Sir dalam kad POP-OUT ----------
-    const graf = put(`<div class="gridp" style="position:absolute;left:60px;top:240px;width:960px;height:560px;border-radius:30px;overflow:hidden">
+    const graf = put(`<div class="gridp" style="position:absolute;left:60px;top:240px;width:840px;height:560px;border-radius:30px;overflow:hidden">
       <div class="mono" style="position:absolute;left:44px;top:34px;font-size:40px;color:#0B0B0B">views / hari</div>
-      <svg width="960" height="560" style="position:absolute;inset:0"><polyline points="60,400 220,385 380,415 540,392 700,408 900,398" fill="none" stroke="#e5322d" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`, "#back");
+      <svg width="840" height="560" style="position:absolute;inset:0"><polyline points="50,400 200,385 350,415 500,392 650,408 790,398" fill="none" stroke="#e5322d" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`, "#back");
     tl.set(graf, { opacity: 0 }, 0);
     tl.fromTo(graf, { opacity: 0, y: -80 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", immediateRender: false }, 9.05);
     a.draw(graf.querySelector("svg"), 9.3, 0.9);
     tl.set(graf, { opacity: 0 }, 11.61);
-    a.card(9.03, a.R(130, 960, 820, 640), { s: 0.82, cut: "p3", out: 150 });
+    a.card(9.03, a.R(90, 960, 800, 640), { s: 0.82, cut: "p3", out: 150 });
     a.full(11.61, { z: 1.0, cut: "p3" });
 
     // ---------- 4) 11.61–16.23: "don't worry" → kertas grid "FASA BIASA" ----------
@@ -78,7 +78,7 @@ window.PYNK = {
     tl.to(p5.querySelector("#fold"), { scale: 1.08, duration: 0.12, yoyo: true, repeat: 1 }, 18.33);
 
     // ---------- 6) 20.52–25.7: kad profil — Sir POP-OUT + Follow → Following + komen positif ----------
-    const prof = put(`<div class="card" style="left:130px;top:470px;width:820px;height:830px">
+    const prof = put(`<div class="card" style="left:90px;top:470px;width:800px;height:830px">
       <div style="position:absolute;left:40px;top:690px;display:flex;align-items:center;gap:22px">
         <div style="width:96px;height:96px;border-radius:50%;background:#d8d8d8"></div>
         <div><div style="font-weight:600;font-size:38px">@akaun_awak</div><div style="font-size:28px;color:#777">kreator · baru mula</div></div></div>
@@ -86,7 +86,7 @@ window.PYNK = {
     tl.set(prof, { opacity: 0 }, 0);
     tl.fromTo(prof, { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", immediateRender: false }, 20.52);
     tl.set(prof, { opacity: 0 }, 25.7);
-    a.card(20.52, a.R(160, 500, 760, 640), { s: 0.78, cut: "p6", out: 150, border: 0, rad: 26 });
+    a.card(20.52, a.R(120, 500, 760, 640), { s: 0.78, cut: "p6", out: 150, border: 0, rad: 26 });
     const fb = prof.querySelector("#fbtn");
     a.cursor(prof, [[20.52, 900, 1000], [21.43, 640, 720, true]]);
     tl.to(fb, { background: "linear-gradient(90deg,#25D366,#1aa34f)", duration: 0.25 }, 21.45);
@@ -117,7 +117,7 @@ window.PYNK = {
     const f1 = put(`<div class="pill" style="left:80px;top:700px">Follow</div>`);
     const f2 = put(`<div class="pill" style="left:80px;top:840px">Engage</div>`);
     const f3 = put(`<div class="pill" style="left:80px;top:980px;background:#25D366;color:#fff">Komen</div>`);
-    a.pop(30.35, 33.06, f1, { dx: -60, dy: 0 }); a.pop(31.43, 33.06, f2, { dx: -60, dy: 0 }); a.pop(32.67, 33.06, f3, { dx: -60, dy: 0 });
+    a.pop(30.35, 33.8, f1, { dx: -60, dy: 0 }); a.pop(31.43, 33.8, f2, { dx: -60, dy: 0 }); a.pop(32.67, 33.8, f3, { dx: -60, dy: 0 });
 
     // ---------- 8) 33.06–36.4: InsyaAllah → orang ramai + views naik ----------
     a.cam(33.06, 1.0);
@@ -132,11 +132,11 @@ window.PYNK = {
     tl.fromTo(p8.querySelector("#bar"), { width: 0 }, { width: "100%", duration: 1.5, ease: "power2.inOut", immediateRender: false }, 34.6);
 
     // ---------- 9) 36.4–39.3: logo glitch + kad CTA, Sir POP-OUT ----------
-    const logo = put(`<div style="position:absolute;left:0;width:1080px;top:270px;text-align:center;font-weight:800;font-size:104px;color:#fff;letter-spacing:4px">SIR DHARMA</div>`);
+    const logo = put(`<div style="position:absolute;left:60px;width:840px;top:280px;text-align:center;font-weight:800;font-size:92px;color:#fff;letter-spacing:3px">SIR DHARMA</div>`);
     tl.set(logo, { opacity: 0 }, 0); tl.set(logo, { opacity: 1 }, 36.5);
     a.glitch(logo, 36.5, 0.6);
-    a.card(36.4, a.R(170, 600, 740, 620), { s: 0.74, cut: "p9", out: 150 });
-    const cta = put(`<div class="pill mono" style="left:150px;top:1300px;width:780px;text-align:center;font-family:Mono;font-weight:400;font-size:44px">komen akaun anda ↓</div>`);
+    a.card(36.4, a.R(130, 600, 740, 620), { s: 0.74, cut: "p9", out: 150 });
+    const cta = put(`<div class="pill mono" style="left:90px;top:1300px;width:780px;text-align:center;font-family:Mono;font-weight:400;font-size:44px">komen akaun anda ↓</div>`);
     a.pop(37.0, 39.3, cta, { dy: 50 });
   },
 };
