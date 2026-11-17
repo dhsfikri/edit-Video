@@ -11,6 +11,7 @@ Rujukan analisis: `docs/rujukan/split-kad-nick/README.md` · Prototaip: `motion/
 | Prinsip kamera / transition antara mod | skill **`cinematic-camera`** | Satu dunia, bukan panel bertaburan |
 | **Komposit utama**: susun atur split, bingkai video bersudut bulat (track matte), kad 3D flip, pentas gelap + spotlight, maskot, kamera, render akhir | **EffectCraft** (MCP, setara After Effects) | 3D sebenar, matte, effect, keyframe/expression, render H.264 |
 | Kad UI berteks banyak (kad kamus, tweet, how-it-works, mockup chat) | **HyperFrames** (`motion/`) → render `.mov` telus → import ke EffectCraft | Susun atur HTML lebih pantas untuk UI |
+| **Grafik vektor**: ikon, badge siri, maskot, bentuk kad, anak panah, logo dibersihkan → eksport SVG/PNG telus → import ke EffectCraft / HyperFrames | **VectorCraft** (MCP, setara Illustrator) | Vektor tajam pada sebarang saiz; boleh guna font brand (Poppins/Kalam) |
 | Blok siap (kaunter, kursor, text swap) | skill **`hyperframes-registry`** | Jangan bina semula |
 | Caption perkataan-demi-perkataan + kata kunci serif italic | HyperFrames (overlay telus) | Masa perkataan dari `words.json` |
 | QC safe zone, kenyaringan | `pipeline/safezone_qc.py`, ebur128 | Wajib setiap draf |
@@ -42,6 +43,7 @@ Prototaip: `motion/effectcraft/proto_split.ecproj` (render contoh `_kerja/proto_
 | Font brand **Poppins** (tajuk/caption + Light) + **Kalam** (tulisan tangan) — ganti serif italic rujukan (keputusan Sir 2026-11-17). Kata kunci = Poppins Bold hijau brand. Instrument Serif/Inter kekal dalam `aset/fonts/` tetapi TIDAK dipakai | `aset/fonts/` + `motion/assets-brand/` (setup script pasang ke `~/.local/share/fonts`) | ✅ |
 | Colour grading | **TIADA** — rakaman asal (keputusan Sir) | ✅ |
 | EffectCraft 0.10.0 + MCP | setup script environment | ✅ |
+| VectorCraft 0.11.0 + MCP | setup script environment | ✅ diuji 2026-11-17 (bentuk + teks Poppins → SVG/PNG ke `_kerja/`) |
 | Folder kerja EffectCraft | `_kerja/` (diabaikan git) | ✅ |
 | Prototaip split + kad 3D flip + render | `motion/effectcraft/proto_split.ecproj` | ✅ diuji (4s render ~20s CPU) |
 | Skill: director, motion, cinematic-camera, hyperframes(+registry), reverse-any-video, tiktok-edit | `.claude/skills/` | ✅ |
