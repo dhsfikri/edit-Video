@@ -23,12 +23,16 @@
 | Kuning | `#FFD60A` | **Keyword dalam thumbnail** (satu sahaja), harga/amaran |
 | Merah | `#FF5A5A` | Ikon ✕ (salah) sahaja |
 
-## 3. Font
+## 3. Font  (dikemas kini 2026-11-17 — keputusan Sir: senang dibaca; kurus & tulisan tangan dibenarkan bila sesuai)
 | Font | Guna | Fail |
 |---|---|---|
-| **Anton** | Headline THUMBNAIL (huruf besar, condensed) | `@fontsource/anton` |
-| **Montserrat ExtraBold 800 / SemiBold 600** | Semua teks dalam video, badge, subtitle, callout | `@fontsource/montserrat` |
-| **Caveat 700** | Tulisan tangan (kicker kecil atas headline) | `@fontsource/caveat` |
+| **Poppins Bold 700 / ExtraBold 800** | Tajuk, caption, subtitle, badge, kata kunci (warna hijau brand) | `aset/fonts/Poppins-*.ttf` · `motion/assets-brand/poppins-latin-*.woff2` |
+| **Poppins Light 300** | Ayat sokongan / penerangan (teks kurus) — saiz ≥ 48px sahaja supaya terbaca di telefon | sama |
+| **Kalam 400/700** | Tulisan tangan: nota kecil, anotasi, kicker — 1–3 perkataan sahaja | `aset/fonts/Kalam-*.ttf` · `motion/assets-brand/kalam-latin-*.woff2` |
+| **Anton** | Headline THUMBNAIL sahaja (tidak berubah) | `@fontsource/anton` |
+| ~~Montserrat / Caveat~~ | Font lama — kekal dalam template lama sahaja; video baru guna Poppins + Kalam | — |
+
+Perbandingan yang dipilih: `docs/split-kad/pilihan_font.png` (pilihan B).
 
 ## 4. Siri (badge)
 `AYAT CLOSING #NN` · `TIPS JUALAN #NN` · `BEDAH CHAT #NN` · `OBJECTION KILLER #NN`

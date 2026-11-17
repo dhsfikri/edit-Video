@@ -38,7 +38,8 @@ Prototaip: `motion/effectcraft/proto_split.ecproj` (render contoh `_kerja/proto_
 ## Sumber yang sudah disediakan
 | Sumber | Tempat | Status |
 |---|---|---|
-| Font Instrument Serif (Italic/Regular) + Inter (OFL) | `aset/fonts/` (dipasang ke `~/.local/share/fonts`) | ✅ |
+| Font brand **Poppins** (tajuk/caption + Light) + **Kalam** (tulisan tangan) — ganti serif italic rujukan (keputusan Sir 2026-11-17). Kata kunci = Poppins Bold hijau brand. Instrument Serif/Inter kekal dalam `aset/fonts/` tetapi TIDAK dipakai | `aset/fonts/` + `motion/assets-brand/` (setup script pasang ke `~/.local/share/fonts`) | ✅ |
+| Colour grading | **TIADA** — rakaman asal (keputusan Sir) | ✅ |
 | EffectCraft 0.10.0 + MCP | setup script environment | ✅ |
 | Folder kerja EffectCraft | `_kerja/` (diabaikan git) | ✅ |
 | Prototaip split + kad 3D flip + render | `motion/effectcraft/proto_split.ecproj` | ✅ diuji (4s render ~20s CPU) |
