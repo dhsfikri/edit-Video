@@ -1,0 +1,133 @@
+<!doctype html>
+<!--
+  GAYA SPLIT KAD — komposisi penuh LEGAP 1080x1920 (rujukan: docs/rujukan/split-kad-nick/, keputusan Sir: aksen HIJAU brand).
+  Mod A (split): atas = kad krim (UI/kad ikut ayat) · tengah = caption besar perkataan-demi-perkataan · bawah = Sir dalam bingkai hijau + POP-OUT.
+  Mod B (penuh muka): video penuh skrin, caption putih.
+  Lapisan: #back (kad di belakang Sir) → #frame (bingkai) → #camClip (video Sir) → #cutClip (pop-out) → #fx (babak penuh) → #top → #caps.
+  Koreografi per video: scene.js (salin dari projects/<ID>/scene_split.js):
+    window.SPLIT = { duration, words:[{w,s,e}], keywords:[...], modeA:[[a,b],...], hideCaps:[[a,b]], scene(tl, api) }
+  POP-OUT: video cutout MESTI ditulis statik dalam #cutWrap (HyperFrames tak kesan <video> yang dicipta skrip).
+  Easing: masuk power3.out .35–.5s (spring kecil back.out(1.2) untuk kad sahaja) · keluar power2.in .2–.3s · tiada lantunan kartun.
+-->
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Poppins"; font-weight: 800; src: url("assets/poppins-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Poppins"; font-weight: 700; src: url("assets/poppins-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Poppins"; font-weight: 600; src: url("assets/poppins-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Poppins"; font-weight: 400; src: url("assets/poppins-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Serif"; font-style: italic; src: url("assets/InstrumentSerif-Italic.ttf"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #F4F0EB; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Poppins", sans-serif; background: #F4F0EB; }
+      .L { position: absolute; inset: 0; }
+      .wrap { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+      .wrap video { width: 1080px; height: 1920px; display: block; }
+      #frame { position: absolute; background: #25D366; opacity: 0; box-shadow: 0 24px 50px rgba(0,0,0,.18); }
+      .cutw { position: absolute; inset: 0; opacity: 0; }
+      .card { position: absolute; background: #fff; border-radius: 30px; box-shadow: 0 22px 48px rgba(40,30,20,.16); }
+      .ser { font-family: "Serif"; font-style: italic; font-weight: 400; }
+      .pill { position: absolute; background: #25D366; color: #fff; border-radius: 60px; padding: 14px 34px; font-weight: 600; font-size: 40px; white-space: nowrap; }
+      #caps { position: absolute; left: 60px; right: 180px; height: 120px; }
+      .cg { position: absolute; left: 0; right: 0; top: 0; text-align: center; opacity: 0; white-space: nowrap; }
+      .cw { display: inline-block; margin: 0 9px; font-weight: 700; font-size: 64px; color: rgba(26,26,26,.28); }
+      .cw.on { color: #1A1A1A; }
+      .cw.k { font-family: "Serif"; font-style: italic; font-weight: 400; font-size: 82px; color: rgba(37,211,102,.35); }
+      .cw.k.on { color: #1fae55; }
+      #caps.B .cw { color: rgba(255,255,255,.35); text-shadow: 0 4px 18px rgba(0,0,0,.6); }
+      #caps.B .cw.on { color: #fff; }
+      #caps.B .cw.k { color: rgba(37,211,102,.45); } #caps.B .cw.k.on { color: #2ee87a; }
+    </style>
+    <script src="scene.js"></script>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10.4" data-width="1080" data-height="1920">
+      <div id="back" class="L"></div>
+      <div id="frame"></div>
+      <div id="camClip" class="L"><div id="camWrap" class="wrap"><video id="base" src="assets/base.mp4" class="clip" data-start="0" data-duration="10.4" data-track-index="0" muted playsinline></video></div></div>
+      <div id="cutClip" class="L"><div id="cutWrap" class="wrap">
+        <div class="cutw" id="cw_s"><video class="clip" src="assets/cut_s.webm" data-start="0" data-duration="10.4" data-track-index="1" muted playsinline></video></div>
+      </div></div>
+      <div id="fx" class="L"></div>
+      <div id="top" class="L"></div>
+      <div id="caps"></div>
+    </div>
+    <script>
+      const P = window.SPLIT, D = P.duration;
+      const tl = gsap.timeline({ paused: true });
+      const $ = (s, r = document) => r.querySelector(s);
+      const el = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstChild; };
+      const put = (h, layer = "#top") => (typeof layer === "string" ? $(layer) : layer).appendChild(el(h));
+      const R = (x, y, w, h) => ({ x, y, w, h });
+      const inset = (r, rad, openTop = false) => `inset(${openTop ? 0 : r.y}px ${1080 - r.x - r.w}px ${1920 - r.y - r.h}px ${r.x}px round ${openTop ? 0 : rad}px)`;
+      const FULL = R(0, 0, 1080, 1920);
+      tl.set("#camClip", { clipPath: inset(FULL, 0) }, 0);
+      tl.set("#cutClip", { clipPath: inset(FULL, 0, true) }, 0);
+      tl.set(["#camWrap", "#cutWrap"], { x: 0, y: 0, scale: 1 }, 0);
+      const F = P.face || { x: 526, y: 760, top: 540 }; // titik muka dalam base (ukur dengan OpenCV)
+
+      const api = {
+        R,
+        // MOD B: penuh skrin, zoom z berpusat pada muka (muka diletak di y=fy)
+        full(t, { z = 1.45, fy = 640, cut, dur = 0.45 } = {}) {
+          if (cut) tl.set("#cw_" + cut, { opacity: 0 }, t);
+          tl.to("#frame", { opacity: 0, duration: 0.2, ease: "power2.in" }, t);
+          const x = Math.min(0, Math.max(1080 - 1080 * z, 540 - F.x * z)), y = Math.min(0, Math.max(1920 - 1920 * z, fy - F.y * z));
+          tl.to("#camClip", { clipPath: inset(FULL, 0), duration: dur, ease: "power3.inOut" }, t);
+          tl.to(["#camWrap", "#cutWrap"], { x, y, scale: z, duration: dur, ease: "power3.inOut" }, t);
+        },
+        // MOD A: Sir dalam bingkai bawah + POP-OUT kepala keluar ke atas bingkai
+        frame(t, r, { s = 1.3, out = 130, rad = 44, border = 12, cut, dur = 0.5 } = {}) {
+          const x = Math.min(r.x, Math.max(r.x + r.w - 1080 * s, r.x + r.w / 2 - F.x * s)), y = r.y - out - F.top * s;
+          tl.to("#camClip", { clipPath: inset(r, rad), duration: dur, ease: "power3.inOut" }, t);
+          tl.to(["#camWrap", "#cutWrap"], { x, y, scale: s, duration: dur, ease: "power3.inOut" }, t);
+          tl.set("#cutClip", { clipPath: inset(r, rad, true) }, t);
+          tl.set("#frame", { left: r.x - border, top: r.y - border, width: r.w + border * 2, height: r.h + border * 2, borderRadius: rad + border }, t);
+          tl.to("#frame", { opacity: 1, duration: dur * 0.6, ease: "power2.out" }, t + 0.1);
+          if (cut) { tl.set("#cw_" + cut, { opacity: 0 }, 0); tl.set("#cw_" + cut, { opacity: 1 }, t + dur * 0.6); }
+        },
+        // elemen masuk (spring kecil) & keluar
+        pop(t, end, node, { dx = 0, dy = 60, rot = 0, sc = 0.92, ease = "back.out(1.2)" } = {}) {
+          tl.set(node, { opacity: 0 }, 0);
+          tl.fromTo(node, { opacity: 0, x: dx, y: dy, scale: sc, rotation: rot * 2 }, { opacity: 1, x: 0, y: 0, scale: 1, rotation: rot, duration: 0.45, ease, immediateRender: false }, t);
+          if (end < D) tl.to(node, { opacity: 0, y: -30, duration: 0.22, ease: "power2.in" }, end - 0.22);
+          return node;
+        },
+        counter(node, keys, fmt = (v) => Math.round(v).toLocaleString("en-US")) {
+          const o = { v: keys[0][1] }; node.textContent = fmt(keys[0][1]);
+          tl.set(o, { v: keys[0][1], onUpdate: () => (node.textContent = fmt(o.v)) }, 0);
+          for (let i = 1; i < keys.length; i++) tl.to(o, { v: keys[i][1], duration: keys[i][0] - keys[i - 1][0], ease: keys[i][2] || "power2.out", onUpdate: () => (node.textContent = fmt(o.v)) }, keys[i - 1][0]);
+        },
+        type(node, text, t, dt = 0.06) { for (let i = 0; i <= text.length; i++) tl.set(node, { textContent: text.slice(0, i) }, t + i * dt); tl.set(node, { textContent: "" }, 0); },
+      };
+      P.scene(tl, api, put);
+
+      // Caption perkataan-demi-perkataan: perkataan akan datang pudar; kata kunci serif italic hijau. Mod A (tengah, gelap) / Mod B (putih).
+      const caps = $("#caps"), W = P.words, KW = new Set((P.keywords || []).map((k) => k.toLowerCase()));
+      const isA = (t) => (P.modeA || []).some(([a, b]) => t >= a && t < b);
+      const hidden = (t) => (P.hideCaps || []).some(([a, b]) => t >= a && t < b);
+      const groups = []; let cur = [];
+      W.forEach((w, i) => { const p = W[i - 1];
+        if (cur.length && (cur.length >= 3 || (p && (w.s - p.e > 0.3 || /[.,?!]$/.test(p.w))) || isA(w.s) !== isA(cur[0].s))) { groups.push(cur); cur = []; } cur.push(w); });
+      if (cur.length) groups.push(cur);
+      groups.forEach((g, gi) => {
+        const t0 = Math.max(g[0].s - 0.04, 0), nx = groups[gi + 1], t1 = nx ? nx[0].s - 0.04 : Math.min(g[g.length - 1].e + 0.3, D);
+        if (hidden(t0)) return;
+        const n = el(`<div class="cg"></div>`); caps.appendChild(n);
+        const sp = g.map((w) => { const c = w.w.replace(/[.,?!]$/, ""), k = KW.has(c.toLowerCase()); const s = el(`<span class="cw${k ? " k" : ""}">${c}</span>`); n.appendChild(s); return s; });
+        tl.set(n, { opacity: 1 }, t0); tl.set(n, { opacity: 0 }, t1);
+        g.forEach((w, i) => tl.set(sp[i], { className: sp[i].className + " on" }, w.s));
+      });
+      // kedudukan caption ikut mod
+      tl.set(caps, { top: isA(0) ? 930 : 1260, className: isA(0) ? "" : "B" }, 0);
+      let prev = isA(0);
+      W.forEach((w) => { const a = isA(w.s); if (a !== prev) { tl.set(caps, { top: a ? 930 : 1260, className: a ? "" : "B" }, Math.max(w.s - 0.05, 0)); prev = a; } });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>

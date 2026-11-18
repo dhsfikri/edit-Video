@@ -1,0 +1,84 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/raw-C0225/C0225.MP4",
+ "transcript": "projects/C0225/transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0225w",
+ "rotate": "none",
+ "fps": 25,
+ "color": "null",
+ "corrections": {
+  "-nekan": "-nekan"
+ },
+ "segments": [
+  {
+   "note": "hook thread blow up: saya ada satu thread yang blow up kat thread dan kebanyakannya",
+   "start": 12.22,
+   "end": 17.64,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "hook thread blow up: mungkin agak tak setuju dengan apa yang saya cadangkan",
+   "start": 18.08,
+   "end": 20.3,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "soalan survey: kalau ada customer survey,",
+   "start": 2.28,
+   "end": 3.86,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "soalan survey: nak buat apa?",
+   "start": 4.22,
+   "end": 5.06,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "memaksa vs melepas: Sebab kalau terlebih buat, nanti orang kata memaksa Tapi kalau tak buat apa -apa, kita melepas",
+   "start": 5.55,
+   "end": 11.8,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "kenapa menekan: Kenapa? Sebab dia orang merasa apa yang saya cadangkan itu adalah terlalu menekan -nekan Dan apabila menekan, customer akan pergi",
+   "start": 20.22,
+   "end": 28.2,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "point pujuk: Tapi apa yang saya nak sampaikan dalam point thread tersebut adalah Daripada 10 seller yang saya jumpa, berapa ramai yang betul -betul beria nak pujuk customer untuk beli",
+   "start": 28.14,
+   "end": 39.7,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "point pujuk: So lepas dapat survey, seberapa ramai yang akan pujuk dia beli juga at least hari itu Dan kalau dia tak nak beli, kita bagi dia masa",
+   "start": 40.02,
+   "end": 48.18,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "bukan tekan: bukan je kita akan tekan -tekan -tekan -tekan",
+   "start": 49.48,
+   "end": 52.55,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "salam: Assalamualaikum",
+   "start": 58.8,
+   "end": 59.54,
+   "zoom": 1.0,
+   "cy": 0.0
+  }
+ ],
+ "pretranscode": true
+}

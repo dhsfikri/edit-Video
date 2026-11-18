@@ -10,6 +10,7 @@ edit.json:
   "workdir": "/path/out",
   "rotate": "cw",                               # cw | ccw | none
   "precrop": "crop=1215:2160:1620:0",           # pilihan: crop rakaman landscape 4K ke 9:16 SEBELUM zoom
+  "pretranscode": true,                         # pilihan: salinan perantara dulu (elak kehabisan memori, rakaman bitrate tinggi)
   "fps": 50,
   "color": "eq=brightness=0.03:contrast=1.06:saturation=1.08:gamma=1.08",
   "corrections": {"say": "sale"},
@@ -62,6 +63,15 @@ cfg = json.load(open(sys.argv[1]))
 out = Path(cfg["workdir"])
 out.mkdir(parents=True, exist_ok=True)
 fps = cfg.get("fps", 30)
+# Rakaman Sony bitrate tinggi (10-bit, 50+ Mbps) → filter_complex dengan banyak trim boleh kehabisan memori.
+# "pretranscode": true → buat salinan perantara 1080-lebar CRF 12 sekali lalu (precrop/rotate dipakai di sini), kemudian potong dari salinan itu.
+if cfg.get("pretranscode"):
+    src_mid = out / "_src.mov"
+    if not src_mid.exists():
+        vf = ",".join(f for f in [cfg.get("precrop", ""), {"cw": "transpose=1", "ccw": "transpose=2"}.get(cfg.get("rotate", "none"), ""), "scale=1080:-2:flags=lanczos"] if f)
+        run(["ffmpeg", "-v", "error", "-y", "-i", cfg["source"], "-vf", vf, "-c:v", "libx264", "-preset", "fast", "-crf", "12",
+             "-pix_fmt", "yuv420p", "-threads", "4", "-c:a", "pcm_s16le", str(src_mid)])
+    cfg["source"], cfg["precrop"], cfg["rotate"] = str(src_mid), "", "none"
 audio, sr = load_audio(cfg["source"])
 
 segs = []
