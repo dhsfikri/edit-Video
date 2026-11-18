@@ -53,7 +53,10 @@
       const F = P.face || { x: 526, y: 760 };
       // FRAMING: video diturunkan SY px supaya kepala di bawah zon grafik (elak cutout). Atas = hitam brand pudar ke video.
       const SY = P.shiftY || 0;
-      tl.set("#camWrap", { x: 0, y: SY, scale: 1, filter: "blur(0px)" }, 0);
+      // keadaan kamera awal (frame 0). Babak boleh beri P.initCam (contoh hook crash-zoom) — renderer undur ke 0 dan pulihkan nilai INI.
+      const INIT = P.initCam || { x: 0, y: SY, scale: 1, filter: "blur(0px)" };
+      gsap.set("#camWrap", INIT);
+      tl.set("#camWrap", INIT, 0);
       if (SY) $("#cam").insertAdjacentHTML("afterend", `<div class="L" style="background:linear-gradient(#0B0B0B 0, #0B0B0B ${SY}px, rgba(11,11,11,0) ${SY + 260}px)"></div>`);
       const api = {
         // zoom potong (jump) — maks ~1.1 (Sir rakam lebar)

@@ -14,7 +14,12 @@
 - Outro tetap 1.6s beku: logo `aset/logo-adabclosing/adabclosing_telus_2160.png` + CTA komen 2 pilihan (contoh "PUJUK atau BIAR?").
 
 ## Tambahan Sir (2026-11-18, C0226)
-- **Hook: Sir TERUS nampak dari frame 1** + tajuk di ruang atas + **punch-in LAJU** (`a.push(0.05, 0.35, 1.0, 1.28, "expo.out")` + whoosh 0.3 pada 0s) — zoom perlahan tak mengejutkan (Sir). JANGAN panel hitam penuh menutup Sir di awal.
+- **Hook VIRAL (Sir lulus v4, C0226 — salin blok HOOK dari `projects/C0226/scene_ed.js`):** Sir terus nampak, JANGAN panel hitam penuh.
+  1. Frame 0 **dah dekat ~1.95x** + kabur 10px → jelas dalam 0.14s (crash-in). Tetapkan `initCam` dalam ED (renderer undur ke 0 dan pulihkan nilai ini).
+  2. Merayap 1.95→2.08 semasa ayat hook (tak kaku).
+  3. **SNAP 2.08→2.45 dalam 0.09s (expo.out) tepat pada perkataan kunci** + kilat putih 1 frame + perkataan besar hentak masuk (scale 1.6→1, 0.14s).
+  4. **Whip keluar ke lebar 1.0** dalam 0.16s + kabur 12px → kontras dekat↔lebar = kejutan.
+  5. Muka diturunkan bila zoom (`+ (z-1)*150`) supaya tajuk tak tindih kepala. SFX: whoosh 0.35 @0, pop 0.45 + ding 0.25 @ perkataan kunci, whoosh 0.3 @ whip.
 - **Variasi zoom antara babak:** selang-seli LEBAR (1.0) ↔ DEKAT (1.2–1.28), dan push-in/pull-out perlahan (`a.push(t0,t1,z0,z1)`). Muka kekal di tempat sama; maks ~1.3 (kepala tak masuk zon grafik).
 - **2–3 B-roll skrin penuh motion graphic** (`a.panel`): contoh skrin "Claude sedang edit" (bar arahan + timeline dipotong + render %), telefon profil TikTok, telefon Threads + TikTok guna aset sebenar (SS kad, thumbnail). Caption kekal atas B-roll.
 
