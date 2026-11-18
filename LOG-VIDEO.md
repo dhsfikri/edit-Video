@@ -15,6 +15,7 @@
 | C0009 | `Raw/060224` | `1hiGVxjxic7HoZ-9a5FNAu2ir9vJ3BAnL` | ⛔ Sir buat sendiri | Iklan e-book | — | `projects/C0009/transcript.json` | Draf Sir: Drive `08 Video Ads/C0009_draf_v1.mp4` |
 | C0060 | `Raw/131221` | `1r-_ypjBApdinLiQYcI_ksLrCn-5xzUUz` | ✅ Final | Tanpa label siri — penat buat konten? komen akaun, kita support | PYNK, hook 2 (tengah cerita) | `projects/C0060_131221/` | 55s, 4K landscape tegak 29.97fps. Topik komuniti kreator. Final 39.3s (Sir lulus draf v1; suara dijelaskan: EQ + gate + noise reduction, `voice_filter.txt`). 15.5 Mbps. Logo = placeholder teks. Muzik: Sir tambah masa posting. Thumbnail + caption siap |
 | C0225 | `Raw/181126` | `1QMV4wzeK-U4xJIGJWqGCJKarCrcy26Sc` | ✅ Final (versi EDITORIAL) | @adabclosing Hari 1 — customer "saya survey dulu" | EDITORIAL brandkit (ganti Split Kad), hook 2, nama Threads dikabur | `projects/C0225/` | 65.8s, 1080x1920 (autorotate), 25fps, tangkapan lebar. 10 SS Threads (folder `Screenshot untuk C0225` id `1fqaD2_cQb0Go2IJW5OTI19Xm7zi0frYQ`) |
+| C0226 | `Raw/181126` | `1_Tspf8hQdoaHPly6v1LXS0mshqyVfokm` | 🔵 Transkrip + 3 hook (tunggu Sir) | @adabclosing — video #2: pengenalan akaun / journey dari 0, diedit oleh Claude | EDITORIAL (resipi harian) | `projects/C0226/` | 72s, 1080x1920 (autorotate), 25fps, set sama C0225 |
 
 ## Belum disentuh (⬜)
 | Kod | Folder Raw | ID Drive | Diupload ke Drive | Catatan |
@@ -23,7 +24,6 @@
 | C0062 | `Raw/131221` | `1pncMlqs4FVYmxHmcbntAwKltZ9Zb3jRr` | 2026-11-17 | BARU |
 | C0063 | `Raw/131221` | `1EGy_jZpfzJhj31hVMxy7ycpHbuIQxmSH` | 2026-11-17 | BARU (fail kecil 50MB — mungkin pendek) |
 | C0064 | `Raw/131221` | `1A4L-cFegM7fFXErFvphl9gJnPlvrThek` | 2026-11-17 | BARU |
-| C0226 | `Raw/181126` | `1_Tspf8hQdoaHPly6v1LXS0mshqyVfokm` | 2026-11-18 | BARU |
 | C0227 | `Raw/181126` | `1_s4Eg6amOMCqTOxRW460TBmLSsWa74qO` | 2026-11-18 | BARU |
 | C0040 | `Raw/New folder/251121` | `14j8MLrg7sRCxQNNqgDA4XfKeLRWasJVI` | 2026-11-11 | |
 | C0041 | `Raw/New folder/251121` | `1Rt_YIRY_bepHlpdbzfM43k9MAeafs3no` | 2026-11-11 | |
