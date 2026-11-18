@@ -1,0 +1,135 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/raw-C0227/C0227.MP4",
+ "transcript": "projects/C0227/transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0227w",
+ "rotate": "none",
+ "fps": 25,
+ "color": "null",
+ "pretranscode": true,
+ "corrections": {
+  "Fifi": "fee",
+  "akun": "akaun",
+  "Tim": "team"
+ },
+ "segments": [
+  {
+   "note": "hook: siapa-siapa struggle dengan fee naik, kembali meta ads",
+   "start": 31.2,
+   "end": 37.0,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "hook: nak kembali kepada WhatsApp",
+   "start": 37.45,
+   "end": 38.88,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "hook: jalan yang betul atau tidak?",
+   "start": 39.14,
+   "end": 41.38,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "who knows, pengalaman, apa pun platform",
+   "start": 41.85,
+   "end": 45.76,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "pilih",
+   "start": 46.0,
+   "end": 46.66,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "sentiasa boleh untung kalau betul",
+   "start": 47.14,
+   "end": 50.45,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "akaun no2",
+   "start": 1.64,
+   "end": 7.82,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "akaun baru dari kosong",
+   "start": 8.2,
+   "end": 11.3,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "cuba sesuatu berbeza",
+   "start": 11.56,
+   "end": 14.95,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "betulkah grow susah teknikal",
+   "start": 15.4,
+   "end": 22.55,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "closing tips ayat",
+   "start": 23.55,
+   "end": 27.8,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "trend closing sekarang",
+   "start": 27.95,
+   "end": 29.45,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "nak tahu tips, real case study",
+   "start": 52.25,
+   "end": 55.52,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "apa saja saya dan team buat",
+   "start": 56.75,
+   "end": 58.96,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "follow content ini follow akaun ini",
+   "start": 58.89,
+   "end": 63.05,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "dan komen nak tahu apa dulu",
+   "start": 63.12,
+   "end": 65.95,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "salam",
+   "start": 67.9,
+   "end": 68.55,
+   "zoom": 1.0,
+   "cy": 0.0
+  }
+ ]
+}

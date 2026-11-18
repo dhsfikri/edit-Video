@@ -25,6 +25,8 @@
 
 - **Tajuk hook = gaya POSTER Anton** (lihat CLAUDE.md 2026-11-18; contoh `projects/C0226/scene_intro.js`). Intro ujian ikut rujukan `docs/rujukan/intro-andy/` (light leak → tajuk poster → picit ke bulatan dengan jejak muka → ikon orbit). TIADA color grading.
 
+- **Jejak muka (wajib untuk close-up / bulatan):** Haar `minSize=(220,220)`, buang calon x>760 (maskot JERUNG di latar dikesan sebagai muka), pilih calon paling hampir kedudukan sebelumnya, licin 7 sampel. Contoh: C0227.
+
 ## Langkah (arahan)
 1. **Log** rakaman baru dalam `LOG-VIDEO.md` (kunci ID Drive). Download: `curl -sSL -o X.MP4 "https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t"`.
 2. **Transkrip**: `ffmpeg -i X.MP4 -ac 1 -ar 16000 a16.wav` → `python3 -I pipeline/transcribe.py a16.wav projects/<ID>/transcript.json`.
