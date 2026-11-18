@@ -1,0 +1,85 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/raw-C0226/C0226.MP4",
+ "transcript": "projects/C0226/transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0226w",
+ "rotate": "none",
+ "fps": 25,
+ "color": "null",
+ "pretranscode": true,
+ "corrections": {
+  "club.": "Claude.",
+  "club": "Claude"
+ },
+ "segments": [
+  {
+   "note": "hook diedit claude: video ni akan di -edit oleh club.",
+   "start": 26.62,
+   "end": 28.05,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "akaun baru from zero: ini adalah account baru yang saya nak create from zero.",
+   "start": 7.38,
+   "end": 10.62,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "semua direkod: everything yang saya buat, kita akan record.",
+   "start": 11.78,
+   "end": 13.76,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "jimat masa tenaga: kita nak jimat masa, nak jimat tenaga. Betul lah, supaya kita boleh shoot dengan lebih banyak.",
+   "start": 21.15,
+   "end": 25.6,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "follow perjalanan: follow perjalanan account ini. Dan macam mana saya grow pemilihan konten -konten yang kita pilih.",
+   "start": 29.4,
+   "end": 36.48,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "we'll see: we'll see.",
+   "start": 39.5,
+   "end": 40.3,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "akaun kedua terima kasih: ini adalah account yang kedua. So, saya rasa terima kasih untuk support account yang pertama.",
+   "start": 41.85,
+   "end": 46.5,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "cabaran creator baru: untuk kali ini kita nak rasalah",
+   "start": 47.9,
+   "end": 56.66,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "threads tiktok automation: sekarang ni saya, Alhamdulillah lah, dah mula start di thread",
+   "start": 57.1,
+   "end": 64.36,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "follow salam: jangan lupa",
+   "start": 66.48,
+   "end": 69.45,
+   "zoom": 1.0,
+   "cy": 0.0
+  }
+ ]
+}
