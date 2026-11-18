@@ -6,25 +6,25 @@ window.SPLIT = {
   keywords: ["thread", "blow", "up", "setuju", "customer", "survey"],
   modeA: [[0, 5.38], [7.5, 10.4]],
   scene(tl, a, put) {
-    const FR = a.R(70, 1200, 940, 760);
+    const FR = a.R(70, 1230, 940, 760);
     // ---- 0–5.4 MOD A: reply Threads sebenar bertimbun (nama dikabur) ----
-    a.frame(0, FR, { s: 1.3, out: 110, cut: "s", dur: 0.01 });
+    a.frame(0, FR, { s: 1.3, out: 60, cut: "s", dur: 0.01 });
     const lbl = put(`<div class="card" style="left:60px;top:250px;padding:16px 30px;border-radius:40px;font-weight:600;font-size:36px;color:#1A1A1A">Threads · <span class="ser" style="font-size:44px;color:#1fae55">"saya survey dulu ye"</span></div>`, "#back");
     a.pop(0.05, 5.38, lbl, { dy: -30 });
-    const cards = [["r01", 330, -3], ["r09", 380, 2.5], ["r11", 430, -2], ["r04", 470, 3], ["r13", 500, -1.5]];
+    const cards = [["r01", 340, -2.5], ["r11", 380, 2], ["r04", 420, -1.5], ["r13", 450, 1]];
     cards.forEach(([f, y, rot], i) => {
-      const c = put(`<img src="assets/kad/${f}.png" style="position:absolute;left:${80 + (i % 2) * 40}px;top:${y}px;width:860px;border-radius:18px;box-shadow:0 20px 40px rgba(0,0,0,.28)">`, "#back");
-      a.pop(0.25 + i * 0.5, 5.38, c, { dy: 220, rot, sc: 0.9 });
+      const c = put(`<img src="assets/kad/${f}.png" style="position:absolute;left:${40 + (i % 2) * 20}px;top:${y}px;width:980px;border-radius:18px;box-shadow:0 20px 40px rgba(0,0,0,.28)">`, "#back");
+      a.pop(0.25 + i * 0.62, 5.38, c, { dy: 220, rot, sc: 0.9 });
     });
     // denyut like "22" pada kad teratas
-    const heart = put(`<div class="pill" style="left:560px;top:760px;background:#e5322d;font-size:38px;padding:10px 26px">&#9829; <span id="lk">0</span> setuju</div>`, "#back");
+    const heart = put(`<div class="pill" style="left:600px;top:800px;background:#e5322d;font-size:38px;padding:10px 26px">&#9829; <span id="lk">0</span> setuju</div>`, "#back");
     a.pop(2.6, 5.38, heart, { dy: 30 });
     a.counter(heart.querySelector("#lk"), [[2.6, 0], [3.4, 22]]);
     tl.to(heart, { scale: 1.08, duration: 0.18, yoyo: true, repeat: 3, ease: "sine.inOut" }, 3.4);
     // ---- 5.4–7.5 MOD B: muka penuh, "tak setuju" ----
-    a.full(5.38, { z: 1.45, cut: "s" });
+    a.full(5.38, { z: 1.85, fy: 700, cut: "s" });
     // ---- 7.5–10.4 MOD A: kad chat "saya survey dulu ye" ----
-    a.frame(7.5, FR, { s: 1.3, out: 110, cut: "s" });
+    a.frame(7.5, FR, { s: 1.3, out: 60, cut: "s" });
     const chat = put(`<div class="card" style="left:90px;top:290px;width:820px;height:540px;padding:34px">
       <div style="display:flex;align-items:center;gap:18px"><div style="width:70px;height:70px;border-radius:50%;background:#d9d4cc"></div>
         <div><div style="font-weight:600;font-size:34px">Customer</div><div style="font-size:26px;color:#8a8a8a">dalam talian</div></div></div>
