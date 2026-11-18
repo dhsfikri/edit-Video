@@ -20,9 +20,9 @@ window.ED = {
     const dk = put(`<div class="L" style="background:rgba(0,0,0,.72)"></div>`, "#fx"); tl.set(dk, { opacity: 1 }, 0); tl.to(dk, { opacity: 0, duration: 0.15 }, 1.25);
     const co = put(`<div style="position:absolute;left:80px;right:180px;top:560px;text-align:left">
       <div id="c1" style="font-weight:700;font-size:54px;color:#fff">video ni</div>
-      <div id="c2" style="font-family:Anton;font-size:250px;line-height:.95;color:#fff;letter-spacing:.01em">DIEDIT</div>
+      <div id="c2" style="font-family:Anton;font-size:230px;line-height:.95;color:#fff;letter-spacing:.01em">DIEDIT</div>
       <div id="c3" style="font-weight:700;font-size:54px;color:#fff;margin-top:6px">oleh</div>
-      <div id="c4" style="font-family:Anton;font-size:300px;line-height:.95;color:#FFD60A;transform-origin:left center">CLAUDE.</div></div>`, "#fx");
+      <div id="c4" style="font-family:Anton;font-size:255px;line-height:.95;color:#FFD60A;transform-origin:left center">CLAUDE.</div></div>`, "#fx");
     tl.set(co, { opacity: 1 }, 0);
     [["#c1", 0.08], ["#c2", 0.55], ["#c3", 0.85], ["#c4", 1.05]].forEach(([s, t]) => { const n = co.querySelector(s); tl.set(n, { opacity: 0 }, 0);
       tl.fromTo(n, { opacity: 0, scale: s === "#c4" ? 1.5 : 1.15, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: s === "#c4" ? 0.12 : 0.16, ease: "expo.out", immediateRender: false }, t); });
