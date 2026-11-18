@@ -13,6 +13,11 @@
 - Bukti sebenar dahulu (SS Threads/komen → kad, nama & avatar DIKABURKAN).
 - Outro tetap 1.6s beku: logo `aset/logo-adabclosing/adabclosing_telus_2160.png` + CTA komen 2 pilihan (contoh "PUJUK atau BIAR?").
 
+## Tambahan Sir (2026-11-18, C0226)
+- **Hook: Sir TERUS nampak dari frame 1** + tajuk di ruang atas + push-in perlahan (`a.push(0, 1.35, 1.0, 1.18)`). JANGAN panel hitam penuh menutup Sir di awal.
+- **Variasi zoom antara babak:** selang-seli LEBAR (1.0) ↔ DEKAT (1.2–1.28), dan push-in/pull-out perlahan (`a.push(t0,t1,z0,z1)`). Muka kekal di tempat sama; maks ~1.3 (kepala tak masuk zon grafik).
+- **2–3 B-roll skrin penuh motion graphic** (`a.panel`): contoh skrin "Claude sedang edit" (bar arahan + timeline dipotong + render %), telefon profil TikTok, telefon Threads + TikTok guna aset sebenar (SS kad, thumbnail). Caption kekal atas B-roll.
+
 ## Langkah (arahan)
 1. **Log** rakaman baru dalam `LOG-VIDEO.md` (kunci ID Drive). Download: `curl -sSL -o X.MP4 "https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t"`.
 2. **Transkrip**: `ffmpeg -i X.MP4 -ac 1 -ar 16000 a16.wav` → `python3 -I pipeline/transcribe.py a16.wav projects/<ID>/transcript.json`.
