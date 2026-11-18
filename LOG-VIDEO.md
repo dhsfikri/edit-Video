@@ -15,7 +15,7 @@
 | C0009 | `Raw/060224` | `1hiGVxjxic7HoZ-9a5FNAu2ir9vJ3BAnL` | ⛔ Sir buat sendiri | Iklan e-book | — | `projects/C0009/transcript.json` | Draf Sir: Drive `08 Video Ads/C0009_draf_v1.mp4` |
 | C0060 | `Raw/131221` | `1r-_ypjBApdinLiQYcI_ksLrCn-5xzUUz` | ✅ Final | Tanpa label siri — penat buat konten? komen akaun, kita support | PYNK, hook 2 (tengah cerita) | `projects/C0060_131221/` | 55s, 4K landscape tegak 29.97fps. Topik komuniti kreator. Final 39.3s (Sir lulus draf v1; suara dijelaskan: EQ + gate + noise reduction, `voice_filter.txt`). 15.5 Mbps. Logo = placeholder teks. Muzik: Sir tambah masa posting. Thumbnail + caption siap |
 | C0225 | `Raw/181126` | `1QMV4wzeK-U4xJIGJWqGCJKarCrcy26Sc` | ✅ Final (versi EDITORIAL) | @adabclosing Hari 1 — customer "saya survey dulu" | EDITORIAL brandkit (ganti Split Kad), hook 2, nama Threads dikabur | `projects/C0225/` | 65.8s, 1080x1920 (autorotate), 25fps, tangkapan lebar. 10 SS Threads (folder `Screenshot untuk C0225` id `1fqaD2_cQb0Go2IJW5OTI19Xm7zi0frYQ`) |
-| C0226 | `Raw/181126` | `1_Tspf8hQdoaHPly6v1LXS0mshqyVfokm` | 🟠 Draf v4 (tunggu Sir) | @adabclosing — video #2: pengenalan akaun / journey dari 0, diedit oleh Claude | EDITORIAL (resipi harian) | `projects/C0226/` | 72s, 1080x1920 (autorotate), 25fps, set sama C0225 |
+| C0226 | `Raw/181126` | `1_Tspf8hQdoaHPly6v1LXS0mshqyVfokm` | ✅ Final | @adabclosing — video #2: pengenalan akaun / journey dari 0, diedit oleh Claude | EDITORIAL (resipi harian) | `projects/C0226/` | 72s, 1080x1920 (autorotate), 25fps, set sama C0225 |
 
 ## Belum disentuh (⬜)
 | Kod | Folder Raw | ID Drive | Diupload ke Drive | Catatan |
@@ -49,3 +49,4 @@
 - 2026-11-18: C0225 draf v1 Split Kad (49s, tanpa pop-out, tangkapan lebar) siap.
 - 2026-11-18: C0225 FINAL (16 Mbps) + thumbnail + caption. Sir: gaya Split Kad 'terlalu kartun' untuk dia — jangan guna lagi tanpa tanya.
 - 2026-11-18: C0225 FINAL versi EDITORIAL (`C0225_final_editorial.mp4`, 19 Mbps) — ganti versi Split Kad. Thumbnail + caption kekal.
+- 2026-11-18: C0226 FINAL (draf v4: hook crash-zoom, variasi zoom, 3 B-roll) + thumbnail + caption.
