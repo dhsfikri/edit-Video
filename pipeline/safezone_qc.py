@@ -24,6 +24,6 @@ for i, t in enumerate(ts):
     inputs += ["-ss", str(t), "-i", a.video]
     labels.append(f"[{i}:v]trim=end_frame=1,{zones},scale=270:-1,"
                   f"drawtext=text='{t}s':fontcolor=yellow:fontsize=20:x=6:y=6:box=1:boxcolor=black[f{i}]")
-fc = ";".join(labels) + ";" + "".join(f"[f{i}]" for i in range(len(ts))) + f"hstack=inputs={len(ts)}"
+fc = ";".join(labels) + ";" + ("".join(f"[f{i}]" for i in range(len(ts))) + f"hstack=inputs={len(ts)}" if len(ts) > 1 else "[f0]null")
 subprocess.run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", fc, "-frames:v", "1", out], check=True)
 print(out)
