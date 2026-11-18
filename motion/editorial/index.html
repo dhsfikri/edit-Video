@@ -16,6 +16,7 @@
       @font-face { font-family: "Poppins"; font-weight: 700; src: url("assets/poppins-latin-700-normal.woff2") format("woff2"); }
       @font-face { font-family: "Poppins"; font-weight: 600; src: url("assets/poppins-latin-600-normal.woff2") format("woff2"); }
       @font-face { font-family: "Poppins"; font-weight: 400; src: url("assets/poppins-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Anton"; src: url("assets/anton-latin-400-normal.woff2") format("woff2"); }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B0B0B; }
       #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Poppins", sans-serif; background: #0B0B0B; }
@@ -33,12 +34,20 @@
       .cg span.box { display: inline-block; background: rgba(11,11,11,.88); border-radius: 12px; padding: 8px 20px; white-space: nowrap; }
       .cw { display: inline-block; margin: 0 6px; font-weight: 700; font-size: 46px; color: rgba(255,255,255,.38); }
       .cw.on { color: #fff; } .cw.k.on { color: #FFD60A; }
+      /* MOD CAPTION "PRO" (rujukan pro-miracle): tiada kotak; perkataan kecil putih berbayang; kata kunci = DISPLAY Anton besar kuning, baris sendiri */
+      #caps.pro { top: 1180px; height: 260px; }
+      #caps.pro .cg span.box { background: none; padding: 0; }
+      #caps.pro .cw { font-size: 50px; color: rgba(255,255,255,.0); text-shadow: 0 4px 16px rgba(0,0,0,.7); }
+      #caps.pro .cw.on { color: #fff; }
+      #caps.pro .cw.k { display: block; font-family: "Anton"; font-weight: 400; font-size: 150px; line-height: 1; letter-spacing: .01em; text-transform: uppercase; margin: 4px 0 0; color: rgba(255,214,10,0); }
+      #caps.pro .cw.k.on { color: #FFD60A; }
+      #caps.pro .cw.k.r.on { color: #FF4D4D; }
     </style>
     <script src="scene.js"></script>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="44.06" data-width="1080" data-height="1920">
-      <div id="cam" class="L"><div id="camWrap"><video id="base" src="assets/base.mp4" class="clip" data-start="0" data-duration="44.06" data-track-index="0" muted playsinline></video></div></div>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="11.1" data-width="1080" data-height="1920">
+      <div id="cam" class="L"><div id="camWrap"><video id="base" src="assets/base.mp4" class="clip" data-start="0" data-duration="11.1" data-track-index="0" muted playsinline></video></div></div>
       <div id="vig" class="L"></div>
       <div id="top" class="L"></div>
       <div id="fx" class="L"></div>
@@ -99,10 +108,11 @@
         const t0 = Math.max(g[0].s - 0.04, 0), nx = groups[gi + 1], t1 = nx ? nx[0].s - 0.04 : Math.min(g[g.length - 1].e + 0.3, D);
         if (hidden(t0)) return;
         const n = el(`<div class="cg"><span class="box"></span></div>`); caps.appendChild(n); const box = n.firstChild;
-        const sp = g.map((w) => { const c = w.w.replace(/[.,?!]$/, ""), k = KW.has(c.toLowerCase()); const s = el(`<span class="cw${k ? " k" : ""}">${c}</span>`); box.appendChild(s); return s; });
+        const RW = new Set((P.redWords || []).map((k) => k.toLowerCase())); const sp = g.map((w) => { const c = w.w.replace(/[.,?!]$/, ""), k = KW.has(c.toLowerCase()), r = RW.has(c.toLowerCase()); const s = el(`<span class="cw${k ? " k" : ""}${r ? " r" : ""}">${c}</span>`); box.appendChild(s); return s; });
         tl.set(n, { opacity: 1 }, t0); tl.set(n, { opacity: 0 }, t1);
         g.forEach((w, i) => tl.set(sp[i], { className: sp[i].className + " on" }, w.s));
       });
+      if (P.capStyle) caps.classList.add(P.capStyle);
       window.__timelines = window.__timelines || {}; window.__timelines["main"] = tl; tl.seek(0);
     </script>
   </body>

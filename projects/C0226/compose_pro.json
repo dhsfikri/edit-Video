@@ -1,0 +1,103 @@
+{
+ "base": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0226w/pro_av.mov",
+ "out": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0226w/C0226_klon_pro.mp4",
+ "fps": 25,
+ "crf": 13,
+ "sfx": [
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 0.0,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 0.08,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 0.55,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 0.85,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 1.05,
+   "vol": 0.5
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/ding.wav",
+   "at": 1.07,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 1.22,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 1.9,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/klik.wav",
+   "at": 3.24,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 4.6,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/klik.wav",
+   "at": 4.62,
+   "vol": 0.4
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/klik.wav",
+   "at": 5.71,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 6.6,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/kertas_tampal.wav",
+   "at": 6.75,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 7.95,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 8.1,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/ding.wav",
+   "at": 8.9,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 9.2,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/klik.wav",
+   "at": 10.15,
+   "vol": 0.3
+  }
+ ]
+}
