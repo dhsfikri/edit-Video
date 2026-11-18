@@ -1,0 +1,113 @@
+{
+ "base": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0225w/ed_av.mov",
+ "out": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0225w/C0225_editorial_draf1.mp4",
+ "fps": 25,
+ "crf": 11,
+ "sfx": [
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 1.1,
+   "vol": 0.18
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 5.38,
+   "vol": 0.18
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 7.5,
+   "vol": 0.18
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 10.0,
+   "vol": 0.18
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 1.35,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 2.6,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 13.65,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 7.8,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 7.89,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 7.98,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 8.07,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 8.16,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 8.25,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 8.34,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 8.43,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 8.52,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 8.61,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 8.7,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/taip.wav",
+   "at": 8.79,
+   "vol": 0.22
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pen.wav",
+   "at": 13.05,
+   "vol": 0.28
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pen.wav",
+   "at": 15.4,
+   "vol": 0.28
+  }
+ ]
+}
