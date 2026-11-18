@@ -6,7 +6,7 @@
   Lapisan: #back (kad di belakang Sir) → #frame (bingkai) → #camClip (video Sir) → #cutClip (pop-out) → #fx (babak penuh) → #top → #caps.
   Koreografi per video: scene.js (salin dari projects/<ID>/scene_split.js):
     window.SPLIT = { duration, words:[{w,s,e}], keywords:[...], modeA:[[a,b],...], hideCaps:[[a,b]], scene(tl, api) }
-  POP-OUT: video cutout MESTI ditulis statik dalam #cutWrap (HyperFrames tak kesan <video> yang dicipta skrip).
+  POP-OUT (pilihan, untuk B-roll sahaja — keputusan Sir 2026-11-18): video cutout MESTI ditulis statik dalam #cutWrap (HyperFrames tak kesan <video> yang dicipta skrip). Bingkai utama Sir: TANPA cutout, tangkapan lebar.
   Easing: masuk power3.out .35–.5s (spring kecil back.out(1.2) untuk kad sahaja) · keluar power2.in .2–.3s · tiada lantunan kartun.
 -->
 <html lang="ms" data-resolution="portrait">
@@ -49,7 +49,6 @@
       <div id="frame"></div>
       <div id="camClip" class="L"><div id="camWrap" class="wrap"><video id="base" src="assets/base.mp4" class="clip" data-start="0" data-duration="49.25" data-track-index="0" muted playsinline></video></div></div>
       <div id="cutClip" class="L"><div id="cutWrap" class="wrap">
-        <div class="cutw" id="cw_f"><video class="clip" src="assets/cut_full.webm" data-start="0" data-duration="49.25" data-track-index="1" muted playsinline></video></div>
       </div></div>
       <div id="fx" class="L"></div>
       <div id="top" class="L"></div>
