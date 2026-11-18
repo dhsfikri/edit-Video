@@ -14,7 +14,7 @@
 - Outro tetap 1.6s beku: logo `aset/logo-adabclosing/adabclosing_telus_2160.png` + CTA komen 2 pilihan (contoh "PUJUK atau BIAR?").
 
 ## Tambahan Sir (2026-11-18, C0226)
-- **Hook: Sir TERUS nampak dari frame 1** + tajuk di ruang atas + push-in perlahan (`a.push(0, 1.35, 1.0, 1.18)`). JANGAN panel hitam penuh menutup Sir di awal.
+- **Hook: Sir TERUS nampak dari frame 1** + tajuk di ruang atas + **punch-in LAJU** (`a.push(0.05, 0.35, 1.0, 1.28, "expo.out")` + whoosh 0.3 pada 0s) — zoom perlahan tak mengejutkan (Sir). JANGAN panel hitam penuh menutup Sir di awal.
 - **Variasi zoom antara babak:** selang-seli LEBAR (1.0) ↔ DEKAT (1.2–1.28), dan push-in/pull-out perlahan (`a.push(t0,t1,z0,z1)`). Muka kekal di tempat sama; maks ~1.3 (kepala tak masuk zon grafik).
 - **2–3 B-roll skrin penuh motion graphic** (`a.panel`): contoh skrin "Claude sedang edit" (bar arahan + timeline dipotong + render %), telefon profil TikTok, telefon Threads + TikTok guna aset sebenar (SS kad, thumbnail). Caption kekal atas B-roll.
 

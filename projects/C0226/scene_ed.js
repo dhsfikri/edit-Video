@@ -18,7 +18,7 @@ window.ED = {
     const phone = (inner, x, y, w = 420, rot = 0) => `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${w * 2.05}px;border-radius:56px;background:#111;padding:16px;box-shadow:0 40px 80px rgba(0,0,0,.6);transform:rotate(${rot}deg)"><div style="width:100%;height:100%;border-radius:42px;overflow:hidden;background:#fff;position:relative">${inner}</div></div>`;
 
     // ===== 0–1.35 HOOK: Sir terus nampak, tajuk atas + push-in =====
-    a.push(0, 1.35, 1.0, 1.18);
+    a.push(0.05, 0.35, 1.0, 1.28, "expo.out"); // punch-in laju (Sir: zoom perlahan tak mengejutkan)
     word(0.05, 1.35, "video ni diedit oleh", `<span class="kw">CLAUDE.</span>`, 190);
     // ===== 1.35–4.6 akaun baru from zero — LEBAR =====
     a.cam(1.35, 1.0);

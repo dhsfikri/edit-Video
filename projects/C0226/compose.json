@@ -1,6 +1,6 @@
 {
  "base": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0226w/ed_av.mov",
- "out": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0226w/C0226_draf_v2.mp4",
+ "out": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0226w/C0226_draf_v3.mp4",
  "fps": 25,
  "crf": 13,
  "sfx": [
@@ -227,6 +227,11 @@
   {
    "src": "/home/user/edit-Video/motion/sfx/klik.wav",
    "at": 5.0,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 0.0,
    "vol": 0.3
   }
  ]
