@@ -23,6 +23,8 @@
 - **Variasi zoom antara babak:** selang-seli LEBAR (1.0) ↔ DEKAT (1.2–1.28), dan push-in/pull-out perlahan (`a.push(t0,t1,z0,z1)`). Muka kekal di tempat sama; maks ~1.3 (kepala tak masuk zon grafik).
 - **2–3 B-roll skrin penuh motion graphic** (`a.panel`): contoh skrin "Claude sedang edit" (bar arahan + timeline dipotong + render %), telefon profil TikTok, telefon Threads + TikTok guna aset sebenar (SS kad, thumbnail). Caption kekal atas B-roll.
 
+- **Tajuk hook = gaya POSTER Anton** (lihat CLAUDE.md 2026-11-18; contoh `projects/C0226/scene_intro.js`). Intro ujian ikut rujukan `docs/rujukan/intro-andy/` (light leak → tajuk poster → picit ke bulatan dengan jejak muka → ikon orbit). TIADA color grading.
+
 ## Langkah (arahan)
 1. **Log** rakaman baru dalam `LOG-VIDEO.md` (kunci ID Drive). Download: `curl -sSL -o X.MP4 "https://drive.usercontent.google.com/download?id=<ID>&export=download&confirm=t"`.
 2. **Transkrip**: `ffmpeg -i X.MP4 -ac 1 -ar 16000 a16.wav` → `python3 -I pipeline/transcribe.py a16.wav projects/<ID>/transcript.json`.

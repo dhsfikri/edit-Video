@@ -18,17 +18,20 @@ window.ED = {
     // ---- 0.6–2.2 gradient bawah + TIPOGRAFI berselang ----
     const gb = put(`<div class="L" style="background:linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,.82) 85%)"></div>`, "#top");
     tl.set(gb, { opacity: 1 }, 0); tl.to(gb, { opacity: 0, duration: 0.15 }, 2.15);
-    const ty = put(`<div style="position:absolute;left:100px;width:800px;top:980px">
-      <div id="t1" style="font-weight:600;font-size:44px;color:#fff">video ni akan</div>
-      <div id="t2" style="font-weight:800;font-size:150px;line-height:.95;color:#FFD60A">diedit</div>
-      <div id="t3" style="font-weight:600;font-size:44px;color:#fff;text-align:right;margin-top:10px">oleh</div>
-      <div id="t4" style="font-weight:800;font-size:150px;line-height:.95;color:#FFD60A;text-align:right">Claude.</div></div>`, "#top");
-    const ic = put(`<svg width="130" height="130" viewBox="0 0 100 100" style="position:absolute;left:140px;top:1320px"><path d="M50 8 L58 42 L92 50 L58 58 L50 92 L42 58 L8 50 L42 42 Z" fill="none" stroke="#FFD60A" stroke-width="5" stroke-linejoin="round"/></svg>`, "#top");
-    [["#t1", 0.6], ["#t2", 0.62], ["#t3", 0.85], ["#t4", 1.07]].forEach(([s, t]) => { const n = ty.querySelector(s); tl.set(n, { opacity: 0 }, 0);
-      tl.fromTo(n, { opacity: 0, y: 30, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", immediateRender: false }, t); });
-    a.draw ? 0 : 0;
-    const icp = ic.querySelector("path"); const L = 340; icp.style.strokeDasharray = L; tl.set(icp, { strokeDashoffset: L }, 0);
-    tl.to(icp, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, 1.15); tl.fromTo(ic, { rotation: -30, scale: 0.6 }, { rotation: 0, scale: 1, duration: 0.45, ease: "power3.out", immediateRender: false }, 1.15);
+    // TAJUK gaya B "POSTER" (Sir pilih): label kecil berjarak + perkataan Anton gergasi bertindan; dimuatkan automatik ≤ 820px (safe zone)
+    const ty = put(`<div style="position:absolute;left:80px;width:820px;top:860px">
+      <div id="t1" style="font:600 38px Poppins;letter-spacing:.3em;color:#fff">VIDEO NI AKAN</div>
+      <div id="t2" class="fit" style="font-family:Anton;font-size:260px;line-height:.88;color:#fff;white-space:nowrap;transform-origin:left bottom">DIEDIT</div>
+      <div style="display:flex;align-items:flex-end;gap:20px"><div id="t3" style="font:600 38px Poppins;letter-spacing:.3em;color:#fff;padding-bottom:26px">OLEH</div>
+        <div id="t4" class="fit" style="font-family:Anton;font-size:228px;line-height:.88;color:#FFD60A;white-space:nowrap;transform-origin:left bottom">CLAUDE.</div></div></div>`, "#top");
+    const ic = put(`<svg width="1" height="1" style="position:absolute;left:0;top:0"><path d="M0 0"/></svg>`, "#top");
+    // saiz tetap (DIEDIT 260 ≈ 585px, OLEH + CLAUDE. 228 ≈ 810px) — dalam safe zone
+    // animasi: label taip-dedah · DIEDIT hentak · OLEH · CLAUDE. hentak + kilat kecil
+    const lab = (n, t) => { tl.set(n, { clipPath: "inset(0 100% 0 0)" }, 0); tl.to(n, { clipPath: "inset(0 0% 0 0)", duration: 0.22, ease: "power2.out" }, t); };
+    const slam = (n, t) => { tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { opacity: 0, scale: 1.35, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.16, ease: "expo.out", immediateRender: false }, t); };
+    lab(ty.querySelector("#t1"), 0.6); slam(ty.querySelector("#t2"), 0.62); lab(ty.querySelector("#t3"), 0.88); slam(ty.querySelector("#t4"), 1.07);
+    const fk = put(`<div class="L" style="background:#fff;opacity:0"></div>`, "#top"); tl.set(fk, { opacity: 0.5 }, 1.07); tl.set(fk, { opacity: 0 }, 1.11);
+    tl.fromTo(ty, { y: 0 }, { y: -16, duration: 1.4, ease: "none", immediateRender: false }, 0.6);
     tl.to([ty, ic], { opacity: 0, y: 40, filter: "blur(8px)", duration: 0.2, ease: "power2.in" }, 2.0);
     // gerakan halus kamera (push perlahan) semasa babak gred
     tl.fromTo("#camWrap", { x: -212.4, y: -395, scale: 1.45 }, { x: -240.7, y: -430.7, scale: 1.51, duration: 2.15, ease: "none", immediateRender: false }, 0.05);
