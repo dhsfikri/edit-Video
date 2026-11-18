@@ -21,7 +21,7 @@ Cara tarik: `accounts_get_follower_stats` (follower), `analytics_get_analytics` 
 ## Log video
 | # | Tarikh post | Kod rakaman | Tajuk / hook | Gaya | Views 24j | Views 7h | Like | Komen | Share | Save | Follower dapat | Nota |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | (Sir post) | C0225 | "Saya ada satu thread yang blow up…" — customer "saya survey dulu ye" | Editorial (brandkit) | | | | | | | | Data Threads (10 SS) jadi bukti dalam video. CTA: Komen pujuk atau biar? |
+| 1 | 18/11 (draf ke inbox TikTok via Zernio, post ID `6afd107c16297f747dad980f`; Sir post dari app) | C0225 | "Saya ada satu thread yang blow up…" — customer "saya survey dulu ye" | Editorial (brandkit) | | | | | | | | Data Threads (10 SS) jadi bukti dalam video. CTA: Komen pujuk atau biar? |
 
 ## Peristiwa penting (milestone)
 - 2026-11-17 — Akaun dibuat. Logo sticker hijau brand. Bio tag akaun utama.
