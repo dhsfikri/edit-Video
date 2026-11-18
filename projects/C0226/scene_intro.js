@@ -36,19 +36,24 @@ window.ED = {
     tl.set("#root", { background: "#0B0B0B" }, 0); tl.set("#root", { background: "#F4F4F2" }, 2.2);
     tl.set("#vig", { opacity: 1 }, 0); tl.set("#vig", { opacity: 0 }, 2.2);
     tl.set("#cam", { clipPath: "inset(0px 0px 0px 0px round 0px)" }, 0);
-    tl.to("#cam", { clipPath: "inset(520px 110px 640px 110px round 380px)", duration: 0.2, ease: "power3.in" }, 2.2);
-    tl.to("#cam", { clipPath: "inset(630px 310px 830px 310px round 230px)", duration: 0.25, ease: "power3.out" }, 2.4);
-    tl.to("#camWrap", { x: -98.4, y: 23, scale: 1.2, duration: 0.45, ease: "power3.inOut" }, 2.2);
-    const sh = put(`<div style="position:absolute;left:310px;top:630px;width:460px;height:460px;border-radius:50%;box-shadow:0 30px 70px rgba(0,0,0,.28)"></div>`, "#back");
+    tl.to("#cam", { clipPath: "inset(430px 90px 600px 90px round 400px)", duration: 0.2, ease: "power3.in" }, 2.2);
+    tl.to("#cam", { clipPath: "inset(570px 250px 770px 250px round 290px)", duration: 0.25, ease: "power3.out" }, 2.4);
+    // muka di tengah bulatan (540,880), kepala penuh + sedikit bahu (z 1.2) — IKUT JEJAK MUKA (OpenCV, dilicinkan) supaya Sir sentiasa di tengah
+    const FT = [[2.3, 605, 723], [2.4, 600, 726], [2.5, 593, 731], [2.6, 580, 740], [2.8, 559, 749], [2.9, 532, 757], [3.0, 504, 762], [3.1, 477, 765], [3.2, 458, 763], [3.4, 451, 758], [3.5, 457, 755], [3.6, 473, 757], [3.7, 498, 752], [3.8, 525, 748], [4.2, 553, 745], [4.3, 566, 746], [4.6, 577, 744], [4.7, 582, 748], [4.8, 586, 751], [4.9, 587, 753], [5.0, 596, 749], [5.2, 604, 746], [5.3, 609, 743], [5.4, 613, 741], [5.5, 614, 741], [5.6, 614, 742], [5.8, 613, 741], [5.9, 611, 742], [6.0, 607, 743], [6.1, 600, 742], [6.2, 594, 742], [6.4, 588, 742]], ZC = 1.0, CX = 540, CY = 935;
+    const at = (fx, fy) => ({ x: CX - fx * ZC, y: CY - fy * ZC, scale: ZC });
+    const ft0 = FT.find((r) => r[0] >= 2.6) || FT[0];
+    tl.to("#camWrap", { ...at(ft0[1], ft0[2]), duration: 0.45, ease: "power3.inOut" }, 2.2);
+    FT.filter((r) => r[0] > 2.7).forEach((r, i, arr) => { const prev = i ? arr[i - 1][0] : 2.65; tl.to("#camWrap", { ...at(r[1], r[2]), duration: Math.max(0.05, r[0] - prev), ease: "none" }, prev); });
+    const sh = put(`<div style="position:absolute;left:250px;top:570px;width:580px;height:580px;border-radius:50%;box-shadow:0 30px 70px rgba(0,0,0,.28)"></div>`, "#back");
     if (!document.querySelector("#back")) {}
     tl.set(sh, { opacity: 0 }, 0); tl.set(sh, { opacity: 1 }, 2.6);
     // ---- 2.6–4.5 teks atas/bawah bulatan ----
-    const up1 = put(`<div style="position:absolute;left:0;right:0;top:540px;text-align:center;font-weight:600;font-size:46px;color:#5b5b5b">ini akaun baru</div>`, "#top");
-    const dn1 = put(`<div style="position:absolute;left:0;right:0;top:1120px;text-align:center;font-weight:800;font-size:96px;color:#0B0B0B">dari <span style="color:#1fae55">zero.</span></div>`, "#top");
+    const up1 = put(`<div style="position:absolute;left:0;right:0;top:470px;text-align:center;font-weight:600;font-size:46px;color:#5b5b5b">ini akaun baru</div>`, "#top");
+    const dn1 = put(`<div style="position:absolute;left:0;right:0;top:1185px;text-align:center;font-weight:800;font-size:96px;color:#0B0B0B">dari <span style="color:#1fae55">zero.</span></div>`, "#top");
     [[up1, 2.6], [dn1, 3.86]].forEach(([n, t]) => { tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out", immediateRender: false }, t); tl.to(n, { opacity: 0, duration: 0.18 }, 4.55); });
     // ---- 4.6–6.4 everything kita REKOD + ikon garisan mengorbit ----
-    const up2 = put(`<div style="position:absolute;left:0;right:0;top:540px;text-align:center;font-weight:600;font-size:46px;color:#5b5b5b">everything yang saya buat</div>`, "#top");
-    const dn2 = put(`<div style="position:absolute;left:0;right:0;top:1120px;text-align:center;font-weight:800;font-size:96px;color:#0B0B0B">kita <span style="color:#1fae55">rekod.</span></div>`, "#top");
+    const up2 = put(`<div style="position:absolute;left:0;right:0;top:470px;text-align:center;font-weight:600;font-size:46px;color:#5b5b5b">everything yang saya buat</div>`, "#top");
+    const dn2 = put(`<div style="position:absolute;left:0;right:0;top:1185px;text-align:center;font-weight:800;font-size:96px;color:#0B0B0B">kita <span style="color:#1fae55">rekod.</span></div>`, "#top");
     [[up2, 4.75], [dn2, 5.7]].forEach(([n, t]) => { tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out", immediateRender: false }, t); });
     const IC = {
       cam: '<rect x="14" y="30" width="58" height="42" rx="8"/><path d="M72 44 L88 34 V68 L72 58"/>',
@@ -58,7 +63,7 @@ window.ED = {
       play: '<circle cx="50" cy="50" r="34"/><path d="M42 36 L64 50 L42 64 Z"/>',
       heart: '<path d="M50 80 C 20 58, 14 40, 26 28 C 36 18, 48 24, 50 34 C 52 24, 64 18, 74 28 C 86 40, 80 58, 50 80 Z"/>',
     };
-    const pos = [[200, 700], [880, 700], [140, 900], [940, 900], [220, 1080], [860, 1080]];
+    const pos = [[210, 620], [850, 610], [150, 880], [845, 900], [215, 1130], [830, 1140]];
     Object.values(IC).forEach((d, i) => {
       const [x, y] = pos[i];
       const n = put(`<div style="position:absolute;left:${x - 55}px;top:${y - 55}px;width:110px;height:110px;border-radius:50%;background:#fff;box-shadow:0 14px 30px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center">
