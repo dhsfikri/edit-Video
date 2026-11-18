@@ -1,8 +1,8 @@
 {
  "base": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0227w/ed_av.mov",
- "out": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0227w/C0227_draf_v1.mp4",
+ "out": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0227w/C0227_draf_v2.mp4",
  "fps": 25,
- "crf": 13,
+ "crf": 12,
  "sfx": [
   {
    "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
@@ -45,11 +45,6 @@
    "vol": 0.3
   },
   {
-   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
-   "at": 9.3,
-   "vol": 0.3
-  },
-  {
    "src": "/home/user/edit-Video/motion/sfx/pop.wav",
    "at": 7.5,
    "vol": 0.22
@@ -63,11 +58,6 @@
    "src": "/home/user/edit-Video/motion/sfx/pop.wav",
    "at": 7.74,
    "vol": 0.22
-  },
-  {
-   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
-   "at": 9.6,
-   "vol": 0.3
   },
   {
    "src": "/home/user/edit-Video/motion/sfx/pop.wav",
@@ -283,6 +273,11 @@
    "src": "/home/user/edit-Video/motion/sfx/ding.wav",
    "at": 55.7,
    "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 9.3,
+   "vol": 0.3
   }
  ]
 }
