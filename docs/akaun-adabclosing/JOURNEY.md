@@ -18,6 +18,9 @@ Cara tarik: `accounts_get_follower_stats` (follower), `analytics_get_analytics` 
 |---|---|---|---|---|---|---|---|
 | 0 | 2026-11-17 | 0 (Zernio) | 0 | 0 | – | – | Akaun dibuat, logo + bio siap, Zernio disambung. Following 0, likes 0 |
 
+<!-- semakan harian -->
+- 2026-11-18 (petang, Zernio): **4 follower**, 1 video dikira, 5 likes. Statistik per-video belum sync (TikTok lambat 24–48j).
+
 ## Log video
 | # | Tarikh post | Kod rakaman | Tajuk / hook | Gaya | Views 24j | Views 7h | Like | Komen | Share | Save | Follower dapat | Nota |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
