@@ -18,6 +18,7 @@
 | C0226 | `Raw/181126` | `1_Tspf8hQdoaHPly6v1LXS0mshqyVfokm` | ✅ Final | @adabclosing — video #2: pengenalan akaun / journey dari 0, diedit oleh Claude | EDITORIAL (resipi harian) | `projects/C0226/` | 72s, 1080x1920 (autorotate), 25fps, set sama C0225 |
 | C0227 | `Raw/181126` | `1_s4Eg6amOMCqTOxRW460TBmLSsWa74qO` | ✅ Final | @adabclosing video #3 — akaun no.2, fee TikTok naik → Meta ads / WhatsApp, semua platform boleh untung | EDITORIAL + intro baru (tajuk Poster Anton) | `projects/C0227/` | 68s, 1080x1920 (autorotate), 25fps. "Fifi" dalam transkrip = **fee** (Sir sahkan) |
 | C0235 | `Raw/191126` | `1MO0GEVbddnK-XIgxt593dB9YcLOQW-KZ` | ✅ Final | @adabclosing — skrip #1 "customer tanya 47 soalan" | EDITORIAL + intro Poster | `projects/C0235/` | **4K tegak** 2160x3840 10-bit 4:2:2, 25fps, ~150 Mbps, 81.6s. Set baru (lampu belakang hangat, jaket hijau) |
+| C0236 | `Raw/191126` | `1EvQObSynElyXWx6znHjIx2iOTyb_DOkj` | 🔵 Transkrip + 3 hook (tunggu Sir) | @adabclosing — skrip #3 "malu jual kat kawan/keluarga" (cerita mak jadi customer) | EDITORIAL 4K | `projects/C0236/` | 4K tegak, 101s → ~55s. Ayat tak jelas: "tergulai lebih" (37.6s), "jadikan semua kita" (92.5s) |
 
 ## Belum disentuh (⬜)
 | Kod | Folder Raw | ID Drive | Diupload ke Drive | Catatan |
@@ -26,7 +27,6 @@
 | C0062 | `Raw/131221` | `1pncMlqs4FVYmxHmcbntAwKltZ9Zb3jRr` | 2026-11-17 | BARU |
 | C0063 | `Raw/131221` | `1EGy_jZpfzJhj31hVMxy7ycpHbuIQxmSH` | 2026-11-17 | BARU (fail kecil 50MB — mungkin pendek) |
 | C0064 | `Raw/131221` | `1A4L-cFegM7fFXErFvphl9gJnPlvrThek` | 2026-11-17 | BARU |
-| C0236 | `Raw/191126` | `1EvQObSynElyXWx6znHjIx2iOTyb_DOkj` | 2026-11-19 | BARU (4K tegak) |
 | C0237 | `Raw/191126` | `1SXgqKD0Ar28alDQqoedd4TTl41PAsgrB` | 2026-11-19 | BARU (4K tegak) |
 | C0239 | `Raw/191126` | `1F-vI09UVzmc3cADmrlUd7yyosYuc5Do6` | 2026-11-19 | BARU (4K tegak) |
 | C0240 | `Raw/191126` | `1ixfmyTTX9rlJNJH92oY_kQX30AoC_SEQ` | 2026-11-19 | BARU (4K tegak) |
