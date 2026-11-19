@@ -1,0 +1,1 @@
+highpass=f=80,anlmdn=s=7:p=0.002:r=0.006,afftdn=nr=15:nf=-40,equalizer=f=3500:t=q:w=1:g=2,loudnorm=I=-14:TP=-1.5:LRA=11
