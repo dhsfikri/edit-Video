@@ -1,0 +1,223 @@
+{
+ "base": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0236w/ed_av.mov",
+ "out": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0236w/C0236_draf_v1.mp4",
+ "fps": 25,
+ "crf": 12,
+ "sfx": [
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 0.0,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/ding.wav",
+   "at": 0.75,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 0.8,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 1.85,
+   "vol": 0.5
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/klik.wav",
+   "at": 1.85,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 2.7,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 5.17,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 6.6,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 7.2,
+   "vol": 0.16
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 8.83,
+   "vol": 0.18
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 10.27,
+   "vol": 0.18
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 11.49,
+   "vol": 0.18
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 12.6,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 16.19,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 20.35,
+   "vol": 0.16
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 20.62,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 24.0,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 24.45,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 26.2,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 28.6,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 30.0,
+   "vol": 0.16
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/ding.wav",
+   "at": 33.95,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 34.6,
+   "vol": 0.16
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pen.wav",
+   "at": 35.4,
+   "vol": 0.28
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 37.52,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 40.6,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 45.7,
+   "vol": 0.35
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 46.9,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 48.14,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 48.5,
+   "vol": 0.25
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 49.3,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 50.6,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 51.27,
+   "vol": 0.45
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 52.2,
+   "vol": 0.16
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 52.42,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 55.7,
+   "vol": 0.16
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/ding.wav",
+   "at": 57.05,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/ding.wav",
+   "at": 59.19,
+   "vol": 0.2
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 61.2,
+   "vol": 0.16
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 61.42,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/pop.wav",
+   "at": 64.37,
+   "vol": 0.4
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/whoosh.wav",
+   "at": 65.85,
+   "vol": 0.3
+  },
+  {
+   "src": "/home/user/edit-Video/motion/sfx/ding.wav",
+   "at": 66.3,
+   "vol": 0.25
+  }
+ ]
+}

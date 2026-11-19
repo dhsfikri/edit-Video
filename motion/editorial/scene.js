@@ -1,14 +1,14 @@
-// C0235 — @adabclosing "47 soalan". Hook 1. Intro: light leak → close-up jejak muka → Poster "SEBELUM BELI / 47 SOALAN" (kaunter) → whip lebar. Badan Editorial + 3 B-roll + bulatan. 4K (base 1440x2560). Tiada grading.
+// C0236 — @adabclosing "Malu jual kat keluarga" — HOOK TWIST: "yang ambil servis saya… MAK saya sendiri" + notifikasi bayaran + SNAP. 4K. Tiada grading.
 window.ED = {
-  duration: 62.28,
-  face: { x: 580, y: 757 },
+  duration: 68.64,
+  face: { x: 582, y: 772 },
   shiftY: 300,
-  initCam: { x: -415.8, y: -910.6, scale: 1.8, filter: "blur(10px)" },
-  words: [{"w": "pelanggan", "s": 0.045, "e": 0.805}, {"w": "ni", "s": 0.805, "e": 1.045}, {"w": "tanya", "s": 1.045, "e": 1.605}, {"w": "47", "s": 1.605, "e": 2.285}, {"w": "soalan", "s": 2.285, "e": 3.225}, {"w": "sebelum", "s": 3.225, "e": 4.045}, {"w": "buat", "s": 4.045, "e": 4.225}, {"w": "purchase.", "s": 4.225, "e": 5.015}, {"w": "biasalah", "s": 5.02, "e": 5.46}, {"w": "bila", "s": 5.46, "e": 5.94}, {"w": "servis", "s": 5.94, "e": 6.32}, {"w": "kita", "s": 6.32, "e": 6.62}, {"w": "ni", "s": 6.62, "e": 6.78}, {"w": "harganya", "s": 6.78, "e": 7.12}, {"w": "agak", "s": 7.12, "e": 7.34}, {"w": "premium.", "s": 7.34, "e": 7.76}, {"w": "dia", "s": 7.93, "e": 7.97}, {"w": "orang", "s": 7.97, "e": 8.09}, {"w": "akan", "s": 8.09, "e": 8.23}, {"w": "tanya", "s": 8.23, "e": 8.49}, {"w": "banyak", "s": 8.49, "e": 8.95}, {"w": "sangat", "s": 8.95, "e": 9.17}, {"w": "soalan.", "s": 9.17, "e": 9.49}, {"w": "untuk", "s": 9.67, "e": 10.105}, {"w": "klien", "s": 10.105, "e": 10.505}, {"w": "ni", "s": 10.505, "e": 10.645}, {"w": "dia", "s": 10.645, "e": 10.785}, {"w": "tanya", "s": 10.785, "e": 10.945}, {"w": "saya", "s": 10.945, "e": 11.165}, {"w": "47", "s": 11.165, "e": 11.765}, {"w": "soalan", "s": 11.765, "e": 12.385}, {"w": "tentang", "s": 12.385, "e": 12.765}, {"w": "apa", "s": 12.765, "e": 13.265}, {"w": "yang", "s": 13.265, "e": 13.465}, {"w": "saya", "s": 13.465, "e": 13.825}, {"w": "akan", "s": 13.825, "e": 14.165}, {"w": "sediakan", "s": 14.165, "e": 14.785}, {"w": "outcome", "s": 14.975, "e": 15.635}, {"w": "yang", "s": 15.635, "e": 16.335}, {"w": "dia", "s": 16.335, "e": 16.535}, {"w": "boleh", "s": 16.535, "e": 16.715}, {"w": "expect", "s": 16.715, "e": 17.295}, {"w": "daripada", "s": 17.295, "e": 18.615}, {"w": "servis", "s": 18.615, "e": 19.095}, {"w": "yang", "s": 19.095, "e": 19.195}, {"w": "saya", "s": 19.195, "e": 19.375}, {"w": "bagi.", "s": 19.375, "e": 19.735}, {"w": "kenapa", "s": 19.82, "e": 19.94}, {"w": "dia", "s": 19.94, "e": 20.14}, {"w": "tanya", "s": 20.14, "e": 20.58}, {"w": "banyak", "s": 20.58, "e": 21.24}, {"w": "sangat", "s": 21.24, "e": 21.54}, {"w": "soalan?", "s": 21.54, "e": 21.9}, {"w": "Tanya", "s": 22.115, "e": 22.335}, {"w": "banyak", "s": 22.335, "e": 22.675}, {"w": "soalan", "s": 22.675, "e": 23.255}, {"w": "ni", "s": 23.255, "e": 23.435}, {"w": "bukanlah", "s": 23.435, "e": 24.515}, {"w": "orang", "s": 24.515, "e": 24.955}, {"w": "yang", "s": 24.955, "e": 25.175}, {"w": "jenis", "s": 25.175, "e": 25.455}, {"w": "annoying", "s": 25.455, "e": 25.915}, {"w": "ataupun", "s": 25.915, "e": 26.415}, {"w": "hanya", "s": 26.415, "e": 26.675}, {"w": "suka", "s": 26.675, "e": 26.995}, {"w": "saja", "s": 26.995, "e": 27.315}, {"w": "dan", "s": 27.315, "e": 27.475}, {"w": "tanya.", "s": 27.475, "e": 28.215}, {"w": "Soalan", "s": 28.315, "e": 28.755}, {"w": "ni", "s": 28.755, "e": 29.095}, {"w": "adalah", "s": 29.095, "e": 29.575}, {"w": "proses", "s": 29.575, "e": 29.995}, {"w": "untuk", "s": 29.995, "e": 30.315}, {"w": "dapatkan", "s": 30.315, "e": 30.795}, {"w": "clarity.", "s": 30.795, "e": 32.095}, {"w": "Lagi", "s": 32.225, "e": 32.485}, {"w": "banyak", "s": 32.485, "e": 32.825}, {"w": "soalan", "s": 32.825, "e": 33.305}, {"w": "maksudnya", "s": 33.305, "e": 33.705}, {"w": "lagi", "s": 33.705, "e": 33.945}, {"w": "berminat", "s": 33.945, "e": 34.505}, {"w": "dia", "s": 34.505, "e": 34.685}, {"w": "nak", "s": 34.685, "e": 34.885}, {"w": "tahu.", "s": 34.885, "e": 35.225}, {"w": "tugas", "s": 35.34, "e": 35.6}, {"w": "kita", "s": 35.6, "e": 35.94}, {"w": "adalah", "s": 35.94, "e": 36.32}, {"w": "jawab", "s": 36.32, "e": 36.66}, {"w": "soalan", "s": 36.66, "e": 37.02}, {"w": "tu", "s": 37.02, "e": 37.16}, {"w": "dengan", "s": 37.16, "e": 37.4}, {"w": "betul,", "s": 37.4, "e": 38.32}, {"w": "dengan", "s": 38.62, "e": 38.84}, {"w": "teratur", "s": 38.84, "e": 39.34}, {"w": "dan", "s": 39.34, "e": 39.6}, {"w": "sabar", "s": 39.6, "e": 40.24}, {"w": "dalam", "s": 40.24, "e": 41.0}, {"w": "menjawab.", "s": 41.0, "e": 42.045}, {"w": "Jangan", "s": 42.065, "e": 42.285}, {"w": "annoying", "s": 42.285, "e": 42.665}, {"w": "dengan", "s": 42.665, "e": 42.865}, {"w": "soalan", "s": 42.865, "e": 43.145}, {"w": "mereka.", "s": 43.145, "e": 43.625}, {"w": "apa", "s": 43.755, "e": 43.86}, {"w": "biasanya", "s": 43.86, "e": 44.3}, {"w": "orang-orang", "s": 44.3, "e": 45.0}, {"w": "yang", "s": 45.0, "e": 45.48}, {"w": "banyak", "s": 45.48, "e": 45.9}, {"w": "soalan", "s": 45.9, "e": 46.32}, {"w": "ini,", "s": 46.32, "e": 47.56}, {"w": "mereka", "s": 47.8, "e": 48.14}, {"w": "dah", "s": 48.14, "e": 48.4}, {"w": "melalui", "s": 48.4, "e": 48.74}, {"w": "fasa-fasa.", "s": 48.74, "e": 49.725}, {"w": "Mungkin", "s": 49.785, "e": 49.905}, {"w": "sebelum", "s": 49.905, "e": 50.605}, {"w": "ini,", "s": 50.605, "e": 51.125}, {"w": "mereka", "s": 51.485, "e": 51.725}, {"w": "tak", "s": 51.725, "e": 51.905}, {"w": "tanya", "s": 51.905, "e": 52.125}, {"w": "banyak", "s": 52.125, "e": 52.365}, {"w": "soalan,", "s": 52.365, "e": 52.745}, {"w": "terlalu", "s": 52.905, "e": 53.225}, {"w": "percaya", "s": 53.225, "e": 53.605}, {"w": "dan", "s": 53.605, "e": 53.825}, {"w": "akhirnya", "s": 53.825, "e": 54.245}, {"w": "kecewa.", "s": 54.245, "e": 55.145}, {"w": "pernah", "s": 55.385, "e": 55.445}, {"w": "tak", "s": 55.445, "e": 55.625}, {"w": "jumpa", "s": 55.625, "e": 55.985}, {"w": "prospect", "s": 55.985, "e": 56.365}, {"w": "atau", "s": 56.365, "e": 56.685}, {"w": "klien", "s": 56.685, "e": 57.385}, {"w": "macam", "s": 57.385, "e": 57.665}, {"w": "ni?", "s": 57.665, "e": 58.085}, {"w": "Dan", "s": 58.135, "e": 58.295}, {"w": "cuba", "s": 58.295, "e": 58.575}, {"w": "share", "s": 58.575, "e": 58.755}, {"w": "cerita", "s": 58.755, "e": 59.095}, {"w": "awak", "s": 59.095, "e": 59.275}, {"w": "pula.", "s": 59.275, "e": 59.785}, {"w": "Assalamualaikum.", "s": 59.835, "e": 60.395}],
-  keywords: ["47", "premium.", "outcome", "annoying", "clarity.", "berminat", "betul,", "teratur", "sabar", "percaya", "kecewa.", "share", "cerita"],
-  hideCaps: [[0, 5.0], [9.6, 14.9], [28.15, 35.7], [52.7, 55.3], [59.6, 62.28]],
+  initCam: { x: -522.0, y: -609.8, scale: 1.8, filter: "blur(10px)" },
+  words: [{"w": "yang", "s": 0.015, "e": 0.275}, {"w": "ambil", "s": 0.275, "e": 0.835}, {"w": "servis", "s": 0.835, "e": 1.215}, {"w": "saya", "s": 1.215, "e": 1.455}, {"w": "adalah", "s": 1.455, "e": 1.855}, {"w": "mak", "s": 1.855, "e": 2.095}, {"w": "saya", "s": 2.095, "e": 2.315}, {"w": "sendiri.", "s": 2.315, "e": 2.715}, {"w": "malu", "s": 2.825, "e": 3.765}, {"w": "ke", "s": 3.765, "e": 4.045}, {"w": "nak", "s": 4.045, "e": 4.285}, {"w": "jual", "s": 4.285, "e": 4.785}, {"w": "kat", "s": 4.785, "e": 5.135}, {"w": "kawan", "s": 5.165, "e": 5.525}, {"w": "sendiri,", "s": 5.525, "e": 6.225}, {"w": "keluarga", "s": 6.595, "e": 6.695}, {"w": "sendiri.", "s": 6.695, "e": 7.035}, {"w": "Saya", "s": 7.225, "e": 7.405}, {"w": "kan", "s": 7.405, "e": 7.525}, {"w": "yang", "s": 7.525, "e": 7.625}, {"w": "buat", "s": 7.625, "e": 7.685}, {"w": "servis", "s": 7.685, "e": 8.125}, {"w": "setelah", "s": 8.125, "e": 8.51}, {"w": "kita", "s": 8.51, "e": 8.83}, {"w": "konsult,", "s": 8.83, "e": 9.59}, {"w": "kita", "s": 9.73, "e": 9.99}, {"w": "ajar", "s": 9.99, "e": 10.27}, {"w": "tentang", "s": 10.27, "e": 10.61}, {"w": "sales,", "s": 10.61, "e": 11.09}, {"w": "kita", "s": 11.27, "e": 11.49}, {"w": "set", "s": 11.49, "e": 11.77}, {"w": "up", "s": 11.77, "e": 11.83}, {"w": "team", "s": 11.83, "e": 12.11}, {"w": "sales.", "s": 12.11, "e": 12.76}, {"w": "tugas", "s": 12.82, "e": 13.06}, {"w": "sebagai", "s": 13.06, "e": 13.36}, {"w": "seorang", "s": 13.36, "e": 13.64}, {"w": "anak", "s": 13.64, "e": 13.96}, {"w": "ni", "s": 13.96, "e": 14.565}, {"w": "akan", "s": 15.05, "e": 15.45}, {"w": "banyak", "s": 15.45, "e": 16.19}, {"w": "dilema", "s": 16.19, "e": 16.75}, {"w": "lah", "s": 16.75, "e": 17.03}, {"w": "nak", "s": 17.03, "e": 17.15}, {"w": "ambil", "s": 17.15, "e": 17.45}, {"w": "ke", "s": 17.45, "e": 17.61}, {"w": "tidak.", "s": 17.61, "e": 17.945}, {"w": "Sebab", "s": 17.95, "e": 18.23}, {"w": "biasa", "s": 18.23, "e": 18.49}, {"w": "kalau", "s": 18.49, "e": 18.67}, {"w": "dengan", "s": 18.67, "e": 18.93}, {"w": "mak", "s": 18.93, "e": 19.15}, {"w": "ni", "s": 19.15, "e": 19.27}, {"w": "kita", "s": 19.27, "e": 19.47}, {"w": "tak", "s": 19.47, "e": 19.61}, {"w": "boleh", "s": 19.61, "e": 19.71}, {"w": "nak", "s": 19.71, "e": 19.87}, {"w": "terlebih-lebih.", "s": 19.87, "e": 20.39}, {"w": "Tapi", "s": 20.51, "e": 20.69}, {"w": "apa", "s": 20.69, "e": 20.91}, {"w": "yang", "s": 20.91, "e": 21.03}, {"w": "saya", "s": 21.03, "e": 21.17}, {"w": "buat", "s": 21.17, "e": 21.31}, {"w": "adalah", "s": 21.31, "e": 21.72}, {"w": "daripada", "s": 21.72, "e": 22.225}, {"w": "saya", "s": 22.225, "e": 22.445}, {"w": "menjual,", "s": 22.445, "e": 22.965}, {"w": "saya", "s": 23.185, "e": 23.325}, {"w": "buat", "s": 23.325, "e": 23.545}, {"w": "je", "s": 23.545, "e": 23.705}, {"w": "dulu.", "s": 23.705, "e": 24.005}, {"w": "daripada", "s": 24.19, "e": 24.45}, {"w": "buat", "s": 24.45, "e": 24.73}, {"w": "dulu", "s": 24.73, "e": 25.03}, {"w": "mak", "s": 25.495, "e": 25.615}, {"w": "sendiri", "s": 25.615, "e": 25.995}, {"w": "yang", "s": 25.995, "e": 26.235}, {"w": "nampak", "s": 26.235, "e": 26.675}, {"w": "kan", "s": 26.78, "e": 27.28}, {"w": "di", "s": 27.28, "e": 27.34}, {"w": "mana", "s": 27.34, "e": 27.8}, {"w": "value", "s": 27.8, "e": 28.24}, {"w": "saya", "s": 28.24, "e": 28.78}, {"w": "dalam", "s": 28.78, "e": 29.28}, {"w": "mengurus", "s": 29.28, "e": 30.08}, {"w": "team", "s": 30.08, "e": 30.43}, {"w": "tersebut", "s": 30.43, "e": 30.91}, {"w": "khusus", "s": 30.91, "e": 31.27}, {"w": "dalam", "s": 31.27, "e": 31.97}, {"w": "sales", "s": 31.97, "e": 32.35}, {"w": "ni.", "s": 32.35, "e": 32.67}, {"w": "Dan", "s": 32.73, "e": 32.85}, {"w": "dia", "s": 32.85, "e": 33.11}, {"w": "yang", "s": 33.11, "e": 33.37}, {"w": "offer", "s": 33.37, "e": 33.71}, {"w": "untuk", "s": 33.71, "e": 33.97}, {"w": "bayar", "s": 33.97, "e": 34.29}, {"w": "saya.", "s": 34.29, "e": 34.51}, {"w": "So", "s": 34.625, "e": 34.735}, {"w": "basically", "s": 34.735, "e": 35.175}, {"w": "tak", "s": 35.175, "e": 35.375}, {"w": "adalah", "s": 35.375, "e": 35.555}, {"w": "kita", "s": 35.555, "e": 35.875}, {"w": "ni", "s": 35.875, "e": 35.975}, {"w": "menjual", "s": 35.975, "e": 36.255}, {"w": "kepada", "s": 36.255, "e": 36.515}, {"w": "keluarga", "s": 36.515, "e": 36.835}, {"w": "sendiri.", "s": 36.835, "e": 37.195}, {"w": "Tapi", "s": 37.34, "e": 37.64}, {"w": "kita", "s": 37.64, "e": 37.98}, {"w": "lebih", "s": 37.98, "e": 38.5}, {"w": "mulakan", "s": 38.5, "e": 39.42}, {"w": "dengan", "s": 39.42, "e": 39.68}, {"w": "servis", "s": 39.68, "e": 40.1}, {"w": "kita", "s": 40.1, "e": 40.36}, {"w": "dulu.", "s": 40.36, "e": 40.7}, {"w": "So", "s": 40.76, "e": 40.86}, {"w": "apabila", "s": 40.86, "e": 41.14}, {"w": "orang", "s": 41.14, "e": 41.48}, {"w": "tu", "s": 41.48, "e": 41.66}, {"w": "berpuas", "s": 41.66, "e": 42.06}, {"w": "hati,", "s": 42.06, "e": 42.67}, {"w": "dia", "s": 42.725, "e": 42.925}, {"w": "suka", "s": 42.925, "e": 43.285}, {"w": "dengan", "s": 43.285, "e": 43.565}, {"w": "apa", "s": 43.565, "e": 43.865}, {"w": "yang", "s": 43.865, "e": 44.085}, {"w": "kita", "s": 44.085, "e": 44.445}, {"w": "sediakan", "s": 44.445, "e": 44.925}, {"w": "dan", "s": 44.925, "e": 45.345}, {"w": "dia", "s": 45.345, "e": 45.585}, {"w": "akan", "s": 45.585, "e": 45.705}, {"w": "bayar.", "s": 45.705, "e": 46.205}, {"w": "Walaupun", "s": 46.205, "e": 46.905}, {"w": "kawan", "s": 46.905, "e": 47.505}, {"w": "ataupun", "s": 47.505, "e": 48.14}, {"w": "keluarga", "s": 48.14, "e": 48.565}, {"w": "sendiri.", "s": 48.565, "e": 49.095}, {"w": "Sekarang", "s": 49.13, "e": 49.41}, {"w": "ni", "s": 49.41, "e": 49.75}, {"w": "kenapa", "s": 49.75, "e": 50.19}, {"w": "kalau", "s": 50.19, "e": 50.41}, {"w": "dengan", "s": 50.41, "e": 50.63}, {"w": "kawan", "s": 50.63, "e": 50.89}, {"w": "asyik", "s": 50.89, "e": 51.09}, {"w": "nak", "s": 51.09, "e": 51.27}, {"w": "murah", "s": 51.27, "e": 51.69}, {"w": "je?", "s": 51.69, "e": 51.91}, {"w": "Sebab", "s": 52.21, "e": 52.35}, {"w": "dia", "s": 52.35, "e": 52.59}, {"w": "tahu", "s": 52.59, "e": 52.89}, {"w": "cerita", "s": 52.89, "e": 53.35}, {"w": "di", "s": 53.35, "e": 53.53}, {"w": "belakang", "s": 53.53, "e": 53.83}, {"w": "kita", "s": 53.83, "e": 54.27}, {"w": "tu,", "s": 54.27, "e": 54.53}, {"w": "kita", "s": 54.61, "e": 54.83}, {"w": "tu", "s": 54.83, "e": 54.99}, {"w": "orang", "s": 54.99, "e": 55.17}, {"w": "yang", "s": 55.17, "e": 55.35}, {"w": "macam", "s": 55.35, "e": 55.49}, {"w": "mana.", "s": 55.49, "e": 55.745}, {"w": "mula", "s": 55.825, "e": 56.125}, {"w": "daripada", "s": 56.125, "e": 56.385}, {"w": "hari", "s": 56.385, "e": 56.645}, {"w": "ni", "s": 56.645, "e": 57.045}, {"w": "layan", "s": 57.045, "e": 57.805}, {"w": "semua", "s": 57.805, "e": 58.145}, {"w": "orang", "s": 58.145, "e": 58.545}, {"w": "dengan", "s": 58.545, "e": 58.825}, {"w": "baik.", "s": 58.825, "e": 59.15}, {"w": "Servis", "s": 59.19, "e": 59.49}, {"w": "mereka", "s": 59.49, "e": 60.11}, {"w": "seikhlas", "s": 60.23, "e": 60.725}, {"w": "mungkin.", "s": 60.725, "e": 61.25}, {"w": "Sebab", "s": 61.3, "e": 61.4}, {"w": "kita", "s": 61.4, "e": 61.62}, {"w": "tak", "s": 61.62, "e": 61.8}, {"w": "tahu.", "s": 61.8, "e": 62.2}, {"w": "Mana", "s": 62.365, "e": 62.525}, {"w": "tahu", "s": 62.525, "e": 62.705}, {"w": "dia", "s": 62.705, "e": 62.925}, {"w": "jadi", "s": 62.925, "e": 63.165}, {"w": "customer", "s": 63.165, "e": 63.365}, {"w": "kita?", "s": 63.365, "e": 63.835}, {"w": "Walaupun", "s": 64.195, "e": 64.795}, {"w": "pasangan", "s": 64.795, "e": 65.255}, {"w": "kita", "s": 65.255, "e": 65.455}, {"w": "sendiri.", "s": 65.455, "e": 65.855}, {"w": "Assalamualaikum.", "s": 65.925, "e": 66.445}],
+  keywords: ["mak", "malu", "kawan", "keluarga", "servis", "dilema", "buat", "value", "bayar", "dulu.", "puas", "murah", "cerita", "baik.", "seikhlas", "pasangan"],
+  hideCaps: [[0, 2.85], [12.7, 17.9], [24.1, 30.1], [40.6, 49.0], [49.0, 52.2], [65.8, 68.64]],
   scene(tl, a, put) {
-    const FX = 580, FY = 757;
+    const FX = 582, FY = 772;
     const cam = (z, tx, ty, fx = FX, fy = FY) => ({ x: Math.min(0, Math.max(1080 - 1080 * z, tx - fx * z)), y: Math.min(0, Math.max(1920 - 1920 * z, ty - fy * z)), scale: z });
     const ov = document.querySelector("#cam").nextElementSibling; tl.set(ov, { opacity: 0 }, 0);
     const lbl = (txt, c = "#fff") => `<div class="pl" style="font:600 38px Poppins;letter-spacing:.3em;color:${c}">${txt}</div>`;
@@ -24,114 +24,111 @@ window.ED = {
       tl.to(n, { opacity: 0, filter: "blur(8px)", duration: 0.2 }, t1 - 0.2); tl.set(n, { opacity: 0 }, t1);
       return n;
     };
-    const row = (txt) => `<div class="rw" style="margin-top:16px;display:flex;align-items:center;gap:20px;font-size:50px;font-weight:700;color:#0B0B0B;white-space:nowrap"><span style="flex:none;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center">&#10003;</span>${txt}</div>`;
+    const row = (txt) => `<div class="rw" style="margin-top:16px;display:flex;align-items:center;gap:20px;font-size:48px;font-weight:700;color:#0B0B0B;white-space:nowrap"><span style="flex:none;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center">&#10003;</span>${txt}</div>`;
+    const notif = (who, amt) => `<div class="card" style="left:90px;top:250px;width:800px;padding:26px 30px;border-radius:30px;display:flex;align-items:center;gap:24px;background:rgba(255,255,255,.96)">
+      <div style="flex:none;width:86px;height:86px;border-radius:22px;background:#25D366;display:flex;align-items:center;justify-content:center"><svg width="52" height="52" viewBox="0 0 100 100"><path d="M22 52 L42 72 L80 30" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div style="flex:1"><div style="display:flex;justify-content:space-between;font-size:26px;color:#777;font-weight:600"><span>BANK · sekarang</span></div>
+      <div style="font-weight:800;font-size:40px;color:#0B0B0B;margin-top:4px">Bayaran diterima</div>
+      <div style="font-weight:600;font-size:34px;color:#333;margin-top:2px">daripada: <b style="color:#1fae55">${who}</b>${amt ? " · " + amt : ""}</div></div></div>`;
 
-    // ===== 0–5.0 HOOK: light leak + close-up jejak muka + POSTER "SEBELUM BELI / 47 SOALAN" =====
-    const lk = put(`<div class="L" style="mix-blend-mode:screen">
-      <div class="k L" style="background:radial-gradient(70% 55% at 30% 30%, rgba(255,90,40,.95), rgba(255,140,60,.4) 45%, transparent 75%)"></div>
-      <div class="k L" style="background:radial-gradient(80% 60% at 70% 40%, rgba(120,255,240,.85), rgba(80,200,220,.3) 50%, transparent 80%)"></div>
-      <div class="k L" style="background:radial-gradient(75% 60% at 50% 70%, rgba(255,170,60,.9), rgba(255,120,40,.35) 50%, transparent 80%)"></div></div>`, "#fx");
-    lk.querySelectorAll(".k").forEach((n, i) => { tl.set(n, { opacity: 0 }, 0); tl.to(n, { opacity: 1, duration: 0.08 }, i * 0.16); tl.to(n, { opacity: 0, duration: 0.14 }, i * 0.16 + 0.12); });
+    // ===== 0–2.85 HOOK TWIST =====
     tl.fromTo("#camWrap", { filter: "blur(10px)" }, { filter: "blur(0px)", duration: 0.18, immediateRender: false }, 0.001);
-    const FT0 = [[0.0, 531, 767], [0.12, 528, 772], [0.24, 521, 775], [0.36, 509, 775], [0.48, 497, 770], [0.6, 490, 766], [0.72, 486, 758], [0.84, 483, 746], [0.96, 484, 733], [1.08, 493, 724], [1.2, 509, 720], [1.32, 527, 723], [1.44, 543, 730], [1.56, 556, 735], [1.68, 565, 741], [1.8, 574, 750], [1.92, 582, 759], [2.04, 590, 761], [2.16, 593, 756], [2.28, 594, 745], [2.4, 593, 740], [2.52, 590, 737], [2.64, 584, 735], [2.76, 574, 729], [2.88, 563, 727], [3.0, 555, 730], [3.12, 551, 736], [3.24, 550, 740], [3.36, 554, 743], [3.48, 561, 745], [3.6, 569, 747], [3.72, 578, 753], [3.84, 588, 766], [3.96, 597, 784], [4.08, 606, 803], [4.2, 611, 819], [4.32, 613, 834], [4.44, 614, 850], [4.56, 613, 862], [4.68, 600, 855], [4.8, 590, 842], [4.92, 581, 825]]; const zt = (tt) => 1.8 + Math.min(tt, 4.8) / 4.8 * 0.18;
-    FT0.forEach((r, i) => { const p = i ? FT0[i - 1][0] : 0.0; if (r[0] < 0.05) return; tl.to("#camWrap", { ...cam(zt(r[0]), 540, 470, r[1], r[2]), duration: Math.max(0.05, r[0] - p), ease: "none" }, p); });
-    const gb = put(`<div class="L" style="background:linear-gradient(rgba(0,0,0,0) 40%, rgba(0,0,0,.85) 82%)"></div>`, "#top"); tl.set(gb, { opacity: 1 }, 0); tl.set(gb, { opacity: 0 }, 5.0);
-    const p1 = put(`<div style="position:absolute;left:80px;width:820px;top:1000px">${lbl("SEBELUM BELI")}<div style="display:flex;align-items:flex-end;gap:26px">${big('<span id="n47">1</span>', "#FFD60A", 270)}${big("SOALAN", "#fff", 185)}</div></div>`, "#top");
-    const [bN, bS] = p1.querySelectorAll(".pb");
-    tl.set(p1, { opacity: 1 }, 0); typeIn(p1.querySelector(".pl"), 0.3);
-    tl.set(bN, { opacity: 0 }, 0); tl.set(bN, { opacity: 1 }, 1.0);
-    const nn = p1.querySelector("#n47"), o47 = { v: 1 }; tl.set(o47, { v: 1, onUpdate: () => (nn.textContent = Math.round(o47.v)) }, 0);
-    tl.to(o47, { v: 47, duration: 0.6, ease: "power2.in", onUpdate: () => (nn.textContent = Math.round(o47.v)) }, 1.0);
-    slam(bN, 1.6); flash(1.6); tl.to("#camWrap", { scale: "+=0.22", duration: 0.09, ease: "expo.out" }, 1.6);
-    slam(bS, 2.28);
-    out(p1, 4.85);
-    tl.fromTo("#camWrap", { filter: "blur(0px)" }, { ...cam(1.0, 540, 1057), filter: "blur(14px)", duration: 0.14, ease: "power3.in", immediateRender: false }, 4.86);
-    tl.set(ov, { opacity: 1 }, 5.0); tl.to("#camWrap", { filter: "blur(0px)", duration: 0.12 }, 5.0);
-    // ===== 5.0–7.9 servis PREMIUM — lebar =====
-    a.cam(5.0, 1.0); word(5.05, 7.9, "harga servis", `<span class="kw">PREMIUM.</span>`, 190);
-    // 7.9–9.6 punch-in "tanya banyak sangat soalan"
-    a.cam(7.9, 1.25); a.cam(8.95, 1.38);
-    // ===== 9.6–14.9 B-ROLL 1: soalan bertimbun + kaunter → 47 =====
-    const qs = ["Berapa lama siap?", "Ada jaminan?", "Kalau tak jadi?", "Boleh tengok contoh?", "Siapa yang uruskan?", "Boleh bayar ansuran?", "Kenapa harga macam ni?", "Apa beza dengan lain?"];
-    const b1 = a.panel(9.6, 14.9, `<div class="lbl" style="position:absolute;left:80px;top:290px;color:#25D366">klien ni tanya saya</div>
-      <div style="position:absolute;left:80px;top:340px;font-family:Anton;font-size:200px;line-height:1;color:#FFD60A"><span id="q47">1</span> <span style="color:#fff">SOALAN</span></div>
-      <div id="qs" style="position:absolute;left:80px;top:600px;width:820px"></div>`);
-    const qw = b1.querySelector("#qs");
-    qs.forEach((q, i) => { qw.insertAdjacentHTML("beforeend", `<div class="qq" style="display:inline-block;margin:0 14px 16px 0;background:#F1EEE9;color:#0B0B0B;border-radius:28px 28px 28px 8px;padding:16px 26px;font-weight:600;font-size:38px">${q}</div>`); });
-    qw.querySelectorAll(".qq").forEach((n, i) => { tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out", immediateRender: false }, 9.75 + i * 0.17); });
-    const q47 = b1.querySelector("#q47"), oq = { v: 1 }; tl.set(oq, { v: 1, onUpdate: () => (q47.textContent = Math.round(oq.v)) }, 0);
-    tl.to(oq, { v: 47, duration: 1.5, ease: "power2.in", onUpdate: () => (q47.textContent = Math.round(oq.v)) }, 9.7);
-    tl.fromTo(qw, { scale: 1 }, { scale: 1.05, duration: 3.3, ease: "none", immediateRender: false, transformOrigin: "left top" }, 11.4);
-    tl.fromTo(b1.querySelector("#q47"), { scale: 1 }, { scale: 1.12, duration: 0.08, yoyo: true, repeat: 1, immediateRender: false, transformOrigin: "left center" }, 11.17);
-    // ===== 14.9–19.8 OUTCOME — lebar → dekat =====
-    a.cam(14.9, 1.0); a.cam(17.3, 1.2); word(14.95, 19.8, "dia nak tahu", `<span class="kw">OUTCOME.</span>`, 190);
-    // ===== 19.8–22.1 KENAPA? — punch dekat =====
-    a.cam(19.8, 1.35); word(19.85, 22.1, "kenapa dia tanya", `<span class="kw">BANYAK?</span>`, 190);
-    // ===== 22.1–28.3 BUKAN ANNOYING — lebar, pangkah =====
-    a.cam(22.1, 1.0); a.cam(25.45, 1.25);
-    const an = word(22.15, 28.3, "dia bukan customer", `<span style="position:relative;display:inline-block">ANNOYING.<i style="position:absolute;left:-8px;right:-8px;top:50%;height:16px;background:#FF4D4D;border-radius:8px;transform:scaleX(0);transform-origin:left" class="sk"></i></span>`, 190);
-    tl.to(an.querySelector(".sk"), { scaleX: 1, duration: 0.3, ease: "power2.out" }, 25.6);
-    // ===== 28.3–32.2 B-ROLL 2 putih: proses dapatkan [CLARITY] + kanta =====
-    const b2 = a.panel(28.3, 32.2, `<div style="position:absolute;left:80px;top:330px;font-weight:800;font-size:96px;color:#0B0B0B;line-height:1">soalan =</div>
-      <div style="position:absolute;left:80px;top:440px;font-weight:600;font-size:56px;color:#0B0B0B;opacity:.6">proses dapatkan</div>
-      <div id="cl" style="position:absolute;left:80px;top:520px;font-family:Anton;font-size:220px;color:#FF4D4D;line-height:1;filter:blur(14px)">[CLARITY]</div>
-      <svg id="mg" width="360" height="360" viewBox="0 0 100 100" style="position:absolute;left:420px;top:860px"><g fill="none" stroke="#0B0B0B" stroke-width="7" stroke-linecap="round"><circle cx="40" cy="40" r="28"/><path d="M61 61 L90 90"/></g></svg>`, "#fff");
-    tl.fromTo(b2.querySelector("#cl"), { filter: "blur(14px)" }, { filter: "blur(0px)", duration: 0.5, ease: "power2.out", immediateRender: false }, 30.8);
-    tl.fromTo(b2.querySelector("#mg"), { x: 300, y: 200, rotation: 20, opacity: 0 }, { x: 0, y: 0, rotation: 0, opacity: 1, duration: 0.5, ease: "expo.out", immediateRender: false }, 28.5);
-    tl.to(b2.querySelector("#mg"), { x: -280, y: -380, duration: 0.6, ease: "power2.inOut" }, 30.3);
-    // ===== 32.2–35.3 BULATAN: LAGI BANYAK SOALAN → LAGI BERMINAT =====
-    tl.set("#root", { background: "#0B0B0B" }, 0); tl.set("#root", { background: "#F4F4F2" }, 32.2); tl.set("#root", { background: "#0B0B0B" }, 35.44);
-    tl.set("#vig", { opacity: 1 }, 0); tl.set("#vig", { opacity: 0 }, 32.2); tl.set("#vig", { opacity: 1 }, 35.44);
-    tl.set("#cam", { clipPath: "circle(1250px at 540px 860px)" }, 0);
-    tl.set(ov, { opacity: 0 }, 32.2);
-    tl.to("#cam", { clipPath: "circle(320px at 540px 860px)", duration: 0.42, ease: "power3.inOut" }, 32.2);
-    const FC = [[31.92, 599, 808], [32.04, 597, 797], [32.16, 591, 790], [32.28, 583, 784], [32.4, 575, 779], [32.52, 565, 774], [32.64, 557, 770], [32.76, 549, 777], [32.88, 543, 784], [33.0, 541, 787], [33.12, 542, 785], [33.24, 544, 779], [33.36, 546, 772], [33.48, 549, 762], [33.6, 552, 752], [33.72, 555, 742], [33.84, 558, 732], [33.96, 560, 724], [34.08, 561, 719], [34.2, 562, 718], [34.32, 562, 718], [34.44, 561, 720], [34.56, 559, 724], [34.68, 557, 732], [34.8, 554, 742], [34.92, 553, 753], [35.04, 550, 755], [35.16, 547, 753], [35.28, 545, 750], [35.4, 543, 742]]; const at = (r) => cam(1.05, 540, 885, r[1], r[2]);
-    tl.to("#camWrap", { ...at(FC[0]), duration: 0.42, ease: "power3.inOut" }, 32.2);
-    FC.filter((r) => r[0] > 32.65 && r[0] < 35.0).forEach((r, i, arr) => { const p = i ? arr[i - 1][0] : 32.62; tl.to("#camWrap", { ...at(r), duration: Math.max(0.05, r[0] - p), ease: "none" }, p); });
-    const sh = put(`<div style="position:absolute;left:220px;top:540px;width:640px;height:640px;border-radius:50%;box-shadow:0 30px 70px rgba(0,0,0,.28)"></div>`, "#back"); tl.set(sh, { opacity: 0 }, 0); tl.to(sh, { opacity: 1, duration: 0.15 }, 32.52); tl.to(sh, { opacity: 0, duration: 0.1 }, 35.0);
-    const tq = put(`<div style="position:absolute;left:0;right:0;top:440px;text-align:center;font-weight:600;font-size:46px;color:#5b5b5b">lagi banyak soalan…</div>`, "#top");
-    const bq = put(`<div style="position:absolute;left:0;right:0;top:1215px;text-align:center;font-family:Anton;font-size:130px;color:#0B0B0B">LAGI <span style="color:#1fae55">BERMINAT.</span></div>`, "#top");
-    [[tq, 32.5], [bq, 33.9]].forEach(([n, t]) => { tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out", immediateRender: false }, t); tl.to(n, { opacity: 0, duration: 0.12 }, 34.95); });
-    const QI = '<path d="M36 36 C 36 20, 64 20, 64 36 C 64 48, 50 50, 50 60"/><circle cx="50" cy="74" r="3"/>';
-    [[200, 620, 32.4], [880, 640, 32.55], [170, 1080, 32.7], [900, 1060, 32.85]].forEach(([x, y, t]) => {
-      const n = put(`<div style="position:absolute;left:${x - 55}px;top:${y - 55}px;width:110px;height:110px;border-radius:50%;background:#fff;box-shadow:0 14px 30px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center"><svg width="62" height="62" viewBox="0 0 100 100"><g fill="none" stroke="#1fae55" stroke-width="8" stroke-linecap="round">${QI}</g></svg></div>`, "#top");
-      tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.6)", immediateRender: false }, t);
-      tl.to(n, { y: -12, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: 1 }, t + 0.35); tl.to(n, { opacity: 0, scale: 0.6, duration: 0.15 }, 34.95); });
-    tl.to("#cam", { clipPath: "circle(1250px at 540px 860px)", duration: 0.38, ease: "power3.in" }, 35.05);
-    tl.to("#camWrap", { x: 0, y: 0, scale: 1, duration: 0.38, ease: "power3.inOut" }, 35.05);
-    tl.to("#camWrap", { y: 300, duration: 0.22, ease: "power2.inOut" }, 35.45);
-    tl.to(ov, { opacity: 1, duration: 0.22 }, 35.45);
-    // ===== 35.7–42.0 TUGAS KITA: betul / teratur / sabar =====
-    const ls = put(`<div class="card" style="left:80px;top:270px;width:820px;padding:30px 40px">
-      <div class="lbl" style="color:#0B0B0B;opacity:.6;font-size:28px">tugas kita: jawab dengan</div>${row("Betul")}${row("Teratur")}${row("Sabar")}</div>`);
-    a.pop(36.3, 42.0, ls); [37.4, 38.84, 39.6].forEach((t, i) => a.pop(t, 42.0, ls.querySelectorAll(".rw")[i], { dy: 16 }));
-    a.cam(39.6, 1.25); a.cam(41.0, 1.05);
-    // ===== 42.0–43.7 JANGAN RIMAS — punch =====
-    a.cam(42.0, 1.35); word(42.05, 43.7, "jangan", `<span class="kw">RIMAS.</span>`, 200);
-    // ===== 43.7–49.7 mereka dah lalui fasa — push perlahan =====
-    a.push(43.7, 52.7, 1.0, 1.28); word(43.85, 47.7, "orang yang banyak", `<span class="kw">SOALAN…</span>`, 180); word(47.8, 52.7, "mereka dah lalui", `FASA <span class="kw">ITU.</span>`, 170);
-    // ===== 49.7–55.3 B-ROLL 3 hitam: TERLALU PERCAYA → KECEWA. =====
-    const b3 = a.panel(52.7, 55.3, `<div class="lbl" style="position:absolute;left:80px;top:330px;color:#25D366">sebelum ni</div>
-      <div id="t1" style="position:absolute;left:80px;top:390px;font-family:Anton;font-size:170px;line-height:.95;color:#fff">TERLALU<br>PERCAYA.</div>
-      <div id="t2" style="position:absolute;left:80px;top:390px;font-family:Anton;font-size:230px;line-height:.95;color:#FF4D4D;opacity:0">KECEWA.</div>
-      <svg id="ck" width="820" height="420" viewBox="0 0 820 420" style="position:absolute;left:80px;top:780px"><path d="M20 210 L 200 210 L 250 120 L 310 300 L 370 160 L 420 260 L 800 260" fill="none" stroke="#FF4D4D" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
-    tl.set(b3.querySelector("#t1"), { opacity: 0 }, 0); slam(b3.querySelector("#t1"), 52.9);
-    tl.to(b3.querySelector("#t1"), { opacity: 0, y: -30, duration: 0.05 }, 54.2); slam(b3.querySelector("#t2"), 54.24); flash(54.24, 0.35);
-    const ck = b3.querySelector("path"); ck.style.strokeDasharray = 1400; tl.set(ck, { strokeDashoffset: 1400 }, 0); tl.to(ck, { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 54.25);
-    tl.to(b3.querySelector(".lbl"), { opacity: 1, duration: 0.2 }, 52.72);
-    tl.set(b3.querySelector(".lbl"), { opacity: 0 }, 0);
-    // ===== 55.3–58.1 PERNAH JUMPA? — dekat =====
-    a.cam(55.3, 1.25); word(55.35, 58.1, "awak pernah", `<span class="kw">JUMPA?</span>`, 200);
-    // ===== 58.1–59.8 bar komen =====
-    a.cam(58.1, 1.0);
-    const cb = put(`<div style="position:absolute;left:80px;top:300px;width:820px"><div class="lbl" style="color:#fff;font-size:28px;margin-bottom:14px">share cerita awak</div>
-      <div class="card" style="position:relative;height:130px;border-radius:65px;display:flex;align-items:center;padding:0 36px;gap:22px">
-        <div style="width:64px;height:64px;border-radius:50%;background:#e8e8e8;flex:none"></div><div id="tx" style="font-weight:700;font-size:42px;color:#0B0B0B;white-space:nowrap"></div>
-        <div style="margin-left:auto;width:70px;height:70px;border-radius:50%;background:#25D366;flex:none"></div></div></div>`);
-    a.pop(58.15, 59.8, cb); a.type(cb.querySelector("#tx"), "pernah! customer saya…", 58.4, 0.05);
-    // ===== 59.8–62.28 OUTRO =====
-    a.panel(59.8, 62.28, `<img src="assets/logo.png" style="position:absolute;left:130px;top:420px;width:700px">
+    const FT0 = [[0.0, 590, 761], [0.12, 586, 762], [0.24, 581, 766], [0.36, 575, 770], [0.48, 570, 773], [0.6, 566, 775], [0.72, 564, 775], [0.84, 563, 774], [0.96, 565, 773], [1.08, 568, 771], [1.2, 571, 769], [1.32, 572, 767], [1.44, 574, 768], [1.56, 579, 767], [1.68, 590, 765], [1.8, 605, 763], [1.92, 621, 764], [2.04, 637, 767], [2.16, 652, 770], [2.28, 666, 772], [2.4, 675, 775], [2.52, 669, 769], [2.64, 657, 764]]; const zt = (tt) => 1.8 + Math.min(tt, 2.8) / 2.8 * 0.12;
+    FT0.forEach((r, i) => { const p = i ? FT0[i - 1][0] : 0.0; if (r[0] < 0.05) return; tl.to("#camWrap", { ...cam(zt(r[0]), 540, 760, r[1], r[2]), duration: Math.max(0.05, r[0] - p), ease: "none" }, p); });
+    const gb = put(`<div class="L" style="background:linear-gradient(rgba(0,0,0,0) 40%, rgba(0,0,0,.85) 82%)"></div>`, "#top"); tl.set(gb, { opacity: 1 }, 0); tl.set(gb, { opacity: 0 }, 2.85);
+    const nt = put(notif("Mak", ""), "#top"); tl.set(nt, { opacity: 0 }, 0);
+    tl.fromTo(nt, { opacity: 0, y: -160 }, { opacity: 1, y: 0, duration: 0.35, ease: "expo.out", immediateRender: false }, 0.75);
+    tl.to(nt, { y: -10, duration: 0.9, ease: "sine.inOut" }, 1.1);
+    const p1 = put(`<div style="position:absolute;left:80px;width:820px;top:1080px">${lbl("CUSTOMER SAYA:")}${big("MAK.", "#FFD60A", 330)}</div>`, "#top");
+    tl.set(p1, { opacity: 1 }, 0); typeIn(p1.querySelector(".pl"), 0.85); slam(p1.querySelector(".pb"), 1.85); flash(1.85);
+    tl.to("#camWrap", { scale: "+=0.3", duration: 0.09, ease: "expo.out" }, 1.85);
+    tl.to(nt, { scale: 1.04, duration: 0.08, yoyo: true, repeat: 1 }, 1.85);
+    out(p1, 2.82); out(nt, 2.82);
+    tl.fromTo("#camWrap", { filter: "blur(0px)" }, { ...cam(1.0, 540, 1072), filter: "blur(14px)", duration: 0.14, ease: "power3.in", immediateRender: false }, 2.7);
+    tl.set(ov, { opacity: 1 }, 2.85); tl.to("#camWrap", { filter: "blur(0px)", duration: 0.12 }, 2.85);
+    // ===== 2.85–7.2 MALU NAK JUAL? KAWAN / KELUARGA =====
+    a.cam(2.85, 1.0);
+    const mj = put(`<div style="position:absolute;left:80px;top:270px"><div class="lbl" style="color:#25D366">malu ke nak jual kat</div>
+      <div style="display:flex;gap:18px;margin-top:22px"><div id="k1" style="background:#fff;color:#0B0B0B;border-radius:50px;padding:12px 28px;font-family:Anton;font-size:84px;line-height:1">KAWAN?</div>
+      <div id="k2" style="background:#FFD60A;color:#0B0B0B;border-radius:50px;padding:12px 28px;font-family:Anton;font-size:84px;line-height:1">KELUARGA?</div></div></div>`);
+    tl.set(mj, { opacity: 0 }, 0); tl.set(mj, { opacity: 1 }, 2.9); a.reveal(2.9, mj.children[0], 0.3);
+    slam(mj.querySelector("#k1"), 5.17); slam(mj.querySelector("#k2"), 6.6); a.cam(6.6, 1.2);
+    out(mj, 7.2);
+    // ===== 7.2–12.7 servis saya =====
+    a.cam(7.2, 1.0);
+    const sv = put(`<div class="card" style="left:80px;top:270px;width:820px;padding:30px 40px">
+      <div class="lbl" style="color:#0B0B0B;opacity:.6;font-size:28px">servis saya</div>${row("Consult")}${row("Ajar sales")}${row("Set up team sales")}</div>`);
+    a.pop(8.5, 12.7, sv); [8.83, 10.27, 11.49].forEach((t, i) => a.pop(t, 12.7, sv.querySelectorAll(".rw")[i], { dy: 16 }));
+    a.cam(10.6, 1.15);
+    // ===== 12.7–17.9 B-ROLL 1 hitam: DILEMA ANAK (JUAL ↔ TAK) =====
+    const b1 = a.panel(12.7, 17.9, `<div class="lbl" style="position:absolute;left:80px;top:320px;color:#25D366">sebagai seorang anak</div>
+      <div id="dl" style="position:absolute;left:80px;top:380px;font-family:Anton;font-size:240px;line-height:1;color:#fff">DILEMA.</div>
+      <svg width="820" height="520" viewBox="0 0 820 520" style="position:absolute;left:80px;top:720px">
+        <path d="M410 470 L 360 510 L 460 510 Z" fill="#fff"/><rect x="404" y="180" width="12" height="300" fill="#fff"/>
+        <g id="bm"><rect x="120" y="170" width="580" height="14" rx="7" fill="#fff"/>
+          <g><line x1="170" y1="177" x2="170" y2="280" stroke="#fff" stroke-width="4"/><rect x="50" y="280" width="240" height="96" rx="20" fill="#FFD60A"/><text x="170" y="344" text-anchor="middle" font-family="Anton" font-size="56" fill="#0B0B0B">JUAL</text></g>
+          <g><line x1="650" y1="177" x2="650" y2="280" stroke="#fff" stroke-width="4"/><rect x="530" y="280" width="240" height="96" rx="20" fill="#444"/><text x="650" y="344" text-anchor="middle" font-family="Anton" font-size="56" fill="#fff">TAK JUAL</text></g></g></svg>`);
+    slam(b1.querySelector("#dl"), 16.19);
+    const bm = b1.querySelector("#bm"); tl.set(bm, { rotation: 0, svgOrigin: "410 177" }, 0);
+    tl.to(bm, { rotation: -10, duration: 0.6, ease: "sine.inOut" }, 13.2); tl.to(bm, { rotation: 10, duration: 0.7, ease: "sine.inOut" }, 14.0); tl.to(bm, { rotation: -6, duration: 0.6, ease: "sine.inOut" }, 14.9); tl.to(bm, { rotation: 6, duration: 0.6, ease: "sine.inOut" }, 15.6); tl.to(bm, { rotation: 0, duration: 0.5 }, 16.3);
+    // ===== 17.9–20.4 punch-in "dengan mak tak boleh terlebih-lebih" =====
+    a.cam(17.9, 1.3); a.cam(19.4, 1.42);
+    // ===== 20.4–24.1 BUAT DULU — key =====
+    a.cam(20.4, 1.0); word(20.5, 24.1, "daripada menjual", `SAYA <span class="kw">BUAT DULU.</span>`, 128); a.cam(23.3, 1.22);
+    // ===== 24.1–30.1 B-ROLL 2 putih: langkah 1→2→3 =====
+    const b2 = a.panel(24.1, 30.1, `<div style="position:absolute;left:80px;top:320px;font-weight:800;font-size:84px;color:#0B0B0B;line-height:1">apa jadi lepas tu</div>
+      <div id="st" style="position:absolute;left:80px;top:560px;width:820px"></div>`, "#fff");
+    const steps = [["1", "Saya buat dulu", 24.45], ["2", "Mak nampak <b>value</b>", 26.2], ["3", "Mak <b>offer bayar</b>", 28.6]];
+    const stw = b2.querySelector("#st");
+    steps.forEach(([n, txt]) => stw.insertAdjacentHTML("beforeend", `<div class="sp" style="display:flex;align-items:center;gap:26px;margin:0 0 34px"><div style="flex:none;width:96px;height:96px;border-radius:50%;background:#0B0B0B;color:#FFD60A;font-family:Anton;font-size:58px;display:flex;align-items:center;justify-content:center">${n}</div><div style="font-weight:700;font-size:64px;color:#0B0B0B">${txt}</div></div>`));
+    stw.querySelectorAll(".sp").forEach((n, i) => { tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.35, ease: "expo.out", immediateRender: false }, steps[i][2]); });
+    // ===== 30.1–34.6 Sir dekat + notifikasi "Bayaran diterima — Mak" =====
+    a.cam(30.1, 1.25);
+    const nt2 = put(notif("Mak", "terima kasih nak"), "#top"); tl.set(nt2, { opacity: 0 }, 0);
+    tl.fromTo(nt2, { opacity: 0, y: -160 }, { opacity: 1, y: 0, duration: 0.35, ease: "expo.out", immediateRender: false }, 33.95); out(nt2, 34.6);
+    a.cam(33.97, 1.38);
+    // ===== 34.6–40.6 BUKAN MENJUAL → SERVIS DULU =====
+    a.cam(34.6, 1.0); word(34.7, 37.3, "bukan menjual kepada", `<span style="position:relative;display:inline-block">KELUARGA.<i class="sk" style="position:absolute;left:-8px;right:-8px;top:50%;height:16px;background:#FF4D4D;border-radius:8px;transform:scaleX(0);transform-origin:left"></i></span>`, 170);
+    tl.to(document.querySelectorAll(".sk")[0], { scaleX: 1, duration: 0.3 }, 35.4);
+    a.cam(37.3, 1.15); word(37.4, 40.6, "tapi mulakan dengan", `<span class="kw">SERVIS DULU.</span>`, 150);
+    // ===== 40.6–49.0 BULATAN: puas hati → bayar, walau kawan/keluarga =====
+    tl.set("#root", { background: "#0B0B0B" }, 0); tl.set("#root", { background: "#F4F4F2" }, 40.6); tl.set("#root", { background: "#0B0B0B" }, 49.0);
+    tl.set("#vig", { opacity: 1 }, 0); tl.set("#vig", { opacity: 0 }, 40.6); tl.set("#vig", { opacity: 1 }, 49.0);
+    tl.set("#cam", { clipPath: "circle(1250px at 540px 860px)" }, 0); tl.set(ov, { opacity: 0 }, 40.6);
+    tl.to("#cam", { clipPath: "circle(320px at 540px 860px)", duration: 0.42, ease: "power3.inOut" }, 40.6);
+    const FC = [[40.44, 571, 777], [40.56, 573, 787], [40.68, 576, 789], [40.8, 578, 788], [40.92, 580, 783], [41.04, 581, 775], [41.16, 582, 766], [41.28, 583, 757], [41.4, 583, 748], [41.52, 582, 747], [41.64, 581, 748], [41.76, 579, 750], [41.88, 577, 753], [42.0, 574, 758], [42.12, 571, 764], [42.24, 567, 771], [42.36, 565, 777], [42.48, 563, 782], [42.6, 559, 783], [42.72, 558, 784], [42.84, 560, 781], [42.96, 561, 777], [43.08, 560, 773], [43.2, 556, 773], [43.32, 553, 774], [43.44, 558, 781], [43.56, 558, 789], [43.68, 555, 800], [43.8, 555, 811], [43.92, 558, 821], [44.04, 564, 827], [44.16, 567, 831], [44.28, 568, 833], [44.4, 569, 831], [44.52, 570, 824], [44.64, 567, 817], [44.76, 558, 810], [44.88, 549, 804], [45.0, 542, 800], [45.12, 533, 796], [45.24, 525, 794], [45.36, 518, 791], [45.48, 519, 789], [45.6, 525, 785], [45.72, 532, 781], [45.84, 538, 776], [45.96, 544, 771], [46.08, 548, 767], [46.2, 553, 767], [46.32, 555, 769], [46.44, 556, 773], [46.56, 557, 779], [46.68, 557, 787], [46.8, 557, 796], [46.92, 558, 806], [47.04, 557, 814], [47.16, 557, 820], [47.28, 555, 824], [47.4, 554, 825], [47.52, 553, 824], [47.64, 553, 821], [47.76, 550, 817], [47.88, 549, 811], [48.0, 546, 802], [48.12, 549, 794], [48.24, 553, 785], [48.36, 555, 777], [48.48, 559, 769], [48.6, 563, 762], [48.72, 567, 760], [48.84, 573, 761], [48.96, 572, 763], [49.08, 569, 764]]; const at = (r) => cam(1.05, 540, 885, r[1], r[2]);
+    tl.to("#camWrap", { ...at(FC[0]), duration: 0.42, ease: "power3.inOut" }, 40.6);
+    FC.filter((r) => r[0] > 41.05 && r[0] < 48.4).forEach((r, i, arr) => { const p = i ? arr[i - 1][0] : 41.02; tl.to("#camWrap", { ...at(r), duration: Math.max(0.05, r[0] - p), ease: "none" }, p); });
+    const sh = put(`<div style="position:absolute;left:220px;top:540px;width:640px;height:640px;border-radius:50%;box-shadow:0 30px 70px rgba(0,0,0,.28)"></div>`, "#back"); tl.set(sh, { opacity: 0 }, 0); tl.to(sh, { opacity: 1, duration: 0.15 }, 40.92); tl.to(sh, { opacity: 0, duration: 0.1 }, 48.45);
+    const tq = put(`<div style="position:absolute;left:0;right:0;top:440px;text-align:center;font-weight:600;font-size:46px;color:#5b5b5b">bila dia puas hati…</div>`, "#top");
+    const bq = put(`<div style="position:absolute;left:0;right:0;top:1215px;text-align:center;font-family:Anton;font-size:130px;color:#0B0B0B">DIA <span style="color:#1fae55">BAYAR.</span></div>`, "#top");
+    [[tq, 41.0], [bq, 45.7]].forEach(([n, t]) => { tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out", immediateRender: false }, t); tl.to(n, { opacity: 0, duration: 0.12 }, 48.5); });
+    [["KAWAN", 190, 640, 46.9], ["KELUARGA", 760, 650, 48.14]].forEach(([tx, x, y, t]) => {
+      const n = put(`<div style="position:absolute;left:${x - 130}px;top:${y - 36}px;width:260px;text-align:center;background:#fff;border-radius:40px;padding:14px 0;font-weight:800;font-size:36px;color:#0B0B0B;box-shadow:0 14px 30px rgba(0,0,0,.18)">${tx}</div>`, "#top");
+      tl.set(n, { opacity: 0 }, 0); tl.fromTo(n, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)", immediateRender: false }, t); tl.to(n, { opacity: 0, duration: 0.12 }, 48.5); });
+    tl.to("#cam", { clipPath: "circle(1250px at 540px 860px)", duration: 0.38, ease: "power3.in" }, 48.5);
+    tl.to("#camWrap", { x: 0, y: 0, scale: 1, duration: 0.38, ease: "power3.inOut" }, 48.5);
+    // ===== 49.0–52.2 B-ROLL 3 chat: kawan minta murah =====
+    const b3 = a.panel(49.0, 52.2, `<div class="lbl" style="position:absolute;left:80px;top:300px;color:#25D366">kenapa kawan asyik nak</div>
+      <div id="mr" style="position:absolute;left:80px;top:350px;font-family:Anton;font-size:220px;line-height:1;color:#FFD60A">MURAH?</div>
+      <div class="card" style="left:80px;top:640px;width:820px;padding:30px">
+        <div id="c1" style="display:inline-block;background:#F1EEE9;border-radius:26px 26px 26px 8px;padding:18px 26px;font-size:40px;color:#0B0B0B">Bagi murah sikit la, kawan kan…</div>
+        <div id="c2" style="margin-top:14px;display:inline-block;background:#F1EEE9;border-radius:26px 26px 26px 8px;padding:18px 26px;font-size:40px;color:#0B0B0B;font-weight:700">Harga kawan?</div></div>`);
+    slam(b3.querySelector("#mr"), 51.27); a.pop(49.3, 52.2, b3.querySelector("#c1"), { dy: 20 }); a.pop(50.6, 52.2, b3.querySelector("#c2"), { dy: 20 });
+    tl.set("#camWrap", { y: 300 }, 49.0); tl.set(ov, { opacity: 1 }, 49.0);
+    // ===== 52.2–55.7 sebab dia tahu CERITA KITA =====
+    a.cam(52.2, 1.2); word(52.3, 55.7, "sebab dia tahu", `<span class="kw">CERITA KITA.</span>`, 150);
+    // ===== 55.7–61.2 layan baik / servis ikhlas =====
+    a.cam(55.7, 1.0);
+    const lb = put(`<div class="card" style="left:80px;top:270px;width:820px;padding:30px 40px">
+      <div class="lbl" style="color:#0B0B0B;opacity:.6;font-size:28px">mula hari ni</div>${row("Layan semua orang baik")}${row("Servis seikhlas mungkin")}</div>`);
+    a.pop(56.7, 61.2, lb); [57.05, 59.19].forEach((t, i) => a.pop(t, 61.2, lb.querySelectorAll(".rw")[i], { dy: 16 })); a.cam(59.19, 1.2);
+    // ===== 61.2–65.9 mana tahu jadi CUSTOMER → walau PASANGAN =====
+    a.cam(61.2, 1.05); word(61.3, 64.1, "mana tahu dia jadi", `<span class="kw">CUSTOMER.</span>`, 170);
+    a.cam(64.2, 1.35); word(64.25, 65.9, "walaupun", `<span class="kw">PASANGAN.</span>`, 190);
+    // ===== 65.9–68.64 OUTRO =====
+    a.panel(65.9, 68.64, `<img src="assets/logo.png" style="position:absolute;left:130px;top:420px;width:700px">
       <div style="position:absolute;left:60px;width:840px;top:1080px;text-align:center"><div class="lbl" style="color:#25D366">komen di bawah</div>
-      <div style="font-family:Anton;font-size:120px;color:#fff;margin-top:16px;line-height:1">CERITA <span class="kw">AWAK?</span></div></div>`);
+      <div style="font-family:Anton;font-size:120px;color:#fff;margin-top:16px;line-height:1">PERNAH <span class="kw">MALU?</span></div></div>`);
   },
 };
