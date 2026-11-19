@@ -17,6 +17,7 @@
 | C0225 | `Raw/181126` | `1QMV4wzeK-U4xJIGJWqGCJKarCrcy26Sc` | ✅ Final (versi EDITORIAL) | @adabclosing Hari 1 — customer "saya survey dulu" | EDITORIAL brandkit (ganti Split Kad), hook 2, nama Threads dikabur | `projects/C0225/` | 65.8s, 1080x1920 (autorotate), 25fps, tangkapan lebar. 10 SS Threads (folder `Screenshot untuk C0225` id `1fqaD2_cQb0Go2IJW5OTI19Xm7zi0frYQ`) |
 | C0226 | `Raw/181126` | `1_Tspf8hQdoaHPly6v1LXS0mshqyVfokm` | ✅ Final | @adabclosing — video #2: pengenalan akaun / journey dari 0, diedit oleh Claude | EDITORIAL (resipi harian) | `projects/C0226/` | 72s, 1080x1920 (autorotate), 25fps, set sama C0225 |
 | C0227 | `Raw/181126` | `1_s4Eg6amOMCqTOxRW460TBmLSsWa74qO` | ✅ Final | @adabclosing video #3 — akaun no.2, fee TikTok naik → Meta ads / WhatsApp, semua platform boleh untung | EDITORIAL + intro baru (tajuk Poster Anton) | `projects/C0227/` | 68s, 1080x1920 (autorotate), 25fps. "Fifi" dalam transkrip = **fee** (Sir sahkan) |
+| C0235 | `Raw/191126` | `1MO0GEVbddnK-XIgxt593dB9YcLOQW-KZ` | 🔵 Transkrip + plan (tunggu Sir) | @adabclosing — skrip #1 "customer tanya 47 soalan" | EDITORIAL + intro Poster | `projects/C0235/` | **4K tegak** 2160x3840 10-bit 4:2:2, 25fps, ~150 Mbps, 81.6s. Set baru (lampu belakang hangat, jaket hijau) |
 
 ## Belum disentuh (⬜)
 | Kod | Folder Raw | ID Drive | Diupload ke Drive | Catatan |
@@ -25,6 +26,10 @@
 | C0062 | `Raw/131221` | `1pncMlqs4FVYmxHmcbntAwKltZ9Zb3jRr` | 2026-11-17 | BARU |
 | C0063 | `Raw/131221` | `1EGy_jZpfzJhj31hVMxy7ycpHbuIQxmSH` | 2026-11-17 | BARU (fail kecil 50MB — mungkin pendek) |
 | C0064 | `Raw/131221` | `1A4L-cFegM7fFXErFvphl9gJnPlvrThek` | 2026-11-17 | BARU |
+| C0236 | `Raw/191126` | `1EvQObSynElyXWx6znHjIx2iOTyb_DOkj` | 2026-11-19 | BARU (4K tegak) |
+| C0237 | `Raw/191126` | `1SXgqKD0Ar28alDQqoedd4TTl41PAsgrB` | 2026-11-19 | BARU (4K tegak) |
+| C0239 | `Raw/191126` | `1F-vI09UVzmc3cADmrlUd7yyosYuc5Do6` | 2026-11-19 | BARU (4K tegak) |
+| C0240 | `Raw/191126` | `1ixfmyTTX9rlJNJH92oY_kQX30AoC_SEQ` | 2026-11-19 | BARU (4K tegak) |
 | C0040 | `Raw/New folder/251121` | `14j8MLrg7sRCxQNNqgDA4XfKeLRWasJVI` | 2026-11-11 | |
 | C0041 | `Raw/New folder/251121` | `1Rt_YIRY_bepHlpdbzfM43k9MAeafs3no` | 2026-11-11 | |
 | C0042 | `Raw/New folder/251121` | `18qNDiNxuKA07t828Xhucz0kT_lgKZdHB` | 2026-11-11 | |
@@ -51,3 +56,4 @@
 - 2026-11-18: C0225 FINAL versi EDITORIAL (`C0225_final_editorial.mp4`, 19 Mbps) — ganti versi Split Kad. Thumbnail + caption kekal.
 - 2026-11-18: C0226 FINAL (draf v4: hook crash-zoom, variasi zoom, 3 B-roll) + thumbnail + caption.
 - 2026-11-18: C0227 FINAL (draf v3, intro baru + review penuh) + thumbnail + caption.
+- 2026-11-19: Folder `Raw/191126`: C0235, C0236, C0237, C0239, C0240 (4K tegak, skrip 2026-11-18). C0235 dianalisis.
