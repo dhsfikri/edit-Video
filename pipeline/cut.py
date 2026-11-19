@@ -114,13 +114,30 @@ fc = ";".join(parts) + ";" + "".join(labels) + f"concat=n={len(segs)}:v=1:a=1[vc
 extra = cfg.get("audio_extra", "")
 fc += f"[ac]highpass=f=70,{extra + ',' if extra else ''}loudnorm=I=-14:TP=-1.5:LRA=9,alimiter=limit=0.89,aresample=48000[ao]"
 
-run([
+if cfg.get("chunked") or len(segs) > 14:
+    # Mod CHUNKED (elak kehabisan memori): setiap segmen di-encode berasingan (seek pantas), kemudian concat + loudnorm sekali
+    tmpd = out / "_chunks"; tmpd.mkdir(exist_ok=True); lst = []
+    for i, s in enumerate(segs):
+        d = s["end"] - s["start"]
+        vfi = parts[2 * i].split("]", 1)[1].rsplit("[", 1)[0].replace(f"trim={s['start']}:{s['end']},setpts=PTS-STARTPTS,", "")
+        afi = f"afade=t=in:d=0.012,afade=t=out:st={max(d-0.015,0):.3f}:d=0.015"
+        cf = tmpd / f"c{i:03d}.mov"
+        run(["ffmpeg", "-v", "error", "-y", "-ss", f"{s['start']:.3f}", "-i", cfg["source"], "-t", f"{d:.3f}",
+             "-vf", vfi, "-af", afi, "-c:v", "libx264", "-preset", "medium", "-crf", "12", "-pix_fmt", "yuv420p",
+             "-c:a", "pcm_s16le", "-ar", "48000", str(cf)])
+        lst.append(f"file '{cf}'")
+    (tmpd / "list.txt").write_text("\n".join(lst))
+    af2 = f"highpass=f=70,{extra + ',' if extra else ''}loudnorm=I=-14:TP=-1.5:LRA=9,alimiter=limit=0.89,aresample=48000"
+    run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(tmpd / "list.txt"), "-af", af2,
+         "-c:v", "copy", "-c:a", "pcm_s16le", str(out / "base.mov")])
+else:
+  run([
     "ffmpeg", "-v", "error", "-stats", "-y", "-i", cfg["source"],
     "-filter_complex", fc, "-map", "[vc]", "-map", "[ao]",
     "-c:v", "libx264", "-preset", "medium", "-crf", "12", "-pix_fmt", "yuv420p",
     "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
     "-c:a", "pcm_s16le", str(out / "base.mov"),
-])
+  ])
 
 # Petakan masa perkataan ke timeline baru
 tr = json.load(open(cfg["transcript"]))
