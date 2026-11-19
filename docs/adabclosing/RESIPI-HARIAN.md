@@ -24,6 +24,7 @@
 - **2–3 B-roll skrin penuh motion graphic** (`a.panel`): contoh skrin "Claude sedang edit" (bar arahan + timeline dipotong + render %), telefon profil TikTok, telefon Threads + TikTok guna aset sebenar (SS kad, thumbnail). Caption kekal atas B-roll.
 
 - **Tajuk hook = gaya POSTER Anton** (lihat CLAUDE.md 2026-11-18; contoh `projects/C0226/scene_intro.js`). Intro ujian ikut rujukan `docs/rujukan/intro-andy/` (light leak → tajuk poster → picit ke bulatan dengan jejak muka → ikon orbit). TIADA color grading.
+- **Jejak muka**: `python3 -I pipeline/facetrack.py base_ext.mov facetrack.json` (Haar, buang x>760, pilih calon terdekat, licin 7 sampel). Langkah penuh end-to-end: skill `tiktok-edit` v2.0.
 
 - **Jejak muka (wajib untuk close-up / bulatan):** Haar `minSize=(220,220)`, buang calon x>760 (maskot JERUNG di latar dikesan sebagai muka), pilih calon paling hampir kedudukan sebelumnya, licin 7 sampel. Contoh: C0227.
 
