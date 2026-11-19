@@ -1,6 +1,7 @@
 # Peraturan Projek (untuk Claude / editor)
 
 ## Skill (ikut langkah dalam skill)
+- **`mula`** (`.claude/skills/mula/SKILL.md`) — **mula session baru**: Sir taip `/mula` atau `/mula C0237`. Satu video = satu session (jimat token).
 - **`tiktok-edit`** (`.claude/skills/tiktok-edit/SKILL.md`) — edit video dari rakaman Raw sampai final.
 - **`tiktok-thumbnail`** (`.claude/skills/tiktok-thumbnail/SKILL.md`) — thumbnail cover + caption.
 - Skill boleh dikemas kini: naikkan nombor versi + changelog. Perubahan besar (gaya/urutan/peraturan) → brief Sir dulu; pembetulan teknikal kecil → terus kemas kini & maklumkan.
