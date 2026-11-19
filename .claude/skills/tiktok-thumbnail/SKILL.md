@@ -5,8 +5,9 @@ description: Buat thumbnail TikTok gaya COVER (standard brand kit Sir Dharma) da
 
 # Skill: Thumbnail Cover + Caption — Sir Dharma
 
-**Versi:** 1.0 (2026-11-04)
+**Versi:** 1.1 (2026-11-19)
 **Changelog:**
+- 1.1 — Nama fail hantaran ikut ID projek: `<ID>_thumbnail.png`, `<ID>_caption.md` (permintaan Sir).
 - 1.0 — Gaya cover diluluskan Sir (band hijau gelap, headline Anton penuh lebar, 1 keyword kuning, muka besar, 1 callout).
 
 > Rujukan: `BRANDKIT.md` §6. Brief konsep ringkas kepada Sir dulu (teks headline, frame, callout) — tunggu approval.
@@ -47,11 +48,11 @@ Semak: teks dalam y 290–1450 & x ≤ 1010 · mata tak tertutup tajuk · keywor
 Perangkap: font mesti dimuat sebelum ukur (`document.fonts.load` — dah dalam template). Jangan `import` ESM dengan NODE_PATH — guna `render.cjs`.
 
 ### 4. Hantar
-Simpan `projects/<ID>/thumbnail.png`, hantar kepada Sir (`SendUserFile`, render) + pratonton grid.
+Simpan `projects/<ID>/<ID>_thumbnail.png`, hantar kepada Sir (`SendUserFile`, render) + pratonton grid.
 Cara guna: TikTok → **Edit cover → Upload from gallery**.
 
 ## B. Caption panjang
-Simpan `projects/<ID>/caption.md`. Struktur:
+Simpan `projects/<ID>/<ID>_caption.md`. Struktur:
 1. **Baris 1 = hook** (sama dengan video) + emoji — inilah yang nampak sebelum "more".
 2. Situasi yang Sir & penonton kenal (2–3 baris pendek).
 3. Punca / poin utama — senarai ❌ atau ✅.
@@ -62,4 +63,4 @@ Simpan `projects/<ID>/caption.md`. Struktur:
 Bahasa Melayu santai Malaysia. Tiada janji hasil tanpa bukti.
 
 ## C. Selesai
-Commit `projects/<ID>/thumb.json`, `thumbnail.png`, `caption.md` → push.
+Commit `projects/<ID>/thumb.json`, `<ID>_thumbnail.png`, `<ID>_caption.md` → push.

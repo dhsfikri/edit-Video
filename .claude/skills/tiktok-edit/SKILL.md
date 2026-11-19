@@ -122,6 +122,6 @@ Lihat frame: tajuk muncul? kotak terkeluar? subtitle bertindih? B-roll peralihan
 - Seterusnya: skill `tiktok-thumbnail` (thumbnail cover + caption).
 
 ## 12. Fail & simpanan
-- Repo: `projects/<ID>/` (edit.json, data.js, compose.json, thumb.json, caption.md, thumbnail), `briefs/`.
+- Repo: `projects/<ID>/` (edit.json, data.js, compose.json, thumb.json, <ID>_caption.md, <ID>_thumbnail.png, <ID>_final.mp4), `briefs/`.
 - Scratchpad: rakaman, base.mov, render, draf (besar — tidak dalam git).
 - Aset untuk Drive → zip & hantar kepada Sir (connector tak boleh upload video). Folder Aset ID dalam `CLAUDE.md`.

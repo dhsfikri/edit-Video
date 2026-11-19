@@ -39,7 +39,7 @@
 8. **Render & gabung**: `npx hyperframes render . -o r.mp4 -f <fps> -q delivery -w 2` → mux suara → `compose.json` (SFX ringan: whoosh 0.16, pop 0.2, taip 0.2, pen 0.26, ding 0.2–0.25) dengan **`"crf": 13`** (sasaran ~12–15 Mbps; 19 Mbps tak perlu) → `python3 pipeline/compose.py`.
 9. **REVIEW PENUH sebelum hantar** (Sir, 2026-11-18): helaian 2fps seluruh video (`fps=2,tile=13x3`) + frame demi frame setiap transition (masuk/keluar). Semak: 2s pertama ada perkataan besar · tiada kad kosong · caption tak tindih B-roll/outro · B-roll tak kaku >2.5s · tiada glitch latar.
 9b. **QC**: `python3 pipeline/safezone_qc.py final.mp4 --times …` (semua babak + outro). Hantar **draf** → Sir lulus → final.
-10. **Thumbnail + caption**: skill `tiktok-thumbnail` (`thumb.json`, `"freeY": true`, `series: ""`); caption `projects/<ID>/caption.md` (hook baris 1, cerita, ✅/❌, soalan, CTA komen sama dengan video, Follow @adabclosing, 8–10 hashtag).
+10. **Thumbnail + caption**: skill `tiktok-thumbnail` (`thumb.json`, `"freeY": true`, `series: ""`); caption `projects/<ID>/<ID>_caption.md`, thumbnail `<ID>_thumbnail.png` (semua fail hantaran bernama ikut ID projek) (hook baris 1, cerita, ✅/❌, soalan, CTA komen sama dengan video, Follow @adabclosing, 8–10 hashtag).
 11. **Post**: Sir upload manual (TikTok Studio, hidupkan Upload HD) ATAU Zernio (`media_generate_upload_link` → `posts_create_post` dengan `tiktok_settings.draft: true` → inbox TikTok). JANGAN post tanpa arahan Sir.
 12. **Rekod**: `docs/akaun-adabclosing/JOURNEY.md` (log video + link). Selepas 24 jam tarik statistik Zernio (`analytics_get_analytics` akaun `6afc469e238b5ba47be82d95`).
 13. **Ayat share WhatsApp** (personal / group / status): templat `docs/adabclosing/SHARE-WHATSAPP.md`.
