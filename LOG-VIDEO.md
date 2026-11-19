@@ -17,7 +17,7 @@
 | C0225 | `Raw/181126` | `1QMV4wzeK-U4xJIGJWqGCJKarCrcy26Sc` | ✅ Final (versi EDITORIAL) | @adabclosing Hari 1 — customer "saya survey dulu" | EDITORIAL brandkit (ganti Split Kad), hook 2, nama Threads dikabur | `projects/C0225/` | 65.8s, 1080x1920 (autorotate), 25fps, tangkapan lebar. 10 SS Threads (folder `Screenshot untuk C0225` id `1fqaD2_cQb0Go2IJW5OTI19Xm7zi0frYQ`) |
 | C0226 | `Raw/181126` | `1_Tspf8hQdoaHPly6v1LXS0mshqyVfokm` | ✅ Final | @adabclosing — video #2: pengenalan akaun / journey dari 0, diedit oleh Claude | EDITORIAL (resipi harian) | `projects/C0226/` | 72s, 1080x1920 (autorotate), 25fps, set sama C0225 |
 | C0227 | `Raw/181126` | `1_s4Eg6amOMCqTOxRW460TBmLSsWa74qO` | ✅ Final | @adabclosing video #3 — akaun no.2, fee TikTok naik → Meta ads / WhatsApp, semua platform boleh untung | EDITORIAL + intro baru (tajuk Poster Anton) | `projects/C0227/` | 68s, 1080x1920 (autorotate), 25fps. "Fifi" dalam transkrip = **fee** (Sir sahkan) |
-| C0235 | `Raw/191126` | `1MO0GEVbddnK-XIgxt593dB9YcLOQW-KZ` | 🔵 Transkrip + plan (tunggu Sir) | @adabclosing — skrip #1 "customer tanya 47 soalan" | EDITORIAL + intro Poster | `projects/C0235/` | **4K tegak** 2160x3840 10-bit 4:2:2, 25fps, ~150 Mbps, 81.6s. Set baru (lampu belakang hangat, jaket hijau) |
+| C0235 | `Raw/191126` | `1MO0GEVbddnK-XIgxt593dB9YcLOQW-KZ` | 🟠 Draf v1 (tunggu Sir) | @adabclosing — skrip #1 "customer tanya 47 soalan" | EDITORIAL + intro Poster | `projects/C0235/` | **4K tegak** 2160x3840 10-bit 4:2:2, 25fps, ~150 Mbps, 81.6s. Set baru (lampu belakang hangat, jaket hijau) |
 
 ## Belum disentuh (⬜)
 | Kod | Folder Raw | ID Drive | Diupload ke Drive | Catatan |
