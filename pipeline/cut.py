@@ -60,6 +60,8 @@ def snap(t, a, sr, win=0.12, direction=0):
 
 
 cfg = json.load(open(sys.argv[1]))
+# "size": [1440, 2560] → output resolusi lebih tinggi (rakaman 4K) supaya punch-in/zoom dalam HyperFrames kekal tajam
+W, H = cfg.get("size", [W, H])
 out = Path(cfg["workdir"])
 out.mkdir(parents=True, exist_ok=True)
 fps = cfg.get("fps", 30)
@@ -68,7 +70,7 @@ fps = cfg.get("fps", 30)
 if cfg.get("pretranscode"):
     src_mid = out / "_src.mov"
     if not src_mid.exists():
-        vf = ",".join(f for f in [cfg.get("precrop", ""), {"cw": "transpose=1", "ccw": "transpose=2"}.get(cfg.get("rotate", "none"), ""), "scale=1080:-2:flags=lanczos"] if f)
+        vf = ",".join(f for f in [cfg.get("precrop", ""), {"cw": "transpose=1", "ccw": "transpose=2"}.get(cfg.get("rotate", "none"), ""), f"scale={W}:-2:flags=lanczos"] if f)
         run(["ffmpeg", "-v", "error", "-y", "-i", cfg["source"], "-vf", vf, "-c:v", "libx264", "-preset", "fast", "-crf", "12",
              "-pix_fmt", "yuv420p", "-threads", "4", "-c:a", "pcm_s16le", str(src_mid)])
     cfg["source"], cfg["precrop"], cfg["rotate"] = str(src_mid), "", "none"

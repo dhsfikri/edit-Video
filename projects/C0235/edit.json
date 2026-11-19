@@ -1,0 +1,131 @@
+{
+ "source": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/raw-C0235/C0235.MP4",
+ "transcript": "projects/C0235/transcript.json",
+ "workdir": "/tmp/claude-0/-home-user-edit-Video/84094419-4a75-5528-9d0d-5e3f0666073a/scratchpad/C0235w",
+ "rotate": "none",
+ "fps": 25,
+ "color": "null",
+ "pretranscode": true,
+ "size": [
+  1440,
+  2560
+ ],
+ "corrections": {
+  "teratuh": "teratur",
+  "sedih": "cari"
+ },
+ "segments": [
+  {
+   "note": "hook 47 soalan sebelum purchase",
+   "start": 0.8,
+   "end": 5.95,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "servis premium",
+   "start": 11.05,
+   "end": 13.9,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "dia orang tanya banyak sangat soalan",
+   "start": 15.85,
+   "end": 17.5,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "klien ni tanya 47 soalan ... sediakan",
+   "start": 19.4,
+   "end": 24.6,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "dan outcome ... servis",
+   "start": 25.25,
+   "end": 30.15,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "kenapa tanya banyak soalan",
+   "start": 30.62,
+   "end": 32.85,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "bukan annoying",
+   "start": 33.25,
+   "end": 39.45,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "proses dapatkan clarity",
+   "start": 39.55,
+   "end": 43.48,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "lagi banyak soalan lagi berminat",
+   "start": 43.9,
+   "end": 46.98,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "tugas jawab betul teratur sabar",
+   "start": 47.65,
+   "end": 54.55,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "jangan annoying",
+   "start": 54.7,
+   "end": 56.35,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "biasanya orang banyak soalan dah lalui fasa",
+   "start": 56.85,
+   "end": 62.95,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "terlalu percaya akhirnya kecewa",
+   "start": 63.2,
+   "end": 68.68,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "pernah jumpa prospek",
+   "start": 70.12,
+   "end": 72.95,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "share cerita",
+   "start": 73.45,
+   "end": 75.2,
+   "zoom": 1.0,
+   "cy": 0.0
+  },
+  {
+   "note": "salam",
+   "start": 75.95,
+   "end": 76.62,
+   "zoom": 1.0,
+   "cy": 0.0
+  }
+ ]
+}
