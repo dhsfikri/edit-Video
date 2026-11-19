@@ -27,6 +27,7 @@ Cara tarik: `accounts_get_follower_stats` (follower), `analytics_get_analytics` 
 | 1 | 18/11 ✅ dipost — https://www.tiktok.com/@adabclosing/video/7709337429882260754 (manual, TikTok Studio; draf Zernio `6afd107c16297f747dad980f` diabaikan) | C0225 | "Saya ada satu thread yang blow up…" — customer "saya survey dulu ye" | Editorial (brandkit) | | | | | | | | Data Threads (10 SS) jadi bukti dalam video. CTA: Komen pujuk atau biar? |
 | 2 | (Sir post) | C0226 | "Video ni akan di-edit oleh Claude" — pengenalan akaun, misi 0→1,000 | Editorial + hook crash-zoom + 3 B-roll | | | | | | | | CTA: 1,000 dalam 30 hari — boleh atau tak? |
 | 3 | (Sir post) | C0227 | "Fee TikTok naik… balik ke Meta Ads / WhatsApp?" | Editorial + intro baru (tajuk Poster, bulatan) | | | | | | | | CTA: komen nak tahu apa dulu |
+| 4 | (Sir post) | C0235 | "Customer tanya 47 soalan sebelum beli" | Editorial 4K + Poster + kaunter | | | | | | | | CTA: cerita awak? |
 
 ## Peristiwa penting (milestone)
 - 2026-11-17 — Akaun dibuat. Logo sticker hijau brand. Bio tag akaun utama.
