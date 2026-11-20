@@ -45,11 +45,13 @@
     const $ = (s) => document.querySelector(s);
     await Promise.all(['300px "Anton"', '700 96px "Caveat"', '800 40px "Montserrat"'].map((f) => document.fonts.load(f)));
     $("#badge b").innerHTML = `${c.series} <span>#${c.episode}</span>`;
+    if (!c.series) { $("#badge").style.display = "none"; $("#head").style.top = "310px"; } // tiada siri = tiada badge
     $("#kicker").textContent = c.kicker || ""; if (!c.kicker) $("#kicker").style.display = "none";
     const rich = (s) => s.replace(/\[([^\]]+)\]/g, '<span class="kw">$1</span>');
     $("#l1").innerHTML = rich(c.line1); $("#l2").innerHTML = rich(c.line2 || ""); if (!c.line2) $("#l2").style.display = "none";
     if (c.callout) { $("#co").className = "sh " + (c.callout.kind || "no"); $("#co i").textContent = c.callout.kind === "ok" ? "✓" : "✕"; $("#co span").textContent = c.callout.text; }
     else $("#co").style.display = "none";
+    if (c.callout && c.coTop) $("#co").style.top = c.coTop + "px";  // coTop pilihan
     // Gaya COVER: setiap baris dibesarkan sendiri sampai penuh lebar 960px (maks 300px tinggi huruf)
     [$("#l1"), $("#l2")].forEach((l) => {
       if (!l.textContent) return;
@@ -60,7 +62,7 @@
     const img = $("#photo"); img.onload = () => {
       const s = c.scale || 1, fy = c.faceY || 1160;
       img.style.width = img.naturalWidth + "px";
-      let x = 540 - c.fx * s, y = fy - c.fy * s;
+      let x = (c.faceX || 540) - c.fx * s, y = fy - c.fy * s;  // faceX pilihan (default tengah)
       x = Math.min(0, Math.max(1080 - img.naturalWidth * s, x)); y = Math.min(0, Math.max(1920 - img.naturalHeight * s, y));
       img.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
       document.fonts.ready.then(() => setTimeout(ok, 100));
