@@ -66,3 +66,7 @@
 - Teknikal: `cut.py` render segmen satu-satu (elak RAM habis pada rakaman 4K/panjang); tempoh segmen dibundar ke frame. Fail perantara 1440x2560 dari 4K.
 - Subtitle dibetulkan: "dashboard"→desperate, "saja"→ada, "juga atau"→awak untuk, tambah "yang" sebelum pertama/kedua.
 - Tulisan tangan & tajuk bold diberi bayang lebih kuat (dinding belakang cerah).
+- **Draf v2 (54.8s) — permintaan Sir:** tajuk hook **besar separuh skrin atas** (0–6.08s) + **zoom dekat muka** 6s pertama + **jaga eye line**.
+  - Tajuk: *kalau terpaksa* / MULA DARI / **[KOSONG]** / *ini yang saya buat…* + bayang gelap atas (template overlay-v2: `titles[].big`).
+  - Zoom 1.55→1.7 (push perlahan) dari rakaman 4K asal; crop ikut muka setiap frame (`pipeline/eyeline_zoom.py`) — **mata dikunci y≈1060** (separuh bawah, bawah tajuk). Segmen "yang pertama adalah" zoom 1.5 (Sir condong ke depan) supaya saiz muka konsisten.
+  - Subtitle disembunyi 0–6s (tajuk = ayat yang dicakap). Lepas 6s potong balik ke shot biasa ("buang ego").

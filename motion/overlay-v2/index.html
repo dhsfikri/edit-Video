@@ -39,6 +39,13 @@
       .tk.bold { font-weight: 800; font-size: 66px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,.85), 0 0 18px rgba(0,0,0,.6); }
       .tk.box { font-weight: 800; font-size: 80px; color: var(--deep); background: #fff; padding: 0 18px; border-radius: 10px; overflow: hidden; white-space: nowrap; }
 
+      /* Tajuk BESAR (hook separuh skrin atas): titles[].big = true */
+      .shade { position: absolute; left: 0; top: 0; width: 1080px; height: 1000px; background: linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,0) 100%); }
+      .title.big { top: 250px; }
+      .title.big .tl { margin-bottom: 10px; }
+      .title.big .tk.script { font-size: 88px; }
+      .title.big .tk.bold { font-size: 124px; }
+      .title.big .tk.box { font-size: 158px; padding: 0 24px; border-radius: 16px; }
       .br { position: absolute; width: 58px; height: 58px; border-color: #fff; border-style: solid; border-width: 0; }
       .br.tl0 { border-top-width: 7px; border-left-width: 7px; } .br.tr0 { border-top-width: 7px; border-right-width: 7px; }
       .br.bl0 { border-bottom-width: 7px; border-left-width: 7px; } .br.br0 { border-bottom-width: 7px; border-right-width: 7px; }
@@ -80,7 +87,13 @@
 
       // Tajuk kinetik
       (E.titles || []).forEach((g) => {
-        const box = put(`<div class="title shadow"></div>`);
+        if (g.big) {
+          const sh = put(`<div class="shade"></div>`);
+          tl.set(sh, { opacity: 0 }, 0);
+          tl.fromTo(sh, { opacity: 0 }, { opacity: 1, duration: 0.2 }, Math.max(g.start, 0));
+          if (g.end < D) tl.to(sh, { opacity: 0, duration: 0.2 }, g.end - 0.2);
+        }
+        const box = put(`<div class="title shadow${g.big ? " big" : ""}"></div>`);
         if (g.start > 0) { tl.set(box, { opacity: 0 }, 0); tl.set(box, { opacity: 1 }, g.start); }
         g.lines.forEach((line) => {
           const ln = el(`<span class="tl"></span>`); box.appendChild(ln);
@@ -90,7 +103,7 @@
               const w = s.getBoundingClientRect().width, n = tok.text.length;
               tl.set(s, { opacity: 0 }, 0);
               tl.fromTo(s, { opacity: 1, width: 0, paddingLeft: 0, paddingRight: 0 },
-                { width: w, paddingLeft: 18, paddingRight: 18, duration: Math.min(0.06 * n, 0.4), ease: `steps(${n})` }, tok.t);
+                { width: w, paddingLeft: g.big ? 24 : 18, paddingRight: g.big ? 24 : 18, duration: Math.min(0.06 * n, 0.4), ease: `steps(${n})` }, tok.t);
             } else {
               tl.fromTo(s, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, tok.t);
             }

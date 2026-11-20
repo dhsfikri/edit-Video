@@ -1,5 +1,5 @@
 {
-  "source": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237/mezz.mov",
+  "source": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/raw-C0237/C0237.MP4",
   "transcript": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237/transcript.json",
   "workdir": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237",
   "rotate": "none",
@@ -12,15 +12,16 @@
       "note": "H hook: kalau terpaksa mula balik hari ini, mula daripada kosong, ini yang saya akan buat",
       "start": 5.66,
       "end": 10.62,
-      "zoom": 1.15,
-      "cy": 0.3
+      "zoom": 1.55,
+      "cy": 0.07,
+      "zoom_to": 1.7
     },
     {
       "note": "1a yang pertama adalah",
       "start": 11.5,
       "end": 12.47,
-      "zoom": 1.15,
-      "cy": 0.3
+      "zoom": 1.7,
+      "cy": 0.07
     },
     {
       "note": "1b buang ego jauh-jauh, sebab ... ego",

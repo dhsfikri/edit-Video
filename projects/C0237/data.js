@@ -1,4 +1,4 @@
-// Data overlay Gaya v2 untuk C0237 (tiada badge siri; iklan 4s @14.84; tahan akhir 1s)
+// Data overlay Gaya v2 untuk C0237 (hook besar 0–6s; tiada badge siri; iklan 4s @14.84; tahan akhir 1s)
 window.EDIT = {
  "duration": 54.76,
  "series": "",
@@ -8,7 +8,8 @@ window.EDIT = {
  "titles": [
   {
    "start": 0.0,
-   "end": 5.0,
+   "end": 6.08,
+   "big": true,
    "lines": [
     [
      {
@@ -29,6 +30,13 @@ window.EDIT = {
       "t": 0.33,
       "text": "KOSONG",
       "k": "box"
+     }
+    ],
+    [
+     {
+      "t": 0.6,
+      "text": "ini yang saya buat…",
+      "k": "script"
      }
     ]
    ]
@@ -128,91 +136,6 @@ window.EDIT = {
   "text": "🔔 follow @sirdharma_"
  },
  "words": [
-  {
-   "w": "kalau",
-   "s": 0.0,
-   "e": 0.34
-  },
-  {
-   "w": "terpaksa",
-   "s": 0.34,
-   "e": 0.84
-  },
-  {
-   "w": "mula",
-   "s": 0.84,
-   "e": 1.14
-  },
-  {
-   "w": "balik",
-   "s": 1.14,
-   "e": 1.48
-  },
-  {
-   "w": "hari",
-   "s": 1.48,
-   "e": 1.94
-  },
-  {
-   "w": "ini,",
-   "s": 1.94,
-   "e": 2.5
-  },
-  {
-   "w": "mula",
-   "s": 2.52,
-   "e": 2.84
-  },
-  {
-   "w": "daripada",
-   "s": 2.84,
-   "e": 3.14
-  },
-  {
-   "w": "kosong,",
-   "s": 3.14,
-   "e": 3.98
-  },
-  {
-   "w": "ini",
-   "s": 4.04,
-   "e": 4.36
-  },
-  {
-   "w": "yang",
-   "s": 4.36,
-   "e": 4.54
-  },
-  {
-   "w": "saya",
-   "s": 4.54,
-   "e": 4.66
-  },
-  {
-   "w": "akan",
-   "s": 4.66,
-   "e": 4.84
-  },
-  {
-   "w": "buat",
-   "s": 4.84,
-   "e": 5.0
-  },
-  {
-   "w": "yang",
-   "s": 5.0,
-   "e": 5.16
-  },
-  {
-   "w": "pertama",
-   "s": 5.16,
-   "e": 5.54
-  },
-  {
-   "w": "adalah",
-   "s": 5.54,
-   "e": 6.16
-  },
   {
    "w": "buang",
    "s": 6.16,
