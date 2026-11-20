@@ -68,14 +68,19 @@ for s in cfg["segments"]:
     # mula: cari ke hadapan sahaja (elak tertarik perkataan sebelumnya, cth "So")
     st = snap(s["start"], audio, sr, win=0.05, direction=1)
     en = snap(s["end"], audio, sr)
+    en = round(st + round((en - st) * fps) / fps, 3)  # bundar ke gandaan frame (audio = video)
     segs.append({**s, "start": st, "end": en})
 
 rot = {"cw": "transpose=1,", "ccw": "transpose=2,", "none": ""}[cfg.get("rotate", "none")]
 color = cfg.get("color", "null")
 
-parts, labels = [], []
+# Render setiap segmen berasingan (seek terus ke segmen) — elak RAM melimpah
+# bila rakaman panjang / resolusi tinggi (trim dalam satu filter graph buffer semua frame).
+segdir = out / "_segs"
+segdir.mkdir(exist_ok=True)
+lst = []
 for i, s in enumerate(segs):
-    d = s["end"] - s["start"]
+    d = round(s["end"] - s["start"], 3)
     z0, z1 = s.get("zoom", 1.0), s.get("zoom_to", s.get("zoom", 1.0))
     cy = s.get("cy", 0.42)  # pusat zoom menegak (muka)
     # zoom linear z0 -> z1 sepanjang segmen: scale ikut frame, kemudian crop 1080x1920 berpusat pada muka
@@ -84,27 +89,25 @@ for i, s in enumerate(segs):
         f"scale=w='trunc({W}*{z}/2)*2':h='trunc({H}*{z}/2)*2':eval=frame:flags=lanczos,"
         f"crop={W}:{H}:x='(iw-{W})/2':y='(ih-{H})*{cy}'"
     )
-    vf = (
-        f"[0:v]trim={s['start']}:{s['end']},setpts=PTS-STARTPTS,{rot}fps={fps},"
-        f"{zoom},setsar=1,{color}[v{i}]"
-    )
-    af = (
-        f"[0:a]atrim={s['start']}:{s['end']},asetpts=PTS-STARTPTS,"
-        f"afade=t=in:d=0.012,afade=t=out:st={max(d-0.015,0):.3f}:d=0.015[a{i}]"
-    )
-    parts += [vf, af]
-    labels.append(f"[v{i}][a{i}]")
+    vf = f"setpts=PTS-STARTPTS,{rot}fps={fps},{zoom},setsar=1,{color}"
+    af = f"asetpts=PTS-STARTPTS,afade=t=in:d=0.012,afade=t=out:st={max(d-0.015,0):.3f}:d=0.015"
+    f = segdir / f"s{i:02d}.mov"
+    run([
+        "ffmpeg", "-v", "error", "-y", "-ss", str(s["start"]), "-i", cfg["source"], "-t", str(d),
+        "-vf", vf, "-af", af, "-frames:v", str(max(1, round(d * fps))),
+        "-c:v", "libx264", "-preset", "medium", "-crf", "12", "-pix_fmt", "yuv420p",
+        "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
+        "-c:a", "pcm_s16le", "-ar", "48000", "-ac", "2", str(f),
+    ])
+    lst.append(f"file '{f}'")
+    print(f"  segmen {i+1}/{len(segs)} siap", flush=True)
+(segdir / "list.txt").write_text("\n".join(lst) + "\n")
 
-fc = ";".join(parts) + ";" + "".join(labels) + f"concat=n={len(segs)}:v=1:a=1[vc][ac];"
 extra = cfg.get("audio_extra", "")
-fc += f"[ac]highpass=f=70,{extra + ',' if extra else ''}loudnorm=I=-14:TP=-1.5:LRA=9,alimiter=limit=0.89,aresample=48000[ao]"
-
+af = f"highpass=f=70,{extra + ',' if extra else ''}loudnorm=I=-14:TP=-1.5:LRA=9,alimiter=limit=0.89,aresample=48000"
 run([
-    "ffmpeg", "-v", "error", "-stats", "-y", "-i", cfg["source"],
-    "-filter_complex", fc, "-map", "[vc]", "-map", "[ao]",
-    "-c:v", "libx264", "-preset", "medium", "-crf", "12", "-pix_fmt", "yuv420p",
-    "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
-    "-c:a", "pcm_s16le", str(out / "base.mov"),
+    "ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(segdir / "list.txt"),
+    "-c:v", "copy", "-af", af, "-c:a", "pcm_s16le", str(out / "base.mov"),
 ])
 
 # Petakan masa perkataan ke timeline baru

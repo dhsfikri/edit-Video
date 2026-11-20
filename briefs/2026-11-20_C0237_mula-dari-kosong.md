@@ -1,7 +1,7 @@
 # Brief Edit — C0237 "Kalau terpaksa mula dari kosong, ini yang saya buat"
 
 **Fail asal:** `Folder Video/Raw/191126/C0237.MP4` · **Versi brief:** v1
-**Status:** ☑ Menunggu approval  ☐ Approved  ☐ Perlu ubah
+**Status:** ☐ Menunggu approval  ☑ Approved (2026-11-20)  ☐ Perlu ubah
 
 ## 0. Spec fail asal (dah semak)
 | Item | Nilai | Tindakan |
@@ -54,5 +54,15 @@
 4. Ayat 89s "as simple as, ok aku hari ni kalau boleh nak sales setiap hari" — nak kekal penuh, atau saya padatkan jadi "yang penting ada sales setiap hari" sahaja? (Cadangan: padatkan.)
 
 ---
+## Keputusan Sir (2026-11-20)
+- Pilihan **A** (5 langkah, ±45s)
+- **Tiada badge siri** (tak perlu nama siri)
+- **Iklan 4s** disisip (selepas langkah 2)
+- Ayat "as simple as, ok aku hari ni kalau boleh nak sales setiap hari" **kekal penuh**
+
 ## Revisi
-- (kosong)
+- **Draf v1 (54.8s):** hook (0–5s) → 1 buang ego → 2 buat je → **iklan 4s @14.84s** → CARI, JANGAN TUNGGU (B-roll chat "tunggu" 27.95–32.46s) → 4 cari desperate → 5 cari apa kita nak → B-roll "1 sale sehari" (41.2–46.4s) → MULA HARI NI + CTA follow → tahan frame akhir 1s.
+- Tiada badge siri (template overlay-v2: `series` kosong = tiada badge). Tiada bracket (muka besar → bracket terkeluar safe zone).
+- Teknikal: `cut.py` render segmen satu-satu (elak RAM habis pada rakaman 4K/panjang); tempoh segmen dibundar ke frame. Fail perantara 1440x2560 dari 4K.
+- Subtitle dibetulkan: "dashboard"→desperate, "saja"→ada, "juga atau"→awak untuk, tambah "yang" sebelum pertama/kedua.
+- Tulisan tangan & tajuk bold diberi bayang lebih kuat (dinding belakang cerah).

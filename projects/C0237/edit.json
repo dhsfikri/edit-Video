@@ -1,0 +1,103 @@
+{
+  "source": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237/mezz.mov",
+  "transcript": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237/transcript.json",
+  "workdir": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237",
+  "rotate": "none",
+  "fps": 25,
+  "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+  "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "corrections": {},
+  "segments": [
+    {
+      "note": "H hook: kalau terpaksa mula balik hari ini, mula daripada kosong, ini yang saya akan buat",
+      "start": 5.66,
+      "end": 10.62,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "1a yang pertama adalah",
+      "start": 11.5,
+      "end": 12.47,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "1b buang ego jauh-jauh, sebab ... ego",
+      "start": 14.0,
+      "end": 18.9,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "2a yang kedua adalah",
+      "start": 19.94,
+      "end": 20.7,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "2b buat je",
+      "start": 21.1,
+      "end": 21.77,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "2c sebab selagi kita tak buat, kita tak tahu",
+      "start": 22.45,
+      "end": 24.62,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "3a kita yang kena cari ... tunggu dan tunggu",
+      "start": 51.0,
+      "end": 62.5,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "3b biasanya tunggu je lah sampai bila-bila",
+      "start": 65.24,
+      "end": 67.4,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "4 cari desperate ... paling kuat",
+      "start": 78.42,
+      "end": 82.7,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "5 cuba cari balik apa yang kita nak ... spark jalan awak untuk bermula",
+      "start": 83.88,
+      "end": 96.5,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C1 kalau content ni bermanfaat",
+      "start": 98.33,
+      "end": 100.73,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C2 tag kawan",
+      "start": 101.1,
+      "end": 101.7,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C3 jangan lupa follow",
+      "start": 103.07,
+      "end": 103.9,
+      "zoom": 1.15,
+      "cy": 0.3
+    }
+  ]
+}

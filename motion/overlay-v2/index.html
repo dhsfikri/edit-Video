@@ -35,8 +35,8 @@
       .title { position: absolute; left: 60px; top: 300px; }
       .tl { display: block; white-space: nowrap; line-height: 1.05; margin-bottom: 6px; }
       .tk { display: inline-block; margin-right: 14px; vertical-align: bottom; }
-      .tk.script { font-family: "Caveat", cursive; font-weight: 700; font-size: 54px; color: #fff; }
-      .tk.bold { font-weight: 800; font-size: 66px; color: #fff; }
+      .tk.script { font-family: "Caveat", cursive; font-weight: 700; font-size: 58px; color: #fff; -webkit-text-stroke: 1.5px rgba(0,0,0,.55); text-shadow: 0 2px 4px rgba(0,0,0,.9), 0 0 16px rgba(0,0,0,.75); }
+      .tk.bold { font-weight: 800; font-size: 66px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,.85), 0 0 18px rgba(0,0,0,.6); }
       .tk.box { font-weight: 800; font-size: 80px; color: var(--deep); background: #fff; padding: 0 18px; border-radius: 10px; overflow: hidden; white-space: nowrap; }
 
       .br { position: absolute; width: 58px; height: 58px; border-color: #fff; border-style: solid; border-width: 0; }
@@ -71,9 +71,12 @@
       const put = (h) => layer.appendChild(el(h));
 
       // Badge siri
-      const badge = put(`<div id="badge"><i></i><b>${E.series} <span>#${E.episode}</span></b></div>`);
-      tl.fromTo(badge, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, 0);
-      (E.hideBadge || []).forEach(([a, b]) => { tl.set(badge, { opacity: 0 }, a); if (b < D) tl.set(badge, { opacity: 1 }, b); });
+      // (series kosong = tiada badge)
+      if (E.series) {
+        const badge = put(`<div id="badge"><i></i><b>${E.series} <span>#${E.episode}</span></b></div>`);
+        tl.fromTo(badge, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, 0);
+        (E.hideBadge || []).forEach(([a, b]) => { tl.set(badge, { opacity: 0 }, a); if (b < D) tl.set(badge, { opacity: 1 }, b); });
+      }
 
       // Tajuk kinetik
       (E.titles || []).forEach((g) => {

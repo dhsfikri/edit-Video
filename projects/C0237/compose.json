@@ -1,0 +1,12 @@
+{
+  "base": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237/base_hold.mov",
+  "out": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237/C0237_draf_v1.mp4",
+  "fps": 25,
+  "insert": {"at": 14.84, "dur": 4.0, "overlay": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237/iklan.mov", "sfx": "/home/user/edit-Video/motion/iklan/assets/ding.wav", "sfx_vol": 0.6},
+  "broll": [
+    {"src": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237/broll_tunggu.mp4", "start": 27.95, "dur": 4.51},
+    {"src": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237/broll_sales.mp4", "start": 41.2, "dur": 5.2}
+  ],
+  "overlay": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0237/overlay.mov",
+  "sfx": [{"src": "/home/user/edit-Video/motion/intro/assets/signature.wav", "at": 0.03, "vol": 0.4}]
+}

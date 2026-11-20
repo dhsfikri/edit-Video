@@ -94,6 +94,18 @@
                  [1.25, "s", "Saya hantar link bayaran sekarang ya?"], [1.8, "typing"], [2.1, "c", "Ok boleh ✅"]],
           stampAt: 2.35,
         },
+        // C0237 — mula dari kosong
+        tunggu: {
+          script: "kalau tunggu…", box: "KOSONG ❌", stamp: ["no", "❌ TUNGGU JE"],
+          msgs: [[0.3, "sys", "Hari 1 — tunggu customer datang…"], [1.0, "typing"], [1.6, "sys", "Hari 7… tiada mesej 😶"], [2.3, "sys", "Hari 30… masih tunggu 😶"]],
+          stampAt: 3.0,
+        },
+        sales: {
+          script: "target kecil", box: "SALES ✅", stamp: ["ok", "✅ 1 SALE SEHARI"],
+          msgs: [[0.3, "c", "Salam, saya nak order 1 ya 🙏"], [1.1, "s", "Boleh! Saya hantar link bayaran ya 😊"],
+                 [1.9, "typing"], [2.3, "c", "Dah bayar ✅"], [2.9, "sys", "Hari ni: 1 sale 🎉"]],
+          stampAt: 3.5,
+        },
       };
       const sc = SCENES[V.scene] || SCENES.salah;
       $("#title .script").textContent = sc.script;
