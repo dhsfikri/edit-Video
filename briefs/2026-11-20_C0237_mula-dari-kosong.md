@@ -1,7 +1,7 @@
 # Brief Edit — C0237 "Kalau terpaksa mula dari kosong, ini yang saya buat"
 
 **Fail asal:** `Folder Video/Raw/191126/C0237.MP4` · **Versi brief:** v1
-**Status:** ☐ Menunggu approval  ☑ Approved (2026-11-20)  ☐ Perlu ubah
+**Status:** ☐ Menunggu approval  ☑ Approved (2026-11-20)  ☐ Perlu ubah  · **FINAL ✅**
 
 ## 0. Spec fail asal (dah semak)
 | Item | Nilai | Tindakan |
@@ -70,3 +70,4 @@
   - Tajuk: *kalau terpaksa* / MULA DARI / **[KOSONG]** / *ini yang saya buat…* + bayang gelap atas (template overlay-v2: `titles[].big`).
   - Zoom 1.55→1.7 (push perlahan) dari rakaman 4K asal; crop ikut muka setiap frame (`pipeline/eyeline_zoom.py`) — **mata dikunci y≈1060** (separuh bawah, bawah tajuk). Segmen "yang pertama adalah" zoom 1.5 (Sir condong ke depan) supaya saiz muka konsisten.
   - Subtitle disembunyi 0–6s (tajuk = ayat yang dicakap). Lepas 6s potong balik ke shot biasa ("buang ego").
+- **FINAL = draf v2** (`20261120_mula-dari-kosong.mp4`, 54.8s, 1080x1920 25fps). Diluluskan Sir 2026-11-20.
