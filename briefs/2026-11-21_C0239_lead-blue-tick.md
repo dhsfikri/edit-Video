@@ -1,7 +1,7 @@
 # Brief Edit — C0239 "Selalu dapat lead yang awal-awal dah kena blue tick?"
 
 **Fail asal:** `Folder Video/Raw/191126/C0239.MP4` · **Versi brief:** v1
-**Status:** ☑ Menunggu approval  ☐ Approved  ☐ Perlu ubah
+**Status:** ☐ Menunggu approval  ☑ Approved (2026-11-21)  ☐ Perlu ubah
 
 ## 0. Spec fail asal (dah semak)
 | Item | Nilai | Tindakan |
@@ -47,5 +47,11 @@
 4. **Iklan 4s** "Setup Team Sales A–Z" — masukkan macam C0237? Cadangan: **ya**, selepas cara 1 (±17s).
 
 ---
+## Keputusan Sir (2026-11-21)
+- Ikut semua cadangan: **tanpa badge**, **voucher RM50**, **buang** "bahas video seterusnya", **iklan 4s** selepas cara 1.
+
 ## Revisi
 - (kosong)
+- **Draf v1 (54.5s):** hook besar + zoom eye line (mata y≈1060) 0–5.9s: *selalu dapat lead yang* / AWAL-AWAL / *dah kena…* / [BLUE TICK?] → *ini ada* / 3 CARA / [UBAH SEKARANG] → cara 1 (callout ✕ soalan tak bantu closing, B-roll chat SALAH "✓✓ Dibaca… tiada balasan" → ❌ BLUE TICK 13.8–17.9s) → **iklan 4s @17.92** → cara 2 (✓ reply cepat, ✓ greeting? jaga ayat) → cara 3 tajuk HEADLINE = [OFFER] (✕ tak bagi harga, ✓ highlight offer) → B-roll chat BETUL voucher RM50 → ✅ DAPAT REPLY (45.7–51.7s) → CUBA [HARI NI] + 🔔 follow → tahan 1s.
+- Subtitle dibetulkan: lead, blue tick, service, closing, nombor 2, voucher RM50.
+- Template overlay-v2: token `size` pilihan (BLUE TICK? 104px, UBAH SEKARANG 84px supaya dalam safe zone).

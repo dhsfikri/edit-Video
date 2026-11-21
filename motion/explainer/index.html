@@ -106,6 +106,18 @@
                  [1.9, "typing"], [2.3, "c", "Dah bayar ✅"], [2.9, "sys", "Hari ni: 1 sale 🎉"]],
           stampAt: 3.5,
         },
+        // C0239 — lead blue tick
+        bluetick: {
+          script: "selalu jadi…", box: "SALAH ❌", stamp: ["no", "❌ BLUE TICK"],
+          msgs: [[0.25, "c", "Hi, nak tanya harga 🙏"], [0.9, "s", "Boleh saya tahu nama & dari mana?"], [1.7, "sys", "✓✓ Dibaca"], [2.4, "sys", "… tiada balasan 😶"]],
+          stampAt: 3.0,
+        },
+        offer: {
+          script: "cuba macam ni", box: "BETUL ✅", stamp: ["ok", "✅ DAPAT REPLY"],
+          msgs: [[0.2, "c", "Hi, nak tanya 🙏"], [0.8, "s", "Tuan, tengok video ni sampai habis ya 🎥"], [1.6, "s", "Ada voucher RM50 untuk tuan hari ni 🎁"],
+                 [2.5, "typing"], [2.9, "c", "Nak! Macam mana nak claim? 🙋"]],
+          stampAt: 3.6,
+        },
       };
       const sc = SCENES[V.scene] || SCENES.salah;
       $("#title .script").textContent = sc.script;

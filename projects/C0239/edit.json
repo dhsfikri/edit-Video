@@ -1,0 +1,177 @@
+{
+  "source": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/raw-C0239/C0239.MP4",
+  "transcript": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0239/transcript.json",
+  "workdir": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0239",
+  "rotate": "none",
+  "fps": 25,
+  "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+  "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "corrections": {
+    "list": "lead",
+    "kozin": "closing",
+    "lemparan": "RM50"
+  },
+  "segments": [
+    {
+      "note": "H hook: selalu dapat lead yang awal-awal dah kena blue tick",
+      "start": 2.18,
+      "end": 5.48,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "I1 ini ada 3 cara yang awak boleh ubah sekarang",
+      "start": 5.95,
+      "end": 8.4,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "I2 untuk dapatkan respon mereka yang WhatsApp kita tentang service atau produk",
+      "start": 8.88,
+      "end": 12.91,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "1a yang pertama adalah",
+      "start": 14.2,
+      "end": 15.55,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "1b cuba jangan tanya soalan-soalan yang",
+      "start": 16.31,
+      "end": 18.66,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "1c tidak membantu dalam closing. contoh,",
+      "start": 19.56,
+      "end": 21.36,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "1d boleh tak saya tahu nama dan dari mana",
+      "start": 21.81,
+      "end": 23.25,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "1e boleh tukar benda lain",
+      "start": 24.45,
+      "end": 25.41,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "2a nombor 2",
+      "start": 26.08,
+      "end": 26.59,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "2b jaga waktu untuk reply, jangan lambat sangat, maksudnya kalau orang tu dah PM",
+      "start": 28.45,
+      "end": 33.0,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "2c cuba reply secepatnya",
+      "start": 33.5,
+      "end": 34.55,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "2d cuma kadang-kadang untuk reply secepatnya, ada orang menggunakan",
+      "start": 35.07,
+      "end": 37.96,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "2e auto greeting message",
+      "start": 38.82,
+      "end": 39.81,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "2f cuma",
+      "start": 43.69,
+      "end": 44.15,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "2g greeting message tu bagus, cuma jaga hati-hati dengan ayat",
+      "start": 44.8,
+      "end": 47.85,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "3a yang nombor 3 adalah",
+      "start": 48.74,
+      "end": 49.93,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "3b cuba",
+      "start": 54.29,
+      "end": 55.28,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "3c mulakan dengan headline fokus kepada offer",
+      "start": 55.9,
+      "end": 59.85,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "3d kita tak bagi harga,",
+      "start": 60.23,
+      "end": 61.26,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "3e tapi awal-awal tu kita dah highlight untuk offer",
+      "start": 62.12,
+      "end": 64.75,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "3f contoh",
+      "start": 66.1,
+      "end": 66.47,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "3g kalau tuan boleh tengok video ni sampai habis, saya ada voucher RM50 untuk tuan hari ni, tolong reply ya",
+      "start": 66.98,
+      "end": 73.36,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "E cuba hari ni",
+      "start": 76.85,
+      "end": 77.7,
+      "zoom": 1.15,
+      "cy": 0.3
+    }
+  ]
+}

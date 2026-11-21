@@ -99,6 +99,7 @@
           const ln = el(`<span class="tl"></span>`); box.appendChild(ln);
           line.forEach((tok) => {
             const s = el(`<span class="tk ${tok.k}">${tok.text}</span>`); ln.appendChild(s);
+            if (tok.size) s.style.fontSize = tok.size + "px";  // saiz pilihan per token
             if (tok.k === "box") {
               const w = s.getBoundingClientRect().width, n = tok.text.length;
               tl.set(s, { opacity: 0 }, 0);
