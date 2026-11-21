@@ -1,7 +1,7 @@
 # Brief Edit — C0240 "Pelanggan beli sebab murah? Tak semestinya…"
 
 **Fail asal:** `Folder Video/Raw/191126/C0240.MP4` · **Versi brief:** v1
-**Status:** ☑ Menunggu approval  ☐ Approved  ☐ Perlu ubah
+**Status:** ☐ Menunggu approval  ☑ Approved (2026-11-21)  ☐ Perlu ubah
 **Akaun:** TikTok **@adabclosing** (draf melalui Zernio)
 
 ## 0. Spec fail asal (dah semak)
@@ -49,5 +49,10 @@
 3. **Contoh produk dalam mockup chat** (set masakan siap / jimat masa) — OK, atau Sir nak contoh lain (cth servis, kursus)?
 
 ---
+## Keputusan Sir (2026-11-21)
+- "Sambung" — ikut semua cadangan: iklan selepas 3 jimat, kekal "in this economy", mockup set masakan siap.
+
 ## Revisi
 - (kosong)
+- **Draf v1 (54.4s):** hook besar + zoom eye line 0–4.7s (*pelanggan beli* / SEBAB / [MURAH?] / *…betul ke?*) → jual murah (✕ profit margin?) → tak semestinya murah, in this economy → tajuk *sebab dia* [PERCAYA] + ✓ jimat duit/tenaga/masa (bertingkat) → **iklan 4s @36.68** → B-roll chat "takde masa nak masak" → ✅ SELESAI MASALAH (42.5–46.7s) → tajuk *fokus* SELESAIKAN [MASALAH] → CTA 🔔 follow @adabclosing → tahan 1s.
+- Jeda "percaya… jimatkan… masa dia" dirapatkan (3 potongan kecil). Subtitle: hati-hati, murah-murah-murah, TikTok, ikon.

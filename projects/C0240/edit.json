@@ -1,0 +1,131 @@
+{
+  "source": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/raw-C0240/C0240.MP4",
+  "transcript": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0240/transcript.json",
+  "workdir": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0240",
+  "rotate": "none",
+  "fps": 25,
+  "color": "eq=brightness=0.01:contrast=1.04:saturation=0.86:gamma=1.02",
+  "audio_extra": "afftdn=nf=-25,acompressor=threshold=-20dB:ratio=3:attack=5:release=80",
+  "corrections": {},
+  "segments": [
+    {
+      "note": "H hook: sebenarnya pelanggan ni membeli sebab apa? adakah sebab murah? boleh jadi",
+      "start": 3.0,
+      "end": 7.56,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C1 kan kalau kita tengok kat TikTok sekarang ni, semua orang kalau boleh nak jual murah",
+      "start": 8.12,
+      "end": 12.66,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C2 tapi ingat... profit margin. ada untung ke tak tu?",
+      "start": 13.13,
+      "end": 20.22,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C3 so selain murah, angle mana lagi yang kita boleh touch?",
+      "start": 20.69,
+      "end": 23.48,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C4 so kalau tanya saya... in this economy",
+      "start": 23.95,
+      "end": 29.24,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C5 cuba kalau pelanggan tu membeli adalah kerana dia percaya",
+      "start": 30.1,
+      "end": 33.56,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C6a so percaya sebab apa? yang pertama sebab percaya",
+      "start": 34.06,
+      "end": 36.32,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C6b boleh jimatkan duit dia",
+      "start": 37.46,
+      "end": 38.97,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C7 percaya jimatkan tenaga dia",
+      "start": 39.6,
+      "end": 41.99,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C8a percaya",
+      "start": 42.51,
+      "end": 43.26,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C8b jimatkan",
+      "start": 43.93,
+      "end": 44.47,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C8c masa dia",
+      "start": 45.33,
+      "end": 45.92,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C9 kalau boleh hati-hati lepas ni, jangan terlalu fokus kepada murah-murah-murah",
+      "start": 48.35,
+      "end": 52.35,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C10 tapi lebih fokus kepada selesaikan masalah pelanggan",
+      "start": 52.9,
+      "end": 56.19,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C11a so nak",
+      "start": 56.95,
+      "end": 57.39,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C11b belajar banyak lagi tentang angle-angle ataupun teknik closing",
+      "start": 58.23,
+      "end": 62.45,
+      "zoom": 1.15,
+      "cy": 0.3
+    },
+    {
+      "note": "C12 follow ikon ni",
+      "start": 67.51,
+      "end": 68.25,
+      "zoom": 1.15,
+      "cy": 0.3
+    }
+  ]
+}

@@ -118,6 +118,13 @@
                  [2.5, "typing"], [2.9, "c", "Nak! Macam mana nak claim? 🙋"]],
           stampAt: 3.6,
         },
+        // C0240 — selesaikan masalah pelanggan
+        masalah: {
+          script: "fokus pada", box: "MASALAH ✅", stamp: ["ok", "✅ SELESAI MASALAH"],
+          msgs: [[0.25, "c", "Saya takde masa nak masak 😩"], [1.0, "s", "Set ni 10 minit siap — jimat masa akak 👍"],
+                 [1.9, "typing"], [2.3, "c", "Ok nak 1 ✅"]],
+          stampAt: 2.9,
+        },
       };
       const sc = SCENES[V.scene] || SCENES.salah;
       $("#title .script").textContent = sc.script;
