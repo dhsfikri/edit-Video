@@ -1,4 +1,4 @@
-# Brand Kit — Dharma | Sales Guru (@sirdharma_)
+# Brand Kit — Dharma | Sales Guru (@adabclosing)
 
 > Rujukan WAJIB setiap kali edit video TikTok, buat thumbnail, atau reka grafik.
 > Status: **v1 — DILULUSKAN Sir (2026-11-04)**. Thumbnail gaya cover + safe zone wajib bermula video seterusnya. Video sedia ada (TIPS JUALAN #01, AYAT CLOSING #01) kekal seperti diupload.
@@ -9,7 +9,7 @@
 | Item | Nilai |
 |---|---|
 | Nama | Dharma \| Sales Guru |
-| TikTok | **@sirdharma_** |
+| TikTok | **@adabclosing** (sejak 2026-11-21; dulu @sirdharma_) |
 | Niche | Sales closing (WhatsApp), tips jualan, team sales |
 | Servis | Setup team sales A–Z + monitoring 30 hari · Personal coaching (link di bio) |
 

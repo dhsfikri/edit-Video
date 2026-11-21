@@ -5,8 +5,9 @@ description: Buat thumbnail TikTok gaya COVER (standard brand kit Sir Dharma) da
 
 # Skill: Thumbnail Cover + Caption — Sir Dharma
 
-**Versi:** 1.0 (2026-11-04)
+**Versi:** 1.1 (2026-11-21)
 **Changelog:**
+- 1.1 — Akaun TikTok utama tukar ke **@adabclosing** (CTA video & caption); posting melalui Zernio.
 - 1.0 — Gaya cover diluluskan Sir (band hijau gelap, headline Anton penuh lebar, 1 keyword kuning, muka besar, 1 callout).
 
 > Rujukan: `BRANDKIT.md` §6. Brief konsep ringkas kepada Sir dulu (teks headline, frame, callout) — tunggu approval.
@@ -56,7 +57,7 @@ Simpan `projects/<ID>/caption.md`. Struktur:
 2. Situasi yang Sir & penonton kenal (2–3 baris pendek).
 3. Punca / poin utama — senarai ❌ atau ✅.
 4. Nilai tambah yang **tiada dalam video** (satu ayat refleksi/soalan).
-5. CTA: `Komen "<KATA>"` (sama dengan CTA video) · Save & share · `Follow @sirdharma_ untuk lagi tips closing 🔔`
+5. CTA: `Komen "<KATA>"` (sama dengan CTA video) · Save & share · `Follow @adabclosing untuk lagi tips closing 🔔`
 6. 8–10 hashtag: campur luas (#bisnesonline #jualanonline) + khusus (#ayatclosing #tipsclosing #closingsales #whatsappmarketing #sellermalaysia #usahawanmalaysia ...).
 
 Bahasa Melayu santai Malaysia. Tiada janji hasil tanpa bukti.

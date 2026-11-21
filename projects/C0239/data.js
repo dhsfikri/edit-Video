@@ -171,7 +171,7 @@ window.EDIT = {
  ],
  "cta": {
   "start": 52.0,
-  "text": "🔔 follow @sirdharma_"
+  "text": "🔔 follow @adabclosing"
  },
  "words": [
   {

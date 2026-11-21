@@ -1,12 +1,13 @@
 ---
 name: tiktok-edit
-description: Edit video TikTok Sir Dharma (@sirdharma_) dari rakaman mentah sampai MP4 final — ambil dari Google Drive Raw, transcribe Bahasa Melayu, brief, potong, B-roll explainer, overlay Gaya v2, iklan, gabung, QC safe zone, draf & final. Guna bila Sir minta edit / buat video / proses rakaman baru, atau ubah video sedia ada dalam repo edit-Video.
+description: Edit video TikTok Sir Dharma (@adabclosing) dari rakaman mentah sampai MP4 final — ambil dari Google Drive Raw, transcribe Bahasa Melayu, brief, potong, B-roll explainer, overlay Gaya v2, iklan, gabung, QC safe zone, draf & final. Guna bila Sir minta edit / buat video / proses rakaman baru, atau ubah video sedia ada dalam repo edit-Video.
 ---
 
 # Skill: Edit Video TikTok — Sir Dharma
 
-**Versi:** 1.0 (2026-11-04)
+**Versi:** 1.1 (2026-11-21)
 **Changelog:**
+- 1.1 — Akaun TikTok utama tukar ke **@adabclosing** (CTA video & caption); posting melalui Zernio.
 - 1.0 — Versi pertama, dari pengalaman C0029 (TIPS JUALAN #01) & C0296 (AYAT CLOSING #01).
 
 > Sebelum mula: baca `CLAUDE.md` dan `BRANDKIT.md`. Komunikasi dengan Sir dalam Bahasa Melayu santai tapi teliti.
@@ -94,7 +95,7 @@ cta{start,text}, words[{w,s,e}]
 - **Tajuk = headline:** muncul sekali gus (token selang 0.14s), **kekal lama**, TIDAK ikut suara. Hanya 2–3 tajuk sevideo: hook (0 → sebelum B-roll), poin utama, penutup (jawapan kepada hook → kesan loop).
 - **Bracket:** kotak muka dari OpenCV pada `base.mov` (median per segmen).
 - **Callout:** di bawah/tepi muka (y ±960–1120), template auto-clamp x ≤ 900.
-- **CTA:** pendek (`🔔 follow @sirdharma_`).
+- **CTA:** pendek (`🔔 follow @adabclosing`).
 - Pembetulan subtitle (cth "buat payment") dalam `words`.
 - Bila parse `data.js` dengan Python: potong selepas `window.EDIT =` (komen mungkin ada `=`).
 - Render: `npx hyperframes render --format mov -f <fps> -w 4 -o overlay.mov`.

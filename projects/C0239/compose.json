@@ -1,6 +1,6 @@
 {
   "base": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0239/base_hold.mov",
-  "out": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0239/C0239_draf_v1.mp4",
+  "out": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0239/20261121_lead-blue-tick_adabclosing.mp4",
   "fps": 25,
   "insert": {"at": 17.92, "dur": 4.0, "overlay": "/tmp/claude-0/-home-user/c0b43634-d8d8-5179-b4e9-0cfb36616c43/scratchpad/C0239/iklan.mov", "sfx": "/home/user/edit-Video/motion/iklan/assets/ding.wav", "sfx_vol": 0.6},
   "broll": [

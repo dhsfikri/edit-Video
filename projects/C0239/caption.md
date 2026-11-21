@@ -15,6 +15,6 @@ Lead yang nampak ada sebab untuk reply, akan reply.
 
 Cara nombor berapa awak nak cuba dulu? Komen kat bawah 👇
 Save & share dengan team sales awak 🙌
-Follow @sirdharma_ untuk lagi tips closing 🔔
+Follow @adabclosing untuk lagi tips closing 🔔
 
 #tipsclosing #closingsales #whatsappmarketing #whatsappbisnes #ayatclosing #salestips #jualanonline #bisnesonline #sellermalaysia #teamsales
