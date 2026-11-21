@@ -57,3 +57,4 @@
 - Template overlay-v2: token `size` pilihan (BLUE TICK? 104px, UBAH SEKARANG 84px supaya dalam safe zone).
 - **FINAL = draf v1** (`20261121_lead-blue-tick.mp4`, 54.5s). Diluluskan Sir 2026-11-21.
 - **Zernio:** draf disimpan untuk TikTok **adabclosing** (post id `6b0132c2401bfec89eaed723`, externalId C0239) dengan cover custom; CTA caption ditukar jadi "Follow untuk lagi tips closing 🔔" (akaun bukan @sirdharma_). Belum publish.
+- **Dijadualkan** (Zernio, @adabclosing): **Sabtu 21 Nov 2026, 8:30 malam MYT** (12:30 UTC), public, cover custom.
