@@ -1,7 +1,7 @@
 # Brief Edit — C0240 "Pelanggan beli sebab murah? Tak semestinya…"
 
 **Fail asal:** `Folder Video/Raw/191126/C0240.MP4` · **Versi brief:** v1
-**Status:** ☐ Menunggu approval  ☑ Approved (2026-11-21)  ☐ Perlu ubah
+**Status:** ☐ Menunggu approval  ☑ Approved (2026-11-21)  ☐ Perlu ubah  · **FINAL ✅**
 **Akaun:** TikTok **@adabclosing** (draf melalui Zernio)
 
 ## 0. Spec fail asal (dah semak)
@@ -56,3 +56,5 @@
 - (kosong)
 - **Draf v1 (54.4s):** hook besar + zoom eye line 0–4.7s (*pelanggan beli* / SEBAB / [MURAH?] / *…betul ke?*) → jual murah (✕ profit margin?) → tak semestinya murah, in this economy → tajuk *sebab dia* [PERCAYA] + ✓ jimat duit/tenaga/masa (bertingkat) → **iklan 4s @36.68** → B-roll chat "takde masa nak masak" → ✅ SELESAI MASALAH (42.5–46.7s) → tajuk *fokus* SELESAIKAN [MASALAH] → CTA 🔔 follow @adabclosing → tahan 1s.
 - Jeda "percaya… jimatkan… masa dia" dirapatkan (3 potongan kecil). Subtitle: hati-hati, murah-murah-murah, TikTok, ikon.
+- **FINAL = draf v1** (`20261121_beli-sebab-percaya.mp4`, 54.4s). Diluluskan Sir 2026-11-21.
+- **Zernio:** draf disimpan untuk TikTok **adabclosing** (post id `6b016712ff9f581b8b198f14`, externalId C0240) dengan cover custom. Belum dijadualkan.
